@@ -1,0 +1,9 @@
+
+theme: jekyll-theme-cayman        # built-in clean theme
+title: Advanced Programming 2025 Course Materials
+# Enable automatic table of contents on the left
+plugins:
+  - jekyll-toc
+toc:
+  min_level: 2
+  max_level: 3
