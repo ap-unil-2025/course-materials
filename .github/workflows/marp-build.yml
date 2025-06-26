@@ -5,6 +5,7 @@ on:
     branches: [master]
     paths:
       - 'slides-src/**/*.md'
+  workflow_dispatch:
 
 jobs:
   marp:
