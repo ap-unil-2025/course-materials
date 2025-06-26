@@ -4,7 +4,7 @@ on:
   push:
     branches: [master]
     paths:
-      - 'slides-src/practice/**/*.md'
+      - 'slides-src/**/*.md'
 
 jobs:
   marp:
@@ -18,7 +18,7 @@ jobs:
       # Build every .md under slides-src/practice → docs/slides/*.html
       - name: Convert slides
         run: |
-          mkdir -p docs/slides
+          mkdir -p docs/slides/practice
           find slides-src/practice -name '*.md' -print0 |
           while IFS= read -r -d '' file; do
             out="docs/slides/practice/$(basename "${file%.md}.html")"
