@@ -21,7 +21,7 @@ jobs:
           mkdir -p docs/slides
           find slides-src/practice -name '*.md' -print0 |
           while IFS= read -r -d '' file; do
-            out="docs/slides/$(basename "${file%.md}.html")"
+            out="docs/slides/practice/$(basename "${file%.md}.html")"
             marp "$file" --html --allow-local-files --output "$out"
           done
 
