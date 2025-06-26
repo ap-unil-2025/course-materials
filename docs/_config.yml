@@ -1,9 +1,10 @@
 
-theme: jekyll-theme-cayman        # built-in clean theme
+remote_theme: pages-themes/hacker@v0.2.0
 title: Advanced Programming 2025 Course Materials
 # Enable automatic table of contents on the left
 plugins:
   - jekyll-toc
+  - jekyll-remote-theme
 toc:
   min_level: 2
   max_level: 3
