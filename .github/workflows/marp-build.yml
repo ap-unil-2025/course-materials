@@ -1,0 +1,35 @@
+name: Build Marp slides into docs/
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'slides-src/practice/**/*.md'
+
+jobs:
+  marp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Marp CLI
+        run: npm install -g @marp-team/marp-cli
+
+      # Build every .md under slides-src/practice → docs/slides/*.html
+      - name: Convert slides
+        run: |
+          mkdir -p docs/slides
+          find slides-src/practice -name '*.md' -print0 |
+          while IFS= read -r -d '' file; do
+            out="docs/slides/$(basename "${file%.md}.html")"
+            marp "$file" --html --allow-local-files --output "$out"
+          done
+
+      # Commit generated HTML, ignore if nothing changed
+      - name: Commit slide HTML
+        run: |
+          git config user.name  "auto-marp-bot"
+          git config user.email "actions@github.com"
+          git add docs/slides/*.html
+          git commit -m "chore: build Marp slides [skip ci]" || exit 0
+          git push
