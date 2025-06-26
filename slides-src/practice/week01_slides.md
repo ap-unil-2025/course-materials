@@ -35,7 +35,7 @@ style: |
 # Code Like a Scientist: Essential Tools for Research Programming
 
 **Anna Smirnova**
-**June 24, 2025**
+**September 2025**
 
 ---
 
