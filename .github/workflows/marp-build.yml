@@ -18,12 +18,12 @@ jobs:
       # Build every .md under slides-src/practice → docs/slides/*.html
       - name: Convert slides
         run: |
-          mkdir -p docs/slides/practice
-          find slides-src/practice -name '*.md' -print0 |
-          while IFS= read -r -d '' file; do
+          mkdir -p docs/slides/practice               # target folder
+          for file in slides-src/practice/*.md; do
             out="docs/slides/practice/$(basename "${file%.md}.html")"
             marp "$file" --html --allow-local-files --output "$out"
           done
+
 
       # Commit generated HTML, ignore if nothing changed
       - name: Commit slide HTML
