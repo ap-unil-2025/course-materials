@@ -46,7 +46,7 @@ style: |
 * If you haven't done this before, download and install [Visual Studio Code](https://code.visualstudio.com/Download) before the session, as well as the Python extension for VSCode. 
 *   **Resources:** All slides and code examples are available on the class [GitHub](github.com/ap-unil-2025/ap-unil-2025-meta) repository and the class [website](https://ap-unil-2025.github.io/ap-unil-2025-meta/).
 ---
-# What is a Terminal? Why do we need it?
+# What is a Terminal, and why do we need it?
 
 *   **Terminal**: A text-based interface to interact with your computer's operating system.
 
@@ -245,15 +245,15 @@ The parts of the command written with a dash before them are called **flags**. T
 Now we know enough to write and run our first Python script!
 *   Create a new file named `hello_world.py` in your project directory.
 *   Open it in VSCode or any text editor and add the following code:
-```python
-print("Hello, World!")
-```
+    ```python
+    print("Hello, World!")
+    ```
 *   Save the file.
 *  Open your terminal and navigate to the directory where you saved the file.
 *   Run the script using the command:
-```bash
-python3 hello_world.py
-```
+    ```bash
+    python3 hello_world.py
+    ```
 ---
 # Difference Between `.ipynb` and `.py` Files
 
