@@ -5,18 +5,20 @@ subtitle: Exceptional work from Advanced Programming students
 ---
 
 <div class="showcase-page">
-    {% assign featured_projects = site.showcase | where: "featured", true | sort: "course_year" | reverse %}
-    {% assign other_projects = site.showcase | where: "featured", false | sort: "course_year" | reverse %}
+    {% assign featured_projects = site.showcase | where: "featured", true | sort: "title" %}
+    {% assign programming_concepts = site.showcase | where: "type", "Programming Concepts" | sort: "title" %}
+    {% assign student_projects = site.showcase | where: "type", "Student Project Placeholder" | sort: "title" %}
+    {% assign other_projects = site.showcase | where: "featured", false | sort: "title" %}
     
-    {% if featured_projects.size > 0 %}
-    <section class="featured-projects">
-        <h2>🌟 Featured Projects</h2>
-        <p class="section-intro">Outstanding projects that demonstrate exceptional technical excellence, innovation, and impact.</p>
+    {% if programming_concepts.size > 0 %}
+    <section class="programming-concepts">
+        <h2>💻 Programming Concepts Gallery</h2>
+        <p class="section-intro">Educational examples demonstrating advanced programming concepts and best practices.</p>
         
         <div class="featured-grid">
-            {% for project in featured_projects %}
+            {% for project in programming_concepts %}
             <div class="featured-project-card card">
-                <div class="featured-badge">⭐ Featured</div>
+                <div class="featured-badge">💡 Educational</div>
                 
                 {% if project.screenshot %}
                 <div class="project-image">
@@ -88,6 +90,75 @@ subtitle: Exceptional work from Advanced Programming students
     </section>
     {% endif %}
     
+    {% if student_projects.size > 0 %}
+    <section class="student-projects">
+        <h2>🌟 Outstanding Student Work</h2>
+        <p class="section-intro">Inspiring examples of exceptional projects from Advanced Programming students.</p>
+        
+        <div class="featured-grid">
+            {% for project in student_projects %}
+            <div class="featured-project-card card">
+                <div class="featured-badge">🏆 Student Excellence</div>
+                
+                {% if project.screenshot %}
+                <div class="project-image">
+                    <img src="{{ project.screenshot | relative_url }}" alt="{{ project.title }}" loading="lazy">
+                </div>
+                {% endif %}
+                
+                <div class="project-info">
+                    <div class="project-header">
+                        <h3 class="project-title">
+                            <a href="{{ project.url | relative_url }}">{{ project.title | escape }}</a>
+                        </h3>
+                        {% if project.course_year %}
+                        <span class="year-badge">{{ project.course_year }}</span>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="project-team">
+                        {% if project.team %}
+                        <strong>Team:</strong> {{ project.team | join: ", " }}
+                        {% elsif project.author %}
+                        <strong>Author:</strong> {{ project.author }}
+                        {% endif %}
+                    </div>
+                    
+                    {% if project.summary %}
+                    <p class="project-description">{{ project.summary | truncate: 200 }}</p>
+                    {% endif %}
+                    
+                    {% if project.technologies %}
+                    <div class="tech-stack">
+                        {% for tech in project.technologies limit:5 %}
+                        <span class="tech-tag">{{ tech }}</span>
+                        {% endfor %}
+                        {% if project.technologies.size > 5 %}
+                        <span class="tech-more">+{{ project.technologies.size | minus: 5 }} more</span>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                    
+                    <div class="project-actions">
+                        <a href="{{ project.url | relative_url }}" class="btn btn-secondary">Learn More</a>
+                        {% if project.github_url %}
+                        <a href="{{ project.github_url }}" class="btn" target="_blank">
+                            💻 Code <span class="external-icon">↗</span>
+                        </a>
+                        {% endif %}
+                        {% if project.demo_url %}
+                        <a href="{{ project.demo_url }}" class="btn demo-btn" target="_blank">
+                            🚀 Demo <span class="external-icon">↗</span>
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+    
     {% if other_projects.size > 0 %}
     <section class="other-projects">
         <h2>📚 All Showcase Projects</h2>
@@ -137,11 +208,11 @@ subtitle: Exceptional work from Advanced Programming students
     </section>
     {% endif %}
     
-    {% if featured_projects.size == 0 and other_projects.size == 0 %}
+    {% if programming_concepts.size == 0 and student_projects.size == 0 and other_projects.size == 0 %}
     <div class="empty-state">
         <h3>Showcase Coming Soon</h3>
         <p>Outstanding student projects will be featured here as they are completed throughout the course.</p>
-        <a href="{{ '/projects/' | relative_url }}" class="btn">View 2025 Projects</a>
+        <a href="{{ '/projects' | relative_url }}" class="btn">View 2025 Projects</a>
     </div>
     {% endif %}
     
