@@ -9,76 +9,77 @@ layout: default
     </section>
 
     <section class="content-sections">
-        <!-- Course Materials -->
-        <div class="section-rubric">
-            <h2 class="rubric-title">📚 Course Materials</h2>
-            <p class="rubric-subtitle">Weekly content and learning resources</p>
-            <div class="rubric-grid">
-                <div class="content-card">
-                    <h3>📺 Slides</h3>
-                    <p>Weekly slide presentations covering course topics, available in HTML and PDF formats.</p>
-                    <a href="{{ '/slides' | relative_url }}" class="btn">View Slides</a>
-                </div>
-
-                <div class="content-card">
-                    <h3>📚 Lessons</h3>
-                    <p>Detailed lesson materials, tutorials, and step-by-step guides for each topic.</p>
-                    <a href="{{ '/lessons' | relative_url }}" class="btn">View Lessons</a>
-                </div>
-
-                <div class="content-card">
-                    <h3>📝 Assignments</h3>
-                    <p>GitHub Classroom assignments with automated distribution and submission tracking.</p>
-                    <a href="{{ '/assignments' | relative_url }}" class="btn">View Assignments</a>
-                </div>
-
-                <div class="content-card">
-                    <h3>💬 Q&A Discussions</h3>
-                    <p>Ask questions, get help, and discuss course topics with classmates and instructors.</p>
-                    <a href="https://github.com/ap-unil-2025/course-materials/discussions" target="_blank" class="btn">Join Discussions <span class="external-icon">↗</span></a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Final Project -->
-        <div class="section-rubric">
-            <h2 class="rubric-title">🎯 Final Project</h2>
-            <p class="rubric-subtitle">Choose your team project and understand requirements</p>
-            <div class="rubric-grid single-card">
-                <div class="content-card priority-card">
-                    <h3>Choose Your Project Repository</h3>
-                    <p><strong>Select one template repo for your team (3-4 students)</strong> or propose a solo project. Registration deadline: <strong>Week 2 Friday 23:59 CET</strong>.</p>
-                    <div class="project-options">
-                        <a href="{{ '/projects/simclt' | relative_url }}" class="option-tag">SIMCLT</a>
-                        <a href="{{ '/projects/econgames' | relative_url }}" class="option-tag">ECONGAMES</a>
-                        <a href="{{ '/projects/riskcalc' | relative_url }}" class="option-tag">RISKCALC</a>
-                        <a href="{{ '/projects/pymort' | relative_url }}" class="option-tag">PYMORT</a>
-                        <a href="{{ '/projects/qsim' | relative_url }}" class="option-tag">QSIM</a>
-                        <a href="{{ '/projects/solo-free-topic' | relative_url }}" class="option-tag solo">Solo Project</a>
+        <!-- Side-by-side Materials and Projects -->
+        <div class="main-content-grid">
+            <!-- Course Materials -->
+            <div class="section-rubric">
+                <h2 class="rubric-title">📚 Course Materials</h2>
+                <p class="rubric-subtitle">Weekly content and learning resources</p>
+                <div class="rubric-grid compact">
+                    <div class="content-card">
+                        <h3>📺 Slides</h3>
+                        <p>Weekly slide presentations covering course topics, available in HTML and PDF formats.</p>
+                        <a href="{{ '/slides' | relative_url }}" class="btn">View Slides</a>
                     </div>
-                    <a href="{{ '/projects' | relative_url }}" class="btn btn-primary">Choose Project</a>
-                </div>
 
-                <div class="content-card">
-                    <h3>📋 Rules & Requirements</h3>
-                    <p>Complete rulebook with technical requirements, deliverables, and assessment criteria.</p>
-                    <a href="{{ '/PROJECT_RULES' | relative_url }}" class="btn">View Rules</a>
+                    <div class="content-card">
+                        <h3>📚 Lessons</h3>
+                        <p>Detailed lesson materials, tutorials, and step-by-step guides for each topic.</p>
+                        <a href="{{ '/lessons' | relative_url }}" class="btn">View Lessons</a>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>📝 Assignments</h3>
+                        <p>GitHub Classroom assignments with automated distribution and submission tracking.</p>
+                        <a href="{{ '/assignments' | relative_url }}" class="btn">View Assignments</a>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>💬 Q&A Discussions</h3>
+                        <p>Ask questions, get help, and discuss course topics with classmates and instructors.</p>
+                        <a href="https://github.com/ap-unil-2025/course-materials/discussions" target="_blank" class="btn">Join Discussions <span class="external-icon">↗</span></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Final Project -->
+            <div class="section-rubric">
+                <h2 class="rubric-title">🎯 Final Project</h2>
+                <p class="rubric-subtitle">Choose your project and understand the requirements</p>
+                <div class="rubric-grid compact">
+                    <div class="content-card priority-card">
+                        <h3>Choose Your Project Repository</h3>
+                        <p><strong>Select one template repo for your team (3-4 students)</strong> or propose a solo project. Registration deadline: <strong>Week 2 Friday 23:59 CET</strong>.</p>
+                        <div class="project-options">
+                            <a href="{{ '/projects/simclt' | relative_url }}" class="option-tag">SIMCLT</a>
+                            <a href="{{ '/projects/econgames' | relative_url }}" class="option-tag">ECONGAMES</a>
+                            <a href="{{ '/projects/riskcalc' | relative_url }}" class="option-tag">RISKCALC</a>
+                            <a href="{{ '/projects/pymort' | relative_url }}" class="option-tag">PYMORT</a>
+                            <a href="{{ '/projects/qsim' | relative_url }}" class="option-tag">QSIM</a>
+                            <a href="{{ '/projects/solo-free-topic' | relative_url }}" class="option-tag solo">Solo Project</a>
+                        </div>
+                        <a href="{{ '/projects' | relative_url }}" class="btn btn-primary">Choose Project</a>
+                    </div>
+
+                    <div class="content-card rules-card">
+                        <h3>📋 Rules & Requirements</h3>
+                        <p><strong>⚠️ REQUIRED READING:</strong> Complete rulebook with technical requirements, deliverables, and assessment criteria.</p>
+                        <div class="rules-warning">
+                            <p>🚨 <strong>READ THE RULES FIRST!</strong> 🚨</p>
+                            <p>No excuses accepted for not reading project requirements!</p>
+                        </div>
+                        <a href="{{ '/PROJECT_RULES' | relative_url }}" class="btn btn-warning">📋 READ RULES NOW</a>
+                    </div>
+
+                    <div class="content-card showcase-card">
+                        <h3>🏆 Project Showcase</h3>
+                        <p>Get inspired by exceptional final projects from previous Advanced Programming cohorts.</p>
+                        <a href="{{ '/showcase' | relative_url }}" class="btn">View Showcase</a>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Inspiration -->
-        <div class="section-rubric">
-            <h2 class="rubric-title">🏆 Inspiration</h2>
-            <p class="rubric-subtitle">Learn from exceptional student work</p>
-            <div class="rubric-grid single-card">
-                <div class="content-card">
-                    <h3>🏆 Project Showcase</h3>
-                    <p>Get inspired by exceptional final projects from previous Advanced Programming cohorts.</p>
-                    <a href="{{ '/showcase' | relative_url }}" class="btn">View Showcase</a>
-                </div>
-            </div>
-        </div>
     </section>
 
     <section class="quick-access">
@@ -113,6 +114,13 @@ layout: default
     margin: 0;
 }
 
+.main-content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 4rem;
+}
+
 .section-rubric {
     margin-bottom: 4rem;
 }
@@ -142,6 +150,11 @@ layout: default
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     max-width: 1000px;
     margin: 0 auto;
+}
+
+.rubric-grid.compact {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
 }
 
 .content-card {
@@ -243,6 +256,47 @@ layout: default
     text-decoration: none;
 }
 
+.rules-card {
+    border: 3px solid var(--warning-color) !important;
+    background: linear-gradient(135deg, #fffbeb 0%, #ffffff 100%);
+}
+
+.showcase-card {
+    border: 3px solid #fbbf24 !important;
+    background: linear-gradient(135deg, #fefce8 0%, #ffffff 100%);
+}
+
+.rules-warning {
+    background: var(--warning-color);
+    color: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+    text-align: center;
+    font-weight: 600;
+}
+
+.rules-warning p {
+    margin: 0.25rem 0;
+    color: white;
+}
+
+.btn-warning {
+    background: var(--warning-color);
+    color: white;
+    font-weight: 700;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+}
+
+.btn-warning:hover {
+    background: #d97706;
+    color: white;
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+
 .quick-access {
     text-align: center;
     margin-top: 4rem;
@@ -286,6 +340,17 @@ layout: default
     margin-left: 0.25rem;
 }
 
+@media (max-width: 1024px) {
+    .main-content-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .rubric-grid.compact {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
 @media (max-width: 768px) {
     .hero-title {
         font-size: 2rem;
@@ -297,6 +362,11 @@ layout: default
     
     .hero {
         padding: 2rem 0;
+    }
+    
+    .main-content-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
     
     .section-rubric {
@@ -313,7 +383,8 @@ layout: default
     }
     
     .rubric-grid,
-    .rubric-grid.single-card {
+    .rubric-grid.single-card,
+    .rubric-grid.compact {
         grid-template-columns: 1fr;
         gap: 1.5rem;
     }
@@ -340,7 +411,8 @@ layout: default
         padding: 0.2rem 0.6rem;
     }
     
-    .btn-primary {
+    .btn-primary,
+    .btn-warning {
         padding: 0.875rem 1.5rem;
         font-size: 1rem;
     }
@@ -349,5 +421,6 @@ layout: default
         flex-direction: column;
         align-items: center;
     }
+    
 }
 </style>
