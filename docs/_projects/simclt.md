@@ -5,7 +5,7 @@ project_id: "SIMCLT"
 difficulty: "Intermediate"
 team_size: "3-4 students"
 focus_area: "Insurance & Actuarial Science"
-template_repo: "https://github.com/ap2025-unil/simclt-template"
+template_repo: "https://github.com/ap-unil-2025/simclt-template"
 brief_file: "docs/projects/SIMCLT.md"
 technologies:
   - "Python 3.10+"

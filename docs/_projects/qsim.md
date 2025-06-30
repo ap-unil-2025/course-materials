@@ -5,7 +5,7 @@ project_id: "QSIM"
 difficulty: "Intermediate"
 team_size: "3-4 students"
 focus_area: "Operations Research"
-template_repo: "https://github.com/ap2025-unil/qsim-template"
+template_repo: "https://github.com/ap-unil-2025/qsim-template"
 brief_file: "docs/projects/QSIM.md"
 technologies:
   - "Python 3.10+"

@@ -5,7 +5,7 @@ project_id: "RISKCALC"
 difficulty: "Intermediate"
 team_size: "3-4 students"
 focus_area: "Financial Risk Management"
-template_repo: "https://github.com/ap2025-unil/riskcalc-template"
+template_repo: "https://github.com/ap-unil-2025/riskcalc-template"
 brief_file: "docs/projects/RISKCALC.md"
 technologies:
   - "Python 3.10+"

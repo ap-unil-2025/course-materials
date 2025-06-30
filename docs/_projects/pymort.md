@@ -5,7 +5,7 @@ project_id: "PYMORT"
 difficulty: "Advanced"
 team_size: "3-4 students"
 focus_area: "Actuarial Finance"
-template_repo: "https://github.com/ap2025-unil/pymort-template"
+template_repo: "https://github.com/ap-unil-2025/pymort-template"
 brief_file: "docs/projects/PYMORT.md"
 technologies:
   - "Python 3.10+"

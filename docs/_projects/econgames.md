@@ -5,7 +5,7 @@ project_id: "ECONGAMES"
 difficulty: "Advanced"
 team_size: "3-4 students"
 focus_area: "Economics & Game Theory"
-template_repo: "https://github.com/ap2025-unil/econgames-template"
+template_repo: "https://github.com/ap-unil-2025/econgames-template"
 brief_file: "docs/projects/ECONGAMES.md"
 technologies:
   - "Python 3.10+"
