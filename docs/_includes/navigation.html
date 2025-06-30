@@ -11,11 +11,12 @@
     
     <div class="nav-links" id="nav-links">
         <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Home</a>
-        <a href="{{ '/slides/' | relative_url }}" {% if page.url contains '/slides' %}class="active"{% endif %}>Slides</a>
-        <a href="{{ '/lessons/' | relative_url }}" {% if page.url contains '/lessons' %}class="active"{% endif %}>Lessons</a>
-        <a href="{{ '/assignments/' | relative_url }}" {% if page.url contains '/assignments' %}class="active"{% endif %}>Assignments</a>
-        <a href="{{ '/projects/' | relative_url }}" {% if page.url contains '/projects' %}class="active"{% endif %}>Projects</a>
-        <a href="{{ '/PROJECT_RULES/' | relative_url }}" {% if page.url contains 'PROJECT_RULES' %}class="active"{% endif %}>Rules</a>
+        <a href="{{ '/slides' | relative_url }}" {% if page.url contains '/slides' %}class="active"{% endif %}>Slides</a>
+        <a href="{{ '/lessons' | relative_url }}" {% if page.url contains '/lessons' %}class="active"{% endif %}>Lessons</a>
+        <a href="{{ '/assignments' | relative_url }}" {% if page.url contains '/assignments' %}class="active"{% endif %}>Assignments</a>
+        <a href="{{ '/projects' | relative_url }}" {% if page.url contains '/projects' %}class="active"{% endif %}>Projects</a>
+        <a href="{{ '/showcase' | relative_url }}" {% if page.url contains '/showcase' %}class="active"{% endif %}>Showcase</a>
+        <a href="{{ '/PROJECT_RULES' | relative_url }}" {% if page.url contains 'PROJECT_RULES' %}class="active"{% endif %}>Rules</a>
         
         {% if site.data.navigation.external_links %}
         <div class="external-links">
