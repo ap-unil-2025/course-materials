@@ -45,6 +45,9 @@ collections:
   showcase:
     output: true
     permalink: /:collection/:name.html
+  slides:
+    output: true
+    permalink: /slides/:name.html
 
 sass:
   style: compressed
@@ -58,4 +61,3 @@ exclude:
   - .sass-cache
   - .jekyll-cache
   - .git
-  - slides-src

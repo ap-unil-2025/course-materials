@@ -11,7 +11,7 @@ footer: "Anna Smirnova, September 2025"
 
 # Session 0: Welcome to Advanced Programming @ UNIL 2025!
 ## Anna Smirnova, TA
-## [Course Website](https://ap-unil-2025.github.io/ap-unil-2025-meta/)
+## [Course Website](https://ap-unil-2025.github.io/course-materials/)
 ---
 
 # Welcome! I'm Anna
