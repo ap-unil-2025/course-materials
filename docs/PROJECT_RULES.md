@@ -5,7 +5,7 @@ subtitle: "Complete rulebook for Advanced Programming Spring 2025"
 ---
 
 # FINAL-PROJECT RULEBOOK
-MSc Advanced Programming · Spring 2025 UNIL
+MSc Advanced Programming · Fall 2025 UNIL
 
 > **These rules are CONTRACTUAL.** Your GitHub repository, written report, and live demo are the
 > graded deliverables for this course --- **none are optional**.
