@@ -4,8 +4,13 @@ layout: default
 
 <div class="home">
     <section class="hero">
-        <h1 class="hero-title">Advanced Programming 2025</h1>
-        <p class="hero-subtitle">Course materials and resources for Advanced Programming at UNIL 🚀</p>
+        <div class="hero-header">
+            <img src="{{ '/assets/images/unil-logo.svg' | relative_url }}" alt="UNIL Logo" class="hero-logo">
+            <div class="hero-text">
+                <h1 class="hero-title">Advanced Programming 2025</h1>
+                <p class="hero-subtitle">Course materials and resources for Advanced Programming at UNIL 🚀</p>
+            </div>
+        </div>
     </section>
 
     <section class="content-sections">
@@ -45,7 +50,7 @@ layout: default
             <!-- Final Project -->
             <div class="section-rubric">
                 <h2 class="rubric-title">🎯 Final Project</h2>
-                <p class="rubric-subtitle">Choose your project and understand the requirements</p>
+                <p class="rubric-subtitle">Choose your project</p>
                 <div class="rubric-grid compact">
                     <div class="content-card priority-card">
                         <h3>Choose Your Project Repository</h3>
@@ -64,10 +69,10 @@ layout: default
                     <div class="content-card rules-card">
                         <h3>📋 Rules & Requirements</h3>
                         <p><strong>⚠️ REQUIRED READING:</strong> Complete rulebook with technical requirements, deliverables, and assessment criteria.</p>
-                        <div class="rules-warning">
+                        <!-- <div class="rules-warning">
                             <p>🚨 <strong>READ THE RULES FIRST!</strong> 🚨</p>
                             <p>No excuses accepted for not reading project requirements!</p>
-                        </div>
+                        </div> -->
                         <a href="{{ '/PROJECT_RULES' | relative_url }}" class="btn btn-warning">📋 READ RULES NOW</a>
                     </div>
 
@@ -101,11 +106,30 @@ layout: default
     margin-bottom: 4rem;
 }
 
+.hero-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 1rem;
+}
+
+.hero-logo {
+    height: 80px;
+    width: auto;
+    flex-shrink: 0;
+}
+
+.hero-text {
+    text-align: left;
+}
+
 .hero-title {
     font-size: 3rem;
     font-weight: 700;
     margin-bottom: 1rem;
     color: var(--accent-color);
+    margin-top: 0;
 }
 
 .hero-subtitle {
@@ -352,6 +376,19 @@ layout: default
 }
 
 @media (max-width: 768px) {
+    .hero-header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .hero-logo {
+        height: 60px;
+    }
+    
+    .hero-text {
+        text-align: center;
+    }
+    
     .hero-title {
         font-size: 2rem;
     }
