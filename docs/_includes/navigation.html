@@ -1,7 +1,7 @@
 <nav class="site-nav" role="navigation" aria-label="Main navigation">
     <a class="site-title" href="{{ '/' | relative_url }}" aria-label="Homepage">
         <img src="{{ '/assets/images/unil.jpeg' | relative_url }}" alt="UNIL Logo" class="site-logo">
-        <span class="site-title-text">{{ site.title | escape }}</span>
+        <span class="site-title-text">DSAP</span>
     </a>
     
     <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
@@ -13,7 +13,7 @@
     <div class="nav-links" id="nav-links">
         <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Home</a>
         <a href="{{ '/syllabus' | relative_url }}" {% if page.url contains '/syllabus' or page.url contains 'PROJECT_RULES' %}class="active"{% endif %}>Syllabus</a>
-        <a href="{{ '/weekly-materials' | relative_url }}" {% if page.url contains '/weekly-materials' or page.url contains '/slides' or page.url contains '/lessons' or page.url contains '/assignments' %}class="active"{% endif %}>Weekly Materials</a>
+        <a href="{{ '/weekly-materials' | relative_url }}" {% if page.url contains '/weekly-materials' or page.url contains '/week/' or page.url contains '/assignments' %}class="active"{% endif %}>Weekly Materials</a>
         <a href="{{ '/help-support' | relative_url }}" {% if page.url contains '/help-support' or page.url contains '/showcase' %}class="active"{% endif %}>Help & Support</a>
         
         {% if site.data.navigation.external_links %}

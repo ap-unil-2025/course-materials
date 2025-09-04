@@ -17,46 +17,14 @@
         </div>
     </header>
 
-    <main class="page-content">
-        <div class="wrapper">
+    <main class="page-content page-transition">
+        <div class="wrapper page-wrapper">
             {% if page.url == '/' %}
-            <!-- Unified header section for homepage -->
-            <section class="unified-header">
-                <div class="hero-content">
-                    <h1 class="hero-title">Introduction to Data Science and Advanced Programming</h1>
-                    <p class="hero-subtitle">HEC Lausanne, Fall Semester 2025</p>
-                    <div class="course-essentials">
-                        <span class="info-item"><strong>📅 Mondays 12:30–16:00</strong> • Internef 263</span>
-                        <span class="info-item"><strong>👨‍🏫 Prof. Dr. Simon Scheidegger</strong> • simon.scheidegger@unil.ch</span>
-                        <span class="info-item"><strong>👩‍💻 Anna Smirnova</strong> (Lead TA) • anna.smirnova@unil.ch • Mon 15:15–16:00, Fri on request</span>
-                        <span class="info-item"><strong>👥 Additional TAs:</strong> TBA</span>
-                    </div>
-                </div>
-                
-                <!-- Platform Integration -->
-                <div class="platform-links">
-                    <a href="https://github.com/ap-unil-2025" target="_blank" class="platform-link">
-                        <span class="platform-icon">💻</span>
-                        <span class="platform-name">GitHub</span>
-                    </a>
-                    <a href="https://app.nuvolos.cloud/enroll/class/RshD654gzU4" target="_blank" class="platform-link">
-                        <span class="platform-icon">☁️</span>
-                        <span class="platform-name">Nuvolos</span>
-                    </a>
-                    <a href="https://moodle.unil.ch/course/view.php?id=33778" target="_blank" class="platform-link">
-                        <span class="platform-icon">📚</span>
-                        <span class="platform-name">Moodle</span>
-                    </a>
-                    <a href="#" target="_blank" class="platform-link">
-                        <span class="platform-icon">🎮</span>
-                        <span class="platform-name">Discord</span>
-                    </a>
-                    <a href="https://github.com/ap-unil-2025/course-materials/discussions" target="_blank" class="platform-link">
-                        <span class="platform-icon">💬</span>
-                        <span class="platform-name">Discussions</span>
-                    </a>
-                </div>
-            </section>
+            <!-- Compact header for homepage -->
+            <div class="home-header">
+                <h1>Data Science and Advanced Programming 2025</h1>
+                <p>DSAP • HEC Lausanne • Fall Semester • Mondays 12:30–16:00 • Internef 263</p>
+            </div>
             
             <!-- Development disclaimer -->
             <div class="development-notice">
@@ -75,5 +43,115 @@
             <p class="credits">Made with ❤️ by Anna Smirnova, Prof. Simon Scheidegger, and Claude Sonnet 4 🤖</p>
         </div>
     </footer>
+
+    <!-- Smooth Page Transitions -->
+    <style>
+    /* No CSS transitions - just AJAX navigation */
+    
+    /* Smooth scrolling for same-page links */
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    /* Preload next page content */
+    .nav-links a {
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .nav-links a::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: -100%;
+        width: 100%;
+        height: 2px;
+        background: var(--primary-color);
+        transition: left 0.3s ease;
+    }
+    
+    .nav-links a:hover::before {
+        left: 0;
+    }
+    </style>
+
+    <script>
+    // Smooth SPA-style navigation
+    document.addEventListener('DOMContentLoaded', function() {
+        const pageContent = document.querySelector('.page-wrapper');
+        const navLinks = document.querySelectorAll('.nav-links a');
+        
+        // Handle navigation clicks with AJAX
+        navLinks.forEach(link => {
+            // Skip external links
+            if (link.hostname !== window.location.hostname) {
+                return;
+            }
+            
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const url = this.href;
+                const currentPath = window.location.pathname;
+                
+                // Skip if same page
+                if (url === window.location.href) {
+                    return;
+                }
+                
+                // Fetch new page content
+                fetch(url)
+                    .then(response => response.text())
+                    .then(html => {
+                        // Parse the new page
+                        const parser = new DOMParser();
+                        const newDoc = parser.parseFromString(html, 'text/html');
+                        const newContent = newDoc.querySelector('.page-wrapper');
+                        const newTitle = newDoc.querySelector('title');
+                        
+                        // Update content instantly
+                        if (newContent) {
+                            pageContent.innerHTML = newContent.innerHTML;
+                        }
+                        if (newTitle) {
+                            document.title = newTitle.textContent;
+                        }
+                        
+                        // Update URL without reload
+                        history.pushState({}, '', url);
+                        
+                        // Update active navigation
+                        updateActiveNav(url);
+                        
+                        // Scroll to top
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    })
+                    .catch(error => {
+                        console.log('AJAX failed, falling back to normal navigation');
+                        window.location.href = url;
+                    });
+            });
+        });
+        
+        // Handle browser back/forward
+        window.addEventListener('popstate', function() {
+            window.location.reload();
+        });
+        
+        // Update active navigation state
+        function updateActiveNav(currentUrl) {
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.href === currentUrl || 
+                    (currentUrl.includes('/week/') && link.href.includes('/weekly-materials'))) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        // Initial active state
+        updateActiveNav(window.location.href);
+    });
+    </script>
 </body>
 </html>
