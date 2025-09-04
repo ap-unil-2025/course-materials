@@ -31,6 +31,11 @@ defaults:
       path: "slides"
     values:
       layout: "slide"
+  - scope:
+      path: ""
+      type: "weeks"
+    values:
+      layout: "week"
 
 collections:
   lessons:
@@ -48,6 +53,9 @@ collections:
   slides:
     output: true
     permalink: /slides/:name.html
+  weeks:
+    output: true
+    permalink: /week/:name/
 
 sass:
   style: compressed

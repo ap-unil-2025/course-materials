@@ -1,0 +1,330 @@
+---
+layout: default
+---
+
+<article class="week-page">
+    <header class="week-header">
+        <h1 class="week-title">{{ page.title | escape }}</h1>
+        {% if page.date %}
+        <p class="week-date">{{ page.date | date: "%B %d, %Y" }}</p>
+        {% endif %}
+        {% if page.description %}
+        <p class="week-description">{{ page.description }}</p>
+        {% endif %}
+    </header>
+
+    <div class="week-content">
+        {% if page.topics %}
+        <section class="week-topics">
+            <h2>📚 Topics Covered</h2>
+            <ul class="topics-list">
+                {% for topic in page.topics %}
+                <li>{{ topic }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endif %}
+
+        <section class="week-materials">
+            <div class="materials-grid">
+                {% if page.lecture_slides %}
+                <div class="material-card lecture-card">
+                    <h3>🎓 Lecture Slides</h3>
+                    <p>Professor's main lecture presentation</p>
+                    <a href="{{ page.lecture_slides | relative_url }}" class="material-btn lecture-btn">View Slides</a>
+                </div>
+                {% endif %}
+
+                {% if page.ta_slides %}
+                <div class="material-card ta-card">
+                    <h3>👩‍💻 TA Slides</h3>
+                    <p>Practice session and tutorial materials</p>
+                    <a href="{{ page.ta_slides | relative_url }}" class="material-btn ta-btn">View TA Slides</a>
+                </div>
+                {% endif %}
+
+                {% if page.lesson %}
+                <div class="material-card lesson-card">
+                    <h3>📖 Lesson Guide</h3>
+                    <p>Detailed content and explanations</p>
+                    <a href="{{ page.lesson | relative_url }}" class="material-btn lesson-btn">Read Lesson</a>
+                </div>
+                {% endif %}
+
+                {% if page.assignment %}
+                <div class="material-card assignment-card">
+                    <h3>📝 Assignment</h3>
+                    <p>{{ page.assignment.description | default: "Weekly homework and exercises" }}</p>
+                    <a href="{{ page.assignment.link | relative_url }}" class="material-btn assignment-btn">{{ page.assignment.title | default: "View Assignment" }}</a>
+                </div>
+                {% endif %}
+
+                {% if page.examples %}
+                <div class="material-card examples-card">
+                    <h3>💻 Class Examples</h3>
+                    <p>Code examples and demonstrations</p>
+                    <div class="examples-links">
+                        {% for example in page.examples %}
+                        <a href="{{ example.link | relative_url }}" class="example-link">{{ example.title }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if page.references %}
+                <div class="material-card references-card">
+                    <h3>📚 References & Readings</h3>
+                    <p>Additional resources and materials</p>
+                    <ul class="references-list">
+                        {% for ref in page.references %}
+                        <li>
+                            {% if ref.link %}
+                            <a href="{{ ref.link }}" target="_blank">{{ ref.title }}</a>
+                            {% else %}
+                            {{ ref.title }}
+                            {% endif %}
+                            {% if ref.description %}<span class="ref-desc">{{ ref.description }}</span>{% endif %}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+        </section>
+
+        {% if content and content != empty %}
+        <section class="week-notes">
+            <h2>📝 Additional Notes</h2>
+            <div class="notes-content">
+                {{ content }}
+            </div>
+        </section>
+        {% endif %}
+    </div>
+</article>
+
+<style>
+.week-page {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.week-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--surface-color) 0%, var(--background-color) 100%);
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+}
+
+.week-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+}
+
+.week-date {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.week-description {
+    font-size: 1rem;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.week-topics {
+    margin-bottom: 3rem;
+}
+
+.week-topics h2 {
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.topics-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+}
+
+.topics-list li {
+    background: var(--primary-color);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.materials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+
+.material-card {
+    background: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.material-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.material-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--accent-color);
+}
+
+.material-card p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.material-btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.material-btn:hover {
+    background: #0031d9;
+    transform: translateY(-1px);
+    text-decoration: none;
+    color: white;
+}
+
+.lecture-card {
+    border-left: 4px solid var(--primary-color);
+}
+
+.ta-card {
+    border-left: 4px solid var(--success-color);
+}
+
+.lesson-card {
+    border-left: 4px solid var(--secondary-color);
+}
+
+.assignment-card {
+    border-left: 4px solid var(--warning-color);
+}
+
+.examples-card {
+    border-left: 4px solid #8b5cf6;
+}
+
+.references-card {
+    border-left: 4px solid #06b6d4;
+}
+
+.examples-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.example-link {
+    padding: 0.5rem 1rem;
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    text-decoration: none;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.example-link:hover {
+    background: var(--border-color);
+    text-decoration: none;
+    color: var(--primary-color);
+}
+
+.references-list {
+    text-align: left;
+    padding-left: 1rem;
+}
+
+.references-list li {
+    margin-bottom: 0.5rem;
+}
+
+.references-list a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.references-list a:hover {
+    text-decoration: underline;
+}
+
+.ref-desc {
+    display: block;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+}
+
+.week-notes {
+    margin-top: 3rem;
+    padding: 2rem;
+    background: var(--surface-color);
+    border-radius: 0.75rem;
+    border: 1px solid var(--border-color);
+}
+
+.week-notes h2 {
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+}
+
+.notes-content h3,
+.notes-content h4 {
+    color: var(--accent-color);
+}
+
+@media (max-width: 768px) {
+    .week-header {
+        padding: 1.5rem;
+    }
+    
+    .week-title {
+        font-size: 1.75rem;
+    }
+    
+    .materials-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .material-card {
+        padding: 1.25rem;
+    }
+    
+    .topics-list {
+        justify-content: center;
+    }
+}
+</style>

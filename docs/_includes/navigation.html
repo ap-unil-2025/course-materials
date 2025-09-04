@@ -29,34 +29,6 @@
     </div>
 </nav>
 
-<!-- Platform Integration Bar -->
-<div class="platform-bar">
-    <div class="wrapper">
-        <div class="platform-links">
-            <a href="https://github.com/ap-unil-2025" target="_blank" class="platform-link">
-                <span class="platform-icon">💻</span>
-                <span class="platform-name">GitHub</span>
-            </a>
-            <a href="https://app.nuvolos.cloud/enroll/class/RshD654gzU4" target="_blank" class="platform-link">
-                <span class="platform-icon">☁️</span>
-                <span class="platform-name">Nuvolos</span>
-            </a>
-            <a href="https://moodle.unil.ch/course/view.php?id=33778" target="_blank" class="platform-link">
-                <span class="platform-icon">📚</span>
-                <span class="platform-name">Moodle</span>
-            </a>
-            <a href="#" target="_blank" class="platform-link">
-                <span class="platform-icon">🎮</span>
-                <span class="platform-name">Discord</span>
-            </a>
-            <a href="https://github.com/ap-unil-2025/course-materials/discussions" target="_blank" class="platform-link">
-                <span class="platform-icon">💬</span>
-                <span class="platform-name">Discussions</span>
-            </a>
-        </div>
-    </div>
-</div>
-
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const navToggle = document.querySelector('.nav-toggle');
@@ -92,44 +64,6 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <style>
-.platform-bar {
-    background-color: var(--surface-color);
-    border-bottom: 1px solid var(--border-color);
-    padding: 0.5rem 0;
-}
-
-.platform-links {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-}
-
-.platform-link {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--text-secondary);
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    transition: color 0.2s ease;
-    font-size: 0.9rem;
-}
-
-.platform-link:hover {
-    color: var(--primary-color);
-    text-decoration: none;
-}
-
-.platform-icon {
-    font-size: 1.1em;
-}
-
-.platform-name {
-    font-weight: 500;
-}
-
 .nav-toggle {
     display: none;
     background: none;
@@ -183,24 +117,6 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 
 @media (max-width: 768px) {
-    .platform-links {
-        gap: 1rem;
-        justify-content: space-around;
-    }
-    
-    .platform-link {
-        padding: 0.375rem 0.75rem;
-        font-size: 0.8rem;
-    }
-    
-    .platform-name {
-        display: none;
-    }
-    
-    .platform-icon {
-        font-size: 1.2em;
-    }
-    
     .site-nav {
         position: relative;
     }

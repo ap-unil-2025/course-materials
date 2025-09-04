@@ -2,23 +2,7 @@
 layout: default
 ---
 
-<div style="background-color: #ffebee; border: 3px solid #d32f2f; padding: 20px; margin-bottom: 30px; border-radius: 8px; text-align: center;">
-  <h2 style="color: #d32f2f; font-size: 24px; font-weight: bold; margin: 0 0 10px 0;">⚠️ UNOFFICIAL CONTENT - UNDER DEVELOPMENT ⚠️</h2>
-  <p style="color: #c62828; font-size: 18px; font-weight: 600; margin: 0;">This website is currently being developed. Information may change significantly and should NOT be considered official until further notice.</p>
-</div>
-
 <div class="home">
-    <section class="hero">
-        <div class="hero-text">
-            <h1 class="hero-title">Introduction to Data Science and Advanced Programming</h1>
-            <p class="hero-subtitle">HEC Lausanne, Fall Semester 2025</p>
-        </div>
-        <div class="course-essentials">
-            <div class="essential-info">
-                <span class="info-item"><strong>📅 Mondays 12:30–16:00</strong> • Internef 263</span>
-            </div>
-        </div>
-    </section>
 
     <section class="content-sections">
         <div class="three-column-grid">
@@ -58,11 +42,8 @@ layout: default
                 <h2 class="column-title">📚 Current Work</h2>
                 <div class="content-card current-week-card">
                     <h3>📅 This Week's Materials</h3>
-                    <p>Access current lectures, tutorials, and resources for ongoing coursework.</p>
-                    <div class="card-actions">
-                        <a href="{{ '/weekly-materials' | relative_url }}" class="btn btn-primary">Weekly Materials</a>
-                        <a href="{{ '/lessons' | relative_url }}" class="btn btn-secondary">All Lessons</a>
-                    </div>
+                    <p>Complete weekly hub with lecture slides, TA materials, lessons, assignments, and examples - all in one place.</p>
+                    <a href="{{ '/weekly-materials' | relative_url }}" class="btn btn-primary">Access Weekly Hub</a>
                 </div>
                 <div class="content-card">
                     <h3>📝 Assignment Submission</h3>
@@ -90,34 +71,25 @@ layout: default
                 <div class="content-card">
                     <h3>📞 Contact & Office Hours</h3>
                     <div class="contact-info">
-                        <div class="contact-item">
+                        <a href="mailto:simon.scheidegger@unil.ch" class="contact-item contact-clickable">
                             <strong>Prof. Simon Scheidegger</strong>
                             <span>simon.scheidegger@unil.ch</span>
-                        </div>
-                        <div class="contact-item">
+                        </a>
+                        <a href="mailto:anna.smirnova@unil.ch" class="contact-item contact-clickable">
                             <strong>Anna Smirnova (Lead TA)</strong>
                             <span>anna.smirnova@unil.ch</span>
                             <span>Office hours: Mon 15:15–16:00, Fri on request</span>
-                        </div>
+                        </a>
                         <div class="contact-item">
                             <strong>Additional TAs</strong>
                             <span>To be announced</span>
                         </div>
                     </div>
                 </div>
-                <div class="content-card">
-                    <h3>💬 Community Support</h3>
-                    <p>Get help from classmates and instructors through our community channels.</p>
-                    <div class="card-actions">
-                        <a href="https://github.com/ap-unil-2025/course-materials/discussions" target="_blank" class="btn">GitHub Discussions</a>
-                        <a href="#" class="btn btn-discord">Discord</a>
-                    </div>
-                </div>
-                <div class="content-card">
+                <a href="{{ '/showcase' | relative_url }}" class="content-card showcase-card-clickable">
                     <h3>🏆 Showcase</h3>
                     <p>Get inspired by exceptional projects from previous Advanced Programming cohorts.</p>
-                    <a href="{{ '/showcase' | relative_url }}" class="btn">View Showcase</a>
-                </div>
+                </a>
             </div>
         </div>
     </section>
@@ -125,53 +97,6 @@ layout: default
 </div>
 
 <style>
-.hero {
-    text-align: center;
-    padding: 2rem 0;
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-    border-radius: 0.75rem;
-    margin-bottom: 3rem;
-}
-
-.hero-text {
-    text-align: center;
-}
-
-.hero-title {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    color: var(--accent-color);
-    margin-top: 0;
-}
-
-.hero-subtitle {
-    font-size: 1rem;
-    color: var(--text-secondary);
-    margin: 0 0 1.5rem 0;
-}
-
-.course-essentials {
-    margin-top: 1.5rem;
-}
-
-.essential-info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    text-align: center;
-}
-
-.info-item {
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-    line-height: 1.4;
-}
-
-.info-item strong {
-    color: var(--text-primary);
-}
-
 .three-column-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -290,7 +215,7 @@ layout: default
     background: var(--background-color);
     border: 1px solid var(--border-color);
     border-radius: 1rem;
-    padding: 2.5rem;
+    padding: 2.25rem;
     text-align: center;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     position: relative;
@@ -321,6 +246,11 @@ layout: default
     display: flex;
     gap: 0.75rem;
     justify-content: center;
+}
+
+.card-actions .btn {
+    flex: 1;
+    text-align: center;
 }
 
 .btn-discord {
@@ -365,6 +295,24 @@ layout: default
     color: var(--text-secondary);
     font-size: 0.8rem;
     line-height: 1.4;
+}
+
+.contact-clickable {
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.contact-clickable:hover {
+    background: var(--border-color);
+    transform: translateY(-1px);
+    text-decoration: none;
+    color: inherit;
+}
+
+.contact-clickable:hover strong {
+    color: var(--primary-color);
 }
 
 .priority-card {
@@ -444,9 +392,30 @@ layout: default
     background: linear-gradient(135deg, #fffbeb 0%, #ffffff 100%);
 }
 
-.showcase-card {
-    border: 3px solid #fbbf24 !important;
+.showcase-card-clickable {
+    border: 2px solid #fbbf24 !important;
     background: linear-gradient(135deg, #fefce8 0%, #ffffff 100%);
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.showcase-card-clickable:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(251, 191, 36, 0.3);
+    border-color: #f59e0b;
+    background: linear-gradient(135deg, #fef3c7 0%, #fffbeb 100%);
+    text-decoration: none;
+    color: inherit;
+}
+
+.showcase-card-clickable h3 {
+    color: #d97706;
+}
+
+.showcase-card-clickable:hover h3 {
+    color: #b45309;
 }
 
 .rules-warning {

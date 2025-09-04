@@ -49,6 +49,124 @@ body {
   background-color: rgba(255, 255, 255, 0.95);
 }
 
+.unified-header {
+  background: linear-gradient(135deg, var(--surface-color) 0%, var(--background-color) 100%);
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  padding: 1.75rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  position: relative;
+}
+
+.unified-header::after {
+  content: '';
+  position: absolute;
+  bottom: -1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--border-color) 50%, transparent 100%);
+}
+
+.hero-content {
+  margin-bottom: 1.5rem;
+}
+
+.hero-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--accent-color);
+  margin-top: 0;
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin: 0 0 1.5rem 0;
+}
+
+.course-essentials {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.info-item {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.info-item strong {
+  color: var(--text-primary);
+}
+
+.platform-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.platform-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: color 0.2s ease;
+  font-size: 0.9rem;
+  border: 1px solid transparent;
+}
+
+.platform-link:hover {
+  color: var(--primary-color);
+  text-decoration: none;
+  border-color: var(--border-color);
+  background: var(--surface-color);
+}
+
+.platform-icon {
+  font-size: 1.1em;
+}
+
+.platform-name {
+  font-weight: 500;
+}
+
+.development-notice {
+  background-color: #ffebee;
+  border: 2px solid #d32f2f;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.development-notice h2 {
+  color: #d32f2f;
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin: 0 0 0.5rem 0;
+}
+
+.development-notice p {
+  color: #c62828;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0;
+}
+
 .site-nav {
   display: flex;
   justify-content: space-between;
@@ -355,11 +473,15 @@ tr:hover {
   background-color: var(--surface-color);
   color: var(--text-primary);
   border: 1px solid var(--border-color);
+  padding: 0.6rem 1.2rem;
+  font-size: 0.9rem;
+  font-weight: 500;
 }
 
 .btn-secondary:hover {
   background-color: var(--border-color);
   color: var(--text-primary);
+  transform: translateY(-1px);
 }
 
 @media (max-width: 768px) {
@@ -406,5 +528,48 @@ tr:hover {
   
   th, td {
     padding: 0.75rem;
+  }
+  
+  .unified-header {
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .hero-title {
+    font-size: 1.5rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.9rem;
+  }
+  
+  .platform-links {
+    gap: 1rem;
+    justify-content: space-around;
+  }
+  
+  .platform-link {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.8rem;
+  }
+  
+  .platform-name {
+    display: none;
+  }
+  
+  .platform-icon {
+    font-size: 1.2em;
+  }
+  
+  .development-notice {
+    padding: 1rem;
+  }
+  
+  .development-notice h2 {
+    font-size: 1rem;
+  }
+  
+  .development-notice p {
+    font-size: 0.8rem;
   }
 }
