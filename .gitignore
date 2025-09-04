@@ -1,12 +1,16 @@
 # Jekyll build files
+docs/_site/
 _site/
 .sass-cache/
 .jekyll-cache/
+docs/.jekyll-cache/
 .jekyll-metadata
 
 # Ruby/Bundler
 .bundle/
+docs/.bundle/
 vendor/
+docs/vendor/
 Gemfile.lock
 
 # Environment files

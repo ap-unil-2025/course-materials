@@ -1,6 +1,6 @@
 <nav class="site-nav" role="navigation" aria-label="Main navigation">
     <a class="site-title" href="{{ '/' | relative_url }}" aria-label="Homepage">
-        <img src="{{ '/assets/images/unil-logo.svg' | relative_url }}" alt="UNIL Logo" class="site-logo">
+        <img src="{{ '/assets/images/unil.jpeg' | relative_url }}" alt="UNIL Logo" class="site-logo">
         <span class="site-title-text">{{ site.title | escape }}</span>
     </a>
     
@@ -12,6 +12,7 @@
     
     <div class="nav-links" id="nav-links">
         <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Home</a>
+        <a href="{{ '/syllabus' | relative_url }}" {% if page.url contains '/syllabus' %}class="active"{% endif %}>Syllabus</a>
         <a href="{{ '/slides' | relative_url }}" {% if page.url contains '/slides' %}class="active"{% endif %}>Slides</a>
         <a href="{{ '/lessons' | relative_url }}" {% if page.url contains '/lessons' %}class="active"{% endif %}>Lessons</a>
         <a href="{{ '/assignments' | relative_url }}" {% if page.url contains '/assignments' %}class="active"{% endif %}>Assignments</a>

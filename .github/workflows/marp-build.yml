@@ -4,7 +4,7 @@ on:
   push:
     branches: [master]
     paths:
-      - 'slides-src/**/*.md'
+      - 'docs/_slides/**/*.md'
   workflow_dispatch:
 
 jobs:
@@ -16,13 +16,15 @@ jobs:
       - name: Install Marp CLI
         run: npm install -g @marp-team/marp-cli
 
-      # Build every .md under slides-src/practice → docs/slides/*.html
+      # Build every .md under docs/_slides/practice → docs/slides/practice/*.html
       - name: Convert slides
         run: |
           mkdir -p docs/slides/practice               # target folder
-          for file in slides-src/practice/*.md; do
-            out="docs/slides/practice/$(basename "${file%.md}.html")"
-            marp "$file" --html --allow-local-files --output "$out"
+          for file in docs/_slides/practice/*.md; do
+            if [ -f "$file" ]; then
+              out="docs/slides/practice/$(basename "${file%.md}.html")"
+              marp "$file" --html --allow-local-files --output "$out"
+            fi
           done
 
 
