@@ -12,13 +12,9 @@
     
     <div class="nav-links" id="nav-links">
         <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Home</a>
-        <a href="{{ '/syllabus' | relative_url }}" {% if page.url contains '/syllabus' %}class="active"{% endif %}>Syllabus</a>
-        <a href="{{ '/slides' | relative_url }}" {% if page.url contains '/slides' %}class="active"{% endif %}>Slides</a>
-        <a href="{{ '/lessons' | relative_url }}" {% if page.url contains '/lessons' %}class="active"{% endif %}>Lessons</a>
-        <a href="{{ '/assignments' | relative_url }}" {% if page.url contains '/assignments' %}class="active"{% endif %}>Assignments</a>
-        <a href="{{ '/projects' | relative_url }}" {% if page.url contains '/projects' %}class="active"{% endif %}>Projects</a>
-        <a href="{{ '/showcase' | relative_url }}" {% if page.url contains '/showcase' %}class="active"{% endif %}>Showcase</a>
-        <a href="{{ '/PROJECT_RULES' | relative_url }}" {% if page.url contains 'PROJECT_RULES' %}class="active"{% endif %}>Rules</a>
+        <a href="{{ '/syllabus' | relative_url }}" {% if page.url contains '/syllabus' or page.url contains 'PROJECT_RULES' %}class="active"{% endif %}>Syllabus</a>
+        <a href="{{ '/weekly-materials' | relative_url }}" {% if page.url contains '/weekly-materials' or page.url contains '/slides' or page.url contains '/lessons' or page.url contains '/assignments' %}class="active"{% endif %}>Weekly Materials</a>
+        <a href="{{ '/help-support' | relative_url }}" {% if page.url contains '/help-support' or page.url contains '/showcase' %}class="active"{% endif %}>Help & Support</a>
         
         {% if site.data.navigation.external_links %}
         <div class="external-links">
@@ -32,6 +28,34 @@
         {% endif %}
     </div>
 </nav>
+
+<!-- Platform Integration Bar -->
+<div class="platform-bar">
+    <div class="wrapper">
+        <div class="platform-links">
+            <a href="https://github.com/ap-unil-2025" target="_blank" class="platform-link">
+                <span class="platform-icon">💻</span>
+                <span class="platform-name">GitHub</span>
+            </a>
+            <a href="https://app.nuvolos.cloud/enroll/class/RshD654gzU4" target="_blank" class="platform-link">
+                <span class="platform-icon">☁️</span>
+                <span class="platform-name">Nuvolos</span>
+            </a>
+            <a href="https://moodle.unil.ch/course/view.php?id=33778" target="_blank" class="platform-link">
+                <span class="platform-icon">📚</span>
+                <span class="platform-name">Moodle</span>
+            </a>
+            <a href="#" target="_blank" class="platform-link">
+                <span class="platform-icon">🎮</span>
+                <span class="platform-name">Discord</span>
+            </a>
+            <a href="https://github.com/ap-unil-2025/course-materials/discussions" target="_blank" class="platform-link">
+                <span class="platform-icon">💬</span>
+                <span class="platform-name">Discussions</span>
+            </a>
+        </div>
+    </div>
+</div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -68,6 +92,44 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <style>
+.platform-bar {
+    background-color: var(--surface-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.5rem 0;
+}
+
+.platform-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.platform-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: color 0.2s ease;
+    font-size: 0.9rem;
+}
+
+.platform-link:hover {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.platform-icon {
+    font-size: 1.1em;
+}
+
+.platform-name {
+    font-weight: 500;
+}
+
 .nav-toggle {
     display: none;
     background: none;
@@ -121,6 +183,24 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 
 @media (max-width: 768px) {
+    .platform-links {
+        gap: 1rem;
+        justify-content: space-around;
+    }
+    
+    .platform-link {
+        padding: 0.375rem 0.75rem;
+        font-size: 0.8rem;
+    }
+    
+    .platform-name {
+        display: none;
+    }
+    
+    .platform-icon {
+        font-size: 1.2em;
+    }
+    
     .site-nav {
         position: relative;
     }
