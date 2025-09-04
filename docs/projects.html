@@ -1,694 +1,570 @@
 ---
 layout: page
-title: Final Projects 2025
-subtitle: Choose your project for Advanced Programming Spring 2025
+title: Final Projects
 ---
 
 <div class="projects-page">
-    <section class="project-selection">
-        <div class="selection-intro">
-            <h2>🎯 Choose Your Final Project</h2>
-            <p>Select <strong>one</strong> of the template projects below for your team (3-4 students), or propose a solo free-topic project. Your choice is <strong>final after Week 2 registration</strong>.</p>
-            
-            <div class="important-info">
-                <h3>📋 Key Information</h3>
-                <ul>
-                    <li><strong>Team Size:</strong> 3-4 students for template projects, solo only for free-topic</li>
-                    <li><strong>Registration Deadline:</strong> Week 2 Friday 23:59 CET</li>
-                    <li><strong>Template Repos:</strong> Each project includes skeleton code, tests, and CI pipeline</li>
-                    <li><strong>Assessment:</strong> Repository (35%), Math/Algorithms (25%), Tests/CI (20%), Usability (10%), Report/Demo (10%)</li>
-                </ul>
-            </div>
-        </div>
+  <!-- Projects Banner -->
+  <div class="projects-banner">
+    <div class="projects-content">
+      <span class="projects-label">2025</span>
+      <div class="projects-info">
+        <h2>Final Projects</h2>
+        <p>Team template projects • Solo free-topic • Full technical assessment</p>
+      </div>
+    </div>
+    <a href="{{ '/PROJECT_RULES/' | relative_url }}" class="projects-btn">View Full Rules →</a>
+  </div>
 
-        <h2>🔖 Template Projects</h2>
-        <div class="template-projects-grid">
-            {% assign template_projects = site.projects | where_exp: "project", "project.project_id != 'SOLO'" | sort: "difficulty" %}
-            {% for project in template_projects %}
-            <div class="project-option-card card">
-                <div class="project-header">
-                    <div class="project-id-badge">{{ project.project_id }}</div>
-                    <div class="difficulty-badge difficulty-{{ project.difficulty | downcase }}">{{ project.difficulty }}</div>
-                </div>
-                
-                <h3 class="project-title">{{ project.title | escape }}</h3>
-                <p class="focus-area">{{ project.focus_area }}</p>
-                <p class="project-summary">{{ project.summary }}</p>
-                
-                <div class="project-details">
-                    <div class="team-size">
-                        <strong>Team:</strong> {{ project.team_size }}
-                    </div>
-                    
-                    {% if project.technologies %}
-                    <div class="tech-stack">
-                        <strong>Technologies:</strong>
-                        <div class="tech-tags">
-                            {% for tech in project.technologies limit:3 %}
-                            <span class="tech-tag">{{ tech }}</span>
-                            {% endfor %}
-                            {% if project.technologies.size > 3 %}
-                            <span class="tech-more">+{{ project.technologies.size | minus: 3 }} more</span>
-                            {% endif %}
-                        </div>
-                    </div>
-                    {% endif %}
-                </div>
-                
-                <div class="project-actions">
-                    <a href="{{ project.url | relative_url }}" class="btn btn-secondary">📖 View Details</a>
-                    {% if project.template_repo %}
-                    <a href="{{ project.template_repo }}" class="btn template-btn" target="_blank">
-                        📁 Template Repo <span class="external-icon">↗</span>
-                    </a>
-                    {% endif %}
-                    {% if project.brief_file %}
-                    <a href="{{ project.brief_file | relative_url }}" class="btn brief-btn" target="_blank">
-                        📋 Full Brief <span class="external-icon">↗</span>
-                    </a>
-                    {% endif %}
-                </div>
-            </div>
-            {% endfor %}
-        </div>
+  <!-- Project Rules Overview -->
+  <section class="projects-section">
+    <h3 class="section-title">Essential Rules</h3>
+    <div class="rules-overview-grid">
+      
+      <div class="rule-overview-item priority">
+        <div class="rule-icon">⚠️</div>
+        <h4>Mandatory Deliverables</h4>
+        <p>GitHub repo tagged v1.0.0 • Technical report (4-6 pages) • Live demo (15 min) • ALL are required</p>
+      </div>
 
-        <h2>🎨 Solo Free-Topic Project</h2>
-        {% assign solo_project = site.projects | where: "project_id", "SOLO" | first %}
-        {% if solo_project %}
-        <div class="solo-project-section">
-            <div class="solo-project-card card">
-                <div class="solo-header">
-                    <h3>{{ solo_project.title }}</h3>
-                    <div class="solo-badge">Individual Work</div>
-                </div>
-                
-                <p class="solo-description">{{ solo_project.summary }}</p>
-                
-                <div class="solo-requirements">
-                    <h4>Requirements</h4>
-                    <ul>
-                        <li><strong>Solo only:</strong> No team members allowed</li>
-                        <li><strong>Proposal required:</strong> One-paragraph proposal by {{ solo_project.proposal_deadline }}</li>
-                        <li><strong>No data science:</strong> Primary focus cannot be datasets/ML/statistics</li>
-                        <li><strong>Software engineering focus:</strong> Must demonstrate advanced programming concepts</li>
-                    </ul>
-                </div>
-                
-                <div class="solo-actions">
-                    <a href="{{ solo_project.url | relative_url }}" class="btn">📝 Proposal Guidelines</a>
-                    <a href="mailto:anna.smirnova@unil.ch" class="btn btn-secondary">✉️ Contact for Advice</a>
-                </div>
-            </div>
-        </div>
-        {% endif %}
-    </section>
-    
-    <section class="project-rules">
-        <h2>📋 Project Rules & Requirements</h2>
-        <div class="rules-summary">
-            <div class="rule-card">
-                <h4>🏗️ Technical Standards</h4>
-                <ul>
-                    <li>Python ≥ 3.10, full CI/CD pipeline</li>
-                    <li>≥90% test coverage, mypy --strict</li>
-                    <li>Ruff linting and formatting</li>
-                    <li>CLI interface and installable package</li>
-                </ul>
-            </div>
-            
-            <div class="rule-card">
-                <h4>📦 Deliverables</h4>
-                <ul>
-                    <li>GitHub repo tagged v1.0.0</li>
-                    <li>Technical report (4-6 pages PDF)</li>
-                    <li>Live demo (10 minutes)</li>
-                    <li>All three are mandatory</li>
-                </ul>
-            </div>
-            
-            <div class="rule-card">
-                <h4>🤖 AI Tools Allowed</h4>
-                <ul>
-                    <li>GitHub Copilot, ChatGPT, Claude, etc.</li>
-                    <li>Keep AI_LOG.md of major contributions</li>
-                    <li>Be ready to explain AI-generated code</li>
-                    <li>Academic honesty rules apply</li>
-                </ul>
-            </div>
+      <div class="rule-overview-item">
+        <div class="rule-icon">👥</div>
+        <h4>Team Formation</h4>
+        <p>3-4 students for template projects • Solo only for free-topic • Registration deadline: Week 2 Friday 23:59 CET</p>
+      </div>
+
+      <div class="rule-overview-item">
+        <div class="rule-icon">🔧</div>
+        <h4>Technical Standards</h4>
+        <p>Python ≥3.10 • ≥90% test coverage • mypy --strict • Full CI/CD pipeline • GitHub Actions</p>
+      </div>
+
+      <div class="rule-overview-item">
+        <div class="rule-icon">🤖</div>
+        <h4>AI Tools Allowed</h4>
+        <p>GitHub Copilot, ChatGPT, Claude • Keep AI_LOG.md • Be ready to explain AI-generated code</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Project Selection -->
+  <section class="projects-section">
+    <h3 class="section-title">Choose Your Project</h3>
+    <div class="selection-intro">
+      <p>Select <strong>one</strong> of the template projects below for your team (3-4 students), or propose a solo free-topic project. Your choice is <strong>final after Week 2 registration</strong>.</p>
+    </div>
+
+    <h4>Template Projects</h4>
+    <div class="template-projects-grid">
+      {% assign template_projects = site.projects | where_exp: "project", "project.project_id != 'SOLO'" | sort: "difficulty" %}
+      {% for project in template_projects %}
+      <div class="project-option-item">
+        <div class="project-header">
+          <div class="project-id-badge">{{ project.project_id }}</div>
+          <div class="difficulty-badge difficulty-{{ project.difficulty | downcase }}">{{ project.difficulty }}</div>
         </div>
         
-        <div class="rules-link">
-            <a href="{{ '/PROJECT_RULES/' | relative_url }}" class="btn btn-large">📋 Read Full Project Rules</a>
+        <h4>{{ project.title | escape }}</h4>
+        <p class="focus-area">{{ project.focus_area }}</p>
+        <p class="project-summary">{{ project.summary }}</p>
+        
+        <div class="project-details">
+          <div class="team-info">
+            <strong>Team:</strong> {{ project.team_size }}
+          </div>
+          
+          {% if project.technologies %}
+          <div class="tech-stack">
+            <strong>Technologies:</strong>
+            <div class="tech-tags">
+              {% for tech in project.technologies limit:3 %}
+              <span class="tech-tag">{{ tech }}</span>
+              {% endfor %}
+              {% if project.technologies.size > 3 %}
+              <span class="tech-more">+{{ project.technologies.size | minus: 3 }} more</span>
+              {% endif %}
+            </div>
+          </div>
+          {% endif %}
         </div>
-    </section>
+        
+        <div class="project-actions">
+          <a href="{{ project.url | relative_url }}" class="project-link">📖 View Details</a>
+          {% if project.template_repo %}
+          <a href="{{ project.template_repo }}" class="project-link" target="_blank">📁 Template Repo →</a>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- Solo Free-Topic Section -->
+  <section class="projects-section">
+    <h3 class="section-title">Solo Free-Topic Project</h3>
+    {% assign solo_project = site.projects | where: "project_id", "SOLO" | first %}
+    {% if solo_project %}
+    <div class="solo-project-item">
+      <div class="solo-header">
+        <div class="solo-icon">🎨</div>
+        <div class="solo-info">
+          <h4>{{ solo_project.title }}</h4>
+          <span class="solo-badge">Individual Work</span>
+        </div>
+      </div>
+      
+      <p class="solo-description">{{ solo_project.summary }}</p>
+      
+      <div class="solo-requirements">
+        <h5>Requirements</h5>
+        <ul>
+          <li><strong>Solo only:</strong> No team members allowed</li>
+          <li><strong>Proposal required:</strong> One-paragraph proposal by {{ solo_project.proposal_deadline }}</li>
+          <li><strong>No data science:</strong> Primary focus cannot be datasets/ML/statistics</li>
+          <li><strong>Software engineering focus:</strong> Must demonstrate advanced programming concepts</li>
+        </ul>
+      </div>
+      
+      <div class="solo-actions">
+        <a href="{{ solo_project.url | relative_url }}" class="project-link">📝 Proposal Guidelines</a>
+        <a href="mailto:anna.smirnova@unil.ch" class="project-link">✉️ Contact for Advice</a>
+      </div>
+    </div>
+    {% endif %}
+  </section>
     
 </div>
 
 <style>
-/* Project cards layout */
+/* Projects Page Layout - Using Hub Patterns */
+.projects-page {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Projects Banner */
+.projects-banner {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  border-radius: 0.75rem;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+  margin-top: 1rem;
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.2);
+}
+
+.projects-content {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.projects-label {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.projects-info h2 {
+  color: white;
+  font-size: 1.25rem;
+  margin: 0 0 0.25rem 0;
+}
+
+.projects-info p {
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+.projects-btn {
+  background: white;
+  color: #f59e0b;
+  padding: 0.6rem 1.25rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.projects-btn:hover {
+  transform: translateX(2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+  color: #f59e0b;
+}
+
+/* Section Layout */
+.projects-section {
+  margin-bottom: 2.5rem;
+}
+
+.section-title {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0 0 1rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Rules Overview Grid */
+.rules-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.rule-overview-item {
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.rule-overview-item:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.rule-overview-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--primary-color);
+  transform: scaleY(0);
+  transition: transform 0.2s ease;
+}
+
+.rule-overview-item:hover::before {
+  transform: scaleY(1);
+}
+
+.rule-overview-item.priority {
+  border-color: #ef4444;
+  background: linear-gradient(135deg, #fef2f2 0%, var(--background-color) 100%);
+}
+
+.rule-overview-item.priority::before {
+  background: #ef4444;
+}
+
+.rule-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.rule-overview-item h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem 0;
+  line-height: 1.3;
+}
+
+.rule-overview-item p {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Template Projects Grid */
 .template-projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
-.project-option-card {
-    border: 1px solid var(--border-color);
-    border-radius: 1rem;
-    padding: 0;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    background: var(--background-color);
+.project-option-item {
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.project-option-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
-    border-color: var(--primary-color);
+.project-option-item:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.project-option-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--primary-color);
+  transform: scaleY(0);
+  transition: transform 0.2s ease;
+}
+
+.project-option-item:hover::before {
+  transform: scaleY(1);
 }
 
 .project-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem 1.5rem 0;
-    margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
 }
 
 .project-id-badge {
-    background: linear-gradient(135deg, var(--primary-color), #1d4ed8);
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 9999px;
-    font-weight: 600;
-    font-family: monospace;
-    font-size: 0.9rem;
-    letter-spacing: 0.5px;
+  background: var(--primary-color);
+  color: white;
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: monospace;
 }
 
 .difficulty-badge {
-    padding: 0.25rem 0.75rem;
-    border-radius: 9999px;
-    font-size: 0.8rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
 }
 
 .difficulty-intermediate {
-    background: linear-gradient(135deg, #f59e0b, #d97706);
-    color: white;
+  background: #f59e0b;
+  color: white;
 }
 
 .difficulty-advanced {
-    background: linear-gradient(135deg, #ef4444, #dc2626);
-    color: white;
+  background: #ef4444;
+  color: white;
 }
 
-.project-title {
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin: 0 0 0.5rem 0;
-    padding: 0 1.5rem;
-    color: var(--accent-color);
-    line-height: 1.3;
+.project-option-item h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem 0;
+  line-height: 1.3;
 }
 
 .focus-area {
-    font-size: 0.9rem;
-    color: var(--primary-color);
-    font-weight: 500;
-    margin: 0 0 1rem 0;
-    padding: 0 1.5rem;
+  font-size: 0.8rem;
+  color: var(--primary-color);
+  font-weight: 500;
+  margin: 0 0 0.5rem 0;
 }
 
 .project-summary {
-    padding: 0 1.5rem;
-    margin-bottom: 1.5rem;
-    color: var(--text-secondary);
-    line-height: 1.5;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin: 0 0 1rem 0;
+  line-height: 1.4;
 }
 
 .project-details {
-    padding: 0 1.5rem;
-    margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
-.team-size {
-    margin-bottom: 1rem;
-    color: var(--text-secondary);
-}
-
-.tech-stack {
-    margin-bottom: 1rem;
+.team-info {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
 }
 
 .tech-stack strong {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: var(--accent-color);
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
 }
 
 .tech-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
 }
 
 .tech-tag {
-    background: var(--surface-color);
-    color: var(--text-secondary);
-    padding: 0.25rem 0.75rem;
-    border-radius: 0.5rem;
-    font-size: 0.8rem;
-    border: 1px solid var(--border-color);
-    font-weight: 500;
+  background: var(--surface-color);
+  color: var(--text-secondary);
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.7rem;
+  border: 1px solid var(--border-color);
 }
 
 .tech-more {
-    color: var(--text-muted);
-    font-size: 0.8rem;
-    font-style: italic;
-    padding: 0.25rem 0.5rem;
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  font-style: italic;
 }
 
 .project-actions {
-    padding: 1.5rem;
-    background: var(--surface-color);
-    border-top: 1px solid var(--border-color);
-    display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
-.template-btn {
-    background: var(--secondary-color);
-    color: white;
+.project-link {
+  background: var(--surface-color);
+  color: var(--text-secondary);
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.25rem;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 
-.template-btn:hover {
-    background: #4b5563;
-    color: white;
-    text-decoration: none;
+.project-link:hover {
+  background: var(--primary-color);
+  color: white;
+  text-decoration: none;
 }
 
-.brief-btn {
-    background: var(--success-color);
-    color: white;
+/* Solo Project Item */
+.solo-project-item {
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.brief-btn:hover {
-    background: #059669;
-    color: white;
-    text-decoration: none;
+.solo-project-item:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
+.solo-project-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--primary-color);
+  transform: scaleY(0);
+  transition: transform 0.2s ease;
 }
 
-.past-grid {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
+.solo-project-item:hover::before {
+  transform: scaleY(1);
 }
 
-.project-card {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    position: relative;
-    overflow: hidden;
+.solo-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
 }
 
-.project-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+.solo-icon {
+  font-size: 1.5rem;
 }
 
-.featured-project {
-    border: 2px solid #ffd700;
-    background: linear-gradient(135deg, #fffbf0 0%, #ffffff 100%);
+.solo-info h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.25rem 0;
 }
 
-.featured-badge {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: linear-gradient(135deg, #ffd700, #ffed4e);
-    color: #8b6914;
-    padding: 0.25rem 0.75rem;
-    border-radius: 9999px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    z-index: 2;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+.solo-badge {
+  background: #8b5cf6;
+  color: white;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.7rem;
+  font-weight: 500;
 }
 
-.project-image {
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
-    background-color: var(--surface-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.solo-description {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin: 0 0 1rem 0;
+  line-height: 1.4;
 }
 
-.project-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.2s ease;
+.solo-requirements h5 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem 0;
 }
 
-.project-card:hover .project-image img {
-    transform: scale(1.05);
+.solo-requirements ul {
+  margin: 0 0 1rem 0;
+  padding-left: 1.25rem;
 }
 
-.project-info {
-    padding: 1.5rem;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+.solo-requirements li {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.25rem;
+  line-height: 1.4;
 }
 
-.card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 1rem;
-    gap: 1rem;
+.solo-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
-.card-title {
-    margin: 0;
-    flex: 1;
-}
-
-.card-title a {
-    color: var(--accent-color);
-    text-decoration: none;
-}
-
-.card-title a:hover {
-    color: var(--primary-color);
-}
-
-.project-type-badge {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 0.25rem 0.75rem;
-    border-radius: 9999px;
-    font-size: 0.8rem;
-    font-weight: 500;
-    white-space: nowrap;
-}
-
-.year-badge {
-    background-color: var(--secondary-color);
-    color: white;
-    padding: 0.25rem 0.75rem;
-    border-radius: 9999px;
-    font-size: 0.8rem;
-    font-weight: 500;
-}
-
-.project-team {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-}
-
-.project-description {
-    color: var(--text-secondary);
-    margin-bottom: 1.5rem;
-    flex: 1;
-}
-
-.tech-preview {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.25rem;
-    margin-bottom: 1.5rem;
-}
-
-.tech-tag-small {
-    background-color: var(--surface-color);
-    color: var(--text-secondary);
-    padding: 0.25rem 0.5rem;
-    border-radius: 0.25rem;
-    font-size: 0.8rem;
-    border: 1px solid var(--border-color);
-}
-
-.tech-more {
-    color: var(--text-muted);
-    font-size: 0.8rem;
-    font-style: italic;
-    padding: 0.25rem 0.5rem;
-}
-
-.card-actions {
-    display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-    margin-top: auto;
-}
-
-.btn-small {
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
-}
-
-.demo-btn {
-    background-color: #28a745;
-    color: white;
-}
-
-.demo-btn:hover {
-    background-color: #218838;
-    color: white;
-}
-
-.external-icon {
-    font-size: 0.8em;
-    opacity: 0.8;
-    margin-left: 0.25rem;
-}
-
-.past-project {
-    background-color: var(--surface-color);
-}
-
-.past-project .project-info {
-    padding: 1.25rem;
-}
-
-.past-project .card-title {
-    font-size: 1.1rem;
-}
-
-.current-projects, .past-projects {
-    margin-bottom: 4rem;
-}
-
-.current-projects h2, .past-projects h2 {
-    margin-bottom: 1rem;
-    color: var(--accent-color);
-}
-
-.project-guidelines {
-    margin-top: 4rem;
-    padding-top: 3rem;
-    border-top: 1px solid var(--border-color);
-}
-
-.project-guidelines h2 {
-    text-align: center;
-    margin-bottom: 2rem;
-    color: var(--accent-color);
-}
-
-.guidelines-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 3rem;
-}
-
-/* Rules section styling */
-.rules-summary {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-bottom: 3rem;
-}
-
-.rule-card {
-    background: var(--surface-color);
-    border: 1px solid var(--border-color);
-    border-radius: 1rem;
-    padding: 2rem;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.rule-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-}
-
-.rule-card h4 {
-    margin-top: 0;
-    margin-bottom: 1rem;
-    color: var(--accent-color);
-    font-size: 1.1rem;
-}
-
-.rule-card ul {
-    margin: 0;
-    padding-left: 1.5rem;
-}
-
-.rule-card li {
-    margin-bottom: 0.75rem;
-    color: var(--text-secondary);
-    line-height: 1.5;
-}
-
-.rules-link {
-    text-align: center;
-}
-
-.btn-large {
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-}
-
-.guideline-card {
-    background-color: var(--surface-color);
-    padding: 1.5rem;
-    border-radius: 0.75rem;
-    border: 1px solid var(--border-color);
-}
-
-.guideline-card h4 {
-    margin-top: 0;
-    margin-bottom: 1rem;
-    color: var(--accent-color);
-}
-
-.guideline-card ul {
-    margin: 0;
-    padding-left: 1.5rem;
-}
-
-.guideline-card li {
-    margin-bottom: 0.5rem;
-    color: var(--text-secondary);
-}
-
-.submission-info {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 2rem;
-    border-radius: 0.75rem;
-    text-align: center;
-}
-
-.submission-info h3 {
-    margin-top: 0;
-    margin-bottom: 1rem;
-    color: white;
-}
-
-.submission-info p {
-    margin: 0;
-    opacity: 0.9;
-}
-
-.empty-state {
-    text-align: center;
-    padding: 4rem 0;
-    color: var(--text-secondary);
-}
-
-.empty-state .btn {
-    margin-top: 1rem;
-}
-
+/* Mobile Responsive */
 @media (max-width: 768px) {
-    .template-projects-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-    
-    .project-option-card {
-        margin-bottom: 1rem;
-    }
-    
-    .project-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.75rem;
-        padding: 1rem 1rem 0;
-    }
-    
-    .project-title {
-        padding: 0 1rem;
-        font-size: 1.2rem;
-    }
-    
-    .focus-area, .project-summary, .project-details {
-        padding: 0 1rem;
-    }
-    
-    .project-actions {
-        padding: 1rem;
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-    
-    .rules-summary {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-    
-    .rule-card {
-        padding: 1.5rem;
-    }
-    
-    .projects-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .past-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .card-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-    }
-    
-    .card-actions {
-        flex-direction: column;
-    }
-    
-    .guidelines-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .featured-badge {
-        position: static;
-        align-self: flex-start;
-        margin-bottom: 1rem;
-    }
+  .projects-banner {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+  .projects-content {
+    flex-direction: column;
+  }
+  
+  .rules-overview-grid,
+  .template-projects-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .project-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .solo-header {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
 }
 </style>

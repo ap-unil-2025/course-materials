@@ -4,6 +4,30 @@ layout: default
 
 <div class="home">
   
+  <!-- Welcome Greeting -->
+  <div class="welcome-section">
+    <h1>Welcome to DSAP! 👋</h1>
+    <p class="welcome-message">Ready to dive into the exciting world of data science and advanced programming? This semester, you'll master Python, explore cutting-edge machine learning techniques, and build real-world projects that showcase your skills. Whether you're passionate about economic modeling, statistical analysis, or computational problem-solving, you're in the right place!</p>
+    <div class="welcome-highlights">
+      <div class="highlight-item">
+        <span class="highlight-icon">🎯</span>
+        <span>Hands-on projects</span>
+      </div>
+      <div class="highlight-item">
+        <span class="highlight-icon">🤖</span>
+        <span>AI-powered development</span>
+      </div>
+      <div class="highlight-item">
+        <span class="highlight-icon">👥</span>
+        <span>Collaborative learning</span>
+      </div>
+      <div class="highlight-item">
+        <span class="highlight-icon">💡</span>
+        <span>Real-world applications</span>
+      </div>
+    </div>
+  </div>
+  
   <!-- Current Week Banner (similar to weekly hub) -->
   <div class="current-banner">
     <div class="current-content">
@@ -44,6 +68,43 @@ layout: default
         <h4>Help & Support</h4>
         <p>Office hours • Contact • Resources</p>
       </a>
+
+    </div>
+  </section>
+
+  <!-- Project Rules Section -->
+  <section class="home-sections">
+    <h3 class="section-title">Project Rules & Deadlines</h3>
+    <div class="rules-banner">
+      <div class="rules-banner-content">
+        <div class="rules-icon">⚠️</div>
+        <div class="rules-info">
+          <h4>Mandatory Project Deliverables</h4>
+          <p>GitHub repo tagged v1.0.0 • Technical report (4-6 pages) • Live demo (15 min) • ALL required for passing</p>
+        </div>
+      </div>
+      <a href="{{ '/PROJECT_RULES/' | relative_url }}" class="rules-banner-btn">View Full Rules →</a>
+    </div>
+    
+    <div class="key-rules-grid">
+      
+      <div class="key-rule-item">
+        <div class="key-rule-icon">📅</div>
+        <h4>Registration Deadline</h4>
+        <p>Team formation and project selection must be completed by <strong>Week 2 Friday 23:59 CET</strong></p>
+      </div>
+
+      <div class="key-rule-item">
+        <div class="key-rule-icon">🔧</div>
+        <h4>Technical Requirements</h4>
+        <p>Python ≥3.10 • ≥90% test coverage • mypy --strict • Full CI/CD pipeline</p>
+      </div>
+
+      <div class="key-rule-item">
+        <div class="key-rule-icon">🤖</div>
+        <h4>AI Tools Welcome</h4>
+        <p>Use GitHub Copilot, ChatGPT, Claude • Keep AI_LOG.md • Explain AI-generated code</p>
+      </div>
 
     </div>
   </section>
@@ -119,6 +180,51 @@ layout: default
 .home {
   max-width: 1200px;
   margin: 0 auto;
+}
+
+/* Welcome Section */
+.welcome-section {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  padding: 2rem 1rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border-radius: 1rem;
+  margin-top: 1rem;
+}
+
+.welcome-section h1 {
+  font-size: 2.5rem;
+  color: var(--accent-color);
+  margin: 0 0 1rem 0;
+  font-weight: 700;
+}
+
+.welcome-message {
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto 2rem auto;
+}
+
+.welcome-highlights {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.highlight-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.highlight-icon {
+  font-size: 1.2rem;
 }
 
 /* Compact Header for Default Layout */
@@ -311,6 +417,122 @@ layout: default
   background: linear-gradient(135deg, #fefce8 0%, var(--background-color) 100%);
 }
 
+/* Project Rules Banner */
+.rules-banner {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  border-radius: 0.75rem;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.2);
+}
+
+.rules-banner-content {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.rules-icon {
+  font-size: 1.5rem;
+  filter: invert(1);
+}
+
+.rules-info h4 {
+  color: white;
+  font-size: 1rem;
+  margin: 0 0 0.25rem 0;
+  font-weight: 600;
+}
+
+.rules-info p {
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.rules-banner-btn {
+  background: white;
+  color: #ef4444;
+  padding: 0.6rem 1.25rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.rules-banner-btn:hover {
+  transform: translateX(2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+  color: #ef4444;
+}
+
+/* Key Rules Grid */
+.key-rules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.key-rule-item {
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.key-rule-item:hover {
+  border-color: #ef4444;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.key-rule-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: #ef4444;
+  transform: scaleY(0);
+  transition: transform 0.2s ease;
+}
+
+.key-rule-item:hover::before {
+  transform: scaleY(1);
+}
+
+.key-rule-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.key-rule-item h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem 0;
+  line-height: 1.3;
+}
+
+.key-rule-item p {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.4;
+}
+
 /* Contact Items */
 .contact-item {
   background: var(--background-color);
@@ -379,6 +601,24 @@ layout: default
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
+  .welcome-section {
+    padding: 1.5rem 0.75rem;
+  }
+  
+  .welcome-section h1 {
+    font-size: 2rem;
+  }
+  
+  .welcome-message {
+    font-size: 1rem;
+  }
+  
+  .welcome-highlights {
+    gap: 1rem;
+    flex-direction: column;
+    align-items: center;
+  }
+  
   .home-header h1 {
     font-size: 1.5rem;
   }
@@ -395,8 +635,19 @@ layout: default
   
   .home-grid,
   .platform-grid,
-  .contact-grid {
+  .contact-grid,
+  .key-rules-grid {
     grid-template-columns: 1fr;
+  }
+  
+  .rules-banner {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+  .rules-banner-content {
+    flex-direction: column;
   }
 }
 </style>
