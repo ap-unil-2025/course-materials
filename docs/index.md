@@ -3,6 +3,11 @@
 layout: home
 ---
 
+<div style="background-color: #ffebee; border: 3px solid #d32f2f; padding: 20px; margin-bottom: 30px; border-radius: 8px; text-align: center;">
+  <h2 style="color: #d32f2f; font-size: 24px; font-weight: bold; margin: 0 0 10px 0;">⚠️ UNOFFICIAL CONTENT - UNDER DEVELOPMENT ⚠️</h2>
+  <p style="color: #c62828; font-size: 18px; font-weight: 600; margin: 0;">This website is currently being developed. Information may change significantly and should NOT be considered official until further notice.</p>
+</div>
+
 # Advanced Programming @ UNIL 2025
 **MSc Economics, Actuarial Science & Finance**
 
