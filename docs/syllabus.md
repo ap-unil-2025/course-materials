@@ -1,7 +1,12 @@
+---
+layout: page
+title: "Course Syllabus"
+---
+
 # Introduction to Data Science and Advanced Programming  
 HEC Lausanne, Fall Semester 2025  
 
-This advanced course introduces students to the Python programming language, core concepts of statistical learning, and high-performance computing. It is designed for Master’s students in Economics and Finance to build the computational and analytical skills necessary for modern quantitative analysis. 
+This advanced course introduces students to the Python programming language, core concepts of statistical learning, and high-performance computing. It is designed for Master's students in Economics and Finance to build the computational and analytical skills necessary for modern quantitative analysis. 
 
 The course consists of three 45-minute lecture sessions and one 45-minute hands-on session each week. 
 
