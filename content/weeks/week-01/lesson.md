@@ -1,52 +1,90 @@
 ---
 layout: lesson
-title: "Code Like a Scientist: Essential Tools"
+title: "Essential Tools Setup & Unix/Linux Continuation"
 week: 1
-date: 2025-01-27
+date: 2025-09-15
 type: "hands-on"
 topics:
-  - Command line basics
-  - Git version control
+  - Advanced Unix/Linux commands
+  - Git version control fundamentals
   - Python environment setup
-  - Research programming workflow
+  - Nuvolos platform workflows
 slides: "/slides/practice/week01_slides.html"
 code_examples: 
   - git-basics.py
   - environment-setup.sh
-summary: "Hands-on tutorial covering essential programming tools for researchers including Git, command line, and Python environment setup."
+summary: "Continuation of course setup with advanced Unix/Linux, Git fundamentals, and Python environment configuration on Nuvolos platform."
 ---
 
-# Code Like a Scientist: Essential Tools for Research Programming
+# Essential Tools Setup & Unix/Linux Continuation
 
-This lesson introduces the fundamental tools every research programmer needs to work effectively and reproducibly.
+This lesson builds on Week 0's introduction by diving deeper into Unix/Linux commands, introducing Git version control, and setting up Python development environments on the Nuvolos platform.
 
 ## Learning Objectives
 
 By the end of this lesson, you will:
 
-- Navigate the command line confidently
+- Master advanced Unix/Linux commands for file manipulation and system navigation
 - Use Git for version control of your research code
-- Set up a professional Python development environment
-- Understand research programming best practices
-- Create reproducible research workflows
+- Set up Python development environments on Nuvolos
+- Create reproducible research workflows using cloud tools
+- Integrate Unix/Linux, Git, and Python for efficient data science workflows
 
-## Essential Tools Overview
+## Advanced Unix/Linux Commands
 
-### 1. Command Line Interface (CLI)
-The command line is your gateway to powerful programming tools and efficient file management.
+Building on Week 0's basics, let's explore more powerful Unix/Linux commands essential for data science work.
 
-**Key Commands:**
+### Advanced File Operations
 ```bash
-# Navigation
-ls          # List files
-cd          # Change directory
-pwd         # Print working directory
+# Find files and directories
+find . -name "*.csv"           # Find all CSV files
+find . -type f -size +1M       # Find files larger than 1MB
+locate filename                # Quick file location
 
-# File operations
-mkdir       # Create directory
-cp          # Copy files
-mv          # Move/rename files
-rm          # Remove files
+# Text processing
+grep "pattern" file.txt        # Search for patterns in files
+grep -r "function" .           # Recursively search in directories  
+sed 's/old/new/g' file.txt     # Replace text in files
+awk '{print $1}' data.txt      # Extract columns from data
+
+# File compression and archives
+tar -czf archive.tar.gz dir/   # Create compressed archive
+tar -xzf archive.tar.gz        # Extract archive
+zip -r backup.zip project/     # Create zip archive
+```
+
+### Process and System Management
+```bash
+# Process management
+ps aux                         # List all running processes
+top                           # Monitor system resources
+htop                          # Enhanced process monitor
+kill PID                      # Terminate process by ID
+
+# Disk usage and system info
+df -h                         # Disk space usage
+du -sh *                      # Directory sizes
+free -h                       # Memory usage
+uname -a                      # System information
+```
+
+### Advanced Navigation and Shortcuts
+```bash
+# Command history
+history                       # View command history
+!!                           # Repeat last command
+!n                           # Repeat command number n
+Ctrl+R                       # Search command history
+
+# File permissions
+chmod 755 script.py          # Set executable permissions
+chmod +x script.py           # Make file executable
+chown user:group file.txt    # Change ownership
+
+# Pipes and redirection
+ls -la | grep ".py"          # Filter output
+python script.py > output.txt    # Redirect output to file
+python script.py 2>&1 | tee log.txt    # Log both output and errors
 ```
 
 ### 2. Git Version Control
@@ -97,20 +135,28 @@ uv pip install package-name
 3. Add and commit your changes
 4. Check the commit history
 
-### Activity 3: Python Environment Setup
-1. Create a virtual environment for your project
-2. Install commonly used research packages
-3. Create a requirements.txt file
-4. Test your environment
+### Activity 3: Nuvolos Workspace Setup
+1. Create a project workspace in Nuvolos
+2. Set up Python environment with required packages
+3. Test Git integration within Nuvolos
+4. Create your first Jupyter notebook
 
-## Research Programming Workflow
+## Integrated Nuvolos Workflow
 
-1. **Project Setup**: Create organized directory structure
-2. **Version Control**: Initialize Git repository
-3. **Environment**: Set up isolated Python environment
-4. **Development**: Write code with proper documentation
+### Working with Nuvolos Platform
+1. **Project Organization**: Use Nuvolos workspace structure
+2. **Version Control**: Integrate Git within Nuvolos environment  
+3. **Environment Management**: Leverage pre-configured Python environments
+4. **Collaboration**: Share workspaces with team members
+5. **Resource Scaling**: Use cloud computing resources as needed
+
+### Research Programming Workflow
+1. **Project Setup**: Create organized directory structure in Nuvolos
+2. **Version Control**: Initialize Git repository (local and remote)
+3. **Environment**: Configure Python packages for your project
+4. **Development**: Write code with proper documentation using Jupyter
 5. **Testing**: Validate your code works correctly
-6. **Sharing**: Push to GitHub for collaboration
+6. **Collaboration**: Share via Nuvolos and push to GitHub
 
 ## Code Examples
 

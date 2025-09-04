@@ -1,293 +1,244 @@
 ---
 marp: true
-theme: default
+theme: gradient
 paginate: true
-header: 'Session 5: Thinking in Objects'
-footer: 'An Introduction to Object-Oriented Programming (OOP)'
-author: 'Anna Smirnova'
+size: 16:9
+title: "Session 5: Generative AI for Programming"
+description: "Large Language Models and Autonomous Agents"
+author: "Anna Smirnova"
+date: "2025-10-13"
+header: "Session 5: Generative AI for Programming"
 ---
 
+<!-- _class: lead -->
 
-# Session 5: Thinking in Objects
+# Session 5: Generative AI for Programming
 
-**An Introduction to Object-Oriented Programming (OOP)**
-
----
-
-# First Things First: Today's Goals
-
-*   Understand the **idea** behind OOP.
-*   See the difference between **Imperative** and **Object-Oriented** code.
-*   Learn the core concepts: **Classes** and **Objects**.
-*   Master the `__init__` method and the `self` keyword.
-*   Explore the power of **Inheritance** for code reuse.
-*   Build a practical, realistic example.
-
----
-<!-- _class: invert -->
-
-# Part 1: A New Way of Thinking
+**Large Language Models and Autonomous Agents**
 
 ---
 
-# The Story So Far: Imperative Programming
+# Today's Goals
 
-Up to now, we've mostly written **imperative code**. This means we think in terms of:
-
-1.  **Data** (like dictionaries, lists, variables).
-2.  **Functions** that operate on that data.
-
-```python
-# The DATA
-experiment_run = {
-    "id": "exp_01",
-    "param_A": 0.5,
-    "results": [10.2, 10.4, 9.9]
-}
-
-# The FUNCTIONS that operate on the data
-def calculate_mean(data_dict: dict) -> float | None:
-    return sum(data_dict["results"]) / len(data_dict["results"])
-
-def print_summary(data_dict: dict) -> None:
-    mean_val = calculate_mean(data_dict)
-    print(f"ID: {data_dict['id']}, Mean: {mean_val:.2f}")
-
-print_summary(experiment_run)
-```
-This works, but the data and the functions are separate.
-
----
-
-# The Problem with Separate Data and Functions
-
-As our projects grow, this separation becomes a problem:
-
-*   **It gets messy**: Which functions work with which data structures?
-*   **No enforced structure**: What if we forget a key in our dictionary, like `"results"`? The `calculate_mean` function will crash.
-*   **Hard to manage state**: The data is "dumb." It has no ability to manage itself or ensure its own consistency.
-
-There must be a better way to organize our code...
-
----
-
-# The OOP Solution: Bundling Data and Functions
-
-**Object-Oriented Programming** is a paradigm based on a simple, powerful idea:
-
-> Let's bundle the data and the functions that work on that data together into a single "thing" called an **Object**.
-
-*   An object **HAS** data (attributes).
-*   An object **CAN DO** things (methods).
-
-Think of a car. It's not just a collection of parts (data) and a separate instruction manual (functions). A car is a single object that *has* an engine and wheels, and *can* accelerate and brake.
+*   Understand the landscape of **AI in coding**.
+*   Learn how **GitHub Copilot** works inside VS Code.
+*   Master **best practices for prompting** to get the best results.
+*   Discuss the **benefits and limitations** of AI coding assistants.
+*   Look ahead to the future: **Agentic AI Tools**.
 
 ---
 <!-- _class: invert -->
 
-# Part 2: The Building Blocks of OOP
+# Part 1: The AI Coding Revolution
 
 ---
 
-# Classes and Objects (Blueprints and Houses)
+# From Spellcheck to Copilot
 
-This is the most important concept in OOP.
+AI assistance in software development isn't new. We've had:
+*   **Linters & Formatters**: Early rule-based AI.
+*   **IntelliSense**: Smart, context-aware autocompletion.
 
-*   A **Class** is the **blueprint**. It's the template or recipe that defines the structure and behavior. It doesn't *do* anything on its own.
+What's new is the rise of **Generative AI** powered by Large Language Models (LLMs). These models don't just complete your code based on syntax; they *understand intent* and can *generate novel code* from natural language descriptions.
 
-*   An **Object** (or **Instance**) is the **actual thing** built from the blueprint. You can create many objects from a single class, each with its own unique data.
+---
+# The Landscape of AI Coding Tools
+The AI coding landscape is evolving rapidly. Here are the main categories of tools you'll encounter:
+*   **Conversational Assistants (Chatbots)**: These are like having a coding buddy in a chat window.
+*   **Code Assistants**: These live inside your editor and help you write code line-by-line.
+*   **Agentic Tools**: These are more autonomous and can handle entire workflows or projects.
 
-```python
-# The Class (Blueprint)
-class Experiment:
-    # ... definition goes here ...
-    pass
+---
+# The Landscape of AI Coding Tools : Conversational Assistants
+ * **Conversational Assistants (Chatbots)**: These are maybe the most familiar tools for most of you. 
+ * You have a conversation with an AI in a chat window to solve problems, get explanations, or generate code snippets. 
+ * Examples are ChatGPT, Claude, Gemini, Deepseek, Grok, Mistral, and many others. 
+ * **Copilot Chat** is an *interface* that provides you with access to many of these!
+---
+# The Landscape of AI Coding Tools : Code Assistants
+* These live inside your editor and help you write code line-by-line. They are **tools** that *integrate* the **models** we discussed earlier.
+* Examples are **GitHub Copilot** (our focus today!), **Gemini Code Assist**, **Junia** (JetBrains),  They provide:
+    *   **Inline Suggestions**: Autocomplete lines or blocks of code, usually completed with a single `Tab`.
+    *  **Inline Chat**: Ask questions about your code, get explanations, or generate new code snippets right from the code line.
+    *   **Documentation Generation**: Automatically creates docstrings and comments.
+---
+# The Landscape of AI Coding Tools : Agentic Tools
+* **Agentic Tools**: You talk to the AI about your high-level goal, and it works autonomously to achieve it by writing code, debugging, and running tests by itself!
+* These tools are still emerging, but in the last year they have achieved impressive results.
+* They can handle entire workflows, like building a web scraper, setting up a database, or even deploying a web app.
 
-# Creating Objects (Instances) from the blueprint
-exp_A = Experiment()  # One house
-exp_B = Experiment()  # A second, separate house
-```
+* The biggest players in this field are Claude Code, Codex (OpenAI), Aider (independent, supports all major model providers and local models), Gemini CLI, and Copilot Agent Mode.
+
+---
+# Choosing the Right AI Tool
+
+- **For quick code suggestions and productivity:**  
+    Use **Code Assistants** like GitHub Copilot directly in your IDE for real-time help as you write code.
+
+- **For explanations, debugging, or brainstorming:**  
+    Try **Conversational Assistants** to ask questions, get code reviews, or generate snippets.
+
+- **For complex, multi-step tasks:**  
+    Explore **Agentic Tools** (emerging tech) when you want the AI to handle an entire workflow or project for fast prototyping and scaffolding.
+
+> **Tip:** Start with Copilot for daily coding. Use chatbots for deeper questions. Watch agentic tools as they mature!
+---
+# Choosing the Right AI Tool
+Here's my personal recommendation on AI tools, but remember that the landscape is evolving rapidly:
+1. Copilot is the only Tab completion tool you need. The Student subscription also grants you access to the rest of the models in the list in VSCode **for free**.
+2. Claude (https://claude.ai; Copilot) is great for code generation and debugging, but has very low limits on the free version.
+3. Gemini (https://aistudio.google.com; Copilot) is currently free, and their Gemini 2.5 Pro model is one of the most powerful AI models available.
+4. ChatGPT (https://chatgpt.com; Copilot) is great for general-purpose coding questions. Use Plus (20.-/month) to access high quality models.
 
 ---
 
-# Building the Object: `__init__`
+# OpenAI Model Line-up (June 25 2025) 
 
-How do we give an object its initial data when it's created? We use a special "dunder" (double-underscore) method called `__init__`.
+- **GPT-4o (“omni”)** – multimodal (works with images and audio)  flagship; became ChatGPT’s default model on Apr 30 2025. Default model for Plus subscribers, can help with some tasks, but more a of generalist than a specialist.
+- **GPT-4o mini** – lightweight model (≈8 B params) that’s ≈60 % cheaper than GPT-3.5 Turbo yet tops other small LLMs, announced Jul 18 2024. This is the default free version of ChatGPT, and (in my opinion) not very high-quality.
+- **GPT-4.1 / 4.1 mini / 4.1 nano** – models specifically created for coding tasks, up to 1 M-token context and faster/cheaper than 4o. Default model for Copilot, and now available in ChatGPT for Plus subscribers.
+---
+# OpenAI model lineup: Reasoning → **o-series**  
+> **Reasoning models** are models which "think" (generate intermediate steps) before answering a question, and are therefore more accurate than the previous models. They are also more expensive to run, so they are not available in the free version of ChatGPT.
+- **o3** – frontier long-form reasoning model launched Apr 16 2025.
+- **o3-pro** – premium variant with extended “think time,” rolled out Jun 10 2025 to Pro users (200.-/month)  
+- **o4-mini**/**o4-mini-high** – cost-efficient sibling; matches o3 accuracy with lower latency/cost. 
+---
+<!-- _class: invert -->
 
-*   `__init__` is the **constructor**.
-*   It runs **automatically** every time you create a new object from the class.
-*   Its job is to set up the initial state of the object.
+# Part 2: Getting Started with GitHub Copilot
 
 ---
 
-# The `self` Keyword: The Object's "I"
+# What is GitHub Copilot?
 
-Inside a class's methods, how does an object refer to its *own* data? It uses `self`.
+GitHub Copilot is an AI "pair programmer" that lives directly inside your editor (like VS Code). 
 
-*   `self` is a special variable that represents **the instance of the object itself**.
-*   When you write `self.parameter = value`, you are saying: "Store this `value` in *my own* `parameter` attribute."
-
-```python
-class Experiment:
-    # The constructor method
-    def __init__(self, exp_id: str, parameter_A: float):
-        print(f"Creating a new experiment with ID: {exp_id}")
-        # Storing the initial data ON THE OBJECT ITSELF
-        self.id = exp_id
-        self.param_A = parameter_A
-        self.results: list[float] = [] # Start with an empty list
-
-# When you run this...
-exp_1 = Experiment(exp_id="run_01", parameter_A=0.75)
-# ...the __init__ method is called automatically.
-# `self` inside __init__ refers to the `exp_1` object.
-```
+It covers all three categories of AI tools we've discussed:
+1.  **Inline Suggestions**: As you type, it suggests entire lines or blocks of code in grayed-out text. Press `Tab` to accept.
+2.  **Copilot Chat**: A full-fledged chatbot panel within VS Code where you can ask questions, generate code, explain snippets, and more.
+3. **Copilot Agent Mode**: An experimental feature that allows Copilot to run code, install dependencies, and debug issues autonomously.
 
 ---
 
-# Attributes and Methods
+# Copilot's Superpowers
 
-An object has two main components:
+Copilot uses the context of your **entire project** to provide suggestions. This context includes:
 
-*   **Attributes**: The variables that belong to an object. They represent what the object **HAS**.
-    *   `exp_1.id`
-    *   `exp_1.results`
+*   The code in your **current file**.
+*   The code in **other open files/tabs**.
+*   The **filename** itself.
+*   Your project's **dependencies** (`pyproject.toml`).
+*   Your **comments** and **docstrings**.
 
-*   **Methods**: The functions that belong to an object. They represent what the object **CAN DO**. Methods always take `self` as their first argument so they can access the object's own attributes.
-
----
-
-# Putting It All Together: A Full Class
-
-Let's add a method to our `Experiment` class.
-
-```python
-class Experiment:
-    def __init__(self, exp_id: str, parameter_A: float):
-        self.id = exp_id
-        self.param_A = parameter_A
-        self.results: list[float] = []
-
-    # This is a METHOD
-    def add_data_point(self, value: float):
-        # It uses `self` to access its own `results` list
-        self.results.append(value)
-
-    # Another METHOD
-    def calculate_mean(self) -> float | None:
-        if not self.results:
-            return None
-        return sum(self.results) / len(self.results)
-```
+**The more context you provide, the better its suggestions will be.**
 
 ---
 
-# Using Our New Object
+# Using Inline Suggestions
 
-Now our data (`id`, `results`) and the functions that operate on it (`add_data_point`, `calculate_mean`) are bundled together cleanly.
+This is Copilot's most basic feature. Just start typing!
 
-```python
-# Create an instance
-exp_1 = Experiment(exp_id="run_01", parameter_A=0.75)
+*   **Writing a function name**: Type `def calculate_standard_deviation(data: list[float]) -> float:` and pause. Copilot will likely suggest the entire function body.
+*   **Writing a comment**: Type `# Function to read a csv file and return a pandas dataframe` and press Enter. Copilot will generate the function for you.
+*   **Writing docstrings**: After defining a function, start a docstring with `"""`. Copilot will often write a complete, helpful description of what the function does.
 
-# Use its methods to change its internal state
-exp_1.add_data_point(12.5)
-exp_1.add_data_point(13.1)
-exp_1.add_data_point(12.8)
+**Key Shortcut:** Press `Tab` to accept a suggestion.
 
-# Access its attributes and methods
-print(f"Experiment ID: {exp_1.id}")
-print(f"Raw results: {exp_1.results}")
-print(f"Mean of results: {exp_1.calculate_mean():.2f}")
-```
-This is much more organized and less error-prone!
+---
+
+# Using Copilot Chat
+
+This is where the real power lies. You can open the Chat panel in VS Code and have a conversation.
+
+**You can ask it to:**
+
+*   **"Explain this selected code"**: Get a plain-English description of a complex function.
+*   **"Generate a docstring for this function"**: Automate your documentation.
+*   **"Find bugs in this code"**: It will analyze a selection and suggest fixes.
+*   **"Write a test for this function using pytest"**: A huge time-saver for writing unit tests.
+*   **"How do I...?"**: Ask a general programming question without leaving your editor.
+
+---
+# Live Demo: Copilot in Action
+Let's see Copilot in action! Please follow along in your VS Code editor.
+
+---
+
+<!-- _class: invert -->
+
+# Part 3: The Art of Prompting
+
+---
+
+# Getting Good Results: Prompt Engineering
+
+Your AI assistant is only as good as the instructions you give it. Vague prompts lead to vague or incorrect code. **Good prompting is a skill.**
+
+### The "CRISPE" Framework for Prompts
+
+*   **C - Context**: Tell it what you're doing. "I'm writing a script using pandas to analyze..."
+*   **R - Role**: Assign it a role. "You are an expert Python data scientist."
+*   **I - Instruction**: What do you want it to do? "Write a function that..."
+*   **S - Specificity**: Provide details. "...takes a DataFrame as input, groups by the 'city' column, and calculates the mean of the 'sales' column."
+*   **P - Persona**: Define the output style. "Explain it to me like I'm a beginner."
+*   **E - Example**: Show it what you want. "For example, if the input is `...`, the output should be `...`"
+
+---
+
+# Prompting Examples: Good vs. Bad
+
+### Bad Prompt 👎
+> "make a function for my data"
+
+This is too vague. What data? What should the function do?
+
+### Good Prompt 👍
+> **You are an expert Python data scientist.** I am working with a pandas DataFrame that has columns `['date', 'product_id', 'sales']`.
+>
+> **Write a Python function** named `summarize_monthly_sales` that:
+> 1. Takes this DataFrame as input.
+> 2. Converts the 'date' column to datetime objects.
+> 3. Groups the data by month.
+> 4. Calculates the total sales for each month.
+> 5. Returns a new DataFrame with 'month' and 'total_sales' columns.
+
+This prompt is specific, provides context, and gives a clear instruction.
 
 ---
 <!-- _class: invert -->
 
-# Part 3: The Power-Up - Inheritance
+# Part 4: Benefits, Limitations, and The Future
 
 ---
 
-# Don't Repeat Yourself (DRY)
+# The Benefits: Why Use AI?
 
-What if we have a special kind of experiment, like a computer simulation, that has all the properties of a normal experiment but also some extra ones?
-
-We don't want to copy-paste the `Experiment` class and add to it. Instead, we can use **Inheritance**.
-
-**Inheritance** lets a new class (the "child") inherit all the attributes and methods from an existing class (the "parent"). This is an "is-a" relationship: a `SimulationExperiment` *is a kind of* `Experiment`.
-
----
-
-# Inheritance in Code
-
-The child class is defined by putting the parent class in parentheses.
-
-```python
-# PARENT CLASS
-class Experiment:
-    # ... (same as before) ...
-
-# CHILD CLASS
-class SimulationExperiment(Experiment): # <-- This is inheritance!
-    def __init__(self, exp_id: str, parameter_A: float, software_version: str):
-        # Ask the parent to do its setup first!
-        super().__init__(exp_id, parameter_A)
-        # Now add the new attribute specific to this child
-        self.version = software_version
-
-    # We can also add new methods
-    def run_simulation(self):
-        print(f"Running simulation v{self.version} for {self.id}...")
-        # ... logic to run simulation and add data points ...
-        self.add_data_point(50.1) # We can use methods from the parent!
-```
-The `super().__init__()` line is crucial: it runs the `__init__` method of the parent class.
+*   **Increased Productivity**: Write boilerplate code, tests, and documentation in seconds.
+*   **Learning Tool**: Ask it to explain complex code or concepts. A "why" button for code.
+*   **Reduces "Context Switching"**: Get answers to programming questions without leaving your editor to search online.
+*   **Overcomes "Blank Page" Syndrome**: Helps you get started when you're not sure how to begin a new function or script.
 
 ---
 
-# A Realistic Example: Data Readers
+# The Limitations: Trust but Verify
 
-Let's design a system to read data from different file types.
+**AI assistants are not always right!** You are still the programmer in charge.
 
-**The Blueprint (Parent Class):**
-We'll create a generic `DataReader` that knows it needs a `filepath`, but doesn't know *how* to read it yet.
+*   **It can hallucinate**: It might invent functions or libraries that don't exist.
+*   **It can introduce subtle bugs**: The code might *look* correct but have a logical flaw.
+*   **It can be outdated**: It may not know about the latest version of a library or best practices.
+*   **Security risks**: Be very careful about pasting sensitive information (like API keys) into chat prompts.
 
-```python
-class DataReader:
-    def __init__(self, filepath: str):
-        self.filepath = filepath
-
-    def read(self) -> list[dict]:
-        # This is a placeholder. The children MUST implement this.
-        raise NotImplementedError("Each subclass must implement its own read method!")
-```
+**Rule #1: You are responsible for the code you commit. Always review and test AI-generated code.**
 
 ---
 
-# The Implementations (Child Classes)
+# The Future is Agentic
 
-Now we create specialized child classes that inherit from `DataReader` and provide their own concrete implementation of the `read` method.
+**Example Goal:**
+> "Build a web scraper to get the titles and prices of all books from example.com/books, and save the results to a CSV file named `books.csv`."
 
-```python
-import csv
-import json
+See agentic AI in action in the live demo :)
 
-class CSVReader(DataReader):
-    def read(self) -> list[dict]:
-        print(f"Reading CSV from {self.filepath}")
-        with open(self.filepath, 'r') as f:
-            return list(csv.DictReader(f))
-
-class JSONReader(DataReader):
-    def read(self) -> list[dict]:
-        print(f"Reading JSON from {self.filepath}")
-        with open(self.filepath, 'r') as f:
-            return json.load(f)
-```
-This is a powerful and clean pattern for building extensible software.
-
----
-# Your Assignment
-TBA
 

@@ -1,244 +1,455 @@
 ---
 marp: true
-theme: gradient
+theme: default
 paginate: true
 size: 16:9
-title: "Session 6: Your AI Coding Partner"
-description: "Leveraging AI Tools like GitHub Copilot"
-author: "Your Name"
-date: "2024-01-01"
-header: "Session 6: Your AI Coding Partner"
+title: "Scientific Computing in Python"
+description: "NumPy, Pandas, and Jupyter Notebooks for Data Science"
+author: "Data Science Course"
+date: "2025-10-20"
+header: "Session 6: Scientific Computing in Python"
+footer: "NumPy, Pandas, and Jupyter Notebooks"
 ---
 
 <!-- _class: lead -->
 
-# Session 6: Your AI Coding Partner
+# Session 6: Scientific Computing in Python
 
-**Leveraging AI Tools like GitHub Copilot**
+**NumPy Arrays, Pandas DataFrames, and Jupyter Notebooks**
 
 ---
 
 # Today's Goals
 
-*   Understand the landscape of **AI in coding**.
-*   Learn how **GitHub Copilot** works inside VS Code.
-*   Master **best practices for prompting** to get the best results.
-*   Discuss the **benefits and limitations** of AI coding assistants.
-*   Look ahead to the future: **Agentic AI Tools**.
+- Master **NumPy arrays** for efficient numerical computing
+- Use **Pandas** for data manipulation and analysis  
+- Work effectively with **Jupyter notebooks** for exploration
+- Understand **vectorization** and performance optimization
+- Build the foundation for **statistical learning**
 
 ---
 <!-- _class: invert -->
 
-# Part 1: The AI Coding Revolution
+# Part 1: NumPy - The Foundation of Scientific Python
 
 ---
 
-# From Spellcheck to Copilot
+# Why NumPy?
 
-AI assistance in software development isn't new. We've had:
-*   **Linters & Formatters**: Early rule-based AI.
-*   **IntelliSense**: Smart, context-aware autocompletion.
+**The Problem with Pure Python:**
+```python
+# Slow: Python lists with loops
+data = [1, 2, 3, 4, 5] * 100000
+result = []
+for x in data:
+    result.append(x ** 2)
+```
 
-What's new is the rise of **Generative AI** powered by Large Language Models (LLMs). These models don't just complete your code based on syntax; they *understand intent* and can *generate novel code* from natural language descriptions.
-
----
-# The Landscape of AI Coding Tools
-The AI coding landscape is evolving rapidly. Here are the main categories of tools you'll encounter:
-*   **Conversational Assistants (Chatbots)**: These are like having a coding buddy in a chat window.
-*   **Code Assistants**: These live inside your editor and help you write code line-by-line.
-*   **Agentic Tools**: These are more autonomous and can handle entire workflows or projects.
-
----
-# The Landscape of AI Coding Tools : Conversational Assistants
- * **Conversational Assistants (Chatbots)**: These are maybe the most familiar tools for most of you. 
- * You have a conversation with an AI in a chat window to solve problems, get explanations, or generate code snippets. 
- * Examples are ChatGPT, Claude, Gemini, Deepseek, Grok, Mistral, and many others. 
- * **Copilot Chat** is an *interface* that provides you with access to many of these!
----
-# The Landscape of AI Coding Tools : Code Assistants
-* These live inside your editor and help you write code line-by-line. They are **tools** that *integrate* the **models** we discussed earlier.
-* Examples are **GitHub Copilot** (our focus today!), **Gemini Code Assist**, **Junia** (JetBrains),  They provide:
-    *   **Inline Suggestions**: Autocomplete lines or blocks of code, usually completed with a single `Tab`.
-    *  **Inline Chat**: Ask questions about your code, get explanations, or generate new code snippets right from the code line.
-    *   **Documentation Generation**: Automatically creates docstrings and comments.
----
-# The Landscape of AI Coding Tools : Agentic Tools
-* **Agentic Tools**: You talk to the AI about your high-level goal, and it works autonomously to achieve it by writing code, debugging, and running tests by itself!
-* These tools are still emerging, but in the last year they have achieved impressive results.
-* They can handle entire workflows, like building a web scraper, setting up a database, or even deploying a web app.
-
-* The biggest players in this field are Claude Code, Codex (OpenAI), Aider (independent, supports all major model providers and local models), Gemini CLI, and Copilot Agent Mode.
-
----
-# Choosing the Right AI Tool
-
-- **For quick code suggestions and productivity:**  
-    Use **Code Assistants** like GitHub Copilot directly in your IDE for real-time help as you write code.
-
-- **For explanations, debugging, or brainstorming:**  
-    Try **Conversational Assistants** to ask questions, get code reviews, or generate snippets.
-
-- **For complex, multi-step tasks:**  
-    Explore **Agentic Tools** (emerging tech) when you want the AI to handle an entire workflow or project for fast prototyping and scaffolding.
-
-> **Tip:** Start with Copilot for daily coding. Use chatbots for deeper questions. Watch agentic tools as they mature!
----
-# Choosing the Right AI Tool
-Here's my personal recommendation on AI tools, but remember that the landscape is evolving rapidly:
-1. Copilot is the only Tab completion tool you need. The Student subscription also grants you access to the rest of the models in the list in VSCode **for free**.
-2. Claude (https://claude.ai; Copilot) is great for code generation and debugging, but has very low limits on the free version.
-3. Gemini (https://aistudio.google.com; Copilot) is currently free, and their Gemini 2.5 Pro model is one of the most powerful AI models available.
-4. ChatGPT (https://chatgpt.com; Copilot) is great for general-purpose coding questions. Use Plus (20.-/month) to access high quality models.
+**The NumPy Solution:**
+```python
+# Fast: NumPy arrays with vectorization
+import numpy as np
+data = np.array([1, 2, 3, 4, 5] * 100000)
+result = data ** 2  # 100x faster!
+```
 
 ---
 
-# OpenAI Model Line-up (June 25 2025) 
+# NumPy Arrays: The Basics
 
-- **GPT-4o (“omni”)** – multimodal (works with images and audio)  flagship; became ChatGPT’s default model on Apr 30 2025. Default model for Plus subscribers, can help with some tasks, but more a of generalist than a specialist.
-- **GPT-4o mini** – lightweight model (≈8 B params) that’s ≈60 % cheaper than GPT-3.5 Turbo yet tops other small LLMs, announced Jul 18 2024. This is the default free version of ChatGPT, and (in my opinion) not very high-quality.
-- **GPT-4.1 / 4.1 mini / 4.1 nano** – models specifically created for coding tasks, up to 1 M-token context and faster/cheaper than 4o. Default model for Copilot, and now available in ChatGPT for Plus subscribers.
----
-# OpenAI model lineup: Reasoning → **o-series**  
-> **Reasoning models** are models which "think" (generate intermediate steps) before answering a question, and are therefore more accurate than the previous models. They are also more expensive to run, so they are not available in the free version of ChatGPT.
-- **o3** – frontier long-form reasoning model launched Apr 16 2025.
-- **o3-pro** – premium variant with extended “think time,” rolled out Jun 10 2025 to Pro users (200.-/month)  
-- **o4-mini**/**o4-mini-high** – cost-efficient sibling; matches o3 accuracy with lower latency/cost. 
----
-<!-- _class: invert -->
+```python
+import numpy as np
 
-# Part 2: Getting Started with GitHub Copilot
+# Creating arrays
+arr1d = np.array([1, 2, 3, 4, 5])
+arr2d = np.array([[1, 2, 3], [4, 5, 6]])
 
----
+# Array properties
+print(arr2d.shape)    # (2, 3)
+print(arr2d.dtype)    # int64
+print(arr2d.ndim)     # 2
+print(arr2d.size)     # 6
 
-# What is GitHub Copilot?
-
-GitHub Copilot is an AI "pair programmer" that lives directly inside your editor (like VS Code). 
-
-It covers all three categories of AI tools we've discussed:
-1.  **Inline Suggestions**: As you type, it suggests entire lines or blocks of code in grayed-out text. Press `Tab` to accept.
-2.  **Copilot Chat**: A full-fledged chatbot panel within VS Code where you can ask questions, generate code, explain snippets, and more.
-3. **Copilot Agent Mode**: An experimental feature that allows Copilot to run code, install dependencies, and debug issues autonomously.
+# Special arrays
+zeros = np.zeros((3, 4))
+ones = np.ones((2, 5))
+identity = np.eye(3)
+random_data = np.random.random((100, 3))
+```
 
 ---
 
-# Copilot's Superpowers
+# Financial Data with NumPy
 
-Copilot uses the context of your **entire project** to provide suggestions. This context includes:
+```python
+# Stock price analysis
+prices = np.array([100, 105, 98, 110, 103, 108])
 
-*   The code in your **current file**.
-*   The code in **other open files/tabs**.
-*   The **filename** itself.
-*   Your project's **dependencies** (`pyproject.toml`).
-*   Your **comments** and **docstrings**.
+# Calculate returns
+returns = (prices[1:] - prices[:-1]) / prices[:-1]
+print(f"Returns: {returns}")
 
-**The more context you provide, the better its suggestions will be.**
+# Portfolio calculations
+weights = np.array([0.4, 0.3, 0.3])
+asset_returns = np.array([[0.05, 0.02, 0.08],
+                         [0.03, 0.04, 0.06],
+                         [-0.01, 0.03, 0.04]])
 
----
-
-# Using Inline Suggestions
-
-This is Copilot's most basic feature. Just start typing!
-
-*   **Writing a function name**: Type `def calculate_standard_deviation(data: list[float]) -> float:` and pause. Copilot will likely suggest the entire function body.
-*   **Writing a comment**: Type `# Function to read a csv file and return a pandas dataframe` and press Enter. Copilot will generate the function for you.
-*   **Writing docstrings**: After defining a function, start a docstring with `"""`. Copilot will often write a complete, helpful description of what the function does.
-
-**Key Shortcut:** Press `Tab` to accept a suggestion.
+# Portfolio return for each period
+portfolio_returns = np.sum(asset_returns * weights, axis=1)
+```
 
 ---
 
-# Using Copilot Chat
+# Vectorization: The NumPy Superpower
 
-This is where the real power lies. You can open the Chat panel in VS Code and have a conversation.
+```python
+# Instead of loops...
+result = []
+for i in range(len(prices)):
+    result.append(prices[i] * 1.02)  # 2% increase
 
-**You can ask it to:**
+# Use vectorization!
+result = prices * 1.02
 
-*   **"Explain this selected code"**: Get a plain-English description of a complex function.
-*   **"Generate a docstring for this function"**: Automate your documentation.
-*   **"Find bugs in this code"**: It will analyze a selection and suggest fixes.
-*   **"Write a test for this function using pytest"**: A huge time-saver for writing unit tests.
-*   **"How do I...?"**: Ask a general programming question without leaving your editor.
+# Complex operations vectorized
+risk_adjusted = (returns - 0.02) / np.std(returns)
 
----
-# Live Demo: Copilot in Action
-Let's see Copilot in action! Please follow along in your VS Code editor.
+# Boolean indexing
+high_return_days = returns[returns > 0.05]
+```
 
----
-
-<!-- _class: invert -->
-
-# Part 3: The Art of Prompting
+**Key Point**: Vectorization is not just faster, it's more readable!
 
 ---
 
-# Getting Good Results: Prompt Engineering
+# NumPy for Linear Algebra
 
-Your AI assistant is only as good as the instructions you give it. Vague prompts lead to vague or incorrect code. **Good prompting is a skill.**
+```python
+# Covariance matrix calculation
+returns_matrix = np.array([[0.05, 0.02, 0.08],
+                          [0.03, 0.04, 0.06], 
+                          [-0.01, 0.03, 0.04]])
 
-### The "CRISPE" Framework for Prompts
+cov_matrix = np.cov(returns_matrix.T)
+print("Covariance Matrix:")
+print(cov_matrix)
 
-*   **C - Context**: Tell it what you're doing. "I'm writing a script using pandas to analyze..."
-*   **R - Role**: Assign it a role. "You are an expert Python data scientist."
-*   **I - Instruction**: What do you want it to do? "Write a function that..."
-*   **S - Specificity**: Provide details. "...takes a DataFrame as input, groups by the 'city' column, and calculates the mean of the 'sales' column."
-*   **P - Persona**: Define the output style. "Explain it to me like I'm a beginner."
-*   **E - Example**: Show it what you want. "For example, if the input is `...`, the output should be `...`"
-
----
-
-# Prompting Examples: Good vs. Bad
-
-### Bad Prompt 👎
-> "make a function for my data"
-
-This is too vague. What data? What should the function do?
-
-### Good Prompt 👍
-> **You are an expert Python data scientist.** I am working with a pandas DataFrame that has columns `['date', 'product_id', 'sales']`.
->
-> **Write a Python function** named `summarize_monthly_sales` that:
-> 1. Takes this DataFrame as input.
-> 2. Converts the 'date' column to datetime objects.
-> 3. Groups the data by month.
-> 4. Calculates the total sales for each month.
-> 5. Returns a new DataFrame with 'month' and 'total_sales' columns.
-
-This prompt is specific, provides context, and gives a clear instruction.
+# Portfolio risk calculation
+portfolio_risk = np.sqrt(np.dot(weights.T, np.dot(cov_matrix, weights)))
+print(f"Portfolio Risk: {portfolio_risk:.4f}")
+```
 
 ---
 <!-- _class: invert -->
 
-# Part 4: Benefits, Limitations, and The Future
+# Part 2: Pandas - Data Manipulation Made Easy
 
 ---
 
-# The Benefits: Why Use AI?
+# Why Pandas?
 
-*   **Increased Productivity**: Write boilerplate code, tests, and documentation in seconds.
-*   **Learning Tool**: Ask it to explain complex code or concepts. A "why" button for code.
-*   **Reduces "Context Switching"**: Get answers to programming questions without leaving your editor to search online.
-*   **Overcomes "Blank Page" Syndrome**: Helps you get started when you're not sure how to begin a new function or script.
+**NumPy** is great for numerical arrays, but real data is messy:
+- Missing values
+- Different data types  
+- Row and column labels
+- Time series data
+- Grouping and aggregation
 
----
-
-# The Limitations: Trust but Verify
-
-**AI assistants are not always right!** You are still the programmer in charge.
-
-*   **It can hallucinate**: It might invent functions or libraries that don't exist.
-*   **It can introduce subtle bugs**: The code might *look* correct but have a logical flaw.
-*   **It can be outdated**: It may not know about the latest version of a library or best practices.
-*   **Security risks**: Be very careful about pasting sensitive information (like API keys) into chat prompts.
-
-**Rule #1: You are responsible for the code you commit. Always review and test AI-generated code.**
+**Pandas** provides labeled, heterogeneous data structures built on NumPy.
 
 ---
 
-# The Future is Agentic
+# Pandas Data Structures
 
-**Example Goal:**
-> "Build a web scraper to get the titles and prices of all books from example.com/books, and save the results to a CSV file named `books.csv`."
+```python
+import pandas as pd
 
-See agentic AI in action in the live demo :)
+# Series: 1-dimensional labeled array
+stock_prices = pd.Series([100, 105, 98, 110], 
+                        index=['AAPL', 'GOOGL', 'MSFT', 'AMZN'])
 
+# DataFrame: 2-dimensional labeled data
+portfolio = pd.DataFrame({
+    'Symbol': ['AAPL', 'GOOGL', 'MSFT', 'AMZN'],
+    'Price': [150.25, 2800.50, 310.75, 3400.25],
+    'Shares': [100, 10, 50, 5],
+    'Sector': ['Tech', 'Tech', 'Tech', 'Consumer']
+})
 
+print(portfolio)
+```
+
+---
+
+# Loading Real Data
+
+```python
+# Reading from various sources
+df = pd.read_csv('financial_data.csv')
+df = pd.read_excel('portfolio.xlsx', sheet_name='holdings')
+df = pd.read_json('market_data.json')
+
+# Quick data inspection
+print(df.head())        # First 5 rows
+print(df.info())        # Data types and missing values
+print(df.describe())    # Statistical summary
+print(df.shape)         # (rows, columns)
+```
+
+---
+
+# Data Cleaning and Transformation
+
+```python
+# Handling missing data
+df_clean = df.dropna()                    # Remove rows with NaN
+df_filled = df.fillna(method='ffill')     # Forward fill
+df_interpolated = df.interpolate()        # Linear interpolation
+
+# Data type conversion
+df['Date'] = pd.to_datetime(df['Date'])
+df['Price'] = pd.to_numeric(df['Price'], errors='coerce')
+
+# Creating new columns
+df['Market_Value'] = df['Price'] * df['Shares']
+df['Weight'] = df['Market_Value'] / df['Market_Value'].sum()
+df['Return'] = df['Price'].pct_change()
+```
+
+---
+
+# Data Selection and Filtering
+
+```python
+# Column selection
+prices = df['Price']
+subset = df[['Symbol', 'Price', 'Market_Value']]
+
+# Boolean filtering
+high_value = df[df['Market_Value'] > 10000]
+tech_stocks = df[df['Sector'] == 'Tech']
+
+# Multiple conditions
+large_tech = df[(df['Sector'] == 'Tech') & 
+                (df['Market_Value'] > 5000)]
+
+# Date-based filtering (if Date is index)
+recent = df.loc['2025-01-01':'2025-01-31']
+```
+
+---
+
+# Grouping and Aggregation
+
+```python
+# Group by sector analysis
+sector_analysis = df.groupby('Sector').agg({
+    'Market_Value': ['sum', 'mean', 'count'],
+    'Price': ['min', 'max'],
+    'Return': 'std'
+})
+
+# Custom aggregation
+def portfolio_metrics(group):
+    return pd.Series({
+        'total_value': group['Market_Value'].sum(),
+        'avg_return': group['Return'].mean(),
+        'volatility': group['Return'].std(),
+        'sharpe_ratio': group['Return'].mean() / group['Return'].std()
+    })
+
+metrics_by_sector = df.groupby('Sector').apply(portfolio_metrics)
+```
+
+---
+
+# Time Series with Pandas
+
+```python
+# Set date as index
+df.set_index('Date', inplace=True)
+
+# Resampling time series
+daily_prices = df.resample('D')['Price'].last()      # Daily
+monthly_avg = df.resample('M')['Price'].mean()       # Monthly averages
+
+# Rolling calculations
+df['MA_20'] = df['Price'].rolling(20).mean()         # 20-day moving average
+df['Volatility'] = df['Return'].rolling(30).std()    # 30-day volatility
+
+# Lag operations
+df['Price_Lag1'] = df['Price'].shift(1)
+df['Return'] = (df['Price'] - df['Price_Lag1']) / df['Price_Lag1']
+```
+
+---
+<!-- _class: invert -->
+
+# Part 3: Jupyter Notebooks - Interactive Data Science
+
+---
+
+# Why Jupyter Notebooks?
+
+**Traditional Scripts** → Run all at once, hard to experiment
+
+**Jupyter Notebooks** → Interactive cells, perfect for:
+- Data exploration
+- Iterative analysis  
+- Visualization
+- Documentation
+- Sharing results
+
+**Best for**: Prototyping, analysis, teaching
+**Not best for**: Production code, large applications
+
+---
+
+# Jupyter Best Practices
+
+```python
+# 1. Organize imports at the top
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+# 2. Define functions in separate cells
+def calculate_sharpe_ratio(returns, risk_free_rate=0.02):
+    excess_returns = returns - risk_free_rate
+    return np.mean(excess_returns) / np.std(excess_returns)
+
+# 3. Load and explore data step by step
+df = pd.read_csv('data.csv')
+df.head()
+```
+
+---
+
+# Jupyter Magic Commands
+
+```python
+# Timing code execution
+%time result = expensive_calculation()
+
+%%time  
+# Time entire cell
+for i in range(1000):
+    complex_operation()
+
+# Other useful magics
+%matplotlib inline    # Display plots in notebook
+%load script.py       # Load external Python file
+?pd.DataFrame         # Get help
+??np.array           # Show source code
+%who                 # List variables
+```
+
+---
+
+# Example: Complete Portfolio Analysis
+
+```python
+# Step 1: Load and clean data
+portfolio_data = pd.read_csv('portfolio.csv')
+portfolio_data['Date'] = pd.to_datetime(portfolio_data['Date'])
+portfolio_data.set_index('Date', inplace=True)
+
+# Step 2: Calculate returns
+for stock in ['AAPL', 'GOOGL', 'MSFT']:
+    portfolio_data[f'{stock}_Return'] = portfolio_data[stock].pct_change()
+
+# Step 3: Portfolio metrics
+returns_cols = [col for col in portfolio_data.columns if 'Return' in col]
+returns_matrix = portfolio_data[returns_cols].dropna()
+
+weights = np.array([0.4, 0.3, 0.3])
+portfolio_returns = np.dot(returns_matrix, weights)
+sharpe_ratio = calculate_sharpe_ratio(portfolio_returns)
+
+print(f"Portfolio Sharpe Ratio: {sharpe_ratio:.3f}")
+```
+
+---
+
+# Integration: NumPy + Pandas + Jupyter
+
+```python
+# NumPy for mathematical operations
+correlation_matrix = np.corrcoef(returns_matrix.T)
+
+# Pandas for data structure and manipulation
+corr_df = pd.DataFrame(correlation_matrix, 
+                      index=['AAPL', 'GOOGL', 'MSFT'],
+                      columns=['AAPL', 'GOOGL', 'MSFT'])
+
+# Jupyter for interactive exploration and visualization
+import seaborn as sns
+plt.figure(figsize=(8, 6))
+sns.heatmap(corr_df, annot=True, cmap='coolwarm', center=0)
+plt.title('Stock Correlation Matrix')
+plt.show()
+```
+
+---
+
+# Performance Tips
+
+```python
+# Do: Vectorize with NumPy/Pandas
+df['normalized'] = (df['value'] - df['value'].mean()) / df['value'].std()
+
+# Don't: Use Python loops
+normalized = []
+mean_val = df['value'].mean()
+std_val = df['value'].std()
+for val in df['value']:
+    normalized.append((val - mean_val) / std_val)
+
+# Do: Use built-in methods
+df.groupby('category')['value'].mean()
+
+# Don't: Manual grouping
+categories = df['category'].unique()
+means = {}
+for cat in categories:
+    means[cat] = df[df['category'] == cat]['value'].mean()
+```
+
+---
+
+# Next Steps: Statistical Learning Foundation
+
+With NumPy, Pandas, and Jupyter, you now have the tools for:
+
+- **Data Loading**: Read from CSV, Excel, databases
+- **Data Cleaning**: Handle missing values, outliers
+- **Feature Engineering**: Create new variables
+- **Exploratory Analysis**: Understand your data
+- **Statistical Computing**: Efficient numerical operations
+
+**Next week**: We'll use these tools for statistical learning, starting with visualization and the statistical learning framework!
+
+---
+
+# Resources
+
+- **NumPy Documentation**: [numpy.org](https://numpy.org/doc/)
+- **Pandas Documentation**: [pandas.pydata.org](https://pandas.pydata.org/docs/)  
+- **Jupyter Documentation**: [jupyter.org](https://jupyter.org/documentation)
+- **Python for Data Analysis** by Wes McKinney
+- **Course Examples**: Available in Nuvolos workspace
+
+---
+
+# Hands-on Lab
+
+**Lab Activity**: Complete portfolio analysis
+1. Load sample financial dataset
+2. Clean and prepare the data
+3. Calculate portfolio metrics using NumPy
+4. Create summary statistics with Pandas
+5. Document your analysis in Jupyter notebook
+
+**Goal**: Create a reproducible analysis that demonstrates scientific computing workflow!

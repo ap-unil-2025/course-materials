@@ -1,466 +1,293 @@
 ---
 marp: true
-theme: gradient
+theme: default
 paginate: true
-header: "Finding and Preventing Bugs"
-footer: "Anna Smirnova, June 24, 2025"
-style: |
-  section {
-    font-size: 29px;
-  }
-  h1 {
-    font-size: 40px;
-  }
-  h2 {
-    font-size: 10px;
-  }
-  h3 {
-    font-size: 20px;
-    }
----
-
-# Session 4: Finding and Preventing Bugs
-
-**An Introduction to Debugging and Type Hints**
-
----
-
-# Today's Goals
-
-*   Move beyond `print()` for finding bugs.
-*   Learn to use a real **Debugger** in VS Code.
-*   Understand what **Type Hints** are.
-*   Use type hints to write clearer, safer, and self-documenting code.
-
+header: 'Session 4: Thinking in Objects'
+footer: 'Object-Oriented Programming (OOP) Basics'
+author: 'Anna Smirnova'
 ---
 
 
-# Part 1: The Art of Finding Bugs (Debugging)
+# Session 4: Thinking in Objects
+
+**Object-Oriented Programming (OOP) Basics**
 
 ---
 
-# The Old-Fashioned Way: `print()`
+# First Things First: Today's Goals
 
-We've all done this. Your code isn't working, so you add `print()` statements everywhere to see the values of variables.
+*   Understand the **idea** behind OOP.
+*   See the difference between **Imperative** and **Object-Oriented** code.
+*   Learn the core concepts: **Classes** and **Objects**.
+*   Master the `__init__` method and the `self` keyword.
+*   Explore the power of **Inheritance** for code reuse.
+*   Build a practical, realistic example.
+
+---
+<!-- _class: invert -->
+
+# Part 1: A New Way of Thinking
+
+---
+
+# The Story So Far: Imperative Programming
+
+Up to now, we've mostly written **imperative code**. This means we think in terms of:
+
+1.  **Data** (like dictionaries, lists, variables).
+2.  **Functions** that operate on that data.
 
 ```python
-def calculate_mean(numbers):
-    total = 0
-    print(f"Starting total: {total}")
-    for n in numbers:
-        total += n
-        print(f"  - Added {n}, new total is {total}")
-    mean = total / len(numbers)
-    print(f"Final mean: {mean}")
-    return mean
-
-calculate_mean([10, 20, 30])
-```
-
-**It works, but it's messy, slow, and you have to remove the prints later.**
-
----
-
-# Level Up: Using a Debugger
-
-A **debugger** is a tool that lets you run your code line by line, pausing it at any point to inspect its state.
-
-Think of it as **pausing time inside your program** to look around.
-
-### Why is it better than `print()`?
-*   **Interactive**: You can explore variables without re-running your code.
-*   **Controlled**: You decide exactly how and when the code proceeds.
-*   **Clean**: No need to add and remove temporary `print()` statements.
-
----
-
-# The VS Code Debugger
-
-![bg left:30% contain](https://code.visualstudio.com/assets/docs/debugtest/debugging/debugging_hero.png)
-The VS Code Debugger is a powerful built-in tool that allows you to debug Python code (and many other languages) directly within Visual Studio Code.
-
-The VS Code Debugger is built into Visual Studio Code, making it easy to use without any extra setup.
-
-[Learn more in the official documentation &rarr;](https://code.visualstudio.com/docs/debugtest/debugging)
-
----
-# Debugging: Key Concepts
-1.  **Breakpoints**: A "stop sign" you place on a line of code.
-2.  **Debug Controls**: Buttons to control the flow of time (step, continue).
-3.  **Variable Inspector**: A panel showing the real-time values of all variables.
-
----
-
-# Key Concept: Breakpoints
-
-A **breakpoint** is a red dot you place next to a line number in VS Code by clicking in the margin.
-
-When you run your code in debug mode, it will **execute normally until it hits a breakpoint, then it will pause.**
-
-This is the most fundamental feature of any debugger.
-
----
-
-# Controlling Time: The Debug Toolbar
-
-Once paused at a breakpoint, this toolbar appears. It lets you control how the code proceeds.
-
-*   ▶️ **Continue (F5)**: Unpause and run until the next breakpoint.
-*   ↪️ **Step Over (F10)**: Execute the current line and pause on the *next* one. (If the line is a function call, it runs the whole function without going inside).
-*   🔽 **Step Into (F11)**: If the line is a function call, "step into" that function and pause on its first line.
-*   🔼 **Step Out (Shift+F11)**: Finish running the current function and pause on the line where it was called from.
-
----
-
-# The Superpower: Inspecting Variables
-
-While your code is paused, the **Variables** panel on the left is your best friend.
-
-*   It shows you the **current value of every variable** in scope.
-*   You can see how values change as you "step" through the code line by line.
-*   This is infinitely more powerful than adding `print()` statements!
-
----
-
-# A Quick Detour: Handling Expected Errors (Exceptions)
-
----
-
-# What if an Error is *Expected*?
-
-Sometimes, errors are a normal part of a program's operation.
-*   What if a file you want to read doesn't exist?
-*   What if a user enters text when you expect a number?
-*   What if you try to divide by zero?
-
-Crashing is not a good user experience. Python gives us a way to "catch" these errors and handle them gracefully using a `try...except` block.
-
----
-
-# The `try...except` Block
-
-The basic idea:
-1.  **`try`**: You put the code that *might* cause an error in this block.
-2.  **`except`**: If an error of a specific type occurs in the `try` block, the code inside `except` is executed. The program does **not** crash.
----
-# Example: Handling Division by Zero
-```python
-try:
-    # This will cause a ZeroDivisionError
-    result = 10 / 0
-    print("This line will never be reached.")
-except ZeroDivisionError:
-    print("Oops! You can't divide by zero. Setting result to 0.")
-    result = 0
-
-print(f"The final result is: {result}")
-```
-This is a clean way to handle predictable problems without stopping your entire script.
-
----
-
-# Part 2: Preventing Bugs with Type Hints
-
----
-
-# From Fixing Bugs to Preventing Them
-
-Debugging is a great skill for fixing bugs that already exist.
-
-**Type Hints** help us prevent a whole class of bugs from being written in the first place.
-
----
-
-# What Are Type Hints?
-
-Type hints are optional "labels" you add to your Python code to indicate the expected data type of variables, function arguments, and return values.
-
-**Before:**
-```python
-def add(a, b):
-    return a + b
-```
-
-**After:**
-```python
-def add(a: int, b: int) -> int:
-    return a + b
-```
-
-The `-> int` indicates that this function is expected to return an integer.
-
----
-
-# Type Hint Syntax
-
-```python
-# For variables
-name: str = "Anna"
-age: int = 29
-is_researcher: bool = True
-
-# For collections 
-scores: list[int] = [95, 88, 100]
-headers: dict[str, int, bool] = {
-    "name": "Anna",
-    "age": 29,
-    "is_researcher": True
+# The DATA
+experiment_run = {
+    "id": "exp_01",
+    "param_A": 0.5,
+    "results": [10.2, 10.4, 9.9]
 }
 
-# For function return values
-def get_name() -> str:
-    return "Anna"
+# The FUNCTIONS that operate on the data
+def calculate_mean(data_dict: dict) -> float | None:
+    return sum(data_dict["results"]) / len(data_dict["results"])
+
+def print_summary(data_dict: dict) -> None:
+    mean_val = calculate_mean(data_dict)
+    print(f"ID: {data_dict['id']}, Mean: {mean_val:.2f}")
+
+print_summary(experiment_run)
 ```
+This works, but the data and the functions are separate.
 
 ---
 
-# Important: Python Itself Ignores Type Hints!
+# The Problem with Separate Data and Functions
 
-This is a critical point. At runtime, the Python interpreter **does nothing** with these hints. Your code doesn't run slower or faster.
+As our projects grow, this separation becomes a problem:
 
-`"hello" + "world"` works, and so does `2 + 3`. A function `add(a, b)` will work with both strings and integers, even if you hint it for `int`.
+*   **It gets messy**: Which functions work with which data structures?
+*   **No enforced structure**: What if we forget a key in our dictionary, like `"results"`? The `calculate_mean` function will crash.
+*   **Hard to manage state**: The data is "dumb." It has no ability to manage itself or ensure its own consistency.
 
-So... *why bother?*
-
----
-
-# Why Use Them? Three Huge Benefits
-
-Type hints are for **humans** and for **tools**.
-
-1.  **Readability & Documentation**: Your code becomes self-documenting. You immediately know what kind of data a function expects and returns.
-
-2.  **Editor Superpowers**: Your code editor (like VS Code) understands the types, giving you much better autocompletion and suggestions.
-
-3.  **Automatic Error Checking**: This is the big one. Tools can read your type hints and find bugs for you *before you even run the code*.
-    
----
-
-# Catching Bugs Before You Run
-
-Remember `ruff` from last session? It's not just a formatter; it's also a linter that understands type hints.
-
-Consider this code:
-```python
-def calculate_mean(scores: list[float]) -> float:
-    return sum(scores) / len(scores)
-
-# This will cause a TypeError at runtime!
-# We are passing a string instead of a number.
-calculate_mean([90.5, 88.1, "75.3"])
-```
-
-When you run `uv run ruff check .`, `ruff` will immediately flag this as an error, saving you from a runtime crash!
+There must be a better way to organize our code...
 
 ---
 
-# Part 3: Advanced Type Hinting
+# The OOP Solution: Bundling Data and Functions
 
-**Describing more complex data structures.**
+**Object-Oriented Programming** is a paradigm based on a simple, powerful idea:
+
+> Let's bundle the data and the functions that work on that data together into a single "thing" called an **Object**.
+
+*   An object **HAS** data (attributes).
+*   An object **CAN DO** things (methods).
+
+Think of a car. It's not just a collection of parts (data) and a separate instruction manual (functions). A car is a single object that *has* an engine and wheels, and *can* accelerate and brake.
+
+---
+<!-- _class: invert -->
+
+# Part 2: The Building Blocks of OOP
 
 ---
 
-# Multiple Possible Types: The `Union`
+# Classes and Objects (Blueprints and Houses)
 
-**Problem:** What if a variable could be one of several different types? For example, an ID could be an `int` or a `str`.
+This is the most important concept in OOP.
 
-**Solution:** Use `Union` to specify all possible types.
+*   A **Class** is the **blueprint**. It's the template or recipe that defines the structure and behavior. It doesn't *do* anything on its own.
+
+*   An **Object** (or **Instance**) is the **actual thing** built from the blueprint. You can create many objects from a single class, each with its own unique data.
 
 ```python
-from typing import Union
-
-def get_user_by_id(user_id: Union[int, str]) -> dict:
-    # ... logic to fetch user ...
+# The Class (Blueprint)
+class Experiment:
+    # ... definition goes here ...
     pass
 
-# Modern Python (3.10+) allows a cleaner syntax with `|`
-def get_user_by_id_modern(user_id: int | str) -> dict:
-    pass
+# Creating Objects (Instances) from the blueprint
+exp_A = Experiment()  # One house
+exp_B = Experiment()  # A second, separate house
 ```
-
-This tells the type checker that `user_id` is allowed to be *either* an `int` *or* a `str`.
 
 ---
 
-# Handling `None`: The `Optional` Type
+# Building the Object: `__init__`
 
-**Problem:** What if a function might return a value, but it could also return `None`? This is extremely common when searching for something that might not exist.
+How do we give an object its initial data when it's created? We use a special "dunder" (double-underscore) method called `__init__`.
 
-**Solution:** Use `Optional`. It is a shortcut for `Union[YourType, None]`.
+*   `__init__` is the **constructor**.
+*   It runs **automatically** every time you create a new object from the class.
+*   Its job is to set up the initial state of the object.
+
+---
+
+# The `self` Keyword: The Object's "I"
+
+Inside a class's methods, how does an object refer to its *own* data? It uses `self`.
+
+*   `self` is a special variable that represents **the instance of the object itself**.
+*   When you write `self.parameter = value`, you are saying: "Store this `value` in *my own* `parameter` attribute."
 
 ```python
-from typing import Optional
+class Experiment:
+    # The constructor method
+    def __init__(self, exp_id: str, parameter_A: float):
+        print(f"Creating a new experiment with ID: {exp_id}")
+        # Storing the initial data ON THE OBJECT ITSELF
+        self.id = exp_id
+        self.param_A = parameter_A
+        self.results: list[float] = [] # Start with an empty list
 
-def find_user(name: str) -> Optional[dict]:
-    # Returns a user dict if found in names dict, otherwise returns None
-    if name in all_users:
-        return all_users[name]
-    return None
+# When you run this...
+exp_1 = Experiment(exp_id="run_01", parameter_A=0.75)
+# ...the __init__ method is called automatically.
+# `self` inside __init__ refers to the `exp_1` object.
 ```
-`mypy` and `ruff` will now force you to check if the result is `None` before you try to use it as a dictionary, preventing `NoneType` errors!
 
 ---
 
-# The Escape Hatch: `Any`
+# Attributes and Methods
 
-**Problem:** You're working with a library that has no type hints, or you have a piece of code that is so dynamic it's nearly impossible to type.
+An object has two main components:
 
-**Solution:** Use `Any` to tell the type checker: **"Trust me. Stop checking here."**
+*   **Attributes**: The variables that belong to an object. They represent what the object **HAS**.
+    *   `exp_1.id`
+    *   `exp_1.results`
+
+*   **Methods**: The functions that belong to an object. They represent what the object **CAN DO**. Methods always take `self` as their first argument so they can access the object's own attributes.
+
+---
+
+# Putting It All Together: A Full Class
+
+Let's add a method to our `Experiment` class.
 
 ```python
-from typing import Any
+class Experiment:
+    def __init__(self, exp_id: str, parameter_A: float):
+        self.id = exp_id
+        self.param_A = parameter_A
+        self.results: list[float] = []
 
-def process_legacy_data(raw_data: Any) -> int:
-    # We don't know the type of 'raw_data',
-    # so we use Any and hope for the best.
-    # The type checker will not complain about the next line.
-    return int(raw_data['user']['id'])
-```
-**⚠️ Caution:** `Any` is powerful but dangerous. It silences the type checker. Use it as a last resort when you cannot be more specific. Overusing it defeats the purpose of type hinting.
+    # This is a METHOD
+    def add_data_point(self, value: float):
+        # It uses `self` to access its own `results` list
+        self.results.append(value)
 
----
-
-# Typing Functions Themselves: `Callable`
-
-**Problem:** How do you specify the type of an argument that is itself a function (like a callback or a transformation function)?
-
-**Solution:** Use `Callable`. The syntax is `Callable[[arg1_type, arg2_type], return_type]`.
-
----
-# Example
-```python
-from typing import Callable
-
-# This function takes a list of numbers and a function
-# that transforms one float into another.
-def apply_transform(
-    data: list[float],
-    transform_func: Callable[[float], float]
-) -> list[float]:
-    return [transform_func(x) for x in data]
-
-# Example usage:
-import math
-result = apply_transform([1.0, 4.0, 9.0], math.sqrt)
+    # Another METHOD
+    def calculate_mean(self) -> float | None:
+        if not self.results:
+            return None
+        return sum(self.results) / len(self.results)
 ```
 
 ---
 
-# Creating Your Own Type Names: `TypeAlias`
+# Using Our New Object
 
-**Problem:** Your type hints are getting long and repetitive, making function signatures hard to read.
-
-**Solution:** Use `TypeAlias` to create a shorter, more meaningful name for a complex type.
+Now our data (`id`, `results`) and the functions that operate on it (`add_data_point`, `calculate_mean`) are bundled together cleanly.
 
 ```python
-from typing import TypeAlias
+# Create an instance
+exp_1 = Experiment(exp_id="run_01", parameter_A=0.75)
 
-# This is a complex and repetitive type for a user dict
-UserDict: TypeAlias = dict[str, Union[int, str, bool]]
+# Use its methods to change its internal state
+exp_1.add_data_point(12.5)
+exp_1.add_data_point(13.1)
+exp_1.add_data_point(12.8)
 
-def process_user(user: UserDict) -> None:
-    # The signature is now much cleaner!
-    pass
+# Access its attributes and methods
+print(f"Experiment ID: {exp_1.id}")
+print(f"Raw results: {exp_1.results}")
+print(f"Mean of results: {exp_1.calculate_mean():.2f}")
 ```
+This is much more organized and less error-prone!
+
+---
+<!-- _class: invert -->
+
+# Part 3: The Power-Up - Inheritance
 
 ---
 
-# Special Case for Researchers: `numpy` Arrays
+# Don't Repeat Yourself (DRY)
 
-A NumPy array is not a `list`. So how do we type it? The `numpy` library provides its own special types that you should use.
+What if we have a special kind of experiment, like a computer simulation, that has all the properties of a normal experiment but also some extra ones?
+
+We don't want to copy-paste the `Experiment` class and add to it. Instead, we can use **Inheritance**.
+
+**Inheritance** lets a new class (the "child") inherit all the attributes and methods from an existing class (the "parent"). This is an "is-a" relationship: a `SimulationExperiment` *is a kind of* `Experiment`.
+
+---
+
+# Inheritance in Code
+
+The child class is defined by putting the parent class in parentheses.
 
 ```python
-import numpy as np
-from numpy.typing import NDArray
+# PARENT CLASS
+class Experiment:
+    # ... (same as before) ...
 
-# NDArray is a generic type for any numpy array
-def get_magnitude(vector: NDArray) -> np.float64:
-    return np.linalg.norm(vector)
+# CHILD CLASS
+class SimulationExperiment(Experiment): # <-- This is inheritance!
+    def __init__(self, exp_id: str, parameter_A: float, software_version: str):
+        # Ask the parent to do its setup first!
+        super().__init__(exp_id, parameter_A)
+        # Now add the new attribute specific to this child
+        self.version = software_version
 
-# You can even specify the data type inside the array!
-def process_image(image: NDArray[np.uint8]) -> NDArray[np.float64]:
-    # This function expects an array of unsigned 8-bit integers
-    # and returns an array of 64-bit floats.
-    return image.astype(np.float64) / 255.0
+    # We can also add new methods
+    def run_simulation(self):
+        print(f"Running simulation v{self.version} for {self.id}...")
+        # ... logic to run simulation and add data points ...
+        self.add_data_point(50.1) # We can use methods from the parent!
 ```
+The `super().__init__()` line is crucial: it runs the `__init__` method of the parent class.
 
 ---
 
-# Putting It All Together: A Complex Example
+# A Realistic Example: Data Readers
+
+Let's design a system to read data from different file types.
+
+**The Blueprint (Parent Class):**
+We'll create a generic `DataReader` that knows it needs a `filepath`, but doesn't know *how* to read it yet.
+
 ```python
-from typing import Callable, Optional, TypeAlias
-import numpy as np
-from numpy.typing import NDArray
+class DataReader:
+    def __init__(self, filepath: str):
+        self.filepath = filepath
 
-ProcessingFunc: TypeAlias = Callable[[NDArray], NDArray]
-
-def analyze_data(
-    data: NDArray[np.float64],
-    preprocessor: Optional[ProcessingFunc] = None
-) -> dict[str, float]:
-    """Analyzes a dataset, optionally preprocessing it first."""
-
-    if preprocessor:
-        data = preprocessor(data)
-
-    return {"mean": np.mean(data), "std": np.std(data)}
+    def read(self) -> list[dict]:
+        # This is a placeholder. The children MUST implement this.
+        raise NotImplementedError("Each subclass must implement its own read method!")
 ```
----
-
-# `mypy`: The Original Type Checker
-
-While `ruff`'s linter is fantastic and catches many type errors, the most powerful and dedicated tool for type checking is **`mypy`**.
-
-*   `mypy` is the gold standard for static type analysis in Python.
-*   It performs a deeper, more comprehensive analysis of your type hints than most linters.
-*   If you are serious about type safety, `mypy` is the tool to use.
 
 ---
 
-# Using `mypy`
+# The Implementations (Child Classes)
 
-1.  **Install it as a dev dependency:**
-    Just like `ruff`, it's a tool for developers.
-    ```bash
-    uv pip install --dev mypy
-    ```
+Now we create specialized child classes that inherit from `DataReader` and provide their own concrete implementation of the `read` method.
 
-2.  **Run it from the command line:**
-    `mypy` will check your entire codebase, following imports to ensure types are consistent across all your files.
-    ```bash
-    uv run mypy src/
-    ```
-    If it finds no issues, it will output nothing. If it finds a type inconsistency, it will give you a clear error message pointing to the exact line.
+```python
+import csv
+import json
 
----
+class CSVReader(DataReader):
+    def read(self) -> list[dict]:
+        print(f"Reading CSV from {self.filepath}")
+        with open(self.filepath, 'r') as f:
+            return list(csv.DictReader(f))
 
-# `ruff` vs. `mypy`
-
-*   **`ruff`**: An all-in-one, blazing-fast tool. Its type checking is very good for most day-to-day use and catches the most common errors.
-*   **`mypy`**: A specialized, highly-configurable, and more thorough type checker. It is the definitive authority on whether your type hints are correct.
-
-**Recommendation:** Use `ruff` for instant feedback as you code. Use `mypy` as a final, comprehensive check before you commit your code.
+class JSONReader(DataReader):
+    def read(self) -> list[dict]:
+        print(f"Reading JSON from {self.filepath}")
+        with open(self.filepath, 'r') as f:
+            return json.load(f)
+```
+This is a powerful and clean pattern for building extensible software.
 
 ---
-
-# Final Project: Automated Checks with GitHub Actions
-
----
-
-# Bringing It All Together
-
-For your final project, we will use an automated system called **GitHub Actions** to ensure code quality.
-
-GitHub Actions allows you to run specific scripts automatically whenever you push code to your repository. This way, you don't have to worry about forgetting to run checks or format your code.
-
----
-# What does this mean?
-Every time you `git push` your code to your project's `main` branch on GitHub, a process that **I have outlined** will automatically run on GitHub's servers.This process will:
-1.  Set up a clean Python environment.
-2.  Install all your dependencies from `pyproject.toml`.
-2.  Run `uv run ruff check .` to find linting errors *without fixing them*.
-3.  Run `ruff format --check .` to ensure your code is formatted correctly (without actually changing it).
-4.  Run `uv run mypy src/` to perform a strict type check.
-
-**If any of these checks fail, you will see a red ❌ next to your commit on GitHub.** You will need to fix the issues and push again to get a green ✅.
+# Your Assignment
+TBA
 
