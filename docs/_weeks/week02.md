@@ -2,10 +2,9 @@
 title: "Week: week-02"
 date: 2025-09-04
 description: "Weekly materials for week02"
-
 lecture_slides: "#"
-ta_slides: "/slides/practice/week-02_slides.html"
-lesson: "/lessons/week02-lesson"
+ta_slides: "/course-materials/slides/practice/week02_slides.html"
+lesson: "/course-materials/lessons/week02-lesson.html"
 assignment:
   title: "Assignment"
   link: "#"

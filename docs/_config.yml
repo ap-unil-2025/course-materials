@@ -38,12 +38,12 @@ defaults:
       layout: "week"
 
 collections:
-  lessons:
-    output: true
-    permalink: /:collection/:name.html
   assignments:
     output: true
     permalink: /:collection/:name.html
+  lessons:
+    output: true
+    permalink: /lessons/:name.html
   projects:
     output: true
     permalink: /:collection/:name.html
