@@ -15,13 +15,24 @@ footer: "Anna Smirnova, September 2025"
 ---
 
 # Welcome! I'm Anna
-
-A little about me:
-*   My PhD research area is Economics, but I have a degree in Computer Science, and I've worked in software development for several years.
-*   Now, I use programming for... everything in my work!
-*   My goal for my part of the Advanced Programming course is to give you the practical, real-world tools that I wish I had known when I started.
+* I will be the course coordinator and your TA for the semester.
+* I will hold the weekly hands-on sessions and help you with assignments.
+* A little about me:
+    *   My PhD research area is Economics, but I have a degree in Computer Science, and I've worked in software development for several years.
+    *   Now, I use programming for... everything in my work!
+    *   My goal for my part of the Advanced Programming course is to give you the practical, real-world tools that I wish I had known when I started.
 
 **This is not a typical computer science course. This is about making your research life easier.**
+
+---
+# Your other instructors
+*   **Prof. Dr. Simon Scheidegger** (Course Instructor)
+    *   Associate Professor, Department of Economics, University of Lausanne
+    *   Research: Machine Learning, Causal Inference, Computational Economics
+    *   [Website](https://sites.google.com/site/simonscheidegger/)
+    *   Email:
+* Francesco 
+
 
 ---
 # Part 1: Why Are We Here?
