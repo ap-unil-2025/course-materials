@@ -1,7 +1,8 @@
 ---
 marp: true
-theme: default
+theme: unil-theme
 paginate: true
+backgroundColor: #f5f9ff
 header: "Tracking Your Genius (Git & GitHub)"
 footer: "Anna Smirnova, June 24, 2025"
 # style: |
@@ -25,6 +26,8 @@ footer: "Anna Smirnova, June 24, 2025"
 # Part 2: Git & GitHub
 
 ---
+
+<!-- _class: lead -->
 <!-- _class: invert -->
 # Practical Session 2
 # Tracking Your Genius: Git & GitHub

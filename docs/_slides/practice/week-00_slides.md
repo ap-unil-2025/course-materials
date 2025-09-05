@@ -1,13 +1,29 @@
 ---
 marp: true
-theme: rose-pine-dawn
+theme: unil-theme
 paginate: true
+backgroundColor: #f5f9ff
 size: 16:9
 header: "Advanced Programming @ UNIL 2025"
 footer: "Anna Smirnova, September 2025"
+style: |
+  section.lead {
+    background: #003aff;
+    color: white;
+  }
+  section.lead h1, section.lead h2, section.lead h3 {
+    color: white;
+    border-bottom: none;
+  }
+  section.lead a {
+    color: white;
+  }
 
 ---
 
+<!-- _class: lead -->
+<!-- _backgroundColor: #003aff -->
+<!-- _color: white -->
 
 # Session 0: Welcome to Advanced Programming @ UNIL 2025!
 ## Anna Smirnova, TA

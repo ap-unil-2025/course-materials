@@ -1,6 +1,6 @@
 ---
 layout: lesson
-title: "Course Overview & Setup"
+title: "Course Overview & Essential Tools Setup"
 week: 0
 date: 2025-09-15
 type: "introduction"
@@ -8,9 +8,12 @@ topics:
   - Introduction to the course
   - Structure, grading, and capstone project
   - Introduction to Nuvolos cloud computing platform
-  - Unix/Linux basics
+  - Unix/Linux basics and advanced commands
+  - Python environment setup
 slides: "/slides/practice/week00_slides.html"
-summary: "Introduction to Data Science and Advanced Programming course structure, Nuvolos platform, and Unix/Linux fundamentals."
+code_examples: 
+  - environment-setup.sh
+summary: "Introduction to Data Science and Advanced Programming course structure, Nuvolos platform, Unix/Linux fundamentals, and Python environment configuration."
 ---
 
 # Introduction to Data Science and Advanced Programming

@@ -1,7 +1,8 @@
 ---
 marp: true
-theme: default
+theme: unil-theme
 paginate: true
+backgroundColor: #f5f9ff
 size: 16:9
 title: "Scientific Computing in Python"
 description: "NumPy, Pandas, and Jupyter Notebooks for Data Science"

@@ -1,7 +1,8 @@
 ---
 marp: true
-theme: gradient
+theme: unil-theme
 paginate: true
+backgroundColor: #f5f9ff
 size: 16:9
 title: "Session 5: Generative AI for Programming"
 description: "Large Language Models and Autonomous Agents"

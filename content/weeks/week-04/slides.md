@@ -1,11 +1,14 @@
 ---
 marp: true
-theme: default
+theme: unil-theme
 paginate: true
+backgroundColor: #f5f9ff
 header: 'Session 4: Thinking in Objects'
 footer: 'Object-Oriented Programming (OOP) Basics'
 author: 'Anna Smirnova'
 ---
+
+<!-- _class: lead -->
 
 
 # Session 4: Thinking in Objects

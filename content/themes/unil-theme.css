@@ -1,0 +1,50 @@
+/* @theme unil */
+
+@import 'default';
+
+/* Title slide - use _class: lead */
+div#\:\$p > svg > foreignObject > section.lead {
+  background-color: #003aff !important;
+  color: white !important;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+div#\:\$p > svg > foreignObject > section.lead h1,
+div#\:\$p > svg > foreignObject > section.lead :is(h1, marp-h1) {
+  color: white !important;
+  border-bottom: none !important;
+}
+
+div#\:\$p > svg > foreignObject > section.lead h2,
+div#\:\$p > svg > foreignObject > section.lead :is(h2, marp-h2) {
+  color: white !important;
+  border-bottom: none !important;
+}
+
+div#\:\$p > svg > foreignObject > section.lead h3,
+div#\:\$p > svg > foreignObject > section.lead h4,
+div#\:\$p > svg > foreignObject > section.lead h5,
+div#\:\$p > svg > foreignObject > section.lead h6 {
+  color: white !important;
+}
+
+div#\:\$p > svg > foreignObject > section.lead p {
+  color: white !important;
+}
+
+div#\:\$p > svg > foreignObject > section.lead a {
+  color: white !important;
+  text-decoration: underline;
+}
+
+div#\:\$p > svg > foreignObject > section.lead code {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+}
+
+div#\:\$p > svg > foreignObject > section.lead strong {
+  color: white !important;
+}

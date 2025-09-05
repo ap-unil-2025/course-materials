@@ -1,6 +1,6 @@
 ---
 title: "Week: week-12"
-date: 2025-09-04
+date: 2025-09-01
 description: "Weekly materials for week12"
 lecture_slides: "#"
 ta_slides: "/course-materials/slides/practice/week12_slides.html"

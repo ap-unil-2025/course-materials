@@ -1,44 +1,86 @@
 #!/bin/bash
 
-# sync-content.sh - Sync content/ to Jekyll collections for AP 2025 course
-# This script copies content from the easy-to-edit content/ structure 
-# to the Jekyll collections that build the website
+# Simple sync script - just copy files, no fancy processing
 
 set -e
 
-# Function to create unified week pages
-create_week_page() {
-    local week_dir="$1"
-    local jekyll_name="$2"
-    local week_file="docs/_weeks/${jekyll_name}.md"
-    
-    # Extract metadata from lesson.md if it exists
-    local title="Week: $(basename "$week_dir")"
-    local date=""
-    local description=""
-    local topics=""
-    
-    if [ -f "$week_dir/lesson.md" ]; then
-        # Extract title from lesson frontmatter
-        title=$(grep '^title:' "$week_dir/lesson.md" | head -1 | sed 's/title: *//' | tr -d '"')
-        date=$(grep '^date:' "$week_dir/lesson.md" | head -1 | sed 's/date: *//')
-        description=$(grep '^summary:' "$week_dir/lesson.md" | head -1 | sed 's/summary: *//' | tr -d '"')
+echo "🔄 Syncing content/ to Jekyll collections..."
+
+# Create directories
+mkdir -p docs/_lessons docs/_assignments docs/_projects docs/_slides/practice docs/slides/practice docs/_weeks
+
+# Sync lessons
+echo "📖 Syncing lessons..."
+for week_dir in content/weeks/week-*; do
+    if [ -d "$week_dir" ]; then
+        week_num=$(basename "$week_dir")
+        jekyll_name=$(echo "$week_num" | sed 's/week-/week/')
         
-        # Extract topics from lesson frontmatter if they exist
-        if grep -q '^topics:' "$week_dir/lesson.md"; then
-            topics=$(sed -n '/^topics:/,/^[^[:space:]-]/p' "$week_dir/lesson.md" | grep '^ *-' | sed 's/^ *- */  - /')
+        # Copy lesson if exists
+        if [ -f "$week_dir/lesson.md" ]; then
+            cp "$week_dir/lesson.md" "docs/_lessons/${jekyll_name}-lesson.md"
+            echo "  ✅ $week_num/lesson.md → _lessons/${jekyll_name}-lesson.md"
+        fi
+        
+        # Copy slides if exists  
+        if [ -f "$week_dir/slides.md" ]; then
+            cp "$week_dir/slides.md" "docs/_slides/practice/${week_num}_slides.md"
+            echo "  ✅ $week_num/slides.md → _slides/practice/${week_num}_slides.md"
+            
+            # Build HTML slides with marp
+            echo "  🎯 Building $week_num slides..."
+            week_num_compact=$(echo "$week_num" | sed 's/week-/week/')
+            npx @marp-team/marp-cli "$week_dir/slides.md" \
+                --config .marprc.yml \
+                --theme content/themes/unil-theme.css \
+                --output "docs/slides/practice/${week_num_compact}_slides.html"
         fi
     fi
-    
-    # Create the unified week page with clean YAML
-    cat > "$week_file" << 'FRONTMATTER'
+done
+
+# Sync week definitions if they exist
+echo "📋 Syncing week pages..."
+if [ -d "content/week-definitions" ]; then
+    for week_file in content/week-definitions/week*.md; do
+        if [ -f "$week_file" ]; then
+            filename=$(basename "$week_file")
+            cp "$week_file" "docs/_weeks/$filename"
+            echo "  ✅ Week definition: $filename"
+        fi
+    done
+fi
+
+# Auto-generate week pages that don't have definitions
+for week_dir in content/weeks/week-*; do
+    if [ -d "$week_dir" ]; then
+        week_num=$(basename "$week_dir")
+        jekyll_name=$(echo "$week_num" | sed 's/week-/week/')
+        week_file="docs/_weeks/${jekyll_name}.md"
+        week_num_compact=$(echo "$week_num" | sed 's/week-/week/')
+        
+        # Extract basic info from lesson if it exists
+        if [ -f "$week_dir/lesson.md" ]; then
+            # Keep the title exactly as it appears after "title: " (including quotes if present)
+            title=$(grep '^title:' "$week_dir/lesson.md" 2>/dev/null | head -1 | sed 's/^title: *//' || echo "\"Week $jekyll_name\"")
+            date=$(grep '^date:' "$week_dir/lesson.md" 2>/dev/null | head -1 | sed 's/^date: *//' || echo "2025-09-01")
+            # Keep the description exactly as it appears after "summary: " (including quotes if present)
+            desc=$(grep '^summary:' "$week_dir/lesson.md" 2>/dev/null | head -1 | sed 's/^summary: *//' || echo "\"Weekly materials\"")
+        else
+            title="Week: $week_num"
+            date="2025-09-01"
+            desc="Weekly materials for $jekyll_name"
+        fi
+        
+        # Only create week page if it doesn't exist (don't overwrite!)
+        if [ ! -f "$week_file" ]; then
+            cat > "$week_file" << EOF
 ---
-title: "TITLE_PLACEHOLDER"
-date: DATE_PLACEHOLDER
-description: "DESC_PLACEHOLDER"
+title: $title
+date: $date
+description: $desc
 lecture_slides: "#"
-ta_slides: "SLIDES_PLACEHOLDER"
-lesson: "LESSON_PLACEHOLDER"
+ta_slides: "/course-materials/slides/practice/${week_num_compact}_slides.html"
+lesson: "/course-materials/lessons/${jekyll_name}-lesson.html"
 assignment:
   title: "Assignment"
   link: "#"
@@ -51,17 +93,6 @@ references:
     link: "https://github.com/ap-unil-2025/course-materials"
     description: "Main course repository with all materials"
 ---
-FRONTMATTER
-
-    # Replace placeholders with actual values
-    sed -i "s|TITLE_PLACEHOLDER|${title:-Week $jekyll_name}|g" "$week_file"
-    sed -i "s|DATE_PLACEHOLDER|${date:-$(date +%Y-%m-%d)}|g" "$week_file"
-    sed -i "s|DESC_PLACEHOLDER|${description:-Weekly materials for $jekyll_name}|g" "$week_file"
-    sed -i "s|SLIDES_PLACEHOLDER|/slides/practice/${week_dir##*/}_slides.html|g" "$week_file"
-    sed -i "s|LESSON_PLACEHOLDER|/lessons/${jekyll_name}-lesson|g" "$week_file"
-    
-    # Add the content section
-    cat >> "$week_file" << 'CONTENT'
 
 ## Week Overview
 
@@ -79,51 +110,11 @@ This week's materials include lecture content, practice exercises, and assignmen
 - Check the course discussion forum
 - Attend office hours
 - Review previous week's materials if needed
-CONTENT
-
-    echo "  ✅ Created unified week page: ${week_file}"
-}
-
-echo "🔄 Syncing content/ to Jekyll collections..."
-
-# Create directories if they don't exist
-mkdir -p docs/_lessons docs/_assignments docs/_projects docs/_slides/practice docs/slides/practice docs/_weeks
-
-# Sync lessons from content/weeks/*/lesson.md to docs/_lessons/
-echo "📖 Syncing lessons and creating unified week pages..."
-for week_dir in content/weeks/week-*; do
-    if [ -d "$week_dir" ]; then
-        week_num=$(basename "$week_dir")
-        jekyll_name=$(echo "$week_num" | sed 's/week-/week/')
-        
-        # Sync lesson
-        if [ -f "$week_dir/lesson.md" ]; then
-            cp "$week_dir/lesson.md" "docs/_lessons/${jekyll_name}-lesson.md"
-            echo "  ✅ $week_num/lesson.md → _lessons/${jekyll_name}-lesson.md"
+EOF
+            echo "  ✅ Created week page: ${week_file}"
+        else
+            echo "  ⏭️  Skipping ${week_file} (already exists)"
         fi
-        
-        # Sync slides (copy to both _slides for source and process with Marp)
-        if [ -f "$week_dir/slides.md" ]; then
-            # Copy source slides
-            cp "$week_dir/slides.md" "docs/_slides/practice/${week_num}_slides.md"
-            echo "  ✅ $week_num/slides.md → _slides/practice/${week_num}_slides.md"
-            
-            # Generate HTML slides if marp is available
-            if command -v marp &> /dev/null; then
-                echo "  🎯 Building $week_num slides with Marp..."
-                marp "$week_dir/slides.md" \
-                    --html \
-                    --allow-local-files \
-                    --output "docs/slides/practice/${week_num}_slides.html"
-                echo "  ✅ Generated docs/slides/practice/${week_num}_slides.html"
-            else
-                echo "  ⚠️  Marp not found - skipping HTML generation for $week_num"
-            fi
-        fi
-        
-        # Create unified week page
-        echo "  📋 Creating unified week page for $week_num..."
-        create_week_page "$week_dir" "$jekyll_name"
     fi
 done
 
@@ -134,7 +125,7 @@ if [ -d "content/projects" ]; then
         if [ -f "$project_file" ]; then
             filename=$(basename "$project_file")
             cp "$project_file" "docs/_projects/$filename"
-            echo "  ✅ projects/$filename → _projects/$filename"
+            echo "  ✅ $filename"
         fi
     done
 fi
@@ -146,25 +137,9 @@ if [ -d "content/assignments" ]; then
         if [ -f "$assignment_file" ]; then
             filename=$(basename "$assignment_file")
             cp "$assignment_file" "docs/_assignments/$filename"
-            echo "  ✅ assignments/$filename → _assignments/$filename"
+            echo "  ✅ $filename"
         fi
     done
 fi
 
-echo ""
 echo "✅ Content sync complete!"
-echo ""
-echo "💡 Usage tips:"
-echo "   - Edit files in content/ directory (easy structure)"
-echo "   - Run ./sync-content.sh to update Jekyll collections"
-echo "   - Use ./serve-local.sh to preview changes"
-echo "   - Commit and push to deploy via CI"
-echo ""
-
-# Show summary
-echo "📊 Sync summary:"
-echo "   - $(find content/weeks -name 'lesson.md' | wc -l) lessons synced"
-echo "   - $(find content/weeks -name 'slides.md' | wc -l) slide sets synced"
-echo "   - $(find docs/_weeks -name '*.md' | wc -l) unified week pages created"
-echo "   - $(find content/projects -name '*.md' | wc -l) projects synced"  
-echo "   - $(find content/assignments -name '*.md' | wc -l) assignments synced"

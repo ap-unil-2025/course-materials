@@ -1,7 +1,8 @@
 ---
 marp: true
-theme: default
+theme: unil-theme
 paginate: true
+backgroundColor: #f5f9ff
 header: "session 3: Modern Python Projects"
 footer: "Anna Smirnova, June 24, 2025"
 style: |

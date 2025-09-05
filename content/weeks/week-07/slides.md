@@ -1,7 +1,8 @@
 ---
 marp: true
-theme: default
+theme: unil-theme
 paginate: true
+backgroundColor: #f5f9ff
 header: "Session 7: Trusting Your Code"
 footer: "An Introduction to Automated Testing with `pytest`"
 size: 16:9

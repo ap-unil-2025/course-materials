@@ -1,0 +1,5 @@
+themes:
+  - ./content/themes/unil-theme.css
+options:
+  html: true
+  allowLocalFiles: true
