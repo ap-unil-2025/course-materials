@@ -1,48 +1,49 @@
 ---
-title: "Week 6: Scientific Computing"
+title: "Week 6: Python Fundamentals III"
 date: 2025-10-20
-description: "NumPy, Pandas, and Jupyter for data science"
+description: "Object-oriented programming, classes, inheritance, and program efficiency"
 lecture_slides:
-  - title: "Lecture 6a: NumPy Basics"
+  - title: "Testing and Debugging (Productivity)"
     link: "/course-materials/lectures/lecture_6/slides/Advanced_Programming_2025_lecture_6a.pdf"
-  - title: "Lecture 6b: Advanced NumPy"
+  - title: "Object Oriented Programming"
     link: "/course-materials/lectures/lecture_6/slides/Advanced_Programming_2025_lecture_6b.pdf"
-  - title: "Lecture 6c: Pandas & Data Analysis"
+  - title: "Classes, Inheritance & Program Efficiency"
     link: "/course-materials/lectures/lecture_6/slides/Advanced_Programming_2025_lecture_6c.pdf"
 ta_slides: "/course-materials/slides/practice/week06_slides.html"
 lesson: "/course-materials/lessons/week06-lesson.html"
 assignment:
-  title: "Data Analysis Project"
+  title: "OOP Assignment"
   link: "#"
-  description: "Analyze a dataset using NumPy and Pandas"
+  description: "Practice with classes, inheritance, and object-oriented design"
 examples:
-  - title: "Scientific Computing Examples"
-    link: "https://github.com/ap-unil-2025/course-materials"
+  - title: "Debugging Notebook"
+    link: "/course-materials/lectures/lecture_6/demo/debugging.ipynb"
+  - title: "OOP Examples"
+    link: "https://github.com/sischei/advanced_programming_2025/tree/main/lectures/lecture_6/demo"
+  - title: "NumPy Introduction"
+    link: "/course-materials/lectures/lecture_6/demo/numpy.ipynb"
+  - title: "Scientific Computing Overview"
+    link: "/course-materials/lectures/lecture_6/demo/scientific_computing_in_python.ipynb"
 references:
-  - title: "NumPy Documentation"
-    link: "https://numpy.org/doc/stable/"
-    description: "Official NumPy documentation"
-  - title: "Pandas Documentation"
-    link: "https://pandas.pydata.org/docs/"
-    description: "Official Pandas documentation"
-  - title: "Jupyter Documentation"
-    link: "https://jupyter.org/documentation"
-    description: "Jupyter notebooks guide"
+  - title: "Python OOP Documentation"
+    link: "https://docs.python.org/3/tutorial/classes.html"
+    description: "Official Python classes tutorial"
+  - title: "Testing in Python"
+    link: "https://docs.pytest.org/"
+    description: "pytest documentation"
 ---
 
-## Week Overview
+## Week 6: Python Fundamentals III
 
-This week's materials include lecture content, practice exercises, and assignments designed to build your understanding of the covered topics.
+### Topics Covered
+- Selected Topics on Object Oriented Programming
+- Selected Topics on Python Classes and Inheritance
+- Basics on Program Efficiency
+- A preview on Libraries (take-home materials)
+- Productivity: Basics on Testing and Debugging
 
-### Getting Started
+### Code Examples
+This week includes practical examples of OOP concepts, debugging techniques, and an introduction to scientific computing libraries.
 
-1. Review the lesson guide for detailed explanations
-2. Go through the practice slides for hands-on examples  
-3. Complete the weekly assignment
-4. Use the course repository for additional examples and resources
-
-### Need Help?
-
-- Check the course discussion forum
-- Attend office hours
-- Review previous week's materials if needed
+### Take-Home Materials
+Additional notebooks on NumPy and scientific computing in Python are provided for self-study.

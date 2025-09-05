@@ -23,7 +23,6 @@ header: "Session 5: Generative AI for Programming"
 
 *   Understand the landscape of **AI in coding**.
 *   Learn how **GitHub Copilot** works inside VS Code.
-*   Master **best practices for prompting** to get the best results.
 *   Discuss the **benefits and limitations** of AI coding assistants.
 *   Look ahead to the future: **Agentic AI Tools**.
 
@@ -41,6 +40,7 @@ AI assistance in software development isn't new. We've had:
 *   **IntelliSense**: Smart, context-aware autocompletion.
 
 What's new is the rise of **Generative AI** powered by Large Language Models (LLMs). These models don't just complete your code based on syntax; they *understand intent* and can *generate novel code* from natural language descriptions.
+> Note: I will be covering NLP/LLMs as a guest lecturer in the "Advanced Data Analytics" course on week 8! Stay tuned :)
 
 ---
 # The Landscape of AI Coding Tools
@@ -93,17 +93,11 @@ Here's my personal recommendation on AI tools, but remember that the landscape i
 
 ---
 
-# OpenAI Model Line-up (June 25 2025) 
+# OpenAI Model Line-up (October 2025) 
 
-- **GPT-4o (“omni”)** – multimodal (works with images and audio)  flagship; became ChatGPT’s default model on Apr 30 2025. Default model for Plus subscribers, can help with some tasks, but more a of generalist than a specialist.
-- **GPT-4o mini** – lightweight model (≈8 B params) that’s ≈60 % cheaper than GPT-3.5 Turbo yet tops other small LLMs, announced Jul 18 2024. This is the default free version of ChatGPT, and (in my opinion) not very high-quality.
-- **GPT-4.1 / 4.1 mini / 4.1 nano** – models specifically created for coding tasks, up to 1 M-token context and faster/cheaper than 4o. Default model for Copilot, and now available in ChatGPT for Plus subscribers.
----
-# OpenAI model lineup: Reasoning → **o-series**  
-> **Reasoning models** are models which "think" (generate intermediate steps) before answering a question, and are therefore more accurate than the previous models. They are also more expensive to run, so they are not available in the free version of ChatGPT.
-- **o3** – frontier long-form reasoning model launched Apr 16 2025.
-- **o3-pro** – premium variant with extended “think time,” rolled out Jun 10 2025 to Pro users (200.-/month)  
-- **o4-mini**/**o4-mini-high** – cost-efficient sibling; matches o3 accuracy with lower latency/cost. 
+- GPT-5: 
+- GPT-5 Thinking:
+- **GPT-4.1** – models specifically created for coding tasks. Can be accessed in Copilot.
 ---
 <!-- _class: invert -->
 
@@ -234,12 +228,494 @@ This prompt is specific, provides context, and gives a clear instruction.
 **Rule #1: You are responsible for the code you commit. Always review and test AI-generated code.**
 
 ---
+<!-- _class: invert -->
 
-# The Future is Agentic
+# Part 5: The Future is Agentic
 
-**Example Goal:**
-> "Build a web scraper to get the titles and prices of all books from example.com/books, and save the results to a CSV file named `books.csv`."
+---
 
-See agentic AI in action in the live demo :)
+# Understanding AI Model Types
 
+Before we dive into agents, let's understand the two types of AI models you'll encounter:
+
+---
+
+# Standard vs. Reasoning Models
+
+<div style="display: flex; gap: 2rem;">
+<div style="flex: 1;">
+
+## Standard Models 
+**GPT-4, Claude, Gemini**
+
+⚡ **Fast** (instant)
+📝 **Writing & coding**
+💰 **Cheap** ($10/M tokens)
+❌ **Bad at math/logic**
+
+</div>
+<div style="flex: 1;">
+
+## Reasoning Models
+**o1, o3, Gemini-thinking**
+
+🐌 **Slow** (30+ seconds)
+🧠 **Complex problems**
+💸 **Expensive** (5x cost)
+✅ **Great at algorithms**
+
+</div>
+</div>
+
+---
+
+# The Strawberry Test
+
+**Question:** "How many 'r's in strawberry?"
+
+| Standard Model | Reasoning Model |
+|---------------|-----------------|
+| "2 r's" ❌ | "Let me count: s-t-r-a-w-b-e-r-r-y" |
+| | "Positions 3, 8, 9 = **3 r's**" ✅ |
+
+💡 **Why?** Standard models see tokens ["straw"]["berry"], not letters!
+
+---
+
+# Quick Comparison: Binary Tree Problem
+
+**Task:** "Is binary tree balanced?"
+
+**Standard:** ❌ Only checks root
+**Reasoning:** ✅ Recursively checks all subtrees
+
+> Reasoning models catch the edge cases!
+
+---
+
+# When to Use Which?
+
+| Use Standard 🚀 | Use Reasoning 🧠 |
+|-----------------|------------------|
+| Writing docs | Complex algorithms |
+| Simple code | Debug subtle bugs |
+| Quick answers | Math problems |
+| Translations | System design |
+| **$10/M tokens** | **$50/M tokens** |
+
+---
+
+# The Hidden Thinking
+
+**You ask:** "What's 15% of 2,847?"
+**You see:** "427.05"
+
+**What happened (hidden):**
+```
+2,847 × 0.15 = 2,847 × 0.1 + 2,847 × 0.05  
+= 284.7 + 142.35 = 427.05 ✓
+```
+
+💭 o1 hides thinking, Claude/Gemini can show it!
+
+---
+
+# Cost & Performance Comparison (2025)
+
+| Model | Speed | $/1M |
+|-------|-------|------|
+| GPT-4 | Instant | $10-30 |
+| Claude | Instant | $3-15 |
+| **o1** | 30 sec | **$60** 💸 |
+| **o1-mini** | 10 sec | **$12** |
+
+**👉 Reasoning = 5x cost, 100x slower**
+
+---
+
+# Student Cheat Sheet
+
+**Use Standard 🚀**
+- README files
+- Test cases  
+- Code explanation
+
+**Use Reasoning 🧠**
+- Debug recursion
+- Optimize algorithms
+- Security audits
+
+---
+
+# The Future: Hybrid Approaches
+
+## What's Coming (2025-2026):
+- **Automatic routing**: System chooses model based on query complexity
+- **Mixed workflows**: Standard for drafting, Reasoning for verification
+- **Thinking tokens**: Pay only for visible output, not thinking process
+- **Local reasoning**: Smaller reasoning models on your laptop
+
+## Today's Best Practice:
+1. Start with standard models (fast & cheap)
+2. If output seems wrong → try reasoning model
+3. For critical code → always verify with reasoning model
+4. For learning → ask reasoning model to "show your thinking"
+
+---
+
+# Try This Now!
+
+**Problem:** "3 apples, eat 1, buy 5, give away half, buy 2x what you gave. Total?"
+
+**Standard:** Often gets 8-9 ❌
+**Reasoning:** Step-by-step = 10 ✅
+
+*Let's test it live!*
+
+---
+
+# What Are Agentic AI Tools?
+
+**Traditional AI Assistants** (like Copilot autocomplete):
+- Respond to direct commands
+- Generate code snippets
+- Answer specific questions
+- **You drive, AI assists**
+
+**Agentic AI Tools**:
+- Work autonomously toward goals
+- Can execute code and see results
+- Debug and iterate on their own
+- Use multiple tools (terminal, file system, web)
+- **AI drives, you supervise**
+
+---
+
+# The Agent Loop
+
+```
+Goal → Plan → Execute → Check → Fix → Done!
+```
+
+**Example:** "Build stock price scraper"
+1. 🧐 Plans architecture
+2. 📝 Writes code  
+3. 🧪 Tests & debugs
+4. ✅ Delivers solution
+
+---
+
+# Key Agentic Tools in 2025
+
+## Claude Code (Anthropic)
+- **Strengths**: Excellent at complex reasoning, careful with code quality
+- **Access**: Built into Claude.ai Pro, VS Code extension
+- **Best for**: Full-stack development, refactoring, documentation
+
+## Cursor AI
+- **Strengths**: Deep IDE integration, multi-file edits
+- **Access**: Standalone IDE based on VS Code
+- **Best for**: Rapid prototyping, UI/UX development
+
+## Windsurf (Codeium)
+- **Strengths**: Free tier available, fast iterations
+- **Access**: VS Code fork with agent capabilities
+- **Best for**: Students, open-source projects
+
+---
+
+# Key Agentic Tools (continued)
+
+## Aider (Open Source)
+- **Strengths**: Terminal-based, supports all LLMs, git integration
+- **Access**: `pip install aider-chat`
+- **Best for**: Command-line workflows, automation scripts
+
+## GitHub Copilot Workspace
+- **Strengths**: GitHub integration, issue-to-PR workflow
+- **Access**: GitHub.com (limited preview)
+- **Best for**: Open source maintenance, bug fixes
+
+## Devin (Cognition Labs)
+- **Strengths**: Full software engineer capabilities
+- **Access**: Limited beta
+- **Best for**: Complete project development
+
+---
+
+# Real-World Agentic Example
+
+Let's see how an agent handles a real task:
+
+**Human**: "Create a Python script that fetches cryptocurrency prices from an API and saves them to a CSV file with timestamps"
+
+**Agent's Process**:
+1. 🔍 Research available crypto APIs
+2. 📝 Write initial script using `requests`
+3. 🧪 Test the API connection
+4. ❌ Handle API errors gracefully
+5. 💾 Implement CSV writing with `pandas`
+6. ⏰ Add scheduling functionality
+7. 📊 Create visualization bonus feature
+8. ✅ Deliver complete, tested solution
+
+---
+
+# Agentic Workflow Demo
+
+```python
+# Agent-generated solution (simplified)
+import requests
+import pandas as pd
+from datetime import datetime
+import time
+
+def fetch_crypto_prices(symbols=['BTC', 'ETH']):
+    """Fetch current prices for given cryptocurrencies."""
+    base_url = "https://api.coinbase.com/v2/exchange-rates"
+    prices = {}
+    
+    for symbol in symbols:
+        response = requests.get(f"{base_url}?currency={symbol}")
+        if response.status_code == 200:
+            data = response.json()
+            prices[symbol] = float(data['data']['rates']['USD'])
+    
+    return prices
+
+def save_to_csv(prices, filename='crypto_prices.csv'):
+    """Append prices with timestamp to CSV file."""
+    df = pd.DataFrame([{
+        'timestamp': datetime.now(),
+        **prices
+    }])
+    
+    df.to_csv(filename, mode='a', header=not pd.io.common.file_exists(filename), index=False)
+    print(f"Saved: {prices}")
+
+# Main execution loop
+if __name__ == "__main__":
+    while True:
+        prices = fetch_crypto_prices()
+        save_to_csv(prices)
+        time.sleep(300)  # Wait 5 minutes
+```
+
+---
+
+# Why Use Agents?
+
+**🚀 10x faster** • Boilerplate in seconds
+**🎓 Learn faster** • See best practices live
+**🎨 Focus on design** • Not syntax
+
+---
+
+# ⚠️ Agent Limitations
+
+**Problems:** Context limits • Hallucinations • Cost • Security
+
+**Rules:**
+✅ Start small
+✅ Review everything
+✅ Use git
+❌ Never share secrets
+
+---
+
+# Quick Start: Aider
+
+```bash
+pip install aider-chat
+aider --model gpt-4o-mini  # Free tier!
+```
+
+**Commands:**
+```
+/add main.py
+make a fibonacci function
+/run python main.py
+add tests
+/commit
+```
+
+---
+
+# Advanced Agentic Patterns
+
+## Multi-Agent Collaboration
+```
+Architect Agent → designs system
+    ↓
+Developer Agent → implements code
+    ↓
+Tester Agent → writes and runs tests
+    ↓
+Reviewer Agent → suggests improvements
+```
+
+## Autonomous Debugging
+- Agent reads error messages
+- Searches documentation
+- Modifies code
+- Re-runs tests
+- Iterates until success
+
+---
+
+# Economics/Finance Agentic Use Cases
+
+## Quantitative Analysis
+- "Build a portfolio optimization tool using Modern Portfolio Theory"
+- "Create a backtesting framework for trading strategies"
+- "Implement a Monte Carlo simulation for option pricing"
+
+## Data Pipeline Automation
+- "Set up a daily scraper for Federal Reserve economic data"
+- "Create an ETL pipeline for Bloomberg data to PostgreSQL"
+- "Build a real-time dashboard for market indicators"
+
+## Research Automation
+- "Generate statistical reports from FRED data"
+- "Automate literature review summaries"
+- "Create reproducible research notebooks"
+
+---
+
+# The Future of Agentic AI (2025-2027)
+
+## Near Term (Now - 2025)
+- Better IDE integration
+- Improved debugging capabilities
+- Lower costs, faster inference
+- Multi-modal understanding (screenshots, diagrams)
+
+## Medium Term (2025-2026)
+- Agents that maintain entire codebases
+- Automatic refactoring and optimization
+- Cross-language translations
+- Self-healing production systems
+
+## Long Term (2026+)
+- AI software teams
+- Specification-to-deployment pipelines
+- Autonomous DevOps
+- AI-first programming languages
+
+---
+
+# Preparing for an Agentic Future
+
+## Skills That Matter More
+- **System design** and architecture
+- **Problem decomposition**
+- **Prompt engineering**
+- **Code review** and quality assessment
+- **Testing strategies**
+- **Domain expertise** (economics, finance)
+
+## Skills That Matter Less
+- Memorizing syntax
+- Boilerplate code writing
+- Manual refactoring
+- Basic debugging
+
+---
+
+# Ethical Considerations
+
+## Attribution & Authorship
+- Who owns AI-generated code?
+- How do we attribute contributions?
+- What about licensing?
+
+## Job Market Impact
+- Will junior developer roles disappear?
+- How will education adapt?
+- New roles: AI supervisors, prompt engineers
+
+## Quality & Reliability
+- Can we trust critical systems to AI?
+- How do we audit AI-generated code?
+- What about security vulnerabilities?
+
+---
+
+# Hands-On Exercise
+
+## Try It Yourself (15 minutes)
+1. Choose an agentic tool:
+   - Claude.ai (free tier)
+   - Cursor (free trial)
+   - Aider (open source)
+
+2. Give it this task:
+   > "Create a Python class for managing a personal budget. It should:
+   > - Track income and expenses by category
+   > - Calculate monthly summaries
+   > - Generate a simple text report
+   > - Save/load data from JSON"
+
+3. Observe how it:
+   - Plans the implementation
+   - Writes code iteratively
+   - Tests the solution
+
+---
+
+# Best Practices for Students
+
+## Start Small
+- Use agents for homework scaffolding
+- Generate test cases for your code
+- Get explanations for complex topics
+
+## Learn by Reviewing
+- **Don't just copy-paste**
+- Understand every line
+- Ask "why" decisions were made
+- Try alternative approaches
+
+## Build Your Portfolio
+- Use agents to accelerate projects
+- Focus on unique ideas
+- Document your design decisions
+- Show human creativity + AI efficiency
+
+---
+
+# Summary: Agentic Programming
+
+## Key Takeaways
+✅ Agents work **autonomously** toward goals  
+✅ They can **write, test, and debug** code  
+✅ Current tools are **powerful but need supervision**  
+✅ The future is **collaborative human-AI development**  
+
+## Your Action Items
+1. Try at least one agentic tool this week
+2. Use it for your next assignment (with attribution!)
+3. Focus on learning high-level design
+4. Stay curious about new developments
+
+---
+
+# Resources & Further Learning
+
+## Tools to Try
+- **Aider**: https://aider.chat
+- **Claude Code**: https://claude.ai
+- **Cursor**: https://cursor.sh
+- **Windsurf**: https://codeium.com/windsurf
+
+## Learning Resources
+- **Prompt Engineering Guide**: https://www.promptingguide.ai
+- **Agentic Patterns**: https://github.com/aider-dev/aider
+- **r/LocalLLaMA**: Community for open-source AI
+
+## Stay Updated
+- **AI Tool Reviews**: https://theresanaiforthat.com
+- **Weekly AI News**: https://www.therundown.ai
+
+---
 

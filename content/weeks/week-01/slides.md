@@ -3,11 +3,11 @@ marp: true
 theme: default
 title: "Code Like a Scientist: Essential Tools for Research Programming"
 author: "Anna Smirnova"
-date: "June 24, 2025"
+date: "September 15, 2025"
 description: "A hands-on tutorial to get you started with essential programming tools for researchers."
 paginate: true
 header: "Code Like a Scientist: Essential Tools for Research Programming"
-footer: "Anna Smirnova, June 24, 2025"
+footer: "Anna Smirnova, September 15, 2025"
 style: |
   section {
     font-size: 29px;
@@ -76,9 +76,9 @@ style: |
 <!-- TODO: This is a placeholder for a screenshot or a live demo of a terminal window. -->
 ![bg right:70% 90%](https://techterms.com/img/xl/terminal_610.png)
 
----
+<!-- --- -->
 
-# Using the Terminal on Your Personal Computer: MacOS
+<!-- # Using the Terminal on Your Personal Computer: MacOS
 
 
 *   `Terminal.app` is built-in. Look it up in Spotlight (Cmd + Space) or find it in Applications > Utilities.
@@ -91,24 +91,26 @@ style: |
 * After that, open a new terminal window and run:
     * `brew install git` to install Git.
     * `brew install python3.12` to install Python.
-    * `brew install uv` to install `uv`, our new package manager.
+    * `brew install uv` to install `uv`, our new package manager. -->
 
-
+<!-- 
 ---
 # Using the Terminal on Your Personal Computer: Windows
 
 *   Use the `Windows Terminal` app (built-in).
 * There are a lot of ways to use these commands on Windows, but I recommend using the **Windows Subsystem for Linux (WSL)**, which allows you to run a Linux distribution alongside Windows. 
 * This will give you a more consistent experience with the commands we will be using.
-* It takes a while to install, so do it before the next session.
+* It takes a while to install, so do it before the next session. -->
 
 ---
-# For now: Using a Github Codespace
-*   **GitHub Codespaces**: A cloud-based development environment that runs in your browser.
-*   Provides a full-featured terminal and code editor without needing to install anything locally.
-* Go to [GitHub Codespaces](codespaces.github.com) and create a new codespace.
-*   You can use the terminal in the codespace just like you would on your local machine.
-*   This is a great way to get started without worrying about local setup issues.
+# For now: Using Nuvolos + VSCode
+
+*   **Nuvolos**: A cloud-based platform for collaborative research and teaching, providing ready-to-use computational environments.
+*   You do not need to install anything locally — everything runs in your browser.
+*   Log in to [Nuvolos](https://nuvolos.cloud/) and open your workspace for this course.
+*   Launch the **VSCode** interface directly from Nuvolos for a full-featured code editor and integrated terminal.
+*   You can use the terminal in Nuvolos just like you would on your local machine.
+*   This setup is ideal for getting started quickly and avoiding local configuration issues.
 ---
 
 # Using the Terminal in VSCode

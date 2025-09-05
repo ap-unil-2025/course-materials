@@ -153,8 +153,9 @@ title: "Course Syllabus"
       
       <div class="assessment-item primary">
         <div class="assessment-icon">🎯</div>
-        <h4>Capstone Project</h4>
-        <p>Individual data science project • 10-page report • GitHub repository • 10-minute video presentation</p>
+        <h4>Individual Project</h4>
+        <p>Python programming project • 10-page report • GitHub repository • Optional presentation</p>
+        <a href="{{ '/INDIVIDUAL_PROJECT_RULES' | relative_url }}" class="project-link">View Project Guidelines →</a>
       </div>
 
       <div class="assessment-item">
@@ -429,6 +430,21 @@ title: "Course Syllabus"
 .assessment-item.primary {
   border-color: #3b82f6;
   background: linear-gradient(135deg, #eff6ff 0%, var(--background-color) 100%);
+}
+
+.project-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: #3b82f6;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.project-link:hover {
+  color: #2563eb;
+  transform: translateX(2px);
 }
 
 /* Schedule Parts */

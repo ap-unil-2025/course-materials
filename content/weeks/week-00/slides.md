@@ -31,7 +31,7 @@ style: |
 ---
 
 # Welcome! I'm Anna
-* I will be the course coordinator and your TA for the semester.
+* I will be the course coordinator and the exercise lead for the semester.
 * I will hold the weekly hands-on sessions and help you with assignments.
 * A little about me:
     *   My PhD research area is Economics, but I have a degree in Computer Science, and I've worked in software development for several years.
@@ -42,12 +42,9 @@ style: |
 
 ---
 # Your other instructors
-*   **Prof. Dr. Simon Scheidegger** (Course Instructor)
-    *   Associate Professor, Department of Economics, University of Lausanne
-    *   Research: Machine Learning, Causal Inference, Computational Economics
-    *   [Website](https://sites.google.com/site/simonscheidegger/)
-    *   Email:
-* Francesco 
+*   **Prof. Dr. Simon Scheidegger** (Course Instructor) <simon.scheidegger@unil.ch>
+* **Francesco Brunamonti** <francesco.brunamonti@unil.ch> 
+- **Zhongshan Chen** <zhongshan.chen@unil.ch>
 
 
 ---
@@ -55,12 +52,12 @@ style: |
 
 ---
 # A Real-World Example
-*   Me and Professor Scheidegger have vastly different working styles and workflows.
+*   Me and Prof. Scheidegger have vastly different working styles and workflows.
 * He works on Ubuntu Linux with Kate, and I use a combination of Mac and Arch Linux laptops with an array of esoteric editors.
 *   He prefers to write code in an elegant, minimalist way, while I like to think in terms of modular, reusable components and pipelines with OOP.
 * But we collaborate on research projects, as he is my PhD supervisor.
 * How do we make this work?
-* We use modern programming tools and practices to bridge the gap between our different styles.
+* We use modern programming tools and practices to bridge the gap between our different styles!
 
 ---
 
@@ -90,32 +87,33 @@ We will focus on the **"how"** and **"why"** of modern programming workflows.
 
 ---
 ## Practical Course Logistics: Materials
-*   **Course Website**: 
+*   **Course Website**: https://ap-unil-2025.github.io/course-materials/
+    *   All course materials, including slides, lessons, assignments, and examples, will be available here.
 *   **GitHub**: We will use GitHub for assignments and collaboration. Make sure you have an account set up.
-* **Editor**: Make sure you have installed VS Code and the Python extension.
+* **Nuvolos**: We will use Nuvolos for coding exercises during the hands-on sessions. Stay tuned for details!
+* **Editor**: Nuvolos is a cloud environment with a built-in code editor (VSCode).
 ---
 # Practical Course Logistics: Grading
-*   **Assignments**: There will be weekly assignments that will be graded on a pass/fail basis with GitHub Classroom.
-    *   **Due Dates**: Assignments will be due one week after they are assigned.
-    *   **Late Submissions**: Late submissions will not be accepted unless you have a valid reason.
+*   **Assignments**: There will be **optional** homework assigments that will be graded on a pass/fail basis with GitHub Classroom.
+    * They will not be required for the course.
+    * HOWEVER, they can *boost* your final grade if you choose to complete them!
 *   **Participation**: Active participation in class and on GitHub will be considered in your final grade.
-*   **Final Project**: A significant portion of your grade will come from a final project where you will apply what you've learned to a real-world problem.
-    * 25% assigments and participation
-    * 75% final project
+*   **Final Project**: 100% of your grade will come from a final project where you will apply what you've learned to a real-world problem.
+
 ---
 # Final Project
-*   I will provide a list of several **team project ideas** that you can choose from and register your team with me. 
-*   You can **also propose your own project idea**, but it must be approved by me.
-*   The project will be due at the end of the semester, and you will present your project to the class, as well as submit a report.
+*   I will provide a list of several **project ideas** that you can choose from. 
+*   You can **also propose your own project idea**, but it must be approved by the instructors.
+*   The project will be due at the end of the semester, and you will present your project to the class (either in person or on video), as well as submit a report and a git repository with your code.
 *   The project should demonstrate your ability to apply the concepts and tools learned in this course to a real-world problem.
 *   Look for more details on the course website. We will discuss this more in the coming weeks.
 
 ---
 # Administrative Details
-*   **Office Hours**: I will hold weekly office hours on Friday for questions and help with assignments. I will not be covering full solutions during these hours, or live debugging your code, but I will help you understand the concepts and guide you in the right direction.
-*   **Communication**: Please use the course GitHub Discussions for questions and discussions. I will monitor it regularly.
-> **Note:** I will not be answering questions via email. Please use GitHub Discussions for all course-related questions.
-> **Note:** **I will not be using Moodle** for this course, except for announcements. All course materials will be on the course website and GitHub.
+*   **Office Hours**: We will hold weekly office hours on Friday for questions and help with assignments. We will not be covering full solutions during these hours, or live debugging your code, but we will help you understand the concepts and guide you in the right direction.
+*   **Communication**: Please use the Discord server: https://discord.gg/your-invite-link for all course-related questions and discussions. This is the best way to get help and interact with your peers and instructors.
+> **Note:** I will not be answering questions via email. Please use Discord.
+> **Note:** **We will not be using Moodle** for this course, except for announcements. All course materials will be on the course website and GitHub.
 ---
 
 # Part 2: Let's Get to Know Each Other
