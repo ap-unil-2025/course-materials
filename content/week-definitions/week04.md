@@ -2,7 +2,7 @@
 title: "Week 4: Python Fundamentals II"
 date: 2025-10-06
 description: "Functions, recursion, and object-oriented programming"
-lecture_slides: "#"
+lecture_slides: "/course-materials/lectures/lecture_4/slides/Advanced_Programming_2025_lecture_4.pdf"
 ta_slides: "/course-materials/slides/practice/week04_slides.html"
 lesson: "/course-materials/lessons/week04-lesson.html"
 assignment:

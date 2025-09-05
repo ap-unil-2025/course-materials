@@ -2,7 +2,13 @@
 title: "Week 6: Scientific Computing"
 date: 2025-10-20
 description: "NumPy, Pandas, and Jupyter for data science"
-lecture_slides: "#"
+lecture_slides:
+  - title: "Lecture 6a: NumPy Basics"
+    link: "/course-materials/lectures/lecture_6/slides/Advanced_Programming_2025_lecture_6a.pdf"
+  - title: "Lecture 6b: Advanced NumPy"
+    link: "/course-materials/lectures/lecture_6/slides/Advanced_Programming_2025_lecture_6b.pdf"
+  - title: "Lecture 6c: Pandas & Data Analysis"
+    link: "/course-materials/lectures/lecture_6/slides/Advanced_Programming_2025_lecture_6c.pdf"
 ta_slides: "/course-materials/slides/practice/week06_slides.html"
 lesson: "/course-materials/lessons/week06-lesson.html"
 assignment:

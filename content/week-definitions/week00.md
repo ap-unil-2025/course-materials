@@ -2,7 +2,11 @@
 title: "Week 0-1: Course Overview and Setup"
 date: 2025-09-15
 description: "Introduction to the course, Unix/Linux basics, and Git fundamentals"
-lecture_slides: "#"
+lecture_slides:
+  - title: "Lecture 1a: Course Introduction"
+    link: "/course-materials/lectures/lecture_1/slides/Advanced_Programming_2025_lecture_1a.pdf"
+  - title: "Lecture 1b: Unix/Linux Basics"
+    link: "/course-materials/lectures/lecture_1/slides/Advanced_Programming_2025_lecture_1b.pdf"
 ta_slides: "/course-materials/slides/practice/week00_slides.html"
 lesson: "/course-materials/lessons/week00-lesson.html"
 assignment:

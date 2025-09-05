@@ -37,15 +37,35 @@ layout: default
         <section class="week-section">
             <h3 class="section-title">Weekly Materials</h3>
             <div class="materials-grid">
-                {% if page.lecture_slides and page.lecture_slides != "#" %}
-                <div class="material-item lecture-item tba">
-                    <div class="material-icon">🎓</div>
-                    <div class="material-content">
-                        <h3>Lecture Slides</h3>
-                        <p>Professor's main lecture presentation</p>
-                        <span class="tba-badge">TBA</span>
-                    </div>
-                </div>
+                {% if page.lecture_slides %}
+                    {% if page.lecture_slides.first %}
+                        {% for slide in page.lecture_slides %}
+                        <a href="{{ slide.link }}" class="material-item lecture-item" target="_blank">
+                            <div class="material-icon">🎓</div>
+                            <div class="material-content">
+                                <h3>{{ slide.title }}</h3>
+                                <p>Professor's lecture slides (PDF)</p>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    {% elsif page.lecture_slides != "#" %}
+                        <a href="{{ page.lecture_slides }}" class="material-item lecture-item" target="_blank">
+                            <div class="material-icon">🎓</div>
+                            <div class="material-content">
+                                <h3>Lecture Slides</h3>
+                                <p>Professor's main lecture presentation</p>
+                            </div>
+                        </a>
+                    {% else %}
+                        <div class="material-item lecture-item tba">
+                            <div class="material-icon">🎓</div>
+                            <div class="material-content">
+                                <h3>Lecture Slides</h3>
+                                <p>Professor's main lecture presentation</p>
+                                <span class="tba-badge">TBA</span>
+                            </div>
+                        </div>
+                    {% endif %}
                 {% endif %}
 
                 {% if page.ta_slides and page.ta_slides != "#" %}

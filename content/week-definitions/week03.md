@@ -2,7 +2,13 @@
 title: "Week 3: Python Fundamentals I"
 date: 2025-09-29
 description: "Variables, control flow, data structures, and Git workflows"
-lecture_slides: "#"
+lecture_slides:
+  - title: "Lecture 3a: Python Fundamentals"
+    link: "/course-materials/lectures/lecture_3/slides/Advanced_Programming_2025_lecture_3a.pdf"
+  - title: "Lecture 3b: Control Flow"
+    link: "/course-materials/lectures/lecture_3/slides/Advanced_Programming_2025_lecture_3b.pdf"
+  - title: "Lecture 3c: Functions"
+    link: "/course-materials/lectures/lecture_3/slides/Advanced_Programming_2025_lecture_3c.pdf"
 ta_slides: "/course-materials/slides/practice/week02_slides.html"
 lesson: "/course-materials/lessons/week02-lesson.html"
 assignment:

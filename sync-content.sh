@@ -4,6 +4,10 @@
 
 set -e
 
+echo "🔄 Updating submodules..."
+git submodule update --init --recursive
+git submodule foreach git pull origin main || git submodule foreach git pull origin master || true
+
 echo "🔄 Syncing content/ to Jekyll collections..."
 
 # Create directories

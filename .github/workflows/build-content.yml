@@ -29,6 +29,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Pull latest submodule changes
+        run: |
+          git submodule update --init --recursive
+          git submodule foreach git pull origin main || git submodule foreach git pull origin master || true
 
       - name: Install Marp CLI
         run: npm install -g @marp-team/marp-cli
