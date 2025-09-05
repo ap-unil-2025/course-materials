@@ -1,36 +1,40 @@
 ---
-title: "Week: week-14"
-date: 2025-09-01
-description: "Weekly materials for week14"
+title: "Week 14: Project Presentations II & Course Wrap-up"
+date: 2025-12-15
+description: "Final presentations and course conclusion"
 lecture_slides: "#"
-ta_slides: "/course-materials/slides/practice/week14_slides.html"
-lesson: "/course-materials/lessons/week14-lesson.html"
+ta_slides: "#"
+lesson: "#"
 assignment:
-  title: "Assignment"
-  link: "#"
-  description: "Weekly assignment"
+  title: "Final Project Submission"
+  link: "/course-materials/lectures/capstone_project/capstone_project.pdf"
+  description: "Submit final project materials"
 examples:
-  - title: "Course Materials Repository"
-    link: "https://github.com/ap-unil-2025/course-materials"
+  - title: "Capstone Project Guidelines"
+    link: "/course-materials/lectures/capstone_project/capstone_project.pdf"
 references:
   - title: "Course Resources"
     link: "https://github.com/ap-unil-2025/course-materials"
-    description: "Main course repository with all materials"
+    description: "All course materials"
+  - title: "Further Learning"
+    link: "#"
+    description: "Resources for continued learning"
 ---
 
-## Week Overview
+## Week 14: Project Presentations II & Course Wrap-up
 
-This week's materials include lecture content, practice exercises, and assignments designed to build your understanding of the covered topics.
+### Final Presentations
+Continuation of student capstone project presentations.
 
-### Getting Started
+### Course Conclusion
+- Review of key concepts covered
+- Discussion of real-world applications
+- Resources for further learning
+- Career paths in data science
 
-1. Review the lesson guide for detailed explanations
-2. Go through the practice slides for hands-on examples  
-3. Complete the weekly assignment
-4. Use the course repository for additional examples and resources
-
-### Need Help?
-
-- Check the course discussion forum
-- Attend office hours
-- Review previous week's materials if needed
+### Final Submissions
+All project materials must be submitted by the end of this week:
+- Final code repository
+- Project report
+- Presentation video
+- Documentation

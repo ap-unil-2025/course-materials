@@ -1,14 +1,14 @@
 ---
-title: "Week 7: Machine Learning Fundamentals"
-date: 2025-09-01
-description: "Introduction to ML, regression, and gradient descent"
+title: "Week 7: Linear Regression"
+date: 2025-10-27
+description: "Supervised learning, linear regression, gradient descent, and polynomial regression"
 lecture_slides: "/course-materials/lectures/lecture_7/slides/Advanced_Programming_2025_lecture_7.pdf"
 ta_slides: "/course-materials/slides/practice/week07_slides.html"
 lesson: "/course-materials/lessons/week07-lesson.html"
 assignment:
-  title: "Assignment"
+  title: "Linear Regression Assignment"
   link: "#"
-  description: "Weekly assignment"
+  description: "Implement regression models and gradient descent"
 examples:
   - title: "Ridge Regression Example"
     link: "/course-materials/lectures/lecture_7/demo/ridge_regression.py"
@@ -19,24 +19,28 @@ examples:
   - title: "Stock Prediction Notebook"
     link: "/course-materials/lectures/lecture_7/demo/Stock_prediction_ML_Lecture8.ipynb"
 references:
-  - title: "Course Resources"
-    link: "https://github.com/ap-unil-2025/course-materials"
-    description: "Main course repository with all materials"
+  - title: "ISL Chapter 3"
+    link: "https://www.statlearning.com"
+    description: "Linear Regression"
+  - title: "PML Ch. 6.3–6.5"
+    link: "http://probml.github.io/book1"
+    description: "Bayesian linear regression, uncertainty, model comparison"
 ---
 
-## Week Overview
+## Week 7: Linear Regression
 
-This week's materials include lecture content, practice exercises, and assignments designed to build your understanding of the covered topics.
+### Topics Covered
+- Supervised Learning - the general idea
+- Linear Regression (with multiple variables)
+- Gradient Descent
+- Polynomial Regression
+- Tuning Model Complexity
+- Stock Market Prediction (if time permits)
+- Introduction to Pandas (quick tour; self-study)
 
-### Getting Started
+### Code Examples
+This week includes practical implementations of regression algorithms and real-world applications like stock market prediction.
 
-1. Review the lesson guide for detailed explanations
-2. Go through the practice slides for hands-on examples  
-3. Complete the weekly assignment
-4. Use the course repository for additional examples and resources
-
-### Need Help?
-
-- Check the course discussion forum
-- Attend office hours
-- Review previous week's materials if needed
+### Further Reading
+- ISL Chapter 3: Linear Regression
+- PML Ch. 6.3–6.5: Bayesian linear regression, uncertainty, model comparison

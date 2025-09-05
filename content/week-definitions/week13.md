@@ -1,36 +1,37 @@
 ---
-title: "Week: week-13"
-date: 2025-09-01
-description: "Weekly materials for week13"
+title: "Week 13: Project Presentations I"
+date: 2025-12-08
+description: "Student capstone project presentations"
 lecture_slides: "#"
-ta_slides: "/course-materials/slides/practice/week13_slides.html"
-lesson: "/course-materials/lessons/week13-lesson.html"
+ta_slides: "#"
+lesson: "#"
 assignment:
-  title: "Assignment"
-  link: "#"
-  description: "Weekly assignment"
+  title: "Capstone Project Presentation"
+  link: "/course-materials/lectures/capstone_project/capstone_project.pdf"
+  description: "Present your data science project"
 examples:
-  - title: "Course Materials Repository"
-    link: "https://github.com/ap-unil-2025/course-materials"
+  - title: "Capstone Project Guidelines"
+    link: "/course-materials/lectures/capstone_project/capstone_project.pdf"
 references:
-  - title: "Course Resources"
-    link: "https://github.com/ap-unil-2025/course-materials"
-    description: "Main course repository with all materials"
+  - title: "Presentation Tips"
+    link: "#"
+    description: "Guidelines for effective presentations"
 ---
 
-## Week Overview
+## Week 13: Project Presentations I
 
-This week's materials include lecture content, practice exercises, and assignments designed to build your understanding of the covered topics.
+### Capstone Project Presentations
+This week is dedicated to student presentations of their capstone projects.
 
-### Getting Started
+### Presentation Requirements
+- 10-minute video presentation
+- GitHub repository with code
+- 10-page project report
+- Q&A session
 
-1. Review the lesson guide for detailed explanations
-2. Go through the practice slides for hands-on examples  
-3. Complete the weekly assignment
-4. Use the course repository for additional examples and resources
-
-### Need Help?
-
-- Check the course discussion forum
-- Attend office hours
-- Review previous week's materials if needed
+### Evaluation Criteria
+- Technical implementation
+- Problem-solving approach
+- Code quality and documentation
+- Presentation clarity
+- Innovation and creativity

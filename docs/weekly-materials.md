@@ -85,8 +85,8 @@ title: "Weekly Materials"
           <span class="week-num">7</span>
           <span class="week-date">Oct 27</span>
         </div>
-        <h4>Statistical Learning</h4>
-        <p>ISL Ch. 2 • Visualization</p>
+        <h4>Linear Regression</h4>
+        <p>Gradient Descent • Polynomial</p>
       </a>
 
       <a href="{{ '/week/week08' | relative_url }}" class="week-item">
@@ -94,8 +94,8 @@ title: "Weekly Materials"
           <span class="week-num">8</span>
           <span class="week-date">Nov 3</span>
         </div>
-        <h4>Linear Regression</h4>
-        <p>Simple • Multiple • Inference</p>
+        <h4>Classification</h4>
+        <p>k-NN • Naive Bayes • Trees</p>
       </a>
 
       <a href="{{ '/week/week09' | relative_url }}" class="week-item">
@@ -103,8 +103,8 @@ title: "Weekly Materials"
           <span class="week-num">9</span>
           <span class="week-date">Nov 10</span>
         </div>
-        <h4>Classification</h4>
-        <p>Logistic • LDA • QDA • kNN</p>
+        <h4>Unsupervised Learning</h4>
+        <p>k-Means • GMM • Clustering</p>
       </a>
 
       <a href="{{ '/week/week10' | relative_url }}" class="week-item">
@@ -112,17 +112,24 @@ title: "Weekly Materials"
           <span class="week-num">10</span>
           <span class="week-date">Nov 17</span>
         </div>
-        <h4>Resampling Methods</h4>
-        <p>Cross-validation • Bootstrap</p>
+        <h4>Deep Learning Primer</h4>
+        <p>Neural Networks • TensorFlow</p>
       </a>
+      
+    </div>
+  </section>
+
+  <section class="course-section">
+    <h3 class="section-title">Part III: Advanced Topics</h3>
+    <div class="week-grid">
 
       <a href="{{ '/week/week11' | relative_url }}" class="week-item">
         <div class="week-header">
           <span class="week-num">11</span>
           <span class="week-date">Nov 24</span>
         </div>
-        <h4>Model Selection</h4>
-        <p>Subset • Ridge • Lasso</p>
+        <h4>Advanced ML</h4>
+        <p>Topics TBA</p>
       </a>
 
       <a href="{{ '/week/week12' | relative_url }}" class="week-item">
@@ -130,26 +137,26 @@ title: "Weekly Materials"
           <span class="week-num">12</span>
           <span class="week-date">Dec 1</span>
         </div>
-        <h4>Tree-Based Methods</h4>
-        <p>Decision trees • Random forests</p>
+        <h4>High-Performance Computing</h4>
+        <p>Parallelization • GPU • Optimization</p>
       </a>
 
-      <a href="{{ '/week/week13' | relative_url }}" class="week-item">
+      <a href="{{ '/week/week13' | relative_url }}" class="week-item project">
         <div class="week-header">
           <span class="week-num">13</span>
           <span class="week-date">Dec 8</span>
         </div>
-        <h4>Unsupervised Learning</h4>
-        <p>PCA • Clustering • K-means</p>
+        <h4>Project Presentations I</h4>
+        <p>Student capstone projects</p>
       </a>
 
-      <a href="{{ '/week/week14' | relative_url }}" class="week-item">
+      <a href="{{ '/week/week14' | relative_url }}" class="week-item project">
         <div class="week-header">
           <span class="week-num">14</span>
           <span class="week-date">Dec 15</span>
         </div>
-        <h4>Review & Projects</h4>
-        <p>Final presentations • Q&A</p>
+        <h4>Projects & Wrap-up</h4>
+        <p>Final presentations • Course conclusion</p>
       </a>
       
     </div>

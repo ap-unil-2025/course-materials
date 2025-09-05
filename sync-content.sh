@@ -42,19 +42,20 @@ for week_dir in content/weeks/week-*; do
     fi
 done
 
-# Sync week definitions if they exist
-echo "📋 Syncing week pages..."
+# Sync week definitions - THIS IS THE TRUTH SOURCE, ALWAYS USE THESE
+echo "📋 Syncing week pages from week-definitions..."
 if [ -d "content/week-definitions" ]; then
     for week_file in content/week-definitions/week*.md; do
         if [ -f "$week_file" ]; then
             filename=$(basename "$week_file")
             cp "$week_file" "docs/_weeks/$filename"
-            echo "  ✅ Week definition: $filename"
+            echo "  ✅ Synced week page: $filename"
         fi
     done
 fi
 
-# Auto-generate week pages that don't have definitions
+# DISABLED: Auto-generation from lessons - we only use week-definitions now
+if false; then  # This whole block is disabled
 for week_dir in content/weeks/week-*; do
     if [ -d "$week_dir" ]; then
         week_num=$(basename "$week_dir")
@@ -75,9 +76,8 @@ for week_dir in content/weeks/week-*; do
             desc="Weekly materials for $jekyll_name"
         fi
         
-        # Only create week page if it doesn't exist (don't overwrite!)
-        if [ ! -f "$week_file" ]; then
-            cat > "$week_file" << EOF
+        # Always create/overwrite week page to keep in sync
+        cat > "$week_file" << EOF
 ---
 title: $title
 date: $date
@@ -115,12 +115,10 @@ This week's materials include lecture content, practice exercises, and assignmen
 - Attend office hours
 - Review previous week's materials if needed
 EOF
-            echo "  ✅ Created week page: ${week_file}"
-        else
-            echo "  ⏭️  Skipping ${week_file} (already exists)"
-        fi
+        echo "  ✅ Synced week page: ${week_file}"
     fi
 done
+fi  # End of disabled block
 
 # Sync projects
 echo "🚀 Syncing projects..."

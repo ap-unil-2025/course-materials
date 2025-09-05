@@ -17,6 +17,13 @@ title: "Course Syllabus"
     <a href="{{ '/weekly-materials' | relative_url }}" class="course-btn">View Materials →</a>
   </div>
 
+  <!-- Link to Professor's Syllabus -->
+  <div style="margin: 1.5rem 0; padding: 1rem; background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); border: 1px solid #3b82f6; border-radius: 0.5rem; text-align: center;">
+    <p style="margin: 0; font-size: 0.95rem; color: #1e40af;">
+      📄 <strong>Note:</strong> View the <a href="{{ '/professor-syllabus' | relative_url }}" style="font-weight: 600; color: #3b82f6;">Professor's Official Syllabus</a> for the most up-to-date course details and schedule
+    </p>
+  </div>
+
   <!-- Course Information -->
   <section class="syllabus-section">
     <h3 class="section-title">Course Overview</h3>
@@ -98,29 +105,28 @@ title: "Course Syllabus"
         <div class="part-header">
           <span class="part-badge">Part I</span>
           <h4>Python Foundations</h4>
-          <span class="part-dates">Weeks 0-6</span>
+          <span class="part-dates">Weeks 1-6</span>
         </div>
         <div class="part-topics">
           <span class="topic">Course Setup</span>
+          <span class="topic">Unix/Linux & Git</span>
           <span class="topic">Python Basics</span>
-          <span class="topic">OOP & Functions</span>
+          <span class="topic">Functions & OOP</span>
           <span class="topic">Generative AI</span>
-          <span class="topic">Scientific Computing</span>
         </div>
       </div>
 
       <div class="schedule-part">
         <div class="part-header">
           <span class="part-badge">Part II</span>
-          <h4>Statistical Learning</h4>
-          <span class="part-dates">Weeks 7-12</span>
+          <h4>Data Science</h4>
+          <span class="part-dates">Weeks 7-10</span>
         </div>
         <div class="part-topics">
-          <span class="topic">Linear Models</span>
+          <span class="topic">Linear Regression</span>
           <span class="topic">Classification</span>
-          <span class="topic">Regularization</span>
-          <span class="topic">Tree Methods</span>
           <span class="topic">Unsupervised Learning</span>
+          <span class="topic">Deep Learning</span>
         </div>
       </div>
 
@@ -128,10 +134,10 @@ title: "Course Syllabus"
         <div class="part-header">
           <span class="part-badge">Part III</span>
           <h4>Advanced Topics</h4>
-          <span class="part-dates">Weeks 13-14</span>
+          <span class="part-dates">Weeks 11-14</span>
         </div>
         <div class="part-topics">
-          <span class="topic">Deep Learning</span>
+          <span class="topic">Advanced ML</span>
           <span class="topic">High-Performance Computing</span>
           <span class="topic">Project Presentations</span>
         </div>
@@ -212,7 +218,7 @@ title: "Course Syllabus"
       <div class="reference-item">
         <div class="reference-type">Programming</div>
         <h4>Python Resources</h4>
-        <p>Guttag (MIT Press) • Langtangen (Springer) • Official Python Documentation</p>
+        <p>Guttag (MIT Press) • Langtangen (Springer) • <a href="https://www.deeplearningbook.org/" target="_blank">Deep Learning Book</a></p>
       </div>
 
     </div>

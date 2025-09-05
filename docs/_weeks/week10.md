@@ -1,36 +1,47 @@
 ---
-title: "Week: week-10"
-date: 2025-09-01
-description: "Weekly materials for week10"
-lecture_slides: "#"
+title: "Week 10: Deep Learning Primer"
+date: 2025-11-17
+description: "Introduction to deep learning, neural networks, and TensorFlow"
+lecture_slides: "/course-materials/lectures/lecture_10/slides/Advanced_Programming_2025_lecture_10.pdf"
 ta_slides: "/course-materials/slides/practice/week10_slides.html"
 lesson: "/course-materials/lessons/week10-lesson.html"
 assignment:
-  title: "Assignment"
+  title: "Neural Network Assignment"
   link: "#"
-  description: "Weekly assignment"
+  description: "Build and train a simple neural network"
 examples:
-  - title: "Course Materials Repository"
-    link: "https://github.com/ap-unil-2025/course-materials"
+  - title: "Multi-layer Perceptron"
+    link: "/course-materials/lectures/lecture_10/demo/mlp.py"
+  - title: "Gradient Descent & SGD"
+    link: "/course-materials/lectures/lecture_10/demo/01_GradientDescent_and_StochasticGradientDescent.ipynb"
+  - title: "MLP Notebook"
+    link: "/course-materials/lectures/lecture_10/demo/02_Multi-layer_Perceptron.ipynb"
+  - title: "Gentle Introduction to DNNs"
+    link: "/course-materials/lectures/lecture_10/demo/03_Gentle_DNN.ipynb"
+  - title: "Function Approximation"
+    link: "/course-materials/lectures/lecture_10/demo/approx_analytical_function.py"
 references:
-  - title: "Course Resources"
-    link: "https://github.com/ap-unil-2025/course-materials"
-    description: "Main course repository with all materials"
+  - title: "Deep Learning Book"
+    link: "https://www.deeplearningbook.org/"
+    description: "Goodfellow, Bengio, and Courville"
+  - title: "TensorFlow Documentation"
+    link: "https://www.tensorflow.org/"
+    description: "Official TensorFlow guides and tutorials"
 ---
 
-## Week Overview
+## Week 10: Deep Learning Primer
 
-This week's materials include lecture content, practice exercises, and assignments designed to build your understanding of the covered topics.
+### Topics Covered
+- Deep learning basics
+- Multi-layer perceptron
+- Feed-forward networks
+- Network training - SGD
+- Error back-propagation
+- Some notes on overfitting
+- Introduction to TensorFlow, applied to supervised machine learning problems
 
-### Getting Started
+### Code Examples
+This week includes implementations of neural networks from scratch and using TensorFlow, demonstrating fundamental deep learning concepts.
 
-1. Review the lesson guide for detailed explanations
-2. Go through the practice slides for hands-on examples  
-3. Complete the weekly assignment
-4. Use the course repository for additional examples and resources
-
-### Need Help?
-
-- Check the course discussion forum
-- Attend office hours
-- Review previous week's materials if needed
+### Practical Applications
+Learn to build, train, and evaluate neural networks for various supervised learning tasks.
