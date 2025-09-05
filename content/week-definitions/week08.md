@@ -1,32 +1,26 @@
 ---
-title: "Week 2: No Class - Swiss Federal Fast"
-date: 2025-09-22
-description: "Swiss Federal Fast Holiday - No classes this week"
+title: "Week: week-08"
+date: 2025-09-01
+description: "Weekly materials for week08"
 lecture_slides: "#"
-ta_slides: "#"
-lesson: "#"
+ta_slides: "/course-materials/slides/practice/week08_slides.html"
+lesson: "/course-materials/lessons/week08-lesson.html"
 assignment:
-  title: "No Assignment"
+  title: "Assignment"
   link: "#"
-  description: "Holiday week - no new assignments"
+  description: "Weekly assignment"
 examples:
-  - title: "Review Week 0-1 Materials"
-    link: "/course-materials/week/week00/"
+  - title: "Course Materials Repository"
+    link: "https://github.com/ap-unil-2025/course-materials"
 references:
   - title: "Course Resources"
     link: "https://github.com/ap-unil-2025/course-materials"
     description: "Main course repository with all materials"
 ---
 
-## Swiss Federal Fast Holiday
+## Week Overview
 
-There are no classes this week due to the Swiss Federal Fast public holiday.
-
-### Recommended Activities
-
-- Review the materials from Week 0-1
-- Complete the setup assignments if not already done
-- Prepare for Week 3: Python Fundamentals
+This week's materials include lecture content, practice exercises, and assignments designed to build your understanding of the covered topics.
 
 ### Getting Started
 

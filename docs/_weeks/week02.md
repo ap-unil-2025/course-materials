@@ -1,31 +1,42 @@
 ---
-title: "Python Fundamentals I & Git"
-date: 2025-09-29
-description: "Python basics, control flow, data structures, and Git version control"
-topics:
-  - Python basics (variables, types)
-  - Control flow (loops, branching)
-  - Data structures (lists, tuples, dictionaries)
-  - Git version control
+title: "Week 2: No Class - Swiss Federal Fast"
+date: 2025-09-22
+description: "Swiss Federal Fast Holiday - No classes this week"
 lecture_slides: "#"
-ta_slides: "/course-materials/slides/practice/week02_slides.html"
-lesson: "/course-materials/lessons/week02-lesson.html"
+ta_slides: "#"
+lesson: "#"
 assignment:
-  title: "Git Basics Assignment"
-  link: "/course-materials/assignments/assignment-1-git-basics"
-  description: "Practice Git version control"
+  title: "No Assignment"
+  link: "#"
+  description: "Holiday week - no new assignments"
+examples:
+  - title: "Review Week 0-1 Materials"
+    link: "/course-materials/week/week00/"
+references:
+  - title: "Course Resources"
+    link: "https://github.com/ap-unil-2025/course-materials"
+    description: "Main course repository with all materials"
 ---
 
-## Combined Week Materials
+## Swiss Federal Fast Holiday
 
-This week combines two practice sessions:
+There are no classes this week due to the Swiss Federal Fast public holiday.
 
-### Session 1: Git & GitHub
-- **Slides**: [Git & GitHub Tutorial](/course-materials/slides/practice/week02_slides.html)
-- **Lesson**: [Version Control with Git](/course-materials/lessons/week02-lesson.html)
+### Recommended Activities
 
-### Session 2: Python Fundamentals
-- **Slides**: [Python Fundamentals I](/course-materials/slides/practice/week03_slides.html)
-- **Lesson**: [Python Basics](/course-materials/lessons/week03-lesson.html)
+- Review the materials from Week 0-1
+- Complete the setup assignments if not already done
+- Prepare for Week 3: Python Fundamentals
 
-Complete both sessions this week as we're catching up from the holiday.
+### Getting Started
+
+1. Review the lesson guide for detailed explanations
+2. Go through the practice slides for hands-on examples  
+3. Complete the weekly assignment
+4. Use the course repository for additional examples and resources
+
+### Need Help?
+
+- Check the course discussion forum
+- Attend office hours
+- Review previous week's materials if needed

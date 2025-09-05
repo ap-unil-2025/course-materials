@@ -1,26 +1,36 @@
 ---
-title: "No Class - Swiss Federal Fast"
-date: 2025-09-22
-description: "No class due to Swiss Federal Fast (Public Holiday)"
-topics:
-  - Public Holiday
-  - Independent Study Time
+title: "Course Overview and Setup"
+date: 2025-09-01
+description: "Weekly materials for week00"
 lecture_slides: "#"
-ta_slides: "#"
-lesson: "#"
+ta_slides: "/course-materials/slides/practice/week00_slides.html"
+lesson: "/course-materials/lessons/week00-lesson.html"
 assignment:
-  title: "No Assignment"
+  title: "Assignment"
   link: "#"
-  description: "Use this time to review Week 1 materials"
+  description: "Weekly assignment"
+examples:
+  - title: "Course Materials Repository"
+    link: "https://github.com/ap-unil-2025/course-materials"
+references:
+  - title: "Course Resources"
+    link: "https://github.com/ap-unil-2025/course-materials"
+    description: "Main course repository with all materials"
 ---
 
-## Holiday Week
+## Week Overview
 
-There will be no class this week due to the Swiss Federal Fast (Jeûne fédéral) public holiday.
+This week's materials include lecture content, practice exercises, and assignments designed to build your understanding of the covered topics.
 
-### Independent Study Suggestions
+### Getting Started
 
-- Review Week 1 materials on Nuvolos setup
-- Practice Unix/Linux commands
-- Start thinking about your capstone project (due Week 6)
-- Optional reading: ISL Chapter 1
+1. Review the lesson guide for detailed explanations
+2. Go through the practice slides for hands-on examples  
+3. Complete the weekly assignment
+4. Use the course repository for additional examples and resources
+
+### Need Help?
+
+- Check the course discussion forum
+- Attend office hours
+- Review previous week's materials if needed

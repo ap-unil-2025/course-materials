@@ -81,6 +81,19 @@ layout: default
                 </a>
                 {% endif %}
 
+                {% if page.examples %}
+                <div class="material-item examples-item">
+                    <div class="material-icon">💻</div>
+                    <div class="material-content">
+                        <h3>Code Examples</h3>
+                        <div class="examples-list">
+                            {% for example in page.examples %}
+                            <a href="{{ example.link }}" class="example-link">{{ example.title }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {% else %}
                 <div class="material-item examples-item tba">
                     <div class="material-icon">💻</div>
                     <div class="material-content">
@@ -89,7 +102,26 @@ layout: default
                         <span class="tba-badge">TBA</span>
                     </div>
                 </div>
+                {% endif %}
 
+                {% if page.references %}
+                <div class="material-item references-item">
+                    <div class="material-icon">📚</div>
+                    <div class="material-content">
+                        <h3>References & Resources</h3>
+                        <div class="references-list">
+                            {% for ref in page.references %}
+                            <div class="reference-item">
+                                <a href="{{ ref.link }}" class="reference-link">{{ ref.title }}</a>
+                                {% if ref.description %}
+                                <span class="reference-desc">{{ ref.description }}</span>
+                                {% endif %}
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {% else %}
                 <div class="material-item references-item tba">
                     <div class="material-icon">📚</div>
                     <div class="material-content">
@@ -98,6 +130,7 @@ layout: default
                         <span class="tba-badge">TBA</span>
                     </div>
                 </div>
+                {% endif %}
             </div>
         </section>
 
