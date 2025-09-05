@@ -69,8 +69,8 @@ title: "Weekly Materials"
           <span class="week-num">6</span>
           <span class="week-date">Oct 20</span>
         </div>
-        <h4>Scientific Computing</h4>
-        <p>NumPy • Pandas • Jupyter</p>
+        <h4>Python Fundamentals III</h4>
+        <p>OOP • Classes • Testing</p>
       </a>
       
     </div>

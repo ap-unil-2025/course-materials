@@ -14,7 +14,6 @@
         <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Home</a>
         <a href="{{ '/syllabus' | relative_url }}" {% if page.url contains '/syllabus' or page.url contains 'PROJECT_RULES' %}class="active"{% endif %}>Syllabus</a>
         <a href="{{ '/weekly-materials' | relative_url }}" {% if page.url contains '/weekly-materials' or page.url contains '/week/' or page.url contains '/assignments' %}class="active"{% endif %}>Weekly Materials</a>
-        <a href="{{ '/curriculum' | relative_url }}" {% if page.url contains '/curriculum' %}class="active"{% endif %}>Curriculum</a>
         <a href="{{ '/help-support' | relative_url }}" {% if page.url contains '/help-support' or page.url contains '/showcase' %}class="active"{% endif %}>Help & Support</a>
         
         {% if site.data.navigation.external_links %}
