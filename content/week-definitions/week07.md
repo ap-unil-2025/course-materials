@@ -1,8 +1,8 @@
 ---
-title: "Week: week-07"
+title: "Week 7: Machine Learning Fundamentals"
 date: 2025-09-01
-description: "Weekly materials for week07"
-lecture_slides: "#"
+description: "Introduction to ML, regression, and gradient descent"
+lecture_slides: "/course-materials/lectures/lecture_7/slides/Advanced_Programming_2025_lecture_7.pdf"
 ta_slides: "/course-materials/slides/practice/week07_slides.html"
 lesson: "/course-materials/lessons/week07-lesson.html"
 assignment:
@@ -10,8 +10,14 @@ assignment:
   link: "#"
   description: "Weekly assignment"
 examples:
-  - title: "Course Materials Repository"
-    link: "https://github.com/ap-unil-2025/course-materials"
+  - title: "Ridge Regression Example"
+    link: "/course-materials/lectures/lecture_7/demo/ridge_regression.py"
+  - title: "Gradient Descent Implementation"
+    link: "/course-materials/lectures/lecture_7/demo/gradient_descent.py"
+  - title: "K-Fold Cross Validation"
+    link: "/course-materials/lectures/lecture_7/demo/k-fold_cross_validation.py"
+  - title: "Stock Prediction Notebook"
+    link: "/course-materials/lectures/lecture_7/demo/Stock_prediction_ML_Lecture8.ipynb"
 references:
   - title: "Course Resources"
     link: "https://github.com/ap-unil-2025/course-materials"
