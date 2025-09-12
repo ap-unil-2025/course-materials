@@ -32,31 +32,12 @@ jobs:
         with:
           submodules: recursive
           token: ${{ secrets.SUBMODULE_TOKEN || secrets.GITHUB_TOKEN }}
-      
-      - name: Pull latest submodule changes
-        run: |
-          git config --global url."https://${{ secrets.SUBMODULE_TOKEN }}@github.com/".insteadOf "https://github.com/"
-          git config --global pull.rebase false
-          git submodule update --init --recursive
-          git submodule foreach 'git pull origin main || git pull origin master || true'
 
-      - name: Setup Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-      
-      - name: Install Python dependencies
+      - name: Fast sync content to Jekyll collections
         run: |
-          pip install python-frontmatter
-
-      - name: Install Marp CLI
-        run: npm install -g @marp-team/marp-cli
-
-      - name: Sync content to Jekyll collections
-        run: |
-          echo "🔄 Syncing content/ to Jekyll collections..."
-          chmod +x sync-content.sh
-          ./sync-content.sh
+          echo "🔄 Fast syncing content/ to Jekyll collections..."
+          chmod +x sync-content-fast.sh
+          ./sync-content-fast.sh
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
