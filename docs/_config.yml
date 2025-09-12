@@ -16,6 +16,14 @@ plugins:
   - jekyll-seo-tag
   - jekyll-toc
 
+# Keep markdown template files as static files
+keep_files:
+  - assets/templates/project_report_template.md
+
+# Include markdown templates in the build
+include:
+  - assets/templates/project_report_template.md
+
 # Keep your existing TOC settings
 toc:
   min_level: 2

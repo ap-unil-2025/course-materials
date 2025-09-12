@@ -108,13 +108,65 @@ layout: default
           <p>Professional academic format</p>
         </div>
       </a>
-      <a href="{{ '/assets/templates/project_report_template.md' | relative_url }}" class="download-card" download>
+      <a href="{{ '/assets/templates/project_report_template_md.txt' | relative_url }}" class="download-card" download="project_report_template.md">
         <span class="download-icon">📝</span>
         <div>
           <h4>Markdown Template</h4>
           <p>Simple format with pandoc</p>
         </div>
       </a>
+    </div>
+    
+    <!-- How to Use Templates -->
+    <div class="template-usage">
+      <button class="usage-toggle" onclick="toggleUsageInstructions()">
+        <span class="toggle-icon">▶</span>
+        <span class="toggle-text">📚 How to Use These Templates</span>
+        <span class="toggle-hint">(click to expand)</span>
+      </button>
+      
+      <div class="usage-content" id="usageContent" style="display: none;">
+        <div class="usage-tabs">
+        <div class="usage-tab">
+          <h5>📝 Markdown Template</h5>
+          <ol>
+            <li><strong>Download</strong> the template and save it as <code>project_report.md</code></li>
+            <li><strong>Edit</strong> the file in any text editor (VS Code, Sublime, etc.)</li>
+            <li><strong>Convert to PDF</strong> using pandoc:
+              <pre><code>pandoc project_report.md -o project_report.pdf --pdf-engine=xelatex</code></pre>
+            </li>
+            <li><strong>Alternative:</strong> Use online converters like <a href="https://pandoc.org/try/" target="_blank">Pandoc Online</a> or <a href="https://dillinger.io/" target="_blank">Dillinger</a></li>
+          </ol>
+          <p class="template-tip">💡 <strong>Tip:</strong> VS Code with Markdown Preview Enhanced extension provides live preview while editing.</p>
+        </div>
+        
+        <div class="usage-tab">
+          <h5>📄 LaTeX Template</h5>
+          <ol>
+            <li><strong>Download</strong> the template and save it as <code>project_report.tex</code></li>
+            <li><strong>Edit</strong> using a LaTeX editor (Overleaf, TeXstudio, VS Code with LaTeX Workshop)</li>
+            <li><strong>Compile to PDF</strong>:
+              <pre><code>pdflatex project_report.tex
+bibtex project_report  # if using references
+pdflatex project_report.tex</code></pre>
+            </li>
+            <li><strong>Online option:</strong> Upload to <a href="https://www.overleaf.com" target="_blank">Overleaf</a> for cloud-based editing</li>
+          </ol>
+          <p class="template-tip">💡 <strong>Tip:</strong> Overleaf is recommended for beginners - no installation required!</p>
+        </div>
+      </div>
+      
+      <div class="format-requirements">
+        <h5>⚠️ Important Format Requirements</h5>
+        <ul>
+          <li>✅ <strong>Exactly 10 pages</strong> (excluding references and appendices)</li>
+          <li>✅ <strong>Single column format</strong> (not double column)</li>
+          <li>✅ <strong>11pt font size</strong> with 1-inch margins</li>
+          <li>✅ <strong>Include all sections</strong> from the template</li>
+          <li>✅ <strong>PDF submission</strong> required (not .docx or .md)</li>
+        </ul>
+      </div>
+      </div>
     </div>
   </section>
 
@@ -130,7 +182,7 @@ layout: default
     <div class="template-projects-grid">
       {% assign template_projects = site.projects | where_exp: "project", "project.project_id != 'SOLO'" | sort: "difficulty" %}
       {% for project in template_projects %}
-      <div class="project-option-item">
+      <a href="{{ project.url | relative_url }}" class="project-option-item project-card-link">
         <div class="project-header">
           <div class="project-id-badge">{{ project.project_id }}</div>
           <div class="difficulty-badge difficulty-{{ project.difficulty | downcase }}">{{ project.difficulty }}</div>
@@ -160,13 +212,12 @@ layout: default
           {% endif %}
         </div>
         
+        {% if project.template_repo %}
         <div class="project-actions">
-          <a href="{{ project.url | relative_url }}" class="project-link">📖 View Details</a>
-          {% if project.template_repo %}
-          <a href="{{ project.template_repo }}" class="project-link" target="_blank">📁 Template Repo →</a>
-          {% endif %}
+          <span class="project-link" data-href="{{ project.template_repo }}" onclick="event.preventDefault(); event.stopPropagation(); window.open(this.dataset.href, '_blank');">📁 Template Repo →</span>
         </div>
-      </div>
+        {% endif %}
+      </a>
       {% endfor %}
     </div>
   </section>
@@ -204,6 +255,24 @@ layout: default
   </section>
     
 </div>
+
+<script>
+function toggleUsageInstructions() {
+  const content = document.getElementById('usageContent');
+  const icon = document.querySelector('.toggle-icon');
+  const hint = document.querySelector('.toggle-hint');
+  
+  if (content.style.display === 'none') {
+    content.style.display = 'block';
+    icon.textContent = '▼';
+    hint.textContent = '(click to collapse)';
+  } else {
+    content.style.display = 'none';
+    icon.textContent = '▶';
+    hint.textContent = '(click to expand)';
+  }
+}
+</script>
 
 <style>
 /* Projects Page Layout - Using Hub Patterns */
@@ -520,12 +589,18 @@ layout: default
   transition: all 0.2s ease;
   position: relative;
   overflow: hidden;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 }
 
 .project-option-item:hover {
   border-color: var(--primary-color);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  text-decoration: none;
+  color: inherit;
 }
 
 .project-option-item::before {
@@ -654,12 +729,25 @@ layout: default
   font-size: 0.8rem;
   font-weight: 500;
   transition: all 0.2s ease;
+  cursor: pointer;
+  display: inline-block;
 }
 
 .project-link:hover {
   background: var(--primary-color);
   color: white;
   text-decoration: none;
+}
+
+/* Style for clickable card with secondary action */
+.project-card-link .project-link {
+  position: relative;
+  z-index: 2;
+}
+
+.project-card-link .project-link:hover {
+  background: #f59e0b;
+  color: white;
 }
 
 /* Solo Project Item */
@@ -752,6 +840,197 @@ layout: default
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
+}
+
+/* Template Usage Instructions */
+.template-usage {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.03) 0%, rgba(139, 92, 246, 0.03) 100%);
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  padding: 0;
+  margin-top: 2rem;
+  overflow: hidden;
+}
+
+.usage-toggle {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-family: inherit;
+  text-align: left;
+  transition: background-color 0.2s ease;
+}
+
+.usage-toggle:hover {
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.toggle-icon {
+  font-size: 0.75rem;
+  color: var(--primary-color);
+  transition: transform 0.2s ease;
+  display: inline-block;
+  width: 1rem;
+}
+
+.toggle-text {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.toggle-hint {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-style: italic;
+  margin-left: auto;
+}
+
+.usage-content {
+  padding: 0 1.5rem 1.5rem 1.5rem;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.usage-tabs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.usage-tab {
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.usage-tab::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+}
+
+.usage-tab h5 {
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  margin: 0 0 1rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.usage-tab ol {
+  margin: 0 0 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.usage-tab li {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+}
+
+.usage-tab li strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.usage-tab pre {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0.375rem;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  overflow-x: auto;
+}
+
+.usage-tab code {
+  font-family: 'Monaco', 'Courier New', monospace;
+  font-size: 0.8rem;
+  color: var(--primary-color);
+}
+
+.template-tip {
+  background: rgba(245, 158, 11, 0.1);
+  border-left: 3px solid #f59e0b;
+  padding: 0.75rem;
+  margin: 1rem 0 0 0;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  border-radius: 0.25rem;
+}
+
+.template-tip strong {
+  color: #f59e0b;
+}
+
+.format-requirements {
+  background: rgba(239, 68, 68, 0.05);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.format-requirements h5 {
+  color: #ef4444;
+  font-size: 0.9rem;
+  margin: 0 0 0.75rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.format-requirements ul {
+  margin: 0;
+  padding-left: 1.5rem;
+  list-style: none;
+}
+
+.format-requirements li {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.format-requirements li::before {
+  content: attr(data-icon);
+  position: absolute;
+  left: 0;
+  color: #10b981;
+}
+
+.format-requirements li strong {
+  color: var(--text-primary);
+  font-weight: 600;
 }
 
 /* Mobile Responsive */
