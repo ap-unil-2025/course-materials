@@ -9,6 +9,13 @@
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
     
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="{{ '/favicon.svg' | relative_url }}">
+    <link rel="icon" type="image/svg+xml" sizes="32x32" href="{{ '/favicon-32x32.svg' | relative_url }}">
+    <link rel="apple-touch-icon" href="{{ '/apple-touch-icon.svg' | relative_url }}">
+    <link rel="mask-icon" href="{{ '/favicon.svg' | relative_url }}" color="#003aff">
+    <meta name="theme-color" content="#003aff">
+    
     <!-- Citation Metadata -->
     <meta name="citation_title" content="{% if page.title %}{{ page.title | escape }}{% else %}Data Science and Advanced Programming 2025{% endif %}">
     <meta name="citation_author" content="Scheidegger, Simon">

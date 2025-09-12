@@ -1,33 +1,31 @@
 ---
 marp: true
 paginate: true
-backgroundColor: #f5f9ff
 header: "Tracking Your Genius (Git & GitHub)"
 footer: "Anna Smirnova, June 24, 2025"
-# style: |
-#   section {
-#     font-size: 29px;
-#   }
-#   h1 {
-#     font-size: 40px;
-#   }
-#   h2 {
-#     font-size: 10px;
-#   }
-#   h3 {
-#     font-size: 20px;
-#     }
-
-# headerPosition: center
-# footerPosition: center
-# headerAlign: center
-# footerAlign: center
-# Part 2: Git & GitHub
+style: |
+  section.lead {
+    background: #003aff;
+    color: white;
+  }
+  section.lead footer {
+    color: white;
+  }
+  section.lead header {
+    color: white;
+  }
+  section.lead h1, section.lead h2, section.lead h3 {
+    color: white;
+    border-bottom: none;
+  }
+  section.lead a {
+    color: white;
+  }
 
 ---
+<!-- _class: lead -->
 
-
-# Practical Session 2
+# Practical Session 2 (Week 3)
 # Tracking Your Genius: Git & GitHub
 
 **Anna Smirnova**

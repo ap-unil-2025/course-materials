@@ -5,9 +5,27 @@ paginate: true
 header: "Session 7: Trusting Your Code"
 footer: "An Introduction to Automated Testing with `pytest`"
 size: 16:9
+style: |
+  section.lead {
+    background: #003aff;
+    color: white;
+  }
+    section.lead footer {
+    color: white;
+  }
+  section.lead header {
+    color: white;
+  }
+  section.lead h1, section.lead h2, section.lead h3 {
+    color: white;
+    border-bottom: none;
+  }
+  section.lead a {
+    color: white;
+  }
 ---
 
-
+<!-- _class: lead -->
 # Session 7: Trusting Your Code
 
 **An Introduction to Automated Testing with `pytest`**

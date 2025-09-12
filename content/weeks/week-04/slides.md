@@ -1,10 +1,26 @@
 ---
 marp: true
-theme: unil-theme
 paginate: true
-backgroundColor: #f5f9ff
 header: "Session 4: Build Something Real"
 footer: "Anna Smirnova, October 13, 2025"
+style: |
+  section.lead {
+    background: #003aff;
+    color: white;
+  }
+  section.lead footer {
+    color: white;
+  }
+  section.lead header {
+    color: white;
+  }
+  section.lead h1, section.lead h2, section.lead h3 {
+    color: white;
+    border-bottom: none;
+  }
+  section.lead a {
+    color: white;
+  }
 ---
 
 <!-- _class: lead -->
