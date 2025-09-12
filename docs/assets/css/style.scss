@@ -173,25 +173,39 @@ body {
   align-items: center;
 }
 
-.nuvolos-logo {
-  margin-left: auto;
-  margin-right: 1rem;
+.site-branding {
   display: flex;
   align-items: center;
+  gap: 1.5rem;
+}
+
+.powered-by-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
   text-decoration: none;
-  transition: opacity 0.3s ease;
+  padding: 0.25rem 0.75rem;
+  border-left: 1px solid var(--border-color);
+  transition: opacity 0.2s ease;
 }
 
-.nuvolos-logo:hover {
+.powered-by-header:hover {
   opacity: 0.8;
+  text-decoration: none;
 }
 
-.nuvolos-logo img {
-  height: 30px;
-  width: auto;
-  object-fit: contain;
-  object-position: center;
+.powered-text {
+  font-weight: 500;
+  color: var(--text-secondary);
 }
+
+.header-nuvolos-logo {
+  height: 20px;
+  width: auto;
+}
+
 
 .site-title {
   display: flex;
@@ -541,6 +555,17 @@ tr:hover {
     gap: 1rem;
   }
   
+  .site-branding {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .powered-by-header {
+    border-left: none;
+    border-top: 1px solid var(--border-color);
+    padding-top: 0.5rem;
+  }
+  
   .site-title {
     gap: 0.375rem;
   }
@@ -551,15 +576,6 @@ tr:hover {
   
   .site-title-text {
     font-size: 1.125rem;
-  }
-  
-  .nuvolos-logo {
-    margin: 0.5rem 0;
-    order: -1;
-  }
-  
-  .nuvolos-logo img {
-    height: 25px;
   }
   
   .nav-links {

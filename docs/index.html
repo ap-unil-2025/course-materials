@@ -54,7 +54,7 @@ layout: default
     <div class="platform-grid">
       
       <a href="https://app.nuvolos.cloud/enroll/class/RshD654gzU4" target="_blank" class="platform-item priority">
-        <div class="platform-icon">☁️</div>
+        <img src="{{ '/assets/images/nuvolos_logo_small.svg' | relative_url }}" alt="Nuvolos" class="platform-logo">
         <h4>Enroll in Nuvolos</h4>
         <p>Cloud computing environment</p>
       </a>
@@ -313,6 +313,13 @@ layout: default
 .home-icon,
 .platform-icon {
   font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.platform-logo {
+  height: 40px;
+  width: auto;
   margin-bottom: 0.75rem;
   display: block;
 }
