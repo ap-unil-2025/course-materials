@@ -26,7 +26,7 @@ layout: default
   <!-- Compact header for projects page -->
   <div class="projects-header">
     <h1>Final Projects</h1>
-    <p>Individual programming projects • Full technical assessment</p>
+    <p>Choose your own adventure with our individual programming projects</p>
   </div>
   <!-- Projects Banner -->
   <div class="projects-banner">
@@ -170,14 +170,47 @@ pdflatex project_report.tex</code></pre>
     </div>
   </section>
 
-  <!-- Project Selection -->
+  <!-- Free-Topic Section (Primary Option) -->
   <section class="projects-section">
     <h3 class="section-title">Project Options</h3>
     <div class="selection-intro">
-      <p><strong>All projects are individual.</strong> You can either propose your own data science topic OR request one of the challenging software engineering templates below (first-come first-serve, requires instructor approval).</p>
+      <p><strong>All projects are individual.</strong> You can either propose your own data science topic (recommended) OR request one of the challenging software engineering templates below.</p>
     </div>
+    
+    <h4>Free-Topic Project (Recommended)</h4>
+    <div class="solo-project-item">
+      <div class="solo-header">
+        <div class="solo-icon">📊</div>
+        <div class="solo-info">
+          <h4>Choose Your Own Data Science Adventure</h4>
+          <span class="solo-badge">Individual Project</span>
+        </div>
+      </div>
+      
+      <p class="solo-description">Design and implement your own data science project. This is the recommended option for most students.</p>
+      
+      <div class="solo-requirements">
+        <h5>Requirements</h5>
+        <ul>
+          <li><strong>Individual work:</strong> All projects are solo</li>
+          <li><strong>Proposal required:</strong> 200-word proposal by November 3</li>
+          <li><strong>Data science focus:</strong> Should involve real data analysis, ML, or statistics</li>
+          <li><strong>Python implementation:</strong> Must demonstrate programming concepts from the course</li>
+          <li><strong>Original work:</strong> Cannot reuse projects from other courses</li>
+          <li><strong>Be creative:</strong> Don't just submit the first idea ChatGPT suggests - develop your own unique angle</li>
+        </ul>
+      </div>
+      
+      <div class="solo-actions">
+        <a href="{{ '/INDIVIDUAL_PROJECT_RULES/' | relative_url }}" class="project-link">📝 Full Guidelines</a>
+        <a href="mailto:anna.smirnova@unil.ch" class="project-link">✉️ Contact for Questions</a>
+      </div>
+    </div>
+  </section>
 
-    <h4>Optional Template Projects (Advanced Software Engineering)</h4>
+  <!-- Optional Template Projects -->
+  <section class="projects-section">
+    <h3 class="section-title">Optional Template Projects (Advanced Software Engineering)</h3>
     <p style="color: var(--text-secondary); margin-bottom: 1rem;">⚠️ These templates are significantly more challenging and focus on software engineering rather than data science. Available on first-come first-serve basis with instructor approval.</p>
     <div class="template-projects-grid">
       {% assign template_projects = site.projects | where_exp: "project", "project.project_id != 'SOLO'" | sort: "difficulty" %}
@@ -222,37 +255,6 @@ pdflatex project_report.tex</code></pre>
     </div>
   </section>
 
-  <!-- Free-Topic Section (Primary Option) -->
-  <section class="projects-section">
-    <h3 class="section-title">Free-Topic Project (Recommended)</h3>
-    <div class="solo-project-item">
-      <div class="solo-header">
-        <div class="solo-icon">📊</div>
-        <div class="solo-info">
-          <h4>Choose Your Own Data Science Adventure</h4>
-          <span class="solo-badge">Individual Project</span>
-        </div>
-      </div>
-      
-      <p class="solo-description">Design and implement your own data science project. This is the recommended option for most students.</p>
-      
-      <div class="solo-requirements">
-        <h5>Requirements</h5>
-        <ul>
-          <li><strong>Individual work:</strong> All projects are solo</li>
-          <li><strong>Proposal required:</strong> One-page proposal by November 3</li>
-          <li><strong>Data science focus:</strong> Should involve real data analysis, ML, or statistics</li>
-          <li><strong>Python implementation:</strong> Must demonstrate programming concepts from the course</li>
-          <li><strong>Original work:</strong> Cannot reuse projects from other courses</li>
-        </ul>
-      </div>
-      
-      <div class="solo-actions">
-        <a href="{{ '/INDIVIDUAL_PROJECT_RULES/' | relative_url }}" class="project-link">📝 Full Guidelines</a>
-        <a href="mailto:anna.smirnova@unil.ch" class="project-link">✉️ Contact for Questions</a>
-      </div>
-    </div>
-  </section>
     
 </div>
 

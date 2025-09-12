@@ -27,7 +27,7 @@ layout: default
   <!-- Compact header for syllabus -->
   <div class="syllabus-header">
     <h1>Course Syllabus</h1>
-    <p>DSAP • HEC Lausanne • Fall Semester • Mondays 12:30–16:00 • Internef 263</p>
+    <p>Learning objectives, schedule, grading policy, and course requirements</p>
   </div>
 
   <!-- Course Overview Banner -->

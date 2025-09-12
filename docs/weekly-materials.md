@@ -27,7 +27,7 @@ layout: default
   <!-- Compact header for weekly materials -->
   <div class="weekly-header">
     <h1>Weekly Materials</h1>
-    <p>DSAP • HEC Lausanne • Fall Semester • Mondays 12:30–16:00 • Internef 263</p>
+    <p>Lectures, practice sessions, and assignments for each week</p>
   </div>
   <div class="current-banner">
     <div class="current-content">

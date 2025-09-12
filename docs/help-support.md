@@ -27,7 +27,7 @@ layout: default
   <!-- Compact header for help & support -->
   <div class="help-header">
     <h1>Help & Support</h1>
-    <p>DSAP • HEC Lausanne • Fall Semester • Mondays 12:30–16:00 • Internef 263</p>
+    <p>Office hours, TA sessions, Discord community, and learning resources</p>
   </div>
 
   <!-- Support Banner -->
