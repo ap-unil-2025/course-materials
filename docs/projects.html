@@ -215,10 +215,10 @@ pdflatex project_report.tex</code></pre>
     <div class="template-projects-grid">
       {% assign template_projects = site.projects | where_exp: "project", "project.project_id != 'SOLO'" | sort: "difficulty" %}
       {% for project in template_projects %}
-      <a href="{{ project.url | relative_url }}" class="project-option-item project-card-link">
+      <a href="{{ project.url | relative_url }}" class="project-option-item project-card-link template-coming-soon">
         <div class="project-header">
           <div class="project-id-badge">{{ project.project_id }}</div>
-          <div class="difficulty-badge difficulty-{{ project.difficulty | downcase }}">{{ project.difficulty }}</div>
+          <div class="project-id-badge coming-soon">COMING SOON</div>
         </div>
         
         <h4>{{ project.title | escape }}</h4>
@@ -653,14 +653,15 @@ document.addEventListener('DOMContentLoaded', function() {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 0.75rem;
+  position: relative;
 }
 
 .project-id-badge {
   background: var(--primary-color);
   color: white;
-  padding: 0.3rem 0.6rem;
+  padding: 0.2rem 0.5rem;
   border-radius: 0.25rem;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 600;
   font-family: monospace;
 }
@@ -676,6 +677,18 @@ document.addEventListener('DOMContentLoaded', function() {
 .difficulty-intermediate {
   background: #f59e0b;
   color: white;
+}
+
+.project-id-badge.coming-soon {
+  background: #f59e0b;
+}
+
+.template-coming-soon {
+  opacity: 0.85;
+}
+
+.template-coming-soon:hover {
+  opacity: 1;
 }
 
 .difficulty-advanced {
