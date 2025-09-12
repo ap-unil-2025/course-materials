@@ -3,10 +3,10 @@ layout: project
 title: "QSIM: Discrete-Event Queue Simulator"
 project_id: "QSIM"
 difficulty: "Intermediate"
-team_size: "3-4 students"
+team_size: "Individual"
 focus_area: "Operations Research"
 template_repo: "https://github.com/ap-unil-2025/qsim-template"
-brief_file: "docs/projects/QSIM.md"
+brief_file: "/project-briefs/QSIM"
 technologies:
   - "Python 3.10+"
   - "SimPy framework"

@@ -3,97 +3,64 @@ layout: project
 title: "ECONGAMES: Monte-Carlo Game-Theory Toolkit"
 project_id: "ECONGAMES"
 difficulty: "Advanced"
-team_size: "3-4 students"
+team_size: "Individual"
 focus_area: "Economics & Game Theory"
 template_repo: "https://github.com/ap-unil-2025/econgames-template"
-brief_file: "docs/projects/ECONGAMES.md"
+brief_file: "/project-briefs/ECONGAMES"
 technologies:
   - "Python 3.10+"
-  - "NetworkX"
+  - "NumPy/Pandas"
   - "Game theory algorithms"
   - "Monte Carlo simulation"
+  - "Statistical testing"
 tags:
   - "Game Theory"
   - "Economics"
-  - "Network Analysis"
+  - "Simulation"
   - "Strategic Behavior"
 status: "available"
 ---
 
 ## Overview
 
-Develop a comprehensive Monte Carlo simulation toolkit for analyzing game-theoretic scenarios in economics. Focus on strategic interactions, equilibrium finding, and evolutionary dynamics.
+Build a professional-grade Monte Carlo simulation toolkit for analyzing game-theoretic scenarios in economics. Implement strategies like Tit-for-Tat and Grim Trigger for repeated games such as the Prisoner's Dilemma.
 
 ## What You'll Build
 
-A sophisticated game theory toolkit that:
-- Simulates multi-player strategic games
-- Finds Nash equilibria using computational methods
-- Analyzes evolutionary stable strategies
-- Models network effects in economic interactions
+A pip-installable Python package with CLI that:
+- Simulates repeated 2-player normal-form games
+- Implements multiple classic strategies
+- Performs statistical analysis of outcomes
+- Provides insights into cooperation vs. competition dynamics
 
-## Key Learning Objectives
+## Key Skills Developed
 
-- **Game Theory**: Implement fundamental and advanced game-theoretic concepts
-- **Algorithm Design**: Develop efficient equilibrium-finding algorithms
-- **Network Analysis**: Model strategic interactions on graphs
-- **Economic Modeling**: Apply computational methods to economic problems
+- **Software Engineering**: Strict type checking, 90% test coverage, CI/CD pipeline
+- **Game Theory**: Nash equilibria, strategic interactions, evolutionary dynamics
+- **Statistics**: Hypothesis testing, Monte Carlo methods, convergence analysis
+- **Professional Tools**: MyPy, Ruff, pytest, pre-commit hooks, GitHub Actions
 
-## Core Features to Implement
+## Why This Project?
 
-### Game Types
-- Normal form games (matrix games)
-- Extensive form games (sequential)
-- Evolutionary games with population dynamics
-- Network games with spatial interactions
+Game theory underlies many economic phenomena from price wars to environmental cooperation. This project gives you hands-on experience building research-grade simulation tools while enforcing professional software engineering standards.
 
-### Analysis Tools
-- Nash equilibrium computation
-- Evolutionary stable strategy analysis
-- Monte Carlo strategy evolution
-- Convergence and stability testing
+## Difficulty Level
 
-### Simulation Engine
-- Multi-agent strategy learning
-- Population dynamics modeling
-- Network topology effects
-- Stochastic perturbation analysis
+⭐⭐⭐⭐⭐ **Advanced**
 
-## Technical Challenges
-
-- **Algorithm Complexity**: Efficient equilibrium finding in large games
-- **Network Scalability**: Handle large-scale network games
-- **Convergence Analysis**: Detect and verify equilibrium convergence
-- **Visualization**: Clear representation of complex strategic interactions
-
-## Domain Knowledge Required
-
-- Basic game theory concepts (Nash equilibrium, dominant strategies)
-- Graph theory and network analysis
-- Evolutionary dynamics principles
-- Economic intuition helpful but not required
-
-## Assessment Focus
-
-- **Mathematical Accuracy**: Correct implementation of game-theoretic algorithms
-- **Scalability**: Efficient handling of large games and networks
-- **Innovation**: Creative approaches to complex game scenarios
-- **Usability**: Tools accessible to economics researchers
+This is one of the most challenging projects, requiring:
+- Strong Python skills
+- Mathematical understanding
+- Rigorous testing discipline
+- Statistical analysis capabilities
 
 ## Getting Started
 
-1. **Form your team** and select this challenging project
-2. **Review game theory basics** if needed
-3. **Explore the template** for project structure
-4. **Study the detailed brief** for specific requirements
-
-## Resources
-
-- Game theory textbooks and academic papers
-- Network analysis libraries and documentation
-- Economics simulation software for reference
-- Sample datasets of strategic interactions
+1. Use the template repository to create your own project
+2. Review the comprehensive project brief for detailed requirements
+3. Set up your development environment with `make install-dev`
+4. Start with the Week 2 milestone: Random vs Random simulation
 
 ---
 
-*Ready for the ultimate challenge in computational economics? This project pushes the boundaries of game theory and simulation.*
+*Ready to master game theory through code? This project will push your software engineering skills to professional standards.*

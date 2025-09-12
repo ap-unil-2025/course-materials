@@ -3,10 +3,10 @@ layout: project
 title: "RISKCALC: CLI VaR & ES Calculator"
 project_id: "RISKCALC"
 difficulty: "Intermediate"
-team_size: "3-4 students"
+team_size: "Individual"
 focus_area: "Financial Risk Management"
 template_repo: "https://github.com/ap-unil-2025/riskcalc-template"
-brief_file: "docs/projects/RISKCALC.md"
+brief_file: "/project-briefs/RISKCALC"
 technologies:
   - "Python 3.10+"
   - "Click/Typer CLI"

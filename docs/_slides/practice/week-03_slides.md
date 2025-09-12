@@ -3,294 +3,445 @@ marp: true
 theme: unil-theme
 paginate: true
 backgroundColor: #f5f9ff
-header: "session 3: Modern Python Projects"
-footer: "Anna Smirnova, June 24, 2025"
-style: |
-  section {
-    font-size: 29px;
-  }
-  h1 {
-    font-size: 40px;
-  }
-  h2 {
-    font-size: 10px;
-  }
-  h3 {
-    font-size: 20px;
-    }
+header: "Session 3: Contact Manager - Part 1"
+footer: "Anna Smirnova, October 6, 2025"
 ---
 
 <!-- _class: lead -->
 
-# Session 3: Modern Python Projects
+# Session 3: Contact Manager - Part 1
 
-**Building organized, reproducible, and professional code.**
-
----
-
-# First Things First: Today's Goals
-
-* Welcome to Session 3! Today, we will:
-*  Learn a standard **Project Structure** for Python.
-*
-*   Understand what **Dependencies** are and why they matter.
-*   Manage projects with **`uv`**, a modern, all-in-one tool.
-*   Keep code clean and consistent with **`ruff`**.
+**Building the Foundation with Python Basics**
 
 ---
 
-# Part 1: Project Structure & Dependencies
+# Our 3-Week Project Journey 🚀
+
+**Week 3 (Today)**: Foundation
+- Variables and basic data
+- Control flow (if/else)
+- Loops for repetition
+- String manipulation
+- Simple contact storage
+
+**Week 4**: Power Features
+- Functions for organization
+- Lists and dictionaries
+- File save/load
+- Professional structure
+
+**Week 6**: Going Pro
+- Classes and objects
+- Error handling
+- Debugging techniques
+
+**Let's build something real!**
 
 ---
 
-# Why Not Just One `.py` File?
+# Project Setup: Simple Contact Storage
 
-As projects grow, a single file becomes messy. Good structure makes your project:
-
-*   **Understandable**: Newcomers can find things easily.
-*   **Maintainable**: Fixing bugs and adding features is simpler.
-*   **Importable**: Allows you to create reusable code modules.
-
----
-
-# A Standard Project Structure
-
-A great starting point for most research projects:
-
-```
-my-research-project/
-├── .gitignore
-├── README.md
-├── pyproject.toml      # <-- The new control center
-├── src/                # <-- Your source code lives here
-│   ├── __init__.py     # <-- Makes this a package
-│   ├── main.py
-│   └── calculations/   # <-- A submodule for related code
-│       ├── __init__.py
-│       └── math_utils.py
-│
-└── tests/              # (Optional but good practice)
-    └── test_calculations.py
-```
----
-
-# Modules and Packages: The `__init__.py` File
-
-*   A Python file (`.py`) is a **module**.
-*   A directory containing an `__init__.py` file is a **package**.
-
-The `__init__.py` file tells Python:
-> "Treat this folder as a group of modules you can **import** from."
-
-This allows you to import code from your own project, just like you import libraries!
-
----
-# Importing from Packages
-To import code from a module placed in a subfolder, you can use the dot notation:
 ```python
-from src.calculations import math_utils
+# contact_manager_v1.py
+# Week 3: Building the foundation
+
+print("="*40)
+print("  CONTACT MANAGER v0.1 (Basic)")
+print("="*40)
+
+# We'll build this step by step!
 ```
 
-This works because `src/` and `src/calculations/` both contain an `__init__.py`.
-It can be completely empty; its presence is what matters. This allows you to organize your code into sub-folders and still import it.
-> Caution! TODO paths
-
----
-# Absolute vs. Relative Imports
-
-How you import depends on where you are.
-
-**1. Absolute Imports (Recommended)**
-*   Start the import path from the project's source root (`src`).
-*   They are clear, explicit, and work from anywhere.
-*   **Example**: `from src.calculations import math_utils`
-
-**2. Relative Imports (Use with caution)**
-*   Use `.` for the current package and `..` for the parent package.
-*   **Example**: Inside `src/main.py`, you could write `from .calculations import math_utils`
-*   Can be fragile if you move files around. **Stick to absolute imports.**
+**Follow along - create this file now!**
 
 ---
 
-# What Are Dependencies?
-
-> Recall: A **dependency** is an external software package at a specific version your project needs to function.
-
-When you write `import numpy`, your code has a **dependency** on NumPy.
-
-### Why does managing them matter?
-1.  **Functionality**: Your code will crash without them.
-2.  **Versions**: A new version of a library could break your existing code. You need to "lock" the versions that you know work.
-3.  **Reproducibility**: For research to be reproducible, others must be able to recreate your *exact* software environment.
-
----
-<!-- _class: invert -->
-
-# Part 2: Modern Tooling with `uv`
+# Part 1: Storing Contact Data
 
 ---
 
-# Introducing `uv`
+# Variables for One Contact
 
-Forget juggling `venv` and `pip` separately.
+```python
+# Store a single contact's information
+# TODO: Create variables for:
+# - contact_name (string)
+# - contact_phone (string)  
+# - contact_age (integer)
+# - is_favorite (boolean)
 
-**`uv`** is an extremely fast, all-in-one tool that is both a:
-*   **Package Installer** (like `pip`)
-*   **Virtual Environment Manager** (like `venv`)
+# TODO: Print a welcome message using the contact's name
 
-It simplifies the entire project management workflow.
-
----
-
-# Project Setup with `uv`
-
-In a new, empty project folder, this one command does it all:
-
-```bash
-uv init
+# TODO: Calculate and print their age next year
 ```
 
-This will automatically:
-1.  Create a virtual environment in a `.venv` folder.
-2.  Create a `pyproject.toml` file to configure your project.
+**Try it yourself first!**
 
 ---
 
-# The `pyproject.toml` Control Center
+# Getting User Input
 
-This file is the modern standard for configuring Python projects. It replaces multiple older files (`setup.py`, `requirements.txt`).
+```python
+# Let's make it interactive!
+print("\n--- Add New Contact ---")
 
-Let's look inside...
+# TODO: Get contact information from user
+# Remember: input() always returns a string!
+
+contact_name = input("Enter contact name: ")
+# TODO: Get phone number
+# TODO: Get age (hint: convert to int!)
+# TODO: Ask if favorite (y/n)
+
+# TODO: Display the contact info nicely
+```
+
+**Common mistake**: Forgetting to convert input to numbers!
 
 ---
 
-### `pyproject.toml`: The `[project]` Section
+# Building a Contact Display
 
-This section holds general information about your project.
+```python
+# Format contact information nicely
+contact_name = "Alice Smith"
+contact_phone = "555-0001"
+contact_age = 25
+is_favorite = True
 
-```toml
-[project]
-name = "my-research-project"
-version = "0.1.0"
-description = "A short description of the project."
+# TODO: Create a formatted display string
+# Should look like:
+# =====================================
+# Contact: Alice Smith
+# Phone: 555-0001
+# Age: 25 years old
+# Favorite: Yes
+# =====================================
+
+# Hint: Use string concatenation or f-strings
 ```
 
 ---
 
-### `pyproject.toml`: The `[project.dependencies]` Section
+# Part 2: Making Decisions
 
-This is where you list the packages your code needs to **run**. It's the "source of truth" for your project's needs.
+---
 
-```toml
-[project.dependencies]
-# We will add packages like "numpy" here
+# Add Contact Validation
+
+```python
+# Validate contact information before storing
+contact_name = input("Enter name: ")
+contact_phone = input("Enter phone: ")
+
+# TODO: Check if name is not empty
+# If empty, print error and set to "Unknown"
+
+# TODO: Check if phone has at least 7 digits
+# If too short, print warning
+
+# TODO: Only mark as valid contact if both checks pass
+```
+
+**Real programs validate input!**
+
+---
+
+# Contact Categories with If/Elif/Else
+
+```python
+# Categorize contacts by age
+contact_age = int(input("Contact's age: "))
+
+# TODO: Determine category:
+# - Under 18: "Minor"
+# - 18-30: "Young Adult"
+# - 31-60: "Adult"
+# - Over 60: "Senior"
+
+# TODO: Print category and special notes
+# E.g., "Minor - Requires parental consent"
+```
+
+**Think about the order of conditions!**
+
+---
+
+# Menu System with Conditions
+
+```python
+print("\n--- Contact Manager Menu ---")
+print("1. Add contact")
+print("2. View contact")
+print("3. Exit")
+
+choice = input("\nChoose option: ")
+
+# TODO: Use if/elif/else to handle menu choices
+# - If "1": Print "Adding contact..."
+# - If "2": Print "Viewing contact..."
+# - If "3": Print "Goodbye!"
+# - Else: Print "Invalid option!"
+```
+
+**This is the start of our interface!**
+
+---
+
+# Part 3: Storing Multiple Contacts
+
+---
+
+# Using Loops for Multiple Contacts
+
+```python
+# Store up to 3 contacts
+max_contacts = 3
+contact_count = 0
+
+print(f"\nYou can add up to {max_contacts} contacts")
+
+# TODO: Use a while loop to:
+# - Keep asking for contacts until max_contacts reached
+# - Or until user types "done"
+# - Track how many contacts added
+
+# TODO: After loop, print summary
+# "Added X contacts to your manager"
 ```
 
 ---
 
-# Adding Dependencies with `uv`
+# Display All Contacts with For Loop
 
-This single command is all you need:
+```python
+# Simulate having 3 contacts
+# (Next week we'll use lists for this!)
+contact1_name = "Alice"
+contact2_name = "Bob"
+contact3_name = "Charlie"
 
-```bash
-uv pip install numpy pandas
+print("\n--- All Contacts ---")
+
+# TODO: Use a for loop with range(3) to:
+# - Print contact number (1, 2, 3)
+# - Print contact name
+# Format: "Contact #1: Alice"
+
+# Hint: You'll need if/elif to pick the right variable
 ```
 
-This will:
-1.  Add `numpy` and `pandas` to your `pyproject.toml`.
-2.  Install them into your `.venv` virtual environment.
-3.  Create/update a `uv.lock` file, which freezes the exact versions of *all* dependencies for perfect reproducibility.
+**Preview: Lists will make this much easier!**
 
 ---
 
-# Running Code with `uv`
+# Search Contacts with String Methods
 
-No more typing `source .venv/bin/activate`!
+```python
+# Search for a contact
+contact1_name = "Alice Smith"
+contact2_name = "Bob Jones"
+contact3_name = "Charlie Smith"
 
-`uv` can run any command directly within your project's environment.
+search_term = input("Search for: ")
 
-```bash
-# Run a python script
-uv run python src/main.py
+# TODO: Check each contact name
+# - Convert both to lowercase for case-insensitive search
+# - Use 'in' to check if search_term is in name
+# - Print matching contacts
 
-# Run any other command
-uv run <command>
+# Example: Searching for "smith" finds Alice and Charlie
 ```
 
 ---
 
-# The Power of `uv sync`
+# Part 4: String Formatting
 
-You've cloned a project from GitHub. How do you install everything?
+---
 
-```bash
-# Don't do this: uv pip install -r requirements.txt
-# Do this instead:
-uv sync
+# Format Contact Cards
+
+```python
+# Create nice contact cards
+name = "Alice Smith"
+phone = "555-0001"
+age = 25
+
+# TODO: Create a contact card using f-strings:
+# ╔════════════════════════════╗
+# ║  CONTACT CARD              ║
+# ║  Name: Alice Smith         ║
+# ║  Phone: 555-0001           ║
+# ║  Age: 25                   ║
+# ╚════════════════════════════╝
+
+# Hint: Use f-strings for formatting
+# card = f"Name: {name}"
 ```
 
-`uv sync` reads the `uv.lock` file and installs the **exact** versions of all packages, guaranteeing a perfectly replicated environment.
-
-**This is the key to reproducibility.**
-
----
-# Advanced `uv` Features
-
-<img src="image.png" alt="alt text" width="650"/>
-
----
-<!-- _class: invert -->
-
-# Part 3: Code Quality with `ruff`
+**Make it look professional!**
 
 ---
 
-# Linters and Formatters
+# String Operations for Contacts
 
-*   **Linter**: A tool that analyzes your code to find potential bugs, style errors, and bad practices.
-*   **Formatter**: A tool that automatically rewrites your code to follow a strict, consistent style guide.
+```python
+contact_name = "  alice SMITH  "
+contact_phone = "5550001"
 
-**`ruff`** is a next-generation tool that is an extremely fast **linter AND formatter** in one.
+# TODO: Clean up the contact data:
+# - Remove extra spaces with strip()
+# - Capitalize name properly with title()
+# - Format phone as "555-0001"
+
+# TODO: Validate the cleaned data:
+# - Check if name has at least 2 characters
+# - Check if phone has exactly 7 digits
+```
+
+**Clean data is happy data!**
 
 ---
 
-# Using `ruff` in Your Project
+# Build a Complete Mini Contact Manager
 
-1.  **Install `ruff` as a "dev" dependency:**
-    It's a tool for you, the developer, not for running the code.
-    ```bash
-    uv pip install --dev ruff
-    ```
-    This adds `ruff` to a special `[tool.uv.dev-dependencies]` section in your `pyproject.toml`.
+```python
+# Put it all together!
+print("\n" + "="*40)
+print("  CONTACT MANAGER v0.1")
+print("="*40)
 
-2.  **Lint your code:**
-    Find potential problems in all files in the current directory (`.`).
-    ```bash
-    uv run ruff check .
-    ```
+running = True
+contact_count = 0
+max_contacts = 3
 
-3.  **Format your code:**
-    Automatically clean up your code's style.
-    ```bash
-    uv run ruff format .
-    ```
+while running:
+    # TODO: Show menu
+    # TODO: Get user choice
+    # TODO: Handle each option:
+    #   1. Add contact (if not at max)
+    #   2. View all contacts
+    #   3. Search contacts
+    #   4. Exit
+    
+    pass  # Remove this when you add code
+
+print("Thank you for using Contact Manager!")
+```
+
+**This is your Week 3 project!**
+
+---
+
+# Challenge: Add Features
+
+**Enhance your Contact Manager:**
+
+1. **Contact Counter**: Show "X of 3 contacts used"
+
+2. **Duplicate Check**: Don't add same name twice
+
+3. **Phone Formatting**: Auto-format as XXX-XXXX
+
+4. **Favorite Marking**: Mark contacts with ⭐
+
+5. **Statistics**: Show total contacts, favorites count
+
+**Try these on your own!**
+
+---
+
+# What We Built Today
+
+## Contact Manager v0.1 ✅
+
+**Features implemented:**
+- ✅ Store contact information
+- ✅ Input validation
+- ✅ Menu system
+- ✅ Add multiple contacts
+- ✅ Search by name
+- ✅ Display all contacts
+- ✅ Nice formatting
+
+**Skills learned:**
+- Variables and data types
+- User input
+- If/else decisions
+- Loops (for and while)
+- String manipulation
+- Basic program structure
+
+**Next week: We'll make it powerful with functions and lists!**
+
+---
+
+# Homework: Extend Your Contact Manager
+
+**Required features to add:**
+
+1. **Contact limit**: Maximum 10 contacts
+2. **Delete contact**: Remove by name
+3. **Update contact**: Change phone number
+4. **Contact types**: Friend/Family/Work
+5. **Pretty display**: Numbered list with formatting
+
+**Bonus challenges:**
+- Sort contacts alphabetically
+- Export to text file (we'll learn this properly next week)
+- Birthday tracking (calculate age)
+
+**Submit on GitHub!**
+
+---
+
+# Pro Tips from Week 3
+
+**1. Start simple**
+```python
+# Build step by step, test each part
+```
+
+**2. Use meaningful names**
+```python
+# Bad: n, p, a
+# Good: contact_name, phone_number, age
+```
+
+**3. Validate input**
+```python
+# Always check user input before using it
+```
+
+**4. Test edge cases**
+```python
+# What if user enters nothing?
+# What if they enter invalid data?
+```
+
+**Remember**: Every expert was once a beginner!
 
 ---
 
 <!-- _class: lead -->
 
-# Recap
+# Next Week
 
-You can now create a modern, structured, and reproducible Python project!
+## Contact Manager Part 2
 
-| Task | `uv` Command | `ruff` Command |
-| :--- | :--- | :--- |
-| Start a new project | `uv init` | |
-| Add a runtime package | `uv add <package>` | |
-| Recreate environment | `uv sync` | |
-| Run a script in env | `uv run python script.py` | |
-| Find code errors | | `uv run ruff check .` |
-| Auto-format code | | `uv run ruff format .` |
----
-# Your Assignment
-TBA
+**We'll add:**
+- Functions to organize code
+- Lists to store unlimited contacts
+- Dictionaries for better data structure
+- File save/load capability
+- Professional code organization
+
+**Bring your Week 3 code!**
+
+See you next Monday! 🚀
+
+
+
+
+
+

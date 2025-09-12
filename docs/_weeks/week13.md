@@ -1,40 +1,37 @@
 ---
-title: "Week 13: High-Performance Computing with Python"
+title: "Week 13: Project Presentations I"
 date: 2025-12-08
-description: "Practical HPC with Python: Numba, parallelization, and scientific computing"
-lecture_slides: "/course-materials/lectures/lecture_12/slides/Advanced_Programming_2025_lecture_12.pdf"
-ta_slides: "/course-materials/slides/practice/week13_slides.html"
-lesson: "/course-materials/lessons/week13-lesson.html"
+description: "Student capstone project presentations"
+lecture_slides: "#"
+ta_slides: "#"
+lesson: "#"
 assignment:
-  title: "HPC Optimization Project"
-  link: "#"
-  description: "Accelerate Python code using HPC techniques"
+  title: "Capstone Project Presentation"
+  link: "/course-materials/lectures/capstone_project/capstone_project.pdf"
+  description: "Present your data science project"
 examples:
-  - title: "Scientific Computing in Python"
-    link: "/course-materials/lectures/lecture_13/demo/scientific_computing_in_python.ipynb"
-  - title: "Numba JIT Compilation"
-    link: "/course-materials/lectures/lecture_13/demo/numba.ipynb"
-  - title: "Parallelization Techniques"
-    link: "/course-materials/lectures/lecture_13/demo/parallelization.ipynb"
-  - title: "JAX Introduction"
-    link: "/course-materials/lectures/lecture_13/demo/introduction_to_JAX.ipynb"
+  - title: "Capstone Project Guidelines"
+    link: "/course-materials/lectures/capstone_project/capstone_project.pdf"
 references:
-  - title: "Numba Documentation"
-    link: "https://numba.pydata.org/"
-    description: "JIT compiler for Python"
-  - title: "JAX Documentation"
-    link: "https://jax.readthedocs.io/"
-    description: "Composable transformations of NumPy programs"
+  - title: "Presentation Tips"
+    link: "#"
+    description: "Guidelines for effective presentations"
 ---
 
-## Week 13: High-Performance Computing with Python
+## Week 13: Project Presentations I
 
-### Topics Covered
-- Python for Scientific Computing - the general idea
-- Numba: JIT compiler for fast machine code
-- Parallelization and multi-threading
-- Multi-threading techniques (if time permits)
-- JAX and Flax (self-study)
+### Capstone Project Presentations
+This week is dedicated to student presentations of their capstone projects.
 
-### Practical Implementation
-This week focuses on hands-on implementation of HPC concepts introduced in Week 12, with practical examples of accelerating Python code for scientific computing applications.
+### Presentation Requirements
+- 10-minute video presentation
+- GitHub repository with code
+- 10-page project report
+- Q&A session
+
+### Evaluation Criteria
+- Technical implementation
+- Problem-solving approach
+- Code quality and documentation
+- Presentation clarity
+- Innovation and creativity

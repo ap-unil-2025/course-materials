@@ -3,454 +3,711 @@ marp: true
 theme: unil-theme
 paginate: true
 backgroundColor: #f5f9ff
-size: 16:9
-title: "Scientific Computing in Python"
-description: "NumPy, Pandas, and Jupyter Notebooks for Data Science"
-author: "Data Science Course"
-date: "2025-10-20"
-header: "Session 6: Scientific Computing in Python"
-footer: "NumPy, Pandas, and Jupyter Notebooks"
+header: "Session 6: OOP & Debugging"
+footer: "Anna Smirnova, October 27, 2025"
 ---
 
 <!-- _class: lead -->
 
-# Session 6: Scientific Computing in Python
+# Session 6: Contact Manager - Final Form
 
-**NumPy Arrays, Pandas DataFrames, and Jupyter Notebooks**
-
----
-
-# Today's Goals
-
-- Master **NumPy arrays** for efficient numerical computing
-- Use **Pandas** for data manipulation and analysis  
-- Work effectively with **Jupyter notebooks** for exploration
-- Understand **vectorization** and performance optimization
-- Build the foundation for **statistical learning**
-
----
-<!-- _class: invert -->
-
-# Part 1: NumPy - The Foundation of Scientific Python
+**Professional OOP & Debugging**
 
 ---
 
-# Why NumPy?
+# The Journey So Far 🏆
 
-**The Problem with Pure Python:**
+**Week 3**: Basic Contact Manager (v0.1)
+- Variables and if/else
+- Limited to 3 contacts
+
+**Week 4**: Functional Contact Manager (v1.0)
+- Functions and lists
+- Unlimited contacts with save/load
+
+**Week 5**: "AI can write this in 30 seconds!"
+- But can you debug it?
+
+**Today**: Professional Contact Manager (v2.0)
+- Object-oriented design
+- Proper error handling
+- Production-ready code
+
+---
+
+# Part 1: From Functions to Classes
+
+---
+
+# Refactoring Our Contact Manager
+
+**Week 4 approach** (functions + dictionaries):
 ```python
-# Slow: Python lists with loops
-data = [1, 2, 3, 4, 5] * 100000
-result = []
-for x in data:
-    result.append(x ** 2)
+# Data and functions are separate
+contacts = []  # List of dictionaries
+
+def add_contact(contacts_list, name, phone):
+    # Function operates on external data
+    pass
+
+def search_contacts(contacts_list, term):
+    # Another separate function
+    pass
 ```
 
-**The NumPy Solution:**
+**Week 6 approach** (OOP):
 ```python
-# Fast: NumPy arrays with vectorization
-import numpy as np
-data = np.array([1, 2, 3, 4, 5] * 100000)
-result = data ** 2  # 100x faster!
+class ContactManager:
+    def __init__(self):
+        self.contacts = []  # Data inside the class
+    
+    def add_contact(self, name, phone):
+        # Method operates on its own data
+        pass
+    
+    def search(self, term):
+        # Everything organized together
+        pass
 ```
 
+**The data and the functions that operate on it are now together!**
+
+---
+# Key OOP Concepts
+> Note: In practice, OOP is an extensive framework and a way of thinking about models and relationships. In our class, we will treat it as a way to organize code, but in the real world, it also includes design principles, patterns, and architecture.
+- **Class**: Blueprint for creating objects (e.g., `Student`)
+- **Object/Instance**: A specific instance of a class (e.g., `alice`)
+- **Attributes**: Data stored in an object (e.g., `name`, `age`, `grades`)
+- **Methods**: Functions defined in a class that operate on its data (e.g., `calculate_average`)
+
+---
+# Key OOP Concepts (cont.)
+- **Encapsulation**: Bundling data and methods in one unit (class)
+- **Inheritance**: Creating a new class based on an existing class (e.g., `ElectricCar` inherits from `Vehicle`)
+- **Polymorphism**: Methods that can do different things based on the object (e.g., `draw()` method for different shapes)
+- **Abstraction**: Hiding complex implementation details and showing only the necessary parts (e.g., using a `Database` class without knowing its internal workings)
+- **Patterns**: Reusable solutions to common problems (e.g., Singleton, Factory)
 ---
 
-# NumPy Arrays: The Basics
+# Part 2: Debugging Like a Pro
 
+> "Debugging is twice as hard as writing the code in the first place.
+> Therefore, if you write the code as cleverly as possible, you are, by definition,
+> not smart enough to debug it." – Brian Kernighan
+
+---
+
+# Types of Bugs
+
+1. **Syntax Errors** - Python can't understand your code
 ```python
-import numpy as np
-
-# Creating arrays
-arr1d = np.array([1, 2, 3, 4, 5])
-arr2d = np.array([[1, 2, 3], [4, 5, 6]])
-
-# Array properties
-print(arr2d.shape)    # (2, 3)
-print(arr2d.dtype)    # int64
-print(arr2d.ndim)     # 2
-print(arr2d.size)     # 6
-
-# Special arrays
-zeros = np.zeros((3, 4))
-ones = np.ones((2, 5))
-identity = np.eye(3)
-random_data = np.random.random((100, 3))
+# Missing colon
+if x > 5
+    print("Big")
 ```
 
----
-
-# Financial Data with NumPy
-
+2. **Runtime Errors (Exceptions)** - Code crashes while running
 ```python
-# Stock price analysis
-prices = np.array([100, 105, 98, 110, 103, 108])
-
-# Calculate returns
-returns = (prices[1:] - prices[:-1]) / prices[:-1]
-print(f"Returns: {returns}")
-
-# Portfolio calculations
-weights = np.array([0.4, 0.3, 0.3])
-asset_returns = np.array([[0.05, 0.02, 0.08],
-                         [0.03, 0.04, 0.06],
-                         [-0.01, 0.03, 0.04]])
-
-# Portfolio return for each period
-portfolio_returns = np.sum(asset_returns * weights, axis=1)
+result = 10 / 0  # ZeroDivisionError
+x = y + 1        # NameError if y undefined
+'foo' + 6        # TypeError
+L = []; x = L[0] # IndexError
 ```
 
----
-
-# Vectorization: The NumPy Superpower
-
+3. **Logic Errors** - Code runs but gives wrong results
 ```python
-# Instead of loops...
-result = []
-for i in range(len(prices)):
-    result.append(prices[i] * 1.02)  # 2% increase
-
-# Use vectorization!
-result = prices * 1.02
-
-# Complex operations vectorized
-risk_adjusted = (returns - 0.02) / np.std(returns)
-
-# Boolean indexing
-high_return_days = returns[returns > 0.05]
+# Should calculate average, but forgets to divide
+def average(numbers):
+    return sum(numbers)  # Oops, forgot / len(numbers)
 ```
 
-**Key Point**: Vectorization is not just faster, it's more readable!
+**Logic errors are the hardest to find!**
 
 ---
 
-# NumPy for Linear Algebra
+# Debugging Strategy 1: Print Debugging
 
 ```python
-# Covariance matrix calculation
-returns_matrix = np.array([[0.05, 0.02, 0.08],
-                          [0.03, 0.04, 0.06], 
-                          [-0.01, 0.03, 0.04]])
+def calculate_discount(price, discount_percent):
+    print(f"DEBUG: price={price}, discount={discount_percent}")  # Debug line
+    
+    discount_amount = price * discount_percent
+    print(f"DEBUG: discount_amount={discount_amount}")  # Debug line
+    
+    final_price = price - discount_amount
+    print(f"DEBUG: final_price={final_price}")  # Debug line
+    
+    return final_price
 
-cov_matrix = np.cov(returns_matrix.T)
-print("Covariance Matrix:")
-print(cov_matrix)
-
-# Portfolio risk calculation
-portfolio_risk = np.sqrt(np.dot(weights.T, np.dot(cov_matrix, weights)))
-print(f"Portfolio Risk: {portfolio_risk:.4f}")
+# Test it
+result = calculate_discount(100, 0.2)  # Expecting 80
+print(f"Result: {result}")
 ```
 
----
-<!-- _class: invert -->
-
-# Part 2: Pandas - Data Manipulation Made Easy
-
----
-
-# Why Pandas?
-
-**NumPy** is great for numerical arrays, but real data is messy:
-- Missing values
-- Different data types  
-- Row and column labels
-- Time series data
-- Grouping and aggregation
-
-**Pandas** provides labeled, heterogeneous data structures built on NumPy.
-
----
-
-# Pandas Data Structures
-
+**Pro tip**: Use a DEBUG flag
 ```python
-import pandas as pd
+DEBUG = True  # Set to False in production
 
-# Series: 1-dimensional labeled array
-stock_prices = pd.Series([100, 105, 98, 110], 
-                        index=['AAPL', 'GOOGL', 'MSFT', 'AMZN'])
-
-# DataFrame: 2-dimensional labeled data
-portfolio = pd.DataFrame({
-    'Symbol': ['AAPL', 'GOOGL', 'MSFT', 'AMZN'],
-    'Price': [150.25, 2800.50, 310.75, 3400.25],
-    'Shares': [100, 10, 50, 5],
-    'Sector': ['Tech', 'Tech', 'Tech', 'Consumer']
-})
-
-print(portfolio)
+if DEBUG:
+    print(f"Processing user {user_id}")
 ```
 
 ---
 
-# Loading Real Data
+# Debugging Strategy 2: Using Debuggers
+
+## Jupyter/IPython: Post-Mortem Debugging
 
 ```python
-# Reading from various sources
-df = pd.read_csv('financial_data.csv')
-df = pd.read_excel('portfolio.xlsx', sheet_name='holdings')
-df = pd.read_json('market_data.json')
+def plot_log():
+    fig, ax = plt.subplots(2, 1)  # Bug: should be plt.subplots()
+    x = np.linspace(1, 2, 10)
+    ax.plot(x, np.log(x))  # Error: ax is array, not axes
+    plt.show()
 
-# Quick data inspection
-print(df.head())        # First 5 rows
-print(df.info())        # Data types and missing values
-print(df.describe())    # Statistical summary
-print(df.shape)         # (rows, columns)
+plot_log()  # This will crash
+```
+
+After the error, type `%debug` in the next cell:
+```python
+%debug  # Opens interactive debugger at crash point
+# You can inspect variables:
+# ipdb> ax
+# ipdb> type(ax)
+# ipdb> q  # quit debugger
 ```
 
 ---
 
-# Data Cleaning and Transformation
+# Setting Breakpoints
+
+## Method 1: Using pdb
+```python
+from pdb import set_trace
+
+def plot_log():
+    set_trace()  # Execution stops here
+    fig, ax = plt.subplots()
+    x = np.logspace(1, 2, 10)  # Bug: should be linspace
+    ax.plot(x, np.log(x))
+    plt.show()
+
+plot_log()  # Enter debugger before the bug
+```
+
+## Method 2: Modern Python (3.7+)
+```python
+def plot_log():
+    breakpoint()  # Same as set_trace(), but built-in
+    fig, ax = plt.subplots()
+    x = np.logspace(1, 2, 10)
+    ax.plot(x, np.log(x))
+    plt.show()
+```
+
+**Debugger commands:**
+- `n` - next line
+- `s` - step into function
+- `c` - continue execution
+- `p variable` - print variable
+- `h` - help
+- `q` - quit
+
+---
+
+# VSCode Debugging (Live Demo)
+
+**Setting Breakpoints:**
+1. Click left of line number (red dot appears)
+2. Run debugger (F5 or "Debug Cell" in notebooks)
+3. Code stops at breakpoint
+
+**Debug Controls:**
+- **Continue (F5)**: Run until next breakpoint
+- **Step Over (F10)**: Execute current line
+- **Step Into (F11)**: Go inside function calls
+- **Step Out (Shift+F11)**: Exit current function
+
+**Watch Variables:**
+- See all variables in Variables panel
+- Add expressions to Watch panel
+- Hover over variables to see values
 
 ```python
-# Handling missing data
-df_clean = df.dropna()                    # Remove rows with NaN
-df_filled = df.fillna(method='ffill')     # Forward fill
-df_interpolated = df.interpolate()        # Linear interpolation
-
-# Data type conversion
-df['Date'] = pd.to_datetime(df['Date'])
-df['Price'] = pd.to_numeric(df['Price'], errors='coerce')
-
-# Creating new columns
-df['Market_Value'] = df['Price'] * df['Shares']
-df['Weight'] = df['Market_Value'] / df['Market_Value'].sum()
-df['Return'] = df['Price'].pct_change()
+# We'll debug this together
+def rev_list_buggy(L):
+    for i in range(len(L)):
+        j = len(L) - i  # Bug 1: should be len(L) - i - 1
+        L[i] = temp      # Bug 2: temp not defined
+        L[i] = L[j]      # Bug 3: overwrites L[i] before saving
+        L[j] = L[i]      # Bug 4: wrong value (already changed)
 ```
 
 ---
 
-# Data Selection and Filtering
+# Part 3: Exception Handling
 
+---
+
+# Handling Errors Gracefully
+
+**Without exception handling** (program crashes):
 ```python
-# Column selection
-prices = df['Price']
-subset = df[['Symbol', 'Price', 'Market_Value']]
+def divide(a, b):
+    return a / b
 
-# Boolean filtering
-high_value = df[df['Market_Value'] > 10000]
-tech_stocks = df[df['Sector'] == 'Tech']
+result = divide(10, 0)  # 💥 Crash!
+print("This never prints")
+```
 
-# Multiple conditions
-large_tech = df[(df['Sector'] == 'Tech') & 
-                (df['Market_Value'] > 5000)]
+**With exception handling** (program continues):
+```python
+def divide(a, b):
+    try:
+        result = a / b
+        return result
+    except ZeroDivisionError:
+        print("Error: Cannot divide by zero!")
+        return None
 
-# Date-based filtering (if Date is index)
-recent = df.loc['2025-01-01':'2025-01-31']
+result = divide(10, 0)  # Error: Cannot divide by zero!
+print("Program continues running")  # This prints!
 ```
 
 ---
 
-# Grouping and Aggregation
+# Common Python Exceptions
 
 ```python
-# Group by sector analysis
-sector_analysis = df.groupby('Sector').agg({
-    'Market_Value': ['sum', 'mean', 'count'],
-    'Price': ['min', 'max'],
-    'Return': 'std'
-})
+# ZeroDivisionError
+try:
+    result = 1 / 0
+except ZeroDivisionError:
+    print("Cannot divide by zero!")
 
-# Custom aggregation
-def portfolio_metrics(group):
-    return pd.Series({
-        'total_value': group['Market_Value'].sum(),
-        'avg_return': group['Return'].mean(),
-        'volatility': group['Return'].std(),
-        'sharpe_ratio': group['Return'].mean() / group['Return'].std()
-    })
+# ValueError - Wrong type/value
+try:
+    age = int("twenty")  # Can't convert "twenty" to int
+except ValueError:
+    print("Please enter a number")
 
-metrics_by_sector = df.groupby('Sector').apply(portfolio_metrics)
+# NameError - Variable not defined
+try:
+    print(undefined_variable)
+except NameError:
+    print("Variable doesn't exist")
+
+# TypeError - Wrong type for operation
+try:
+    result = 'foo' + 6  # Can't add string and int
+except TypeError:
+    print("Type mismatch")
+
+# IndexError - List index out of range
+try:
+    L = [1, 2, 3]
+    print(L[10])
+except IndexError:
+    print("Index out of range")
 ```
 
 ---
 
-# Time Series with Pandas
+# Multiple Exception Handling
 
 ```python
-# Set date as index
-df.set_index('Date', inplace=True)
+def safe_divide(a, b):
+    try:
+        result = a / b
+        return result
+    except ZeroDivisionError:
+        print("Error: Division by zero")
+        return None
+    except TypeError:
+        print(f"Error: Cannot divide {type(a)} by {type(b)}")
+        return None
+    except Exception as e:  # Catch any other error
+        print(f"Unexpected error: {e}")
+        return None
+    finally:  # Always runs, even if there's an error
+        print("Division operation completed")
 
-# Resampling time series
-daily_prices = df.resample('D')['Price'].last()      # Daily
-monthly_avg = df.resample('M')['Price'].mean()       # Monthly averages
-
-# Rolling calculations
-df['MA_20'] = df['Price'].rolling(20).mean()         # 20-day moving average
-df['Volatility'] = df['Return'].rolling(30).std()    # 30-day volatility
-
-# Lag operations
-df['Price_Lag1'] = df['Price'].shift(1)
-df['Return'] = (df['Price'] - df['Price_Lag1']) / df['Price_Lag1']
+# Test different cases
+print(safe_divide(10, 2))    # Works: 5.0
+print(safe_divide(10, 0))    # ZeroDivisionError
+print(safe_divide("10", 2))  # TypeError
 ```
 
----
-<!-- _class: invert -->
-
-# Part 3: Jupyter Notebooks - Interactive Data Science
+**Best Practice**: Be specific with exceptions - catch specific errors first, then general ones.
 
 ---
 
-# Why Jupyter Notebooks?
-
-**Traditional Scripts** → Run all at once, hard to experiment
-
-**Jupyter Notebooks** → Interactive cells, perfect for:
-- Data exploration
-- Iterative analysis  
-- Visualization
-- Documentation
-- Sharing results
-
-**Best for**: Prototyping, analysis, teaching
-**Not best for**: Production code, large applications
+# Part 4: Inheritance - Building on Classes
 
 ---
 
-# Jupyter Best Practices
+# Inheritance: Reusing Code
 
 ```python
-# 1. Organize imports at the top
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-%matplotlib inline
+# Base class (parent)
+class Vehicle:
+    def __init__(self, brand, model, year):
+        self.brand = brand
+        self.model = model
+        self.year = year
+        self.speed = 0
+    
+    def start(self):
+        print(f"The {self.brand} {self.model} is starting...")
+    
+    def accelerate(self, amount):
+        self.speed += amount
+        print(f"Speed is now {self.speed} km/h")
 
-# 2. Define functions in separate cells
-def calculate_sharpe_ratio(returns, risk_free_rate=0.02):
-    excess_returns = returns - risk_free_rate
-    return np.mean(excess_returns) / np.std(excess_returns)
+# Derived class (child)
+class ElectricCar(Vehicle):
+    def __init__(self, brand, model, year, battery_size):
+        super().__init__(brand, model, year)  # Call parent constructor
+        self.battery_size = battery_size
+        self.battery_level = 100
+    
+    def charge(self):
+        self.battery_level = 100
+        print(f"Battery charged to {self.battery_level}%")
+    
+    def accelerate(self, amount):
+        super().accelerate(amount)  # Call parent method
+        self.battery_level -= amount * 0.1
+        print(f"Battery at {self.battery_level:.1f}%")
 
-# 3. Load and explore data step by step
-df = pd.read_csv('data.csv')
-df.head()
-```
-
----
-
-# Jupyter Magic Commands
-
-```python
-# Timing code execution
-%time result = expensive_calculation()
-
-%%time  
-# Time entire cell
-for i in range(1000):
-    complex_operation()
-
-# Other useful magics
-%matplotlib inline    # Display plots in notebook
-%load script.py       # Load external Python file
-?pd.DataFrame         # Get help
-??np.array           # Show source code
-%who                 # List variables
+# Use it
+tesla = ElectricCar("Tesla", "Model 3", 2024, 75)
+tesla.start()
+tesla.accelerate(50)
 ```
 
 ---
 
-# Example: Complete Portfolio Analysis
+# Using Assertions for Early Detection
 
 ```python
-# Step 1: Load and clean data
-portfolio_data = pd.read_csv('portfolio.csv')
-portfolio_data['Date'] = pd.to_datetime(portfolio_data['Date'])
-portfolio_data.set_index('Date', inplace=True)
+def calculate_variance(data):
+    n = len(data)
+    assert n > 1, "Need at least 2 data points for variance"
+    
+    mean = sum(data) / n
+    variance = sum((x - mean)**2 for x in data) / (n - 1)
+    return variance
 
-# Step 2: Calculate returns
-for stock in ['AAPL', 'GOOGL', 'MSFT']:
-    portfolio_data[f'{stock}_Return'] = portfolio_data[stock].pct_change()
+# This will fail early with clear message:
+try:
+    var = calculate_variance([5])  # Only one data point
+except AssertionError as e:
+    print(f"Assertion failed: {e}")
 
-# Step 3: Portfolio metrics
-returns_cols = [col for col in portfolio_data.columns if 'Return' in col]
-returns_matrix = portfolio_data[returns_cols].dropna()
+# Good for:
+# - Checking preconditions
+# - Validating inputs
+# - Documenting assumptions
+# - Failing fast with clear errors
+```
 
-weights = np.array([0.4, 0.3, 0.3])
-portfolio_returns = np.dot(returns_matrix, weights)
-sharpe_ratio = calculate_sharpe_ratio(portfolio_returns)
+**Note**: Assertions can be disabled with `python -O`, so don't use them for actual error handling in production!
 
-print(f"Portfolio Sharpe Ratio: {sharpe_ratio:.3f}")
+---
+
+# Hands-On: Debug This OOP Code
+
+```python
+class ShoppingCart:
+    def __init__(self):
+        self.items = []
+        self.total = 0
+    
+    def add_item(self, item, price, quantity):
+        self.items.append({
+            'item': item,
+            'price': price,
+            'quantity': quantity
+        })
+        # BUG: What's wrong here?
+        self.total = price * quantity
+    
+    def remove_item(self, item_name):
+        # BUG: This doesn't update the total
+        for item in self.items:
+            if item['item'] == item_name:
+                self.items.remove(item)
+    
+    def get_total(self):
+        # BUG: Why is this wrong?
+        return self.total
+
+# Test it
+cart = ShoppingCart()
+cart.add_item("Apple", 0.5, 10)
+cart.add_item("Banana", 0.3, 5)
+print(f"Total: ${cart.get_total()}")  # What's wrong?
+```
+
+**Your task**: Find and fix the 3 bugs!
+
+---
+
+# Debugging Best Practices
+
+**1. Reproduce the Bug**
+- Can you make it happen consistently?
+- What are the exact steps?
+
+**2. Isolate the Problem**
+- Comment out code sections
+- Test individual functions
+- Use minimal test cases
+
+**3. Use the Right Tools**
+```python
+# Built-in debugging help
+import pdb
+pdb.set_trace()  # Starts interactive debugger
+
+# Better: use VSCode debugger!
+```
+
+**4. Read Error Messages**
+```python
+Traceback (most recent call last):
+  File "script.py", line 15, in <module>  # WHERE
+    result = divide(10, 0)
+  File "script.py", line 3, in divide
+    return a / b
+ZeroDivisionError: division by zero  # WHAT
 ```
 
 ---
 
-# Integration: NumPy + Pandas + Jupyter
+# Part 5: Putting It All Together
+
+---
+
+# Project: Student Grade Tracker
 
 ```python
-# NumPy for mathematical operations
-correlation_matrix = np.corrcoef(returns_matrix.T)
+class Student:
+    def __init__(self, name, student_id):
+        self.name = name
+        self.student_id = student_id
+        self.grades = {}
+    
+    def add_grade(self, subject, grade):
+        if subject not in self.grades:
+            self.grades[subject] = []
+        self.grades[subject].append(grade)
+    
+    def get_average(self, subject=None):
+        try:
+            if subject:
+                return sum(self.grades[subject]) / len(self.grades[subject])
+            else:
+                all_grades = [g for grades in self.grades.values() for g in grades]
+                return sum(all_grades) / len(all_grades)
+        except (KeyError, ZeroDivisionError):
+            return None
+    
+    def __str__(self):
+        return f"Student: {self.name} (ID: {self.student_id})"
 
-# Pandas for data structure and manipulation
-corr_df = pd.DataFrame(correlation_matrix, 
-                      index=['AAPL', 'GOOGL', 'MSFT'],
-                      columns=['AAPL', 'GOOGL', 'MSFT'])
-
-# Jupyter for interactive exploration and visualization
-import seaborn as sns
-plt.figure(figsize=(8, 6))
-sns.heatmap(corr_df, annot=True, cmap='coolwarm', center=0)
-plt.title('Stock Correlation Matrix')
-plt.show()
+class GradeBook:
+    def __init__(self):
+        self.students = {}
+    
+    def add_student(self, student):
+        self.students[student.student_id] = student
+    
+    def find_student(self, student_id):
+        return self.students.get(student_id, None)
+    
+    def class_average(self, subject):
+        averages = []
+        for student in self.students.values():
+            avg = student.get_average(subject)
+            if avg is not None:
+                averages.append(avg)
+        return sum(averages) / len(averages) if averages else 0
 ```
 
 ---
 
-# Performance Tips
+# Live Coding Exercise
+
+**Build Together: Library Management System**
+
+Requirements:
+1. `Book` class with title, author, ISBN
+2. `Library` class that manages books
+3. Check out and return books
+4. Handle errors (book not found, already checked out)
+5. Add debugging to track operations
 
 ```python
-# Do: Vectorize with NumPy/Pandas
-df['normalized'] = (df['value'] - df['value'].mean()) / df['value'].std()
+# We'll build this together from scratch!
+class Book:
+    # TODO: Constructor
+    pass
 
-# Don't: Use Python loops
-normalized = []
-mean_val = df['value'].mean()
-std_val = df['value'].std()
-for val in df['value']:
-    normalized.append((val - mean_val) / std_val)
+class Library:
+    # TODO: Manage books
+    pass
 
-# Do: Use built-in methods
-df.groupby('category')['value'].mean()
-
-# Don't: Manual grouping
-categories = df['category'].unique()
-means = {}
-for cat in categories:
-    means[cat] = df[df['category'] == cat]['value'].mean()
+# Test with debugging
+DEBUG = True
 ```
 
 ---
 
-# Next Steps: Statistical Learning Foundation
+# Common OOP + Debugging Pitfalls
 
-With NumPy, Pandas, and Jupyter, you now have the tools for:
+**1. Modifying lists in __init__**
+```python
+class Bad:
+    def __init__(self, items=[]):  # DON'T DO THIS!
+        self.items = items
 
-- **Data Loading**: Read from CSV, Excel, databases
-- **Data Cleaning**: Handle missing values, outliers
-- **Feature Engineering**: Create new variables
-- **Exploratory Analysis**: Understand your data
-- **Statistical Computing**: Efficient numerical operations
+# Why it's bad:
+a = Bad()
+b = Bad()
+a.items.append(1)
+print(b.items)  # [1] - Surprise! Shared list!
 
-**Next week**: We'll use these tools for statistical learning, starting with visualization and the statistical learning framework!
+# Do this instead:
+class Good:
+    def __init__(self, items=None):
+        self.items = items or []
+```
+
+**2. Forgetting `self`**
+```python
+class Calculator:
+    def add(x, y):  # Forgot self!
+        return x + y
+```
+
+**3. Infinite recursion**
+```python
+class Circle:
+    @property
+    def area(self):
+        return self.area  # Calls itself forever!
+```
 
 ---
 
-# Resources
+# Your Turn: Debug Challenge
 
-- **NumPy Documentation**: [numpy.org](https://numpy.org/doc/)
-- **Pandas Documentation**: [pandas.pydata.org](https://pandas.pydata.org/docs/)  
-- **Jupyter Documentation**: [jupyter.org](https://jupyter.org/documentation)
-- **Python for Data Analysis** by Wes McKinney
-- **Course Examples**: Available in Nuvolos workspace
+```python
+class Calculator:
+    def __init__(self):
+        self.history = []
+    
+    def add(self, a, b):
+        result = a + b
+        self.history.append(f"{a} + {b} = {result}")
+        return result
+    
+    def divide(self, a, b):
+        result = a / b  # Bug 1: No error handling
+        self.history.append(f"{a} / {b} = {result}")
+        return result
+    
+    def get_history(self):
+        return self.history  # Bug 2: Returns mutable list
+    
+    def clear_history(self):
+        self.history = []  # Is this the best way?
+
+# Test it and find issues:
+calc = Calculator()
+calc.add(10, 5)
+calc.divide(10, 0)  # What happens?
+history = calc.get_history()
+history.append("HACKED!")  # What happens to calc.history?
+```
+
+**Tasks**:
+1. Add exception handling to divide()
+2. Protect the history list (hint: return a copy)
+3. Add debugging with assert statements
 
 ---
 
-# Hands-on Lab
+# Exercise: File Reader with Error Handling
 
-**Lab Activity**: Complete portfolio analysis
-1. Load sample financial dataset
-2. Clean and prepare the data
-3. Calculate portfolio metrics using NumPy
-4. Create summary statistics with Pandas
-5. Document your analysis in Jupyter notebook
+```python
+# Create a file with mixed content
+with open('numbers.txt', 'w') as f:
+    f.write("prices\n3\n8\n\n7\ntwenty\n21")
 
-**Goal**: Create a reproducible analysis that demonstrates scientific computing workflow!
+# Your task: Read and sum the numbers, skip non-numbers
+def sum_numbers_from_file(filename):
+    total = 0
+    with open(filename) as f:
+        for line in f:
+            # TODO: Add try-except to handle non-numeric lines
+            pass  # Your code here
+    return total
+
+# Should return 39 (3 + 8 + 7 + 21)
+```
+
+---
+
+# Homework Assignment
+
+**Build a Student Grade System with Debugging**
+
+Extend the `Student` and `GradeBook` classes to:
+
+1. **Add robust error handling**:
+   - Invalid grades (negative, > 100)
+   - Missing students
+   - Empty grade lists
+
+2. **Add debugging features**:
+   - Debug mode that logs all operations
+   - Assertions for data validation
+   - Method to verify data integrity
+
+3. **Create test scenarios** with intentional bugs:
+   - Division by zero in averages
+   - Type errors in grade inputs
+   - Index errors in grade access
+
+**Deliverable**: Submit a Jupyter notebook showing:
+- Your classes with error handling
+- Screenshots of VSCode debugger in action
+- Test cases demonstrating exception handling
+
+---
+
+# Key Takeaways
+
+**OOP Essentials**:
+- Classes organize code into reusable blueprints
+- Objects are instances with their own data
+- Inheritance lets you build on existing classes
+
+**Debugging Tools**:
+1. Print statements (quick and dirty)
+2. `%debug` magic (post-mortem analysis)
+3. `breakpoint()` or `pdb.set_trace()` (interactive)
+4. VSCode debugger (visual and powerful)
+5. Assertions (fail fast with clear messages)
+
+**Error Handling**:
+- Use `try-except` for graceful error recovery
+- Be specific with exception types
+- Use `finally` for cleanup code
+- Assertions for documenting assumptions
+
+**Remember**: 
+> "The debugger is your friend. Learn to use it well!"

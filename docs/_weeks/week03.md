@@ -1,20 +1,20 @@
 ---
 title: "Week 3: Python Fundamentals I"
 date: 2025-09-29
-description: "Python basics, control flow, string manipulation, and Git version control"
+description: "Variables, control flow, data structures, and Git workflows"
 lecture_slides:
-  - title: "Python basics and Control flow"
+  - title: "Lecture 3a: Python Fundamentals"
     link: "/course-materials/lectures/lecture_3/slides/Advanced_Programming_2025_lecture_3a.pdf"
-  - title: "Git version control"
+  - title: "Lecture 3b: Control Flow"
     link: "/course-materials/lectures/lecture_3/slides/Advanced_Programming_2025_lecture_3b.pdf"
-  - title: "Programming style"
+  - title: "Lecture 3c: Functions"
     link: "/course-materials/lectures/lecture_3/slides/Advanced_Programming_2025_lecture_3c.pdf"
 ta_slides: "/course-materials/slides/practice/week02_slides.html"
 lesson: "/course-materials/lessons/week02-lesson.html"
 assignment:
-  title: "Python Basics & Control Flow"
-  link: "/course-materials/assignments/week3-python-basics"
-  description: "Practice with variables, control flow, and string manipulation"
+  title: "Python Basics Assignment"
+  link: "#"
+  description: "Practice with variables, loops, and basic data structures"
 examples:
   - title: "Python Examples Repository"
     link: "https://github.com/ap-unil-2025/course-materials"
@@ -27,18 +27,19 @@ references:
     description: "Comprehensive Git tutorials"
 ---
 
-## Week 3: Python Fundamentals I
+## Combined Sessions: Week 2 & 3
 
-### Topics Covered
-- Python basics (variables, types)
-- Control flow (loops, branching)
-- String Manipulation
-- Git version control
-- Programming style (if time permits)
+This week covers **two practice sessions** on Python fundamentals:
 
-### Practice Session
+### Session 1: Git Workflows (Originally Week 2)
+- **Slides**: [Week 2 Practice Slides](/course-materials/slides/practice/week02_slides.html)
+- **Lesson**: [No Class - Holiday](/course-materials/lessons/week02-lesson.html)
+- Topics: Git branching, merging, collaboration workflows
+
+### Session 2: Python Basics (Originally Week 3)
 - **Slides**: [Week 3 Practice Slides](/course-materials/slides/practice/week03_slides.html)
 - **Lesson**: [Python Fundamentals I](/course-materials/lessons/week03-lesson.html)
+- Topics: Variables, control flow, data structures
 
 ## Week Overview
 

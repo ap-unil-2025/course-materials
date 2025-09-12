@@ -3,10 +3,10 @@ layout: project
 title: "PYMORT: Longevity-Bond Pricing Engine"
 project_id: "PYMORT"
 difficulty: "Advanced"
-team_size: "3-4 students"
+team_size: "Individual"
 focus_area: "Actuarial Finance"
 template_repo: "https://github.com/ap-unil-2025/pymort-template"
-brief_file: "docs/projects/PYMORT.md"
+brief_file: "/project-briefs/PYMORT"
 technologies:
   - "Python 3.10+"
   - "Mathematical modeling"

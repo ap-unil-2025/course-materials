@@ -1,8 +1,8 @@
 ---
-title: "Week 12: Introduction to High-Performance Computing"
+title: "Week 12: High-Performance Computing"
 date: 2025-12-01
-description: "Concepts of shared/distributed memory parallelization and hybrid approaches"
-lecture_slides: "/course-materials/lectures/lecture_12/slides/Advanced_Programming_2025_lecture_12.pdf"
+description: "HPC techniques for accelerating Python code"
+lecture_slides: "#"
 ta_slides: "/course-materials/slides/practice/week12_slides.html"
 lesson: "/course-materials/lessons/week12-lesson.html"
 assignment:
@@ -18,16 +18,15 @@ references:
     description: "Main course repository with all materials"
 ---
 
-## Week 12: Introduction to High-Performance Computing
+## Week 12: High-Performance Computing
 
-### Topics Covered
-- Concepts of shared memory parallelization
-- Concepts of distributed memory parallelization
-- Hybrid parallelization
-- Understanding performance bottlenecks
-- Scaling considerations
+### Topics TBA
+- Parallel processing
+- Code optimization techniques
+- GPU acceleration
+- Distributed computing
 
-This week introduces the theoretical foundations of high-performance computing, preparing you for practical implementation in Week 13.
+Details to be announced. Check back for updates.
 
 ### Getting Started
 1. Review the lesson guide for detailed explanations

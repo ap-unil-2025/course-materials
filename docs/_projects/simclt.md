@@ -3,10 +3,10 @@ layout: project
 title: "SIMCLT: Chain-Ladder Reserving Simulator"
 project_id: "SIMCLT"
 difficulty: "Intermediate"
-team_size: "3-4 students"
+team_size: "Individual"
 focus_area: "Insurance & Actuarial Science"
 template_repo: "https://github.com/ap-unil-2025/simclt-template"
-brief_file: "docs/projects/SIMCLT.md"
+brief_file: "/project-briefs/SIMCLT"
 technologies:
   - "Python 3.10+"
   - "NumPy/SciPy"

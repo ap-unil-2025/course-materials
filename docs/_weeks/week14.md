@@ -1,7 +1,7 @@
 ---
-title: "Week 14: Capstone Project Presentations"
+title: "Week 14: Project Presentations II & Course Wrap-up"
 date: 2025-12-15
-description: "Students voluntarily present their projects, wrap-up and course summary"
+description: "Final presentations and course conclusion"
 lecture_slides: "#"
 ta_slides: "#"
 lesson: "#"
@@ -21,22 +21,16 @@ references:
     description: "Resources for continued learning"
 ---
 
-## Week 14: Capstone Project Presentations
+## Week 14: Project Presentations II & Course Wrap-up
 
-### Student Presentations
-Students voluntarily present their capstone projects showcasing what they've learned throughout the course.
+### Final Presentations
+Continuation of student capstone project presentations.
 
-### Presentation Format
-- 10-minute video presentation
-- Demonstration of project functionality
-- Discussion of challenges and solutions
-- Q&A session
-
-### Course Wrap-up
-- Review of key concepts from Python foundations to HPC
+### Course Conclusion
+- Review of key concepts covered
 - Discussion of real-world applications
-- Resources for continued learning in data science and advanced programming
-- Career paths and opportunities
+- Resources for further learning
+- Career paths in data science
 
 ### Final Submissions
 All project materials must be submitted by the end of this week:
