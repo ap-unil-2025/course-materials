@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Scholar
+Allow: /
+
+Sitemap: https://ap-unil-2025.github.io/course-materials/sitemap.xml

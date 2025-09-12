@@ -8,6 +8,76 @@
     <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
+    
+    <!-- Citation Metadata -->
+    <meta name="citation_title" content="{% if page.title %}{{ page.title | escape }}{% else %}Data Science and Advanced Programming 2025{% endif %}">
+    <meta name="citation_author" content="Scheidegger, Simon">
+    <meta name="citation_author" content="Smirnova, Anna">
+    <meta name="citation_publication_date" content="{{ 'now' | date: '%Y' }}">
+    <meta name="citation_journal_title" content="HEC Lausanne Course Materials">
+    <meta name="citation_public_url" content="{{ page.url | absolute_url }}">
+    <meta name="citation_pdf_url" content="https://ap-unil-2025.github.io/course-materials/assets/course-materials.pdf">
+    
+    <!-- Dublin Core Metadata -->
+    <meta name="DC.title" content="{% if page.title %}{{ page.title | escape }}{% else %}Data Science and Advanced Programming 2025{% endif %}">
+    <meta name="DC.creator" content="Simon Scheidegger">
+    <meta name="DC.creator" content="Anna Smirnova">
+    <meta name="DC.subject" content="Data Science">
+    <meta name="DC.subject" content="Python Programming">
+    <meta name="DC.subject" content="Machine Learning">
+    <meta name="DC.subject" content="Statistical Learning">
+    <meta name="DC.description" content="Advanced course introducing Python programming, statistical learning, and high-performance computing for Master's students in Economics and Finance">
+    <meta name="DC.publisher" content="HEC Lausanne, University of Lausanne">
+    <meta name="DC.date" content="{{ 'now' | date: '%Y-%m-%d' }}">
+    <meta name="DC.type" content="Course Materials">
+    <meta name="DC.format" content="text/html">
+    <meta name="DC.identifier" content="{{ page.url | absolute_url }}">
+    <meta name="DC.language" content="en">
+    <meta name="DC.rights" content="Creative Commons Attribution-ShareAlike 4.0 International License">
+    
+    <!-- Schema.org structured data for Google Scholar -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": "Data Science and Advanced Programming 2025",
+      "description": "Advanced course introducing Python programming, statistical learning, and high-performance computing",
+      "provider": {
+        "@type": "Organization",
+        "name": "HEC Lausanne, University of Lausanne",
+        "sameAs": "https://www.unil.ch/hec/"
+      },
+      "instructor": [
+        {
+          "@type": "Person",
+          "name": "Simon Scheidegger",
+          "url": "https://sites.google.com/site/simonscheidegger/"
+        },
+        {
+          "@type": "Person",
+          "name": "Anna Smirnova"
+        }
+      ],
+      "courseCode": "DSAP2025",
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "courseMode": "https://schema.org/OnlineOnly",
+        "startDate": "2025-09-15",
+        "endDate": "2025-12-15",
+        "location": {
+          "@type": "Place",
+          "name": "Internef 263",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Lausanne",
+            "addressCountry": "CH"
+          }
+        }
+      },
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+    }
+    </script>
+    
     {% seo %}
 </head>
 <body>
@@ -33,7 +103,17 @@
 
     <footer class="site-footer">
         <div class="wrapper">
-            <p>&copy; {{ 'now' | date: "%Y" }} {{ site.title | escape }}. All rights reserved.</p>
+            <p>&copy; {{ 'now' | date: "%Y" }} {{ site.title | escape }}.</p>
+            <p class="license">
+                <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+                    <img alt="Creative Commons License" style="border-width:0; height: 15px; width: auto; vertical-align: middle;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" />
+                </a>
+                This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+            <p class="citation">
+                <strong>Cite as:</strong> Scheidegger, S., & Smirnova, A. ({{ 'now' | date: "%Y" }}). <em>Data Science and Advanced Programming 2025</em>. HEC Lausanne, University of Lausanne. 
+                <a href="{{ '/citation' | relative_url }}">View citation formats →</a>
+            </p>
             <p class="credits">Made with 💙 by Anna Smirnova, Prof. Simon Scheidegger, and Claude 🤖</p>
             <p class="powered-by">
                 <a href="https://nuvolos.cloud" target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem; color: inherit; text-decoration: none;">

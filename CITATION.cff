@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+title: Data Science and Advanced Programming 2025
+message: >-
+  If you use these course materials, please cite them using
+  the metadata from this file.
+type: software
+authors:
+  - given-names: Simon
+    family-names: Scheidegger
+    email: simon.scheidegger@unil.ch
+    affiliation: HEC Lausanne, University of Lausanne
+    orcid: 'https://orcid.org/0000-0000-0000-0000'
+  - given-names: Anna
+    family-names: Smirnova
+    email: anna.smirnova@unil.ch
+    affiliation: HEC Lausanne, University of Lausanne
+repository-code: 'https://github.com/ap-unil-2025/course-materials'
+url: 'https://ap-unil-2025.github.io/course-materials/'
+abstract: >-
+  Advanced course materials for Data Science and Advanced Programming,
+  introducing Python programming, statistical learning, and high-performance
+  computing for Master's students in Economics and Finance at HEC Lausanne.
+keywords:
+  - data-science
+  - python
+  - machine-learning
+  - statistical-learning
+  - high-performance-computing
+  - education
+  - course-materials
+license: CC-BY-SA-4.0
+version: 2025.1
+date-released: '2025-09-15'

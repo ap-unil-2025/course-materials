@@ -440,6 +440,31 @@ tr:hover {
   opacity: 0.7;
 }
 
+.site-footer .license {
+  margin: 0.75rem 0;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.site-footer .license a {
+  color: var(--text-secondary);
+  text-decoration: underline;
+}
+
+.site-footer .license a:hover {
+  color: var(--primary-color);
+}
+
+.site-footer .citation {
+  margin: 0.75rem 0;
+  padding: 0.75rem;
+  background-color: var(--surface-color);
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
 .card {
   background-color: var(--background-color);
   border: 1px solid var(--border-color);
