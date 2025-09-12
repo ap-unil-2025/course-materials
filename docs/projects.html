@@ -259,21 +259,48 @@ pdflatex project_report.tex</code></pre>
 </div>
 
 <script>
-function toggleUsageInstructions() {
+// Make function globally available for AJAX navigation
+window.toggleUsageInstructions = function() {
   const content = document.getElementById('usageContent');
   const icon = document.querySelector('.toggle-icon');
   const hint = document.querySelector('.toggle-hint');
   
-  if (content.style.display === 'none') {
-    content.style.display = 'block';
-    icon.textContent = '▼';
-    hint.textContent = '(click to collapse)';
-  } else {
-    content.style.display = 'none';
-    icon.textContent = '▶';
-    hint.textContent = '(click to expand)';
+  if (content && icon && hint) {
+    if (content.style.display === 'none') {
+      content.style.display = 'block';
+      icon.textContent = '▼';
+      hint.textContent = '(click to collapse)';
+    } else {
+      content.style.display = 'none';
+      icon.textContent = '▶';
+      hint.textContent = '(click to expand)';
+    }
   }
 }
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+  // Ensure function is available
+  if (!window.toggleUsageInstructions) {
+    window.toggleUsageInstructions = function() {
+      const content = document.getElementById('usageContent');
+      const icon = document.querySelector('.toggle-icon');
+      const hint = document.querySelector('.toggle-hint');
+      
+      if (content && icon && hint) {
+        if (content.style.display === 'none') {
+          content.style.display = 'block';
+          icon.textContent = '▼';
+          hint.textContent = '(click to collapse)';
+        } else {
+          content.style.display = 'none';
+          icon.textContent = '▶';
+          hint.textContent = '(click to expand)';
+        }
+      }
+    }
+  }
+});
 </script>
 
 <style>
