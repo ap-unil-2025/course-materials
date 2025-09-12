@@ -1,9 +1,34 @@
 ---
-layout: page
-title: "Course Syllabus"
+layout: default
 ---
 
+<style>
+
+/* Compact Header for Default Layout */
+.syllabus-header {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.syllabus-header h1 {
+  font-size: 2rem;
+  color: var(--accent-color);
+  margin: 0 0 0.5rem 0;
+}
+
+.syllabus-header p {
+  color: var(--text-secondary);
+  margin: 0;
+  font-size: 1rem;
+}
+</style>
+
 <div class="syllabus">
+  <!-- Compact header for syllabus -->
+  <div class="syllabus-header">
+    <h1>Course Syllabus</h1>
+    <p>DSAP • HEC Lausanne • Fall Semester • Mondays 12:30–16:00 • Internef 263</p>
+  </div>
 
   <!-- Course Overview Banner -->
   <div class="course-banner">
@@ -51,6 +76,14 @@ title: "Course Syllabus"
         </div>
         <h4>Nuvolos Cloud</h4>
         <p>All materials distributed via cloud platform. <a href="https://app.nuvolos.cloud/enroll/class/RshD654gzU4" target="_blank">Enroll here</a>.</p>
+      </div>
+
+      <div class="info-item">
+        <div class="info-header">
+          <span class="info-badge">Community</span>
+        </div>
+        <h4>Discord Server</h4>
+        <p>Real-time help and peer support. <a href="https://discord.gg/pr4q3QH2" target="_blank">Join Discord</a>.</p>
       </div>
 
     </div>
@@ -173,53 +206,51 @@ title: "Course Syllabus"
     </div>
   </section>
 
-  <!-- Contact Information -->
-  <section class="syllabus-section">
-    <h3 class="section-title">Teaching Team</h3>
-    <div class="contact-grid">
-      
-      <div class="contact-item">
-        <div class="contact-role-badge">Professor</div>
-        <h4>Simon Scheidegger</h4>
-        <p><a href="mailto:simon.scheidegger@unil.ch">simon.scheidegger@unil.ch</a></p>
-      </div>
-
-      <div class="contact-item">
-        <div class="contact-role-badge">Lead TA</div>
-        <h4>Anna Smirnova</h4>
-        <p><a href="mailto:anna.smirnova@unil.ch">anna.smirnova@unil.ch</a> • Mon 15:15–16:00</p>
-      </div>
-
-      <div class="contact-item">
-        <div class="contact-role-badge">Support</div>
-        <h4>Nuvolos Cloud</h4>
-        <p><a href="mailto:support@nuvolos.cloud">support@nuvolos.cloud</a></p>
-      </div>
-
-    </div>
-  </section>
-
   <!-- References -->
   <section class="syllabus-section">
-    <h3 class="section-title">Key References</h3>
+    <h3 class="section-title">Course References & Textbooks</h3>
     <div class="references-grid">
       
       <div class="reference-item">
-        <div class="reference-type">Primary</div>
+        <div class="reference-type">Statistical Learning</div>
         <h4>An Introduction to Statistical Learning</h4>
-        <p>James, Witten, Hastie, Tibshirani • <a href="https://www.statlearning.com" target="_blank">statlearning.com</a></p>
+        <p>James, Witten, Hastie, Tibshirani (2nd Edition)</p>
+        <p><a href="https://www.statlearning.com" target="_blank">statlearning.com</a></p>
       </div>
 
       <div class="reference-item">
-        <div class="reference-type">Advanced</div>
-        <h4>Probabilistic Machine Learning</h4>
-        <p>Murphy • <a href="http://probml.github.io/book1" target="_blank">MIT Press</a></p>
+        <div class="reference-type">Machine Learning</div>
+        <h4>Probabilistic Machine Learning: An Introduction</h4>
+        <p>Kevin P. Murphy • MIT Press</p>
+        <p><a href="http://probml.github.io/book1" target="_blank">probml.github.io/book1</a></p>
       </div>
 
       <div class="reference-item">
-        <div class="reference-type">Programming</div>
-        <h4>Python Resources</h4>
-        <p>Guttag (MIT Press) • Langtangen (Springer) • <a href="https://www.deeplearningbook.org/" target="_blank">Deep Learning Book</a></p>
+        <div class="reference-type">Deep Learning</div>
+        <h4>Deep Learning</h4>
+        <p>Goodfellow, Bengio, Courville • MIT Press</p>
+        <p><a href="http://www.deeplearningbook.org" target="_blank">deeplearningbook.org</a></p>
+      </div>
+
+      <div class="reference-item">
+        <div class="reference-type">Python Programming</div>
+        <h4>Introduction to Computation and Programming Using Python</h4>
+        <p>John V. Guttag • MIT Press</p>
+        <p>Comprehensive introduction to Python programming</p>
+      </div>
+
+      <div class="reference-item">
+        <div class="reference-type">Scientific Python</div>
+        <h4>A Primer on Scientific Programming with Python</h4>
+        <p>Hans Petter Langtangen • Springer</p>
+        <p>Focus on scientific computing applications</p>
+      </div>
+
+      <div class="reference-item">
+        <div class="reference-type">Economics & Finance</div>
+        <h4>QuantEcon</h4>
+        <p>Lectures on quantitative economics</p>
+        <p><a href="https://quantecon.org" target="_blank">quantecon.org</a></p>
       </div>
 
     </div>
@@ -243,7 +274,7 @@ title: "Course Syllabus"
   align-items: center;
   justify-content: space-between;
   margin-bottom: 2.5rem;
-  margin-top: 1rem;
+  margin-top: 0;
   box-shadow: 0 4px 15px rgba(5, 150, 105, 0.2);
 }
 

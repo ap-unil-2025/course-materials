@@ -4,30 +4,6 @@ layout: default
 
 <div class="home">
   
-  <!-- Welcome Greeting -->
-  <div class="welcome-section">
-    <h1>Data Science & Advanced Programming</h1>
-    <p class="welcome-message">This course covers Python programming, statistical learning, and computational methods for economics and finance. You'll work through practical exercises, build a final project, and learn to use modern development tools including AI assistants.</p>
-    <div class="welcome-highlights">
-      <div class="highlight-item">
-        <span class="highlight-icon">🎯</span>
-        <span>Hands-on projects</span>
-      </div>
-      <div class="highlight-item">
-        <span class="highlight-icon">🤖</span>
-        <span>AI-powered development</span>
-      </div>
-      <div class="highlight-item">
-        <span class="highlight-icon">👥</span>
-        <span>Collaborative learning</span>
-      </div>
-      <div class="highlight-item">
-        <span class="highlight-icon">💡</span>
-        <span>Real-world applications</span>
-      </div>
-    </div>
-  </div>
-  
   <!-- Current Week Banner (similar to weekly hub) -->
   <div class="current-banner">
     <div class="current-content">
@@ -72,6 +48,33 @@ layout: default
     </div>
   </section>
 
+  <!-- Platform Setup Section -->
+  <section class="home-sections">
+    <h3 class="section-title">Platform Setup</h3>
+    <div class="platform-grid">
+      
+      <a href="https://app.nuvolos.cloud/enroll/class/RshD654gzU4" target="_blank" class="platform-item priority">
+        <div class="platform-icon">☁️</div>
+        <h4>Enroll in Nuvolos</h4>
+        <p>Cloud computing environment</p>
+      </a>
+
+      <a href="https://github.com/ap-unil-2025" target="_blank" class="platform-item">
+        <div class="platform-icon">💻</div>
+        <h4>Join GitHub Org</h4>
+        <p>Access course repositories</p>
+      </a>
+
+      <a href="https://discord.gg/pr4q3QH2" target="_blank" class="platform-item">
+        <div class="platform-icon">🎮</div>
+        <h4>Join Discord</h4>
+        <p>Community chat and support</p>
+      </a>
+
+
+    </div>
+  </section>
+
   <!-- Project Rules Section -->
   <section class="home-sections">
     <h3 class="section-title">Project Rules & Deadlines</h3>
@@ -91,7 +94,7 @@ layout: default
       <div class="key-rule-item">
         <div class="key-rule-icon">📅</div>
         <h4>Project Proposal</h4>
-        <p>Submit your project idea by <strong>Week 8</strong> • Final submission <strong>Week 12</strong></p>
+        <p>Submit your project idea by <strong>Nov 3</strong> • Final submission <strong>Dec 8</strong></p>
       </div>
 
       <div class="key-rule-item">
@@ -105,38 +108,6 @@ layout: default
         <h4>AI Tools Welcome</h4>
         <p>Use GitHub Copilot, ChatGPT, Claude • Keep AI_LOG.md • Explain AI-generated code</p>
       </div>
-
-    </div>
-  </section>
-
-  <!-- Platform Setup Section -->
-  <section class="home-sections">
-    <h3 class="section-title">Platform Setup</h3>
-    <div class="platform-grid">
-      
-      <a href="https://app.nuvolos.cloud/enroll/class/RshD654gzU4" target="_blank" class="platform-item priority">
-        <div class="platform-icon">☁️</div>
-        <h4>Enroll in Nuvolos</h4>
-        <p>Cloud computing environment</p>
-      </a>
-
-      <a href="https://github.com/ap-unil-2025" target="_blank" class="platform-item">
-        <div class="platform-icon">💻</div>
-        <h4>Join GitHub Org</h4>
-        <p>Access course repositories</p>
-      </a>
-
-      <a href="#" target="_blank" class="platform-item">
-        <div class="platform-icon">🎮</div>
-        <h4>Join Discord</h4>
-        <p>Community chat and support</p>
-      </a>
-
-      <a href="{{ '/showcase' | relative_url }}" class="platform-item showcase">
-        <div class="platform-icon">🏆</div>
-        <h4>Project Showcase</h4>
-        <p>Previous cohort highlights</p>
-      </a>
 
     </div>
   </section>
@@ -162,13 +133,21 @@ layout: default
         <p>anna.smirnova@unil.ch • Mon 15:15–16:00</p>
       </a>
 
-      <div class="contact-item">
+      <a href="mailto:ta1@unil.ch" class="contact-item">
         <div class="contact-header">
-          <span class="contact-role">TAs</span>
+          <span class="contact-role">TA</span>
         </div>
-        <h4>Additional Support</h4>
-        <p>To be announced</p>
-      </div>
+        <h4>Teaching Assistant 1</h4>
+        <p>TBA • Office hours TBA</p>
+      </a>
+
+      <a href="mailto:ta2@unil.ch" class="contact-item">
+        <div class="contact-header">
+          <span class="contact-role">TA</span>
+        </div>
+        <h4>Teaching Assistant 2</h4>
+        <p>TBA • Office hours TBA</p>
+      </a>
 
     </div>
   </section>
@@ -180,51 +159,6 @@ layout: default
 .home {
   max-width: 1200px;
   margin: 0 auto;
-}
-
-/* Welcome Section */
-.welcome-section {
-  text-align: center;
-  margin-bottom: 2.5rem;
-  padding: 2rem 1rem;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-  border-radius: 1rem;
-  margin-top: 1rem;
-}
-
-.welcome-section h1 {
-  font-size: 2.5rem;
-  color: var(--accent-color);
-  margin: 0 0 1rem 0;
-  font-weight: 700;
-}
-
-.welcome-message {
-  font-size: 1.1rem;
-  color: var(--text-primary);
-  line-height: 1.6;
-  max-width: 800px;
-  margin: 0 auto 2rem auto;
-}
-
-.welcome-highlights {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 2rem;
-  margin-top: 1.5rem;
-}
-
-.highlight-item {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-}
-
-.highlight-icon {
-  font-size: 1.2rem;
 }
 
 /* Compact Header for Default Layout */
@@ -601,24 +535,6 @@ layout: default
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
-  .welcome-section {
-    padding: 1.5rem 0.75rem;
-  }
-  
-  .welcome-section h1 {
-    font-size: 2rem;
-  }
-  
-  .welcome-message {
-    font-size: 1rem;
-  }
-  
-  .welcome-highlights {
-    gap: 1rem;
-    flex-direction: column;
-    align-items: center;
-  }
-  
   .home-header h1 {
     font-size: 1.5rem;
   }

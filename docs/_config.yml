@@ -47,9 +47,6 @@ collections:
   projects:
     output: true
     permalink: /:collection/:name.html
-  showcase:
-    output: true
-    permalink: /:collection/:name.html
   slides:
     output: true
     permalink: /slides/:name.html

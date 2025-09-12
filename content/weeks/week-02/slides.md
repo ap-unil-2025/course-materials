@@ -1,6 +1,5 @@
 ---
 marp: true
-theme: unil-theme
 paginate: true
 backgroundColor: #f5f9ff
 header: "Tracking Your Genius (Git & GitHub)"
@@ -27,13 +26,12 @@ footer: "Anna Smirnova, June 24, 2025"
 
 ---
 
-<!-- _class: lead -->
-<!-- _class: invert -->
+
 # Practical Session 2
 # Tracking Your Genius: Git & GitHub
 
 **Anna Smirnova**
-**June 24, 2025**
+**October 6, 2025**
 
 ---
 
@@ -340,3 +338,9 @@ TBA
     *   [Python Documentation](https://docs.python.org/3/)
     *   [VSCode Documentation](https://code.visualstudio.com/docs)
 
+# Your Assignment
+*   Review the key concepts covered in this session.
+*   Complete the GitHub Classroom assignment if you haven't already.
+*   Practice using Git commands in your terminal.
+*   Explore GitHub features like issues, pull requests, and project boards.
+*   If you have any questions or need help, feel free to reach out during office hours or via email.

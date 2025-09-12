@@ -1,9 +1,34 @@
 ---
-layout: page
-title: "Weekly Materials"
+layout: default
 ---
 
+<style>
+
+/* Compact Header for Default Layout */
+.weekly-header {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.weekly-header h1 {
+  font-size: 2rem;
+  color: var(--accent-color);
+  margin: 0 0 0.5rem 0;
+}
+
+.weekly-header p {
+  color: var(--text-secondary);
+  margin: 0;
+  font-size: 1rem;
+}
+</style>
+
 <div class="weekly-hub">
+  <!-- Compact header for weekly materials -->
+  <div class="weekly-header">
+    <h1>Weekly Materials</h1>
+    <p>DSAP • HEC Lausanne • Fall Semester • Mondays 12:30–16:00 • Internef 263</p>
+  </div>
   <div class="current-banner">
     <div class="current-content">
       <span class="current-label">NOW</span>
@@ -43,7 +68,7 @@ title: "Weekly Materials"
           <span class="week-date">Sep 29</span>
         </div>
         <h4>Python Fundamentals I</h4>
-        <p>Variables • Control flow • Data</p>
+        <p>Variables • Control flow • Strings • Git</p>
       </a>
 
       <a href="{{ '/week/week04' | relative_url }}" class="week-item">
@@ -52,7 +77,7 @@ title: "Weekly Materials"
           <span class="week-date">Oct 6</span>
         </div>
         <h4>Python Fundamentals II</h4>
-        <p>Functions • Recursion • OOP</p>
+        <p>Functions • Data structures • Recursion</p>
       </a>
 
       <a href="{{ '/week/week05' | relative_url }}" class="week-item special">
@@ -60,8 +85,8 @@ title: "Weekly Materials"
           <span class="week-num">5</span>
           <span class="week-date">Oct 13</span>
         </div>
-        <h4>Generative AI</h4>
-        <p>LLMs • Autonomous agents</p>
+        <h4>Special Session: Generative AI</h4>
+        <p>LLMs • Autonomous agents (Anna)</p>
       </a>
 
       <a href="{{ '/week/week06' | relative_url }}" class="week-item">
@@ -70,7 +95,7 @@ title: "Weekly Materials"
           <span class="week-date">Oct 20</span>
         </div>
         <h4>Python Fundamentals III</h4>
-        <p>OOP • Classes • Testing</p>
+        <p>OOP • Classes • Inheritance • Testing</p>
       </a>
       
     </div>
@@ -86,7 +111,7 @@ title: "Weekly Materials"
           <span class="week-date">Oct 27</span>
         </div>
         <h4>Linear Regression</h4>
-        <p>Gradient Descent • Polynomial</p>
+        <p>Supervised Learning • Gradient Descent</p>
       </a>
 
       <a href="{{ '/week/week08' | relative_url }}" class="week-item">
@@ -95,7 +120,7 @@ title: "Weekly Materials"
           <span class="week-date">Nov 3</span>
         </div>
         <h4>Classification</h4>
-        <p>k-NN • Naive Bayes • Trees</p>
+        <p>k-NN • Naive Bayes • Decision Trees</p>
       </a>
 
       <a href="{{ '/week/week09' | relative_url }}" class="week-item">
@@ -103,8 +128,8 @@ title: "Weekly Materials"
           <span class="week-num">9</span>
           <span class="week-date">Nov 10</span>
         </div>
-        <h4>Unsupervised Learning</h4>
-        <p>k-Means • GMM • Clustering</p>
+        <h4>Unsupervised Machine Learning</h4>
+        <p>k-Means • GMM • PCA • Clustering</p>
       </a>
 
       <a href="{{ '/week/week10' | relative_url }}" class="week-item">
@@ -113,7 +138,7 @@ title: "Weekly Materials"
           <span class="week-date">Nov 17</span>
         </div>
         <h4>Deep Learning Primer</h4>
-        <p>Neural Networks • TensorFlow</p>
+        <p>MLPs • Backpropagation • TensorFlow</p>
       </a>
       
     </div>
@@ -128,8 +153,8 @@ title: "Weekly Materials"
           <span class="week-num">11</span>
           <span class="week-date">Nov 24</span>
         </div>
-        <h4>Advanced ML</h4>
-        <p>Topics TBA</p>
+        <h4>Best Practices in Data Science</h4>
+        <p>Libraries • EDA • Feature Engineering</p>
       </a>
 
       <a href="{{ '/week/week12' | relative_url }}" class="week-item">
@@ -137,8 +162,8 @@ title: "Weekly Materials"
           <span class="week-num">12</span>
           <span class="week-date">Dec 1</span>
         </div>
-        <h4>High-Performance Computing</h4>
-        <p>Parallelization • GPU • Optimization</p>
+        <h4>Introduction to HPC</h4>
+        <p>Shared/Distributed Memory • Parallelization</p>
       </a>
 
       <a href="{{ '/week/week13' | relative_url }}" class="week-item project">
@@ -146,8 +171,8 @@ title: "Weekly Materials"
           <span class="week-num">13</span>
           <span class="week-date">Dec 8</span>
         </div>
-        <h4>Project Presentations I</h4>
-        <p>Student capstone projects</p>
+        <h4>HPC with Python</h4>
+        <p>Numba • JAX • Multi-threading</p>
       </a>
 
       <a href="{{ '/week/week14' | relative_url }}" class="week-item project">
@@ -155,18 +180,13 @@ title: "Weekly Materials"
           <span class="week-num">14</span>
           <span class="week-date">Dec 15</span>
         </div>
-        <h4>Projects & Wrap-up</h4>
-        <p>Final presentations • Course conclusion</p>
+        <h4>Capstone Project Presentations</h4>
+        <p>Final presentations • Course wrap-up</p>
       </a>
       
     </div>
   </section>
 
-  <div class="quick-links">
-    <a href="{{ '/assignments' | relative_url }}" class="quick-link">📝 Assignments</a>
-    <a href="{{ '/showcase' | relative_url }}" class="quick-link">🏆 Showcase</a>
-    <a href="{{ '/syllabus' | relative_url }}" class="quick-link">📋 Syllabus</a>
-  </div>
 
 </div>
 
@@ -185,7 +205,7 @@ title: "Weekly Materials"
   align-items: center;
   justify-content: space-between;
   margin-bottom: 2.5rem;
-  margin-top: 1rem;
+  margin-top: 0;
   box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
 }
 
@@ -295,6 +315,45 @@ title: "Weekly Materials"
 
 .week-item:hover::before {
   transform: scaleY(1);
+}
+
+/* Disabled/Coming Soon Week Styling */
+.week-item.disabled {
+  opacity: 0.5;
+  background: #f9fafb;
+  border-color: #e5e7eb;
+  cursor: not-allowed;
+}
+
+.week-item.disabled:hover {
+  transform: none;
+  border-color: #e5e7eb;
+  box-shadow: none;
+}
+
+.week-item.disabled .week-header {
+  opacity: 0.6;
+}
+
+.week-item.disabled h4,
+.week-item.disabled p {
+  color: #9ca3af;
+}
+
+.coming-soon-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.95);
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  color: #6b7280;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Week Header */
@@ -408,3 +467,68 @@ title: "Weekly Materials"
   }
 }
 </style>
+
+<script>
+// Check if week content should be available based on date
+function isWeekAvailable(weekDate) {
+  const today = new Date();
+  const week = new Date(weekDate + 'T00:00:00');
+  return today >= week;
+}
+
+// Apply disabled styling to future weeks
+function applyWeekAvailability() {
+  const weekItems = document.querySelectorAll('.week-item');
+  
+  const weekDates = {
+    'week00': '2025-09-15',
+    'week01': '2025-09-15',
+    'week02': '2025-09-22',
+    'week03': '2025-09-29',
+    'week04': '2025-10-06',
+    'week05': '2025-10-13',
+    'week06': '2025-10-20',
+    'week07': '2025-10-27',
+    'week08': '2025-11-03',
+    'week09': '2025-11-10',
+    'week10': '2025-11-17',
+    'week11': '2025-11-24',
+    'week12': '2025-12-01',
+    'week13': '2025-12-08',
+    'week14': '2025-12-15'
+  };
+  
+  weekItems.forEach(item => {
+    const href = item.getAttribute('href');
+    if (href) {
+      const weekMatch = href.match(/week(\d+)/);
+      if (weekMatch) {
+        const weekNum = 'week' + weekMatch[1].padStart(2, '0');
+        if (weekDates[weekNum] && !isWeekAvailable(weekDates[weekNum])) {
+          item.classList.add('disabled');
+          item.style.pointerEvents = 'none';
+          
+          // Check if overlay already exists
+          if (!item.querySelector('.coming-soon-overlay')) {
+            const overlay = document.createElement('div');
+            overlay.className = 'coming-soon-overlay';
+            overlay.textContent = 'Coming Soon';
+            item.appendChild(overlay);
+          }
+        }
+      }
+    }
+  });
+}
+
+// Run when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', applyWeekAvailability);
+} else {
+  // DOM is already loaded
+  applyWeekAvailability();
+}
+
+// Also run after a short delay to ensure Jekyll has rendered everything
+setTimeout(applyWeekAvailability, 100);
+</script>

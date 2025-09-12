@@ -1,9 +1,34 @@
 ---
-layout: page
-title: "Help & Support"
+layout: default
 ---
 
+<style>
+
+/* Compact Header for Default Layout */
+.help-header {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.help-header h1 {
+  font-size: 2rem;
+  color: var(--accent-color);
+  margin: 0 0 0.5rem 0;
+}
+
+.help-header p {
+  color: var(--text-secondary);
+  margin: 0;
+  font-size: 1rem;
+}
+</style>
+
 <div class="help-support">
+  <!-- Compact header for help & support -->
+  <div class="help-header">
+    <h1>Help & Support</h1>
+    <p>DSAP • HEC Lausanne • Fall Semester • Mondays 12:30–16:00 • Internef 263</p>
+  </div>
 
   <!-- Support Banner -->
   <div class="support-banner">
@@ -14,7 +39,7 @@ title: "Help & Support"
         <p>Multiple channels • Quick responses • Community driven</p>
       </div>
     </div>
-    <a href="{{ '/showcase' | relative_url }}" class="support-btn">View Showcase →</a>
+    <a href="https://discord.gg/pr4q3QH2" target="_blank" class="support-btn">Join Discord →</a>
   </div>
 
   <!-- Office Hours & Contact -->
@@ -84,11 +109,6 @@ title: "Help & Support"
         <p>All slides, code examples, and readings available in <a href="{{ '/weekly-materials' | relative_url }}">Weekly Hub</a></p>
       </div>
 
-      <a href="{{ '/showcase' | relative_url }}" class="resource-item showcase">
-        <div class="resource-icon">🏆</div>
-        <h4>Project Showcase</h4>
-        <p>Previous student projects • Inspiration • Examples • Best practices</p>
-      </a>
 
     </div>
   </section>
@@ -129,8 +149,20 @@ title: "Help & Support"
         <h4>Programming Help</h4>
         <p>Python syntax • Library issues • Debugging • Best practices</p>
         <div class="tech-actions">
-          <a href="https://github.com/ap-unil-2025/course-materials/discussions" target="_blank" class="tech-link">Ask Community</a>
+          <a href="https://discord.gg/pr4q3QH2" target="_blank" class="tech-link">Join Discord</a>
           <a href="mailto:anna.smirnova@unil.ch" class="tech-link">Office Hours</a>
+        </div>
+      </div>
+
+      <div class="tech-item">
+        <div class="tech-header">
+          <span class="tech-badge">Discord</span>
+        </div>
+        <h4>Community Chat</h4>
+        <p>Real-time help • Peer support • Quick questions • Study groups</p>
+        <div class="tech-actions">
+          <a href="https://discord.gg/pr4q3QH2" target="_blank" class="tech-link">Join Discord</a>
+          <a href="https://github.com/ap-unil-2025/course-materials/discussions" target="_blank" class="tech-link">GitHub Discussions</a>
         </div>
       </div>
 
@@ -161,16 +193,16 @@ title: "Help & Support"
       <div class="step-item">
         <div class="step-number">3</div>
         <div class="step-content">
-          <h4>Access Weekly Materials</h4>
-          <p>Visit the <a href="{{ '/weekly-materials' | relative_url }}">Weekly Hub</a> for lectures, assignments, and practice</p>
+          <h4>Join Discord Community</h4>
+          <p>Connect with peers and TAs on <a href="https://discord.gg/pr4q3QH2" target="_blank">Discord</a> for real-time help</p>
         </div>
       </div>
 
       <div class="step-item">
         <div class="step-number">4</div>
         <div class="step-content">
-          <h4>Join Community</h4>
-          <p>Connect via Discord and GitHub Discussions for peer support and announcements</p>
+          <h4>Access Weekly Materials</h4>
+          <p>Visit the <a href="{{ '/weekly-materials' | relative_url }}">Weekly Hub</a> for lectures, assignments, and practice</p>
         </div>
       </div>
 
@@ -195,7 +227,7 @@ title: "Help & Support"
   align-items: center;
   justify-content: space-between;
   margin-bottom: 2.5rem;
-  margin-top: 1rem;
+  margin-top: 0;
   box-shadow: 0 4px 15px rgba(124, 58, 237, 0.2);
 }
 
@@ -386,10 +418,6 @@ title: "Help & Support"
   transform: scaleY(1);
 }
 
-.resource-item.showcase {
-  border-color: #f59e0b;
-  background: linear-gradient(135deg, #fefce8 0%, var(--background-color) 100%);
-}
 
 .resource-icon {
   font-size: 1.5rem;

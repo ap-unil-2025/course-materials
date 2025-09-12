@@ -5,7 +5,7 @@ subtitle: "Final project requirements for Advanced Programming Spring 2025"
 ---
 
 # INDIVIDUAL PROJECT GUIDELINES
-Advanced Programming · Spring 2025 UNIL
+Advanced Programming · Fall 2025 HEC Lausanne
 
 > **Important:** These guidelines outline the requirements for your individual programming project.
 > The project demonstrates your ability to apply programming concepts learned throughout the course.
@@ -74,6 +74,11 @@ Advanced Programming · Spring 2025 UNIL
    - Testing approach and results
    - Reflection on what you learned
 
+4. **Video Recording** (max 10 minutes)
+   - Present your project and findings
+   - Demonstrate key functionality
+   - Explain technical decisions
+
 4. **Code Documentation**
    - Docstrings for all major functions
    - Comments for complex logic
@@ -138,14 +143,14 @@ project-name/
 
 ## 4 · Timeline & Milestones
 
-| Week | Milestone | Description |
-|------|-----------|-------------|
-| **Week 8** | Project Proposal | Submit 1-paragraph project description |
-| **Week 9** | Initial Implementation | Core functionality working |
-| **Week 10** | Feature Complete | All planned features implemented |
-| **Week 11** | Testing & Documentation | Tests written, documentation complete |
-| **Week 12** | Final Submission | Repository finalized, report submitted |
-| **Week 13** | Presentations | 5-minute project demo (optional) |
+| Week | Date | Milestone | Description |
+|------|------|-----------|-------------|
+| **Week 8** | Nov 3 | Project Proposal | Submit 1-paragraph project description |
+| **Week 9** | Nov 10 | Initial Implementation | Core functionality working |
+| **Week 10** | Nov 17 | Feature Complete | All planned features implemented |
+| **Week 11** | Nov 24 | Testing & Documentation | Tests written, documentation complete |
+| **Week 13** | Dec 8 | Final Submission | Repository finalized, report submitted |
+| **Week 14** | Dec 15 | Presentations | Project presentations (voluntary) |
 
 ---
 
@@ -233,7 +238,8 @@ Remember: You must understand and be able to explain all code in your project!
 
 1. **GitHub Repository**: Share repository link via course submission system
 2. **Project Report**: Submit PDF (10 pages) separately
-3. **Deadline**: Week 12, Friday 23:59
+3. **Video Recording**: Submit video file (max 10 minutes)
+4. **Deadline**: December 8, 2025 (Week 13)
 
 ### Late Policy:
 - Up to 24 hours late: -10% penalty
@@ -282,5 +288,6 @@ Remember: You must understand and be able to explain all code in your project!
 
 ---
 
-> **Remember:** This project is your opportunity to demonstrate what you've learned.
-> Choose something you're interested in and have fun with it!
+> **Note:** These guidelines align with the capstone project requirements.
+> Students who volunteer may present their projects in Week 14 (December 15, 2025).
+> There are no exams - your grade is based entirely on the capstone project.

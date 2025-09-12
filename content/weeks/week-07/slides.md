@@ -1,18 +1,12 @@
 ---
 marp: true
-theme: unil-theme
+theme: default
 paginate: true
-backgroundColor: #f5f9ff
 header: "Session 7: Trusting Your Code"
 footer: "An Introduction to Automated Testing with `pytest`"
 size: 16:9
-
-class:
-  - lead
-  - invert
 ---
 
-<!-- _class: lead -->
 
 # Session 7: Trusting Your Code
 
@@ -29,8 +23,6 @@ class:
 *   Learn how to test for expected failures (exceptions).
 
 ---
-<!-- _class: invert -->
-
 # Part 1: Why Test?
 
 ---
@@ -62,7 +54,7 @@ You create a "test suite"—a collection of test functions that:
 **This gives you a "safety net".** When you change something, you can run your tests and be confident you didn't break anything.
 
 ---
-<!-- _class: invert -->
+
 
 # Part 2: Your First Tests with `pytest`
 
@@ -174,7 +166,7 @@ Now run `uv run pytest` again. `pytest` will give you a detailed **red** report 
 This makes debugging a failed test incredibly easy.
 
 ---
-<!-- _class: invert -->
+
 
 # Part 3: More Advanced Testing Scenarios
 

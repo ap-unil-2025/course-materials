@@ -1,29 +1,40 @@
 ---
 title: "Week 4: Python Fundamentals II"
 date: 2025-10-06
-description: "Functions, recursion, and object-oriented programming"
+description: "Functions, data structures, recursions, and Jupyter notebooks"
 lecture_slides: "/course-materials/lectures/lecture_4/slides/Advanced_Programming_2025_lecture_4.pdf"
 ta_slides: "/course-materials/slides/practice/week04_slides.html"
 lesson: "/course-materials/lessons/week04-lesson.html"
 assignment:
-  title: "Functions and OOP Assignment"
-  link: "#"
-  description: "Practice with functions, classes, and object-oriented design"
+  title: "Functions, Data Structures & Recursion"
+  link: "/course-materials/assignments/week4-functions-data-structures"
+  description: "Master functions, data structures, and recursive algorithms"
 examples:
-  - title: "OOP Examples Repository"
+  - title: "Jupyter Notebook Introduction"
+    link: "/course-materials/lectures/lecture_4/demo/jupyter_intro.ipynb"
+  - title: "Course Materials Repository"
     link: "https://github.com/ap-unil-2025/course-materials"
 references:
-  - title: "Python OOP Tutorial"
-    link: "https://realpython.com/python3-object-oriented-programming/"
-    description: "Comprehensive guide to OOP in Python"
   - title: "Python Functions Documentation"
     link: "https://docs.python.org/3/tutorial/controlflow.html#defining-functions"
     description: "Official Python functions guide"
+  - title: "Python Data Structures"
+    link: "https://docs.python.org/3/tutorial/datastructures.html"
+    description: "Lists, tuples, dictionaries, and more"
+  - title: "Recursion Tutorial"
+    link: "https://realpython.com/python-recursion/"
+    description: "Understanding recursive algorithms"
 ---
 
-## Week Overview
+## Week 4: Python Fundamentals II
 
-This week's materials include lecture content, practice exercises, and assignments designed to build your understanding of the covered topics.
+### Topics Covered
+- Functions
+- Basic Data structures (lists, tuples, dictionaries)
+- Recursions
+- Jupyter Notebooks (if time permits)
+
+This week deepens your Python knowledge with advanced function concepts, essential data structures, and recursive problem-solving techniques.
 
 ### Getting Started
 

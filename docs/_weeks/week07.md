@@ -6,9 +6,9 @@ lecture_slides: "/course-materials/lectures/lecture_7/slides/Advanced_Programmin
 ta_slides: "/course-materials/slides/practice/week07_slides.html"
 lesson: "/course-materials/lessons/week07-lesson.html"
 assignment:
-  title: "Linear Regression Assignment"
-  link: "#"
-  description: "Implement regression models and gradient descent"
+  title: "Linear Regression & Gradient Descent"
+  link: "/course-materials/assignments/week7-linear-regression"
+  description: "Implement linear regression from scratch and apply to stock prediction"
 examples:
   - title: "Ridge Regression Example"
     link: "/course-materials/lectures/lecture_7/demo/ridge_regression.py"
