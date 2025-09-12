@@ -1,0 +1,1067 @@
+---
+layout: default
+---
+
+<style>
+/* Compact Header for Default Layout */
+.projects-header {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.projects-header h1 {
+  font-size: 2rem;
+  color: var(--accent-color);
+  margin: 0 0 0.5rem 0;
+}
+
+.projects-header p {
+  color: var(--text-secondary);
+  margin: 0;
+  font-size: 1rem;
+}
+</style>
+
+<div class="projects-page">
+  <!-- Compact header for projects page -->
+  <div class="projects-header">
+    <h1>Final Projects</h1>
+    <p>Choose your own adventure with our individual programming projects</p>
+  </div>
+  <!-- Projects Banner -->
+  <div class="projects-banner">
+    <div class="projects-content">
+      <span class="projects-label">2025</span>
+      <div class="projects-info">
+        <h2>Final Projects</h2>
+        <p>Individual projects • Choose your own adventure • Full technical assessment</p>
+      </div>
+    </div>
+    <a href="{{ '/INDIVIDUAL_PROJECT_RULES/' | relative_url }}" class="projects-btn">View Full Rules →</a>
+  </div>
+
+  <!-- Quick Overview -->
+  <section class="projects-section">
+    <h3 class="section-title">Key Information</h3>
+    <div class="compact-rules-grid">
+      
+      <div class="compact-rule">
+        <div class="rule-icon">👤</div>
+        <div class="rule-content">
+          <h4>Individual Work</h4>
+          <p>All projects are solo</p>
+        </div>
+      </div>
+
+      <div class="compact-rule">
+        <div class="rule-icon">📅</div>
+        <div class="rule-content">
+          <h4>Important Dates</h4>
+          <p>Proposal: Nov 3 • Final: Dec 15</p>
+        </div>
+      </div>
+
+      <div class="compact-rule">
+        <div class="rule-icon">🎯</div>
+        <div class="rule-content">
+          <h4>Project Options</h4>
+          <p>Free-topic or SE template</p>
+        </div>
+      </div>
+
+      <div class="compact-rule">
+        <div class="rule-icon">📦</div>
+        <div class="rule-content">
+          <h4>Deliverables</h4>
+          <p>GitHub • 10-page report • Presentation</p>
+        </div>
+      </div>
+
+      <div class="compact-rule">
+        <div class="rule-icon">🔧</div>
+        <div class="rule-content">
+          <h4>Requirements</h4>
+          <p>Python 3.10+ • Clean code • Git</p>
+        </div>
+      </div>
+
+      <div class="compact-rule">
+        <div class="rule-icon">📊</div>
+        <div class="rule-content">
+          <h4>Grading Weight</h4>
+          <p>100% of final grade</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Report Templates -->
+  <section class="projects-section">
+    <h3 class="section-title">Report Templates</h3>
+    <p style="color: var(--text-secondary); margin-bottom: 1rem;">Download templates for your 10-page technical report (single column format):</p>
+    <div class="template-downloads">
+      <a href="{{ '/assets/templates/project_report_template_md.txt' | relative_url }}" class="download-card" download="project_report_template.md">
+        <span class="download-icon">📝</span>
+        <div>
+          <h4>Markdown Template</h4>
+          <p>Simple format with pandoc</p>
+        </div>
+      </a>
+      <a href="{{ '/assets/templates/project_report_template.tex' | relative_url }}" class="download-card" download>
+        <span class="download-icon">📄</span>
+        <div>
+          <h4>LaTeX Template</h4>
+          <p>Professional academic format</p>
+        </div>
+      </a>
+    </div>
+    
+    <!-- How to Use Templates -->
+    <div class="template-usage">
+      <button class="usage-toggle" onclick="toggleUsageInstructions()">
+        <span class="toggle-icon">▶</span>
+        <span class="toggle-text">📚 How to Use These Templates</span>
+        <span class="toggle-hint">(click to expand)</span>
+      </button>
+      
+      <div class="usage-content" id="usageContent" style="display: none;">
+        <div class="usage-tabs">
+        <div class="usage-tab">
+          <h5>📝 Markdown Template</h5>
+          <ol>
+            <li><strong>Download</strong> the template and save it as <code>project_report.md</code></li>
+            <li><strong>Edit</strong> the file in any text editor (VS Code, Sublime, etc.)</li>
+            <li><strong>Convert to PDF</strong> using pandoc:
+              <pre><code>pandoc project_report.md -o project_report.pdf --pdf-engine=xelatex</code></pre>
+            </li>
+            <li><strong>Alternative:</strong> Use online converters like <a href="https://pandoc.org/try/" target="_blank">Pandoc Online</a> or <a href="https://dillinger.io/" target="_blank">Dillinger</a></li>
+          </ol>
+          <p class="template-tip">💡 <strong>Tip:</strong> VS Code with Markdown Preview Enhanced extension provides live preview while editing.</p>
+        </div>
+        
+        <div class="usage-tab">
+          <h5>📄 LaTeX Template</h5>
+          <ol>
+            <li><strong>Download</strong> the template and save it as <code>project_report.tex</code></li>
+            <li><strong>Edit</strong> using a LaTeX editor (Overleaf, TeXstudio, VS Code with LaTeX Workshop)</li>
+            <li><strong>Compile to PDF</strong>:
+              <pre><code>pdflatex project_report.tex
+bibtex project_report  # if using references
+pdflatex project_report.tex</code></pre>
+            </li>
+            <li><strong>Online option:</strong> Upload to <a href="https://www.overleaf.com" target="_blank">Overleaf</a> for cloud-based editing</li>
+          </ol>
+          <p class="template-tip">💡 <strong>Tip:</strong> Overleaf is recommended for beginners - no installation required!</p>
+        </div>
+      </div>
+      
+      <div class="format-requirements">
+        <h5>⚠️ Important Format Requirements</h5>
+        <ul>
+          <li>✅ <strong>Exactly 10 pages</strong> (excluding references and appendices)</li>
+          <li>✅ <strong>Single column format</strong> (not double column)</li>
+          <li>✅ <strong>11pt font size</strong> with 1-inch margins</li>
+          <li>✅ <strong>Include all sections</strong> from the template</li>
+          <li>✅ <strong>PDF submission</strong> required (not .docx or .md)</li>
+        </ul>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Free-Topic Section (Primary Option) -->
+  <section class="projects-section">
+    <h3 class="section-title">Project Options</h3>
+    <div class="selection-intro">
+      <p><strong>All projects are individual.</strong> You can either propose your own data science topic (recommended) OR request one of the challenging software engineering templates below.</p>
+    </div>
+    
+    <h4>Free-Topic Project (Recommended)</h4>
+    <div class="solo-project-item">
+      <div class="solo-header">
+        <div class="solo-icon">📊</div>
+        <div class="solo-info">
+          <h4>Choose Your Own Data Science Adventure</h4>
+          <span class="solo-badge">Individual Project</span>
+        </div>
+      </div>
+      
+      <p class="solo-description">Design and implement your own data science project. This is the recommended option for most students.</p>
+      
+      <div class="solo-requirements">
+        <h5>Requirements</h5>
+        <ul>
+          <li><strong>Individual work:</strong> All projects are solo</li>
+          <li><strong>Proposal required:</strong> 200-word proposal by November 3</li>
+          <li><strong>Data science focus:</strong> Should involve real data analysis, ML, or statistics</li>
+          <li><strong>Python implementation:</strong> Must demonstrate programming concepts from the course</li>
+          <li><strong>Original work:</strong> Cannot reuse projects from other courses</li>
+          <li><strong>Be creative:</strong> Don't just submit the first idea ChatGPT suggests - develop your own unique angle</li>
+        </ul>
+      </div>
+      
+      <div class="solo-actions">
+        <a href="{{ '/INDIVIDUAL_PROJECT_RULES/' | relative_url }}" class="project-link">📝 Full Guidelines</a>
+        <a href="mailto:anna.smirnova@unil.ch" class="project-link">✉️ Contact for Questions</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Optional Template Projects -->
+  <section class="projects-section">
+    <h3 class="section-title">Optional Template Projects (Advanced Software Engineering)</h3>
+    <p style="color: var(--text-secondary); margin-bottom: 1rem;">⚠️ These templates are significantly more challenging and focus on software engineering rather than data science. Available on first-come first-serve basis with instructor approval.</p>
+    <div class="template-projects-grid">
+      {% assign template_projects = site.projects | where_exp: "project", "project.project_id != 'SOLO'" | sort: "difficulty" %}
+      {% for project in template_projects %}
+      <a href="{{ project.url | relative_url }}" class="project-option-item project-card-link">
+        <div class="project-header">
+          <div class="project-id-badge">{{ project.project_id }}</div>
+          <div class="difficulty-badge difficulty-{{ project.difficulty | downcase }}">{{ project.difficulty }}</div>
+        </div>
+        
+        <h4>{{ project.title | escape }}</h4>
+        <p class="focus-area">{{ project.focus_area }}</p>
+        <p class="project-summary">{{ project.summary }}</p>
+        
+        <div class="project-details">
+          <div class="team-info">
+            <strong>Type:</strong> Individual (Template)
+          </div>
+          
+          {% if project.technologies %}
+          <div class="tech-stack">
+            <strong>Technologies:</strong>
+            <div class="tech-tags">
+              {% for tech in project.technologies limit:3 %}
+              <span class="tech-tag">{{ tech }}</span>
+              {% endfor %}
+              {% if project.technologies.size > 3 %}
+              <span class="tech-more">+{{ project.technologies.size | minus: 3 }} more</span>
+              {% endif %}
+            </div>
+          </div>
+          {% endif %}
+        </div>
+        
+        {% if project.template_repo %}
+        <div class="project-actions">
+          <span class="project-link" data-href="{{ project.template_repo }}" onclick="event.preventDefault(); event.stopPropagation(); window.open(this.dataset.href, '_blank');">📁 Template Repo →</span>
+        </div>
+        {% endif %}
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+
+    
+</div>
+
+<script>
+function toggleUsageInstructions() {
+  const content = document.getElementById('usageContent');
+  const icon = document.querySelector('.toggle-icon');
+  const hint = document.querySelector('.toggle-hint');
+  
+  if (content.style.display === 'none') {
+    content.style.display = 'block';
+    icon.textContent = '▼';
+    hint.textContent = '(click to collapse)';
+  } else {
+    content.style.display = 'none';
+    icon.textContent = '▶';
+    hint.textContent = '(click to expand)';
+  }
+}
+</script>
+
+<style>
+/* Projects Page Layout - Using Hub Patterns */
+.projects-page {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Template Download Links */
+.template-link {
+  display: inline-block;
+  margin-right: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--primary-color);
+  border-radius: 0.25rem;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.template-link:hover {
+  background: rgba(59, 130, 246, 0.2);
+  transform: translateY(-1px);
+}
+
+/* Projects Banner */
+.projects-banner {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  border-radius: 0.75rem;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+  margin-top: 1rem;
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.2);
+}
+
+.projects-content {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.projects-label {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.projects-info h2 {
+  color: white;
+  font-size: 1.25rem;
+  margin: 0 0 0.25rem 0;
+}
+
+.projects-info p {
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+.projects-btn {
+  background: white;
+  color: #f59e0b;
+  padding: 0.6rem 1.25rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.projects-btn:hover {
+  transform: translateX(2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+  color: #f59e0b;
+}
+
+/* Section Layout */
+.projects-section {
+  margin-bottom: 2.5rem;
+}
+
+/* Compact Rules Grid */
+.compact-rules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.compact-rule {
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0.625rem;
+  padding: 1rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.875rem;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.compact-rule::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  transform: scaleY(0);
+  transition: transform 0.2s ease;
+}
+
+.compact-rule:hover {
+  border-color: #f59e0b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.1);
+}
+
+.compact-rule:hover::before {
+  transform: scaleY(1);
+}
+
+.rule-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+.rule-content h4 {
+  margin: 0 0 0.25rem 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.rule-content p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.3;
+}
+
+/* Template Downloads */
+.template-downloads {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.download-card {
+  background: var(--background-color);
+  border: 2px solid var(--border-color);
+  border-radius: 0.625rem;
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.download-card::after {
+  content: '↓';
+  position: absolute;
+  right: 1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+  font-size: 1.25rem;
+  opacity: 0.5;
+  transition: all 0.2s ease;
+}
+
+.download-card:hover {
+  border-color: #f59e0b;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.15);
+  text-decoration: none;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.03) 0%, var(--background-color) 100%);
+}
+
+.download-card:hover::after {
+  opacity: 1;
+  transform: translateY(-50%) translateX(2px);
+}
+
+.download-icon {
+  font-size: 2.5rem;
+  flex-shrink: 0;
+}
+
+.download-card h4 {
+  margin: 0 0 0.375rem 0;
+  font-size: 1.125rem;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.download-card p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.3;
+}
+
+.section-title {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0 0 1rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Rules Overview Grid */
+.rules-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.rule-overview-item {
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.rule-overview-item:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.rule-overview-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--primary-color);
+  transform: scaleY(0);
+  transition: transform 0.2s ease;
+}
+
+.rule-overview-item:hover::before {
+  transform: scaleY(1);
+}
+
+.rule-overview-item.priority {
+  border-color: #ef4444;
+  background: linear-gradient(135deg, #fef2f2 0%, var(--background-color) 100%);
+}
+
+.rule-overview-item.priority::before {
+  background: #ef4444;
+}
+
+.rule-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.rule-overview-item h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem 0;
+  line-height: 1.3;
+}
+
+.rule-overview-item p {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Template Projects Grid */
+.template-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.project-option-item {
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.project-option-item:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  text-decoration: none;
+  color: inherit;
+}
+
+.project-option-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--primary-color);
+  transform: scaleY(0);
+  transition: transform 0.2s ease;
+}
+
+.project-option-item:hover::before {
+  transform: scaleY(1);
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.project-id-badge {
+  background: var(--primary-color);
+  color: white;
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: monospace;
+}
+
+.difficulty-badge {
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.difficulty-intermediate {
+  background: #f59e0b;
+  color: white;
+}
+
+.difficulty-advanced {
+  background: #ef4444;
+  color: white;
+}
+
+.project-option-item h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem 0;
+  line-height: 1.3;
+}
+
+.focus-area {
+  font-size: 0.8rem;
+  color: var(--primary-color);
+  font-weight: 500;
+  margin: 0 0 0.5rem 0;
+}
+
+.project-summary {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin: 0 0 1rem 0;
+  line-height: 1.4;
+}
+
+.project-details {
+  margin-bottom: 1rem;
+}
+
+.team-info {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.tech-stack strong {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.tech-tag {
+  background: var(--surface-color);
+  color: var(--text-secondary);
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.7rem;
+  border: 1px solid var(--border-color);
+}
+
+.tech-more {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.project-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.project-link {
+  background: var(--surface-color);
+  color: var(--text-secondary);
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.25rem;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.project-link:hover {
+  background: var(--primary-color);
+  color: white;
+  text-decoration: none;
+}
+
+/* Style for clickable card with secondary action */
+.project-card-link .project-link {
+  position: relative;
+  z-index: 2;
+}
+
+.project-card-link .project-link:hover {
+  background: #f59e0b;
+  color: white;
+}
+
+/* Solo Project Item */
+.solo-project-item {
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.solo-project-item:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.solo-project-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--primary-color);
+  transform: scaleY(0);
+  transition: transform 0.2s ease;
+}
+
+.solo-project-item:hover::before {
+  transform: scaleY(1);
+}
+
+.solo-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.solo-icon {
+  font-size: 1.5rem;
+}
+
+.solo-info h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.25rem 0;
+}
+
+.solo-badge {
+  background: #8b5cf6;
+  color: white;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.solo-description {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin: 0 0 1rem 0;
+  line-height: 1.4;
+}
+
+.solo-requirements h5 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem 0;
+}
+
+.solo-requirements ul {
+  margin: 0 0 1rem 0;
+  padding-left: 1.25rem;
+}
+
+.solo-requirements li {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.25rem;
+  line-height: 1.4;
+}
+
+.solo-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* Template Usage Instructions */
+.template-usage {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.03) 0%, rgba(139, 92, 246, 0.03) 100%);
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  padding: 0;
+  margin-top: 2rem;
+  overflow: hidden;
+}
+
+.usage-toggle {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-family: inherit;
+  text-align: left;
+  transition: background-color 0.2s ease;
+}
+
+.usage-toggle:hover {
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.toggle-icon {
+  font-size: 0.75rem;
+  color: var(--primary-color);
+  transition: transform 0.2s ease;
+  display: inline-block;
+  width: 1rem;
+}
+
+.toggle-text {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.toggle-hint {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-style: italic;
+  margin-left: auto;
+}
+
+.usage-content {
+  padding: 0 1.5rem 1.5rem 1.5rem;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.usage-tabs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.usage-tab {
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.usage-tab::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+}
+
+.usage-tab h5 {
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  margin: 0 0 1rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.usage-tab ol {
+  margin: 0 0 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.usage-tab li {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+}
+
+.usage-tab li strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.usage-tab pre {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0.375rem;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  overflow-x: auto;
+}
+
+.usage-tab code {
+  font-family: 'Monaco', 'Courier New', monospace;
+  font-size: 0.8rem;
+  color: var(--primary-color);
+}
+
+.template-tip {
+  background: rgba(245, 158, 11, 0.1);
+  border-left: 3px solid #f59e0b;
+  padding: 0.75rem;
+  margin: 1rem 0 0 0;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  border-radius: 0.25rem;
+}
+
+.template-tip strong {
+  color: #f59e0b;
+}
+
+.format-requirements {
+  background: rgba(239, 68, 68, 0.05);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.format-requirements h5 {
+  color: #ef4444;
+  font-size: 0.9rem;
+  margin: 0 0 0.75rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.format-requirements ul {
+  margin: 0;
+  padding-left: 1.5rem;
+  list-style: none;
+}
+
+.format-requirements li {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.format-requirements li::before {
+  content: attr(data-icon);
+  position: absolute;
+  left: 0;
+  color: #10b981;
+}
+
+.format-requirements li strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .projects-banner {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+  .projects-content {
+    flex-direction: column;
+  }
+  
+  .rules-overview-grid,
+  .template-projects-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .project-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .solo-header {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+</style>

@@ -1,0 +1,539 @@
+---
+layout: default
+---
+
+<article class="week-page">
+    <!-- Week Banner -->
+    <div class="week-banner">
+        <div class="week-banner-content">
+            <span class="week-label">{{ page.title | escape | replace: "Week: ", "" | upcase }}</span>
+            <div class="week-info">
+                {% if page.description %}
+                <h2>{{ page.description }}</h2>
+                {% endif %}
+                {% if page.date %}
+                <p>{{ page.date | date: "%B %d, %Y" }}</p>
+                {% endif %}
+            </div>
+        </div>
+        <a href="{{ '/weekly-materials' | relative_url }}" class="week-nav-btn">← All Weeks</a>
+    </div>
+
+    <div class="week-content">
+        {% if page.topics %}
+        <section class="week-section">
+            <h3 class="section-title">Topics Covered</h3>
+            <div class="topics-grid">
+                {% for topic in page.topics %}
+                <div class="topic-item">
+                    <div class="topic-icon">📚</div>
+                    <span class="topic-text">{{ topic }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+
+        <section class="week-section">
+            <h3 class="section-title">Weekly Materials</h3>
+            <div class="materials-grid">
+                {% if page.lecture_slides %}
+                    {% if page.lecture_slides.first %}
+                        {% for slide in page.lecture_slides %}
+                        <a href="{{ slide.link }}" class="material-item lecture-item" target="_blank">
+                            <div class="material-icon">🎓</div>
+                            <div class="material-content">
+                                <h3>{{ slide.title }}</h3>
+                                <p>Professor's lecture slides (PDF)</p>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    {% elsif page.lecture_slides != "#" %}
+                        <a href="{{ page.lecture_slides }}" class="material-item lecture-item" target="_blank">
+                            <div class="material-icon">🎓</div>
+                            <div class="material-content">
+                                <h3>Lecture Slides</h3>
+                                <p>Professor's main lecture presentation</p>
+                            </div>
+                        </a>
+                    {% else %}
+                        <div class="material-item lecture-item tba">
+                            <div class="material-icon">🎓</div>
+                            <div class="material-content">
+                                <h3>Lecture Slides</h3>
+                                <p>Professor's main lecture presentation</p>
+                                <span class="tba-badge">TBA</span>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endif %}
+
+                {% if page.ta_slides and page.ta_slides != "#" %}
+                <a href="{{ page.ta_slides | replace: '/slides/practice/', '/slides/practice/' }}" class="material-item ta-item">
+                    <div class="material-icon">👩‍💻</div>
+                    <div class="material-content">
+                        <h3>TA Practice Slides</h3>
+                        <p>Hands-on tutorials and practice exercises</p>
+                    </div>
+                    <div class="material-arrow">→</div>
+                </a>
+                {% endif %}
+
+                {% if page.lesson and page.lesson != "#" %}
+                <a href="{{ page.lesson | replace: '/lessons/', '/lessons/' }}" class="material-item lesson-item">
+                    <div class="material-icon">📖</div>
+                    <div class="material-content">
+                        <h3>Lesson Guide</h3>
+                        <p>Comprehensive explanations and theory</p>
+                    </div>
+                    <div class="material-arrow">→</div>
+                </a>
+                {% endif %}
+
+                {% if page.assignment and page.assignment.link != "#" %}
+                <a href="{{ page.assignment.link | replace: '/assignments/', '/assignments/' }}" class="material-item assignment-item">
+                    <div class="material-icon">📝</div>
+                    <div class="material-content">
+                        <h3>{{ page.assignment.title | default: "Assignment" }}</h3>
+                        <p>{{ page.assignment.description | default: "Weekly homework and exercises" }}</p>
+                    </div>
+                    <div class="material-arrow">→</div>
+                </a>
+                {% endif %}
+
+                {% if page.examples %}
+                <div class="material-item examples-item">
+                    <div class="material-icon">💻</div>
+                    <div class="material-content">
+                        <h3>Code Examples</h3>
+                        <div class="examples-list">
+                            {% for example in page.examples %}
+                            <a href="{{ example.link }}" class="example-link">{{ example.title }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <div class="material-item examples-item tba">
+                    <div class="material-icon">💻</div>
+                    <div class="material-content">
+                        <h3>Code Examples</h3>
+                        <p>Practical code demonstrations and exercises</p>
+                        <span class="tba-badge">TBA</span>
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if page.references %}
+                <div class="material-item references-item">
+                    <div class="material-icon">📚</div>
+                    <div class="material-content">
+                        <h3>References & Resources</h3>
+                        <div class="references-list">
+                            {% for ref in page.references %}
+                            <div class="reference-item">
+                                <a href="{{ ref.link }}" class="reference-link">{{ ref.title }}</a>
+                                {% if ref.description %}
+                                <span class="reference-desc">{{ ref.description }}</span>
+                                {% endif %}
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <div class="material-item references-item tba">
+                    <div class="material-icon">📚</div>
+                    <div class="material-content">
+                        <h3>References & Resources</h3>
+                        <p>Additional reading materials and external resources</p>
+                        <span class="tba-badge">TBA</span>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </section>
+
+        {% if content and content != empty %}
+        <section class="week-section">
+            <h3 class="section-title">Additional Notes</h3>
+            <div class="notes-content">
+                {{ content }}
+            </div>
+        </section>
+        {% endif %}
+    </div>
+</article>
+
+<style>
+/* Week Page Layout - Using Hub Patterns */
+.week-page {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Week Banner - Similar to Current Week Banner */
+.week-banner {
+    background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+    border-radius: 0.75rem;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+    margin-top: 1rem;
+    box-shadow: 0 4px 15px rgba(220, 38, 38, 0.2);
+}
+
+.week-banner-content {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.week-label {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.375rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+.week-info h2 {
+    color: white;
+    font-size: 1.25rem;
+    margin: 0 0 0.25rem 0;
+}
+
+.week-info p {
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+    font-size: 0.875rem;
+}
+
+.week-nav-btn {
+    background: white;
+    color: #dc2626;
+    padding: 0.6rem 1.25rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.week-nav-btn:hover {
+    transform: translateX(-2px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    text-decoration: none;
+    color: #dc2626;
+}
+
+/* Section Layout */
+.week-section {
+    margin-bottom: 2.5rem;
+}
+
+.section-title {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 0 0 1rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Topics Grid */
+.topics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.75rem;
+}
+
+.topic-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    transition: all 0.2s ease;
+}
+
+.topic-item:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.topic-icon {
+    font-size: 1.2rem;
+}
+
+.topic-text {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+/* Materials Grid */
+.materials-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.material-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.material-item:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    text-decoration: none;
+    color: inherit;
+}
+
+.material-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--primary-color);
+    transform: scaleY(0);
+    transition: transform 0.2s ease;
+}
+
+.material-item:hover::before {
+    transform: scaleY(1);
+}
+
+.material-item:hover .material-arrow {
+    transform: translateX(4px);
+    color: var(--primary-color);
+}
+
+.material-icon {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+.material-content {
+    flex-grow: 1;
+}
+
+.material-content h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 0.25rem 0;
+}
+
+.material-content p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.3;
+}
+
+.material-arrow {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-left: 1rem;
+    transition: all 0.2s ease;
+    font-weight: bold;
+}
+
+/* Material Type Colors */
+.lecture-item {
+    border-left: 3px solid var(--primary-color);
+}
+
+.ta-item {
+    border-left: 3px solid #10b981;
+}
+
+.lesson-item {
+    border-left: 3px solid #6366f1;
+}
+
+.assignment-item {
+    border-left: 3px solid #f59e0b;
+}
+
+.examples-item {
+    border-left: 3px solid #8b5cf6;
+}
+
+.references-item {
+    border-left: 3px solid #06b6d4;
+}
+
+/* TBA Items */
+.material-item.tba {
+    cursor: default;
+    opacity: 0.7;
+}
+
+.material-item.tba:hover {
+    transform: none;
+    background: var(--background-color);
+    border-color: var(--border-color);
+}
+
+.tba-badge {
+    display: inline-block;
+    background: var(--text-secondary);
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+}
+
+/* Examples and References (Non-clickable items) */
+.examples-item,
+.references-item {
+    cursor: default;
+}
+
+.examples-item:hover,
+.references-item:hover {
+    transform: none;
+}
+
+.examples-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+}
+
+.example-link {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+    text-decoration: none;
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+    width: fit-content;
+}
+
+.example-link:hover {
+    background: var(--border-color);
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.references-list {
+    margin-top: 0.5rem;
+}
+
+.reference-item {
+    margin-bottom: 0.4rem;
+    line-height: 1.4;
+}
+
+.reference-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.reference-link:hover {
+    text-decoration: underline;
+}
+
+.reference-title {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.reference-desc {
+    display: block;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    margin-top: 0.2rem;
+    font-style: italic;
+}
+
+/* Notes Content */
+.notes-content {
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+}
+
+.notes-content h3,
+.notes-content h4 {
+    color: var(--text-primary);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .week-page {
+        padding: 0 0.75rem;
+    }
+    
+    .week-banner {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .week-banner-content {
+        flex-direction: column;
+    }
+    
+    .topics-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .material-item {
+        padding: 0.875rem;
+    }
+    
+    .material-icon {
+        font-size: 1.3rem;
+        margin-right: 0.75rem;
+    }
+    
+    .material-content h3 {
+        font-size: 0.95rem;
+    }
+    
+    .material-content p {
+        font-size: 0.8rem;
+    }
+    
+    .notes-content {
+        padding: 1.25rem;
+    }
+}
+</style>

@@ -1,0 +1,568 @@
+---
+layout: default
+---
+
+<div class="home">
+  
+  <!-- Current Week Banner (similar to weekly hub) -->
+  <div class="current-banner">
+    <div class="current-content">
+      <span class="current-label">NOW</span>
+      <div class="current-info">
+        <h2>Week 0-1: Course Overview</h2>
+        <p>Setup • Unix/Linux • Git</p>
+      </div>
+    </div>
+    <a href="{{ '/weekly-materials' | relative_url }}" class="current-btn">Access Weekly Hub →</a>
+  </div>
+
+  <!-- Main Content Sections -->
+  <section class="home-sections">
+    <h3 class="section-title">Essential Course Information</h3>
+    <div class="home-grid">
+      
+      <a href="{{ '/syllabus' | relative_url }}" class="home-item">
+        <div class="home-icon">📋</div>
+        <h4>Course Syllabus</h4>
+        <p>Schedule • Grading • Requirements</p>
+      </a>
+
+      <a href="{{ '/weekly-materials' | relative_url }}" class="home-item current">
+        <div class="home-icon">📚</div>
+        <h4>Weekly Materials</h4>
+        <p>Lectures • Practice • Assignments</p>
+      </a>
+
+      <a href="{{ '/projects' | relative_url }}" class="home-item priority">
+        <div class="home-icon">🎯</div>
+        <h4>Individual Project</h4>
+        <p>Choose topic • Build • Learn</p>
+      </a>
+
+      <a href="{{ '/help-support' | relative_url }}" class="home-item">
+        <div class="home-icon">🆘</div>
+        <h4>Help & Support</h4>
+        <p>Office hours • Contact • Resources</p>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- Platform Setup Section -->
+  <section class="home-sections">
+    <h3 class="section-title">Platform Setup</h3>
+    <div class="platform-grid">
+      
+      <a href="https://app.nuvolos.cloud/enroll/class/RshD654gzU4" target="_blank" class="platform-item priority">
+        <div class="platform-icon">☁️</div>
+        <h4>Enroll in Nuvolos</h4>
+        <p>Cloud computing environment</p>
+      </a>
+
+      <a href="https://github.com/ap-unil-2025" target="_blank" class="platform-item">
+        <div class="platform-icon">💻</div>
+        <h4>Join GitHub Org</h4>
+        <p>Access course repositories</p>
+      </a>
+
+      <a href="https://discord.gg/pr4q3QH2" target="_blank" class="platform-item">
+        <div class="platform-icon">🎮</div>
+        <h4>Join Discord</h4>
+        <p>Community chat and support</p>
+      </a>
+
+
+    </div>
+  </section>
+
+  <!-- Project Rules Section -->
+  <section class="home-sections">
+    <h3 class="section-title">Project Rules & Deadlines</h3>
+    <div class="rules-banner">
+      <div class="rules-banner-content">
+        <div class="rules-icon">⚠️</div>
+        <div class="rules-info">
+          <h4>Mandatory Project Deliverables</h4>
+          <p>Individual Python project • GitHub repository • 10-page technical report • Optional presentation</p>
+        </div>
+      </div>
+      <a href="{{ '/projects/' | relative_url }}" class="rules-banner-btn">Go to Projects →</a>
+    </div>
+    
+    <div class="key-rules-grid">
+      
+      <div class="key-rule-item">
+        <div class="key-rule-icon">📅</div>
+        <h4>Project Proposal</h4>
+        <p>Submit your project idea by <strong>Nov 3</strong> • Final submission <strong>Dec 8</strong></p>
+      </div>
+
+      <div class="key-rule-item">
+        <div class="key-rule-icon">🔧</div>
+        <h4>Technical Requirements</h4>
+        <p>Python ≥3.10 • Clean code • Basic testing • Good documentation</p>
+      </div>
+
+      <div class="key-rule-item">
+        <div class="key-rule-icon">🤖</div>
+        <h4>AI Tools Welcome</h4>
+        <p>Use GitHub Copilot, ChatGPT, Claude • Keep AI_LOG.md • Explain AI-generated code</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Contact Information -->
+  <section class="home-sections">
+    <h3 class="section-title">Contact & Office Hours</h3>
+    <div class="contact-grid">
+      
+      <a href="mailto:simon.scheidegger@unil.ch" class="contact-item">
+        <div class="contact-header">
+          <span class="contact-role">Professor</span>
+        </div>
+        <h4>Simon Scheidegger</h4>
+        <p>simon.scheidegger@unil.ch</p>
+      </a>
+
+      <a href="mailto:anna.smirnova@unil.ch" class="contact-item">
+        <div class="contact-header">
+          <span class="contact-role">Lead TA</span>
+        </div>
+        <h4>Anna Smirnova</h4>
+        <p>anna.smirnova@unil.ch • Mon 15:15–16:00</p>
+      </a>
+
+      <a href="mailto:francesco.brunamonti@unil.ch" class="contact-item">
+        <div class="contact-header">
+          <span class="contact-role">TA</span>
+        </div>
+        <h4>Francesco Brunamonti</h4>
+        <p>francesco.brunamonti@unil.ch • Mon 15:15–16:00</p>
+      </a>
+
+      <a href="mailto:zhongshan.chen@unil.ch" class="contact-item">
+        <div class="contact-header">
+          <span class="contact-role">TA</span>
+        </div>
+        <h4>Zhongshan Chen</h4>
+        <p>zhongshan.chen@unil.ch • Mon 15:15–16:00</p>
+      </a>
+
+    </div>
+  </section>
+
+</div>
+
+<style>
+/* Home Page Layout - Using Weekly Hub Patterns */
+.home {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Compact Header for Default Layout */
+.home-header {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.home-header h1 {
+  font-size: 2rem;
+  color: var(--accent-color);
+  margin: 0 0 0.5rem 0;
+}
+
+.home-header p {
+  color: var(--text-secondary);
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* Current Week Banner - Reusing from Weekly Hub */
+.current-banner {
+  background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+  border-radius: 0.75rem;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+  margin-top: 1rem;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
+}
+
+.current-content {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.current-label {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.current-info h2 {
+  color: white;
+  font-size: 1.25rem;
+  margin: 0 0 0.25rem 0;
+}
+
+.current-info p {
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+.current-btn {
+  background: white;
+  color: #3b82f6;
+  padding: 0.6rem 1.25rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.current-btn:hover {
+  transform: translateX(2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+  color: #3b82f6;
+}
+
+/* Section Layout */
+.home-sections {
+  margin-bottom: 2.5rem;
+}
+
+.section-title {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0 0 1rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Grid Layouts */
+.home-grid,
+.platform-grid,
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.contact-grid {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+/* Item Styles */
+.home-item,
+.platform-item {
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+.home-item:hover,
+.platform-item:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  text-decoration: none;
+  color: inherit;
+}
+
+.home-item::before,
+.platform-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--primary-color);
+  transform: scaleY(0);
+  transition: transform 0.2s ease;
+}
+
+.home-item:hover::before,
+.platform-item:hover::before {
+  transform: scaleY(1);
+}
+
+.home-icon,
+.platform-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.home-item h4,
+.platform-item h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem 0;
+  line-height: 1.3;
+}
+
+.home-item p,
+.platform-item p {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Special Item States */
+.home-item.current {
+  border-color: #3b82f6;
+  background: linear-gradient(135deg, #eff6ff 0%, var(--background-color) 100%);
+}
+
+.home-item.priority,
+.platform-item.priority {
+  border-color: #10b981;
+  background: linear-gradient(135deg, #f0fdf4 0%, var(--background-color) 100%);
+}
+
+.platform-item.showcase {
+  border-color: #f59e0b;
+  background: linear-gradient(135deg, #fefce8 0%, var(--background-color) 100%);
+}
+
+/* Project Rules Banner */
+.rules-banner {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  border-radius: 0.75rem;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.2);
+}
+
+.rules-banner-content {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.rules-icon {
+  font-size: 1.5rem;
+}
+
+.rules-info h4 {
+  color: white;
+  font-size: 1rem;
+  margin: 0 0 0.25rem 0;
+  font-weight: 600;
+}
+
+.rules-info p {
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.rules-banner-btn {
+  background: white;
+  color: #f59e0b;
+  padding: 0.6rem 1.25rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.rules-banner-btn:hover {
+  transform: translateX(2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+  color: #f59e0b;
+}
+
+/* Key Rules Grid */
+.key-rules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.key-rule-item {
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.key-rule-item:hover {
+  border-color: #ef4444;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.key-rule-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: #ef4444;
+  transform: scaleY(0);
+  transition: transform 0.2s ease;
+}
+
+.key-rule-item:hover::before {
+  transform: scaleY(1);
+}
+
+.key-rule-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.key-rule-item h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem 0;
+  line-height: 1.3;
+}
+
+.key-rule-item p {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Contact Items */
+.contact-item {
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-item:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  text-decoration: none;
+  color: inherit;
+}
+
+.contact-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--primary-color);
+  transform: scaleY(0);
+  transition: transform 0.2s ease;
+}
+
+.contact-item:hover::before {
+  transform: scaleY(1);
+}
+
+.contact-header {
+  margin-bottom: 0.5rem;
+}
+
+.contact-role {
+  background: var(--primary-color);
+  color: white;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.contact-item h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem 0;
+  line-height: 1.3;
+}
+
+.contact-item p {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .home-header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .current-banner {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+  .current-content {
+    flex-direction: column;
+  }
+  
+  .home-grid,
+  .platform-grid,
+  .contact-grid,
+  .key-rules-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .rules-banner {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+  .rules-banner-content {
+    flex-direction: column;
+  }
+}
+</style>

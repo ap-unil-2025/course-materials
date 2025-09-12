@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% if page.title %}{{ page.title | escape }} | {{ site.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
+    <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
+    {% seo %}
+</head>
+<body>
+    <header class="site-header">
+        <div class="wrapper">
+            {% include navigation.html %}
+        </div>
+    </header>
+
+    <main class="page-content page-transition">
+        <div class="wrapper page-wrapper">
+            {% if page.url == '/' %}
+            <!-- Compact header for homepage -->
+            <div class="home-header">
+                <h1>Data Science and Advanced Programming 2025</h1>
+                <p>DSAP • HEC Lausanne • Fall Semester • Mondays 12:30–16:00 • Internef 263</p>
+            </div>
+            {% endif %}
+            
+            {{ content }}
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrapper">
+            <p>&copy; {{ 'now' | date: "%Y" }} {{ site.title | escape }}. All rights reserved.</p>
+            <p class="credits">Made with ❤️ by Anna Smirnova, Prof. Simon Scheidegger, and Claude Sonnet 4 🤖</p>
+        </div>
+    </footer>
+
+    <!-- Smooth Page Transitions -->
+    <style>
+    /* No CSS transitions - just AJAX navigation */
+    
+    /* Smooth scrolling for same-page links */
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    /* Removed underline animation - clean hover effect only */
+    </style>
+
+    <script>
+    // Smooth SPA-style navigation
+    document.addEventListener('DOMContentLoaded', function() {
+        const pageContent = document.querySelector('.page-wrapper');
+        const navLinks = document.querySelectorAll('.nav-links a');
+        
+        // Handle navigation clicks with AJAX
+        navLinks.forEach(link => {
+            // Skip external links
+            if (link.hostname !== window.location.hostname) {
+                return;
+            }
+            
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const url = this.href;
+                const currentPath = window.location.pathname;
+                
+                // Skip if same page
+                if (url === window.location.href) {
+                    return;
+                }
+                
+                // Fetch new page content
+                fetch(url)
+                    .then(response => response.text())
+                    .then(html => {
+                        // Parse the new page
+                        const parser = new DOMParser();
+                        const newDoc = parser.parseFromString(html, 'text/html');
+                        const newContent = newDoc.querySelector('.page-wrapper');
+                        const newTitle = newDoc.querySelector('title');
+                        
+                        // Update content instantly
+                        if (newContent) {
+                            pageContent.innerHTML = newContent.innerHTML;
+                        }
+                        if (newTitle) {
+                            document.title = newTitle.textContent;
+                        }
+                        
+                        // Update URL without reload
+                        history.pushState({}, '', url);
+                        
+                        // Update active navigation
+                        updateActiveNav(url);
+                        
+                        // Scroll to top
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    })
+                    .catch(error => {
+                        console.log('AJAX failed, falling back to normal navigation');
+                        window.location.href = url;
+                    });
+            });
+        });
+        
+        // Handle browser back/forward
+        window.addEventListener('popstate', function() {
+            window.location.reload();
+        });
+        
+        // Update active navigation state
+        function updateActiveNav(currentUrl) {
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.href === currentUrl || 
+                    (currentUrl.includes('/week/') && link.href.includes('/weekly-materials'))) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        // Initial active state
+        updateActiveNav(window.location.href);
+    });
+    </script>
+</body>
+</html>

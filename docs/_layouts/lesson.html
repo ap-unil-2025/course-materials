@@ -1,0 +1,45 @@
+---
+layout: default
+---
+
+<article class="lesson">
+    <header class="lesson-header">
+        <h1 class="lesson-title">{{ page.title | escape }}</h1>
+        <div class="lesson-meta">
+            {% if page.lesson_number %}
+            <span class="lesson-number">Lesson {{ page.lesson_number }}</span>
+            {% endif %}
+            {% if page.date %}
+            <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time>
+            {% endif %}
+            {% if page.duration %}
+            <span class="lesson-duration">{{ page.duration }}</span>
+            {% endif %}
+        </div>
+        {% if page.objectives %}
+        <div class="lesson-objectives">
+            <h3>Learning Objectives</h3>
+            <ul>
+                {% for objective in page.objectives %}
+                <li>{{ objective }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </header>
+
+    <div class="lesson-content">
+        {{ content }}
+    </div>
+
+    {% if page.resources %}
+    <div class="lesson-resources">
+        <h3>Additional Resources</h3>
+        <ul>
+            {% for resource in page.resources %}
+            <li><a href="{{ resource.url }}" target="_blank">{{ resource.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+</article>

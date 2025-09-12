@@ -1,0 +1,55 @@
+name: Sync Professor's Repository
+
+on:
+  schedule:
+    # Run daily at 8 AM UTC
+    - cron: '0 8 * * *'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  sync-submodule:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Check for updates
+        id: check
+        run: |
+          cd docs/slides/lecture
+          git fetch origin
+          LOCAL=$(git rev-parse HEAD)
+          REMOTE=$(git rev-parse origin/main || git rev-parse origin/master)
+          
+          if [ "$LOCAL" != "$REMOTE" ]; then
+            echo "updates=true" >> $GITHUB_OUTPUT
+            echo "📚 New content available from professor's repo!"
+            git log --oneline HEAD..origin/main 2>/dev/null || git log --oneline HEAD..origin/master
+          else
+            echo "updates=false" >> $GITHUB_OUTPUT
+            echo "✅ Already up to date"
+          fi
+      
+      - name: Update submodule
+        if: steps.check.outputs.updates == 'true'
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git submodule update --remote
+          git add docs/slides/lecture
+          git commit -m "Update professor's lecture materials
+
+          Auto-sync from sischei/advanced_programming_2025" || echo "No changes to commit"
+          git push || echo "Nothing to push"
+      
+      - name: Trigger site rebuild
+        if: steps.check.outputs.updates == 'true'
+        run: |
+          curl -X POST \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/${{ github.repository }}/dispatches \
+            -d '{"event_type":"professor-repo-updated"}'
