@@ -98,10 +98,12 @@ document.addEventListener('DOMContentLoaded', function() {
 .nav-links a.active {
     color: var(--primary-color);
     font-weight: 600;
+    background-color: rgba(59, 130, 246, 0.05);
 }
 
-.nav-links a.active::after {
-    width: 100%;
+/* Hide the underline pseudo-element completely */
+.nav-links a::after {
+    display: none !important;
 }
 
 .external-links {
