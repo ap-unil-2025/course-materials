@@ -469,66 +469,207 @@ layout: default
 </style>
 
 <script>
-// Check if week content should be available based on date
-function isWeekAvailable(weekDate) {
-  const today = new Date();
-  const week = new Date(weekDate + 'T00:00:00');
-  return today >= week;
-}
-
-// Apply disabled styling to future weeks
-function applyWeekAvailability() {
-  const weekItems = document.querySelectorAll('.week-item');
-  
+// Immediate greying out for future weeks
+(function() {
+  // Test date: September 11, 2025
+  const testDate = new Date('2025-09-11T00:00:00');
   const weekDates = {
-    'week00': '2025-09-15',
-    'week01': '2025-09-15',
-    'week02': '2025-09-22',
-    'week03': '2025-09-29',
-    'week04': '2025-10-06',
-    'week05': '2025-10-13',
-    'week06': '2025-10-20',
-    'week07': '2025-10-27',
-    'week08': '2025-11-03',
-    'week09': '2025-11-10',
-    'week10': '2025-11-17',
-    'week11': '2025-11-24',
-    'week12': '2025-12-01',
-    'week13': '2025-12-08',
-    'week14': '2025-12-15'
+      'week00': '2025-09-15',
+      'week01': '2025-09-15', // Week 0-1 combined
+      'week02': '2025-09-22',
+      'week03': '2025-09-29',
+      'week04': '2025-10-06',
+      'week05': '2025-10-13',
+      'week06': '2025-10-20',
+      'week07': '2025-10-27',
+      'week08': '2025-11-03',
+      'week09': '2025-11-10',
+      'week10': '2025-11-17',
+      'week11': '2025-11-24',
+      'week12': '2025-12-01',
+      'week13': '2025-12-08',
+      'week14': '2025-12-15'
   };
-  
-  weekItems.forEach(item => {
-    const href = item.getAttribute('href');
-    if (href) {
-      const weekMatch = href.match(/week(\d+)/);
-      if (weekMatch) {
-        const weekNum = 'week' + weekMatch[1].padStart(2, '0');
-        if (weekDates[weekNum] && !isWeekAvailable(weekDates[weekNum])) {
-          item.classList.add('disabled');
-          item.style.pointerEvents = 'none';
-          
-          // Check if overlay already exists
-          if (!item.querySelector('.coming-soon-overlay')) {
-            const overlay = document.createElement('div');
-            overlay.className = 'coming-soon-overlay';
-            overlay.textContent = 'Coming Soon';
-            item.appendChild(overlay);
-          }
+
+  // Check if week content should be available based on date
+  function isWeekAvailable(weekId, weekDate) {
+    // Always allow Week 0-1 (course introduction)
+    if (weekId === 'week00' || weekId === 'week01') {
+      return true;
+    }
+    
+    const week = new Date(weekDate + 'T00:00:00');
+    return testDate >= week;
+  }
+
+  // Extract week ID from href attribute
+  function extractWeekId(href) {
+    if (!href) return null;
+    
+    const weekMatch = href.match(/week(\d+)/);
+    if (weekMatch) {
+      const weekNum = weekMatch[1].padStart(2, '0');
+      return 'week' + weekNum;
+    }
+    return null;
+  }
+
+  // Apply disabled styling to future weeks
+  function applyWeekAvailability() {
+    console.log('Applying week availability checks...');
+    
+    // Wait a bit more to ensure elements are ready
+    const weekItems = document.querySelectorAll('.week-item');
+    
+    if (weekItems.length === 0) {
+      console.warn('No week items found, retrying...');
+      return false; // Indicate retry needed
+    }
+    
+    console.log('Found', weekItems.length, 'week items');
+    
+    let processedCount = 0;
+    
+    weekItems.forEach(item => {
+      // Skip holiday weeks - they have special styling already
+      if (item.classList.contains('holiday')) {
+        console.log('Skipping holiday week');
+        return;
+      }
+      
+      // Don't modify current week styling
+      if (item.classList.contains('current')) {
+        console.log('Skipping current week');
+        return;
+      }
+      
+      const href = item.getAttribute('href');
+      const weekId = extractWeekId(href);
+      
+      if (!weekId) {
+        console.warn('Could not extract week ID from href:', href);
+        return;
+      }
+      
+      const weekDate = weekDates[weekId];
+      if (!weekDate) {
+        console.warn('No date configured for week:', weekId);
+        return;
+      }
+      
+      console.log('Checking', weekId, 'with date', weekDate);
+      
+      if (!isWeekAvailable(weekId, weekDate)) {
+        console.log('Disabling', weekId);
+        
+        // Remove any existing disabled state first
+        item.classList.remove('disabled');
+        const existingOverlay = item.querySelector('.coming-soon-overlay');
+        if (existingOverlay) {
+          existingOverlay.remove();
+        }
+        
+        // Apply disabled state
+        item.classList.add('disabled');
+        item.style.pointerEvents = 'none';
+        
+        // Add coming soon overlay
+        const overlay = document.createElement('div');
+        overlay.className = 'coming-soon-overlay';
+        overlay.textContent = 'Coming Soon';
+        item.appendChild(overlay);
+        
+        processedCount++;
+      } else {
+        console.log('Week', weekId, 'is available');
+        // Ensure it's not disabled if it should be available
+        item.classList.remove('disabled');
+        item.style.pointerEvents = '';
+        const existingOverlay = item.querySelector('.coming-soon-overlay');
+        if (existingOverlay) {
+          existingOverlay.remove();
         }
       }
+    });
+    
+    console.log('Processed', processedCount, 'weeks as unavailable');
+    return true; // Indicate success
+  }
+
+  // Robust initialization with multiple fallbacks
+  function initialize() {
+    console.log('Initializing week availability system...');
+    
+    // Try to apply immediately
+    if (applyWeekAvailability()) {
+      return; // Success on first try
     }
+    
+    // Fallback 1: Wait for DOM
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM ready, applying week availability...');
+        if (!applyWeekAvailability()) {
+          // Fallback 2: Short delay after DOM
+          setTimeout(function() {
+            console.log('Delayed attempt after DOM ready...');
+            applyWeekAvailability();
+          }, 100);
+        }
+      });
+    }
+    
+    // Fallback 3: Wait for full page load
+    window.addEventListener('load', function() {
+      console.log('Page loaded, ensuring week availability is applied...');
+      applyWeekAvailability();
+    });
+    
+    // Fallback 4: Delayed execution for slow-loading content
+    setTimeout(function() {
+      console.log('Final delayed check...');
+      applyWeekAvailability();
+    }, 500);
+  }
+
+  // Handle both initial load and AJAX navigation
+  if (document.readyState === 'complete') {
+    // Page already loaded
+    initialize();
+  } else {
+    // Page still loading
+    initialize();
+  }
+  
+  // Re-run when content is loaded via AJAX (for the navigation system)
+  document.addEventListener('DOMContentLoaded', function() {
+    // Watch for content changes (for AJAX navigation)
+    const observer = new MutationObserver(function(mutations) {
+      let shouldRecheck = false;
+      mutations.forEach(function(mutation) {
+        if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+          // Check if week items were added
+          for (let node of mutation.addedNodes) {
+            if (node.nodeType === 1 && (node.classList.contains('week-item') || node.querySelector('.week-item'))) {
+              shouldRecheck = true;
+              break;
+            }
+          }
+        }
+      });
+      
+      if (shouldRecheck) {
+        console.log('Content changed, reapplying week availability...');
+        setTimeout(applyWeekAvailability, 100);
+      }
+    });
+    
+    // Start observing
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
   });
-}
-
-// Run when DOM is ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', applyWeekAvailability);
-} else {
-  // DOM is already loaded
-  applyWeekAvailability();
-}
-
-// Also run after a short delay to ensure Jekyll has rendered everything
-setTimeout(applyWeekAvailability, 100);
+  
+})();
 </script>
