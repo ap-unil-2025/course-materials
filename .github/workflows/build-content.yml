@@ -36,8 +36,18 @@ jobs:
       - name: Pull latest submodule changes
         run: |
           git config --global url."https://${{ secrets.SUBMODULE_TOKEN }}@github.com/".insteadOf "https://github.com/"
+          git config --global pull.rebase false
           git submodule update --init --recursive
-          git submodule foreach git pull origin main || git submodule foreach git pull origin master || true
+          git submodule foreach 'git pull origin main || git pull origin master || true'
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      
+      - name: Install Python dependencies
+        run: |
+          pip install python-frontmatter
 
       - name: Install Marp CLI
         run: npm install -g @marp-team/marp-cli

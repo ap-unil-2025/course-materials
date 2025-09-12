@@ -6,7 +6,8 @@ set -e
 
 echo "🔄 Updating submodules..."
 git submodule update --init --recursive
-git submodule foreach git pull origin main || git submodule foreach git pull origin master || true
+git config --global pull.rebase false
+git submodule foreach 'git pull origin main || git pull origin master || true'
 
 # Run the date filter to generate manifest
 echo "📅 Filtering content by date..."

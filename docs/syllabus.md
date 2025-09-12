@@ -360,8 +360,7 @@ layout: default
 .info-item,
 .skill-item,
 .assessment-item,
-.contact-item,
-.reference-item {
+.contact-item {
   background: var(--background-color);
   border: 1px solid var(--border-color);
   border-radius: 0.5rem;
@@ -371,11 +370,27 @@ layout: default
   overflow: hidden;
 }
 
+/* Reference Item Specific Styles */
+.reference-item {
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0.625rem;
+  padding: 1.25rem;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.reference-item:hover {
+  border-color: #6b7280;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  background: linear-gradient(135deg, #fafafa 0%, var(--background-color) 100%);
+}
+
 .info-item:hover,
 .skill-item:hover,
 .assessment-item:hover,
-.contact-item:hover,
-.reference-item:hover {
+.contact-item:hover {
   border-color: var(--primary-color);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -384,8 +399,7 @@ layout: default
 .info-item::before,
 .skill-item::before,
 .assessment-item::before,
-.contact-item::before,
-.reference-item::before {
+.contact-item::before {
   content: '';
   position: absolute;
   top: 0;
@@ -400,8 +414,7 @@ layout: default
 .info-item:hover::before,
 .skill-item:hover::before,
 .assessment-item:hover::before,
-.contact-item:hover::before,
-.reference-item:hover::before {
+.contact-item:hover::before {
   transform: scaleY(1);
 }
 
@@ -412,14 +425,26 @@ layout: default
 }
 
 .info-badge,
-.contact-role-badge,
-.reference-type {
+.contact-role-badge {
   background: var(--primary-color);
   color: white;
   padding: 0.2rem 0.5rem;
   border-radius: 0.25rem;
   font-size: 0.75rem;
   font-weight: 600;
+}
+
+.reference-type {
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+  color: var(--text-secondary);
+  padding: 0.25rem 0.625rem;
+  border-radius: 0.375rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: inline-block;
+  margin-bottom: 0.5rem;
 }
 
 .info-badge.priority {
