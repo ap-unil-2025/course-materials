@@ -36,8 +36,8 @@ jobs:
       - name: Fast sync content to Jekyll collections
         run: |
           echo "🔄 Fast syncing content/ to Jekyll collections..."
-          chmod +x sync-content-fast.sh
-          ./sync-content-fast.sh
+          chmod +x sync-content.sh
+          ./sync-content.sh --fast
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1

@@ -1,10 +1,26 @@
 #!/bin/bash
 
-# Simple sync script - just copy files, no fancy processing
+# Sync content from source to Jekyll collections
+# Usage: 
+#   ./sync-content.sh           - Full sync with slide building
+#   ./sync-content.sh --fast    - Skip Marp slide building (for CI)
+#   ./sync-content.sh --slides  - Only build slides (no sync)
 
 set -e
 
-echo "🔄 Syncing content/ to Jekyll collections..."
+# Parse arguments
+MODE="full"
+if [[ "$1" == "--fast" ]]; then
+    MODE="fast"
+    echo "🚀 Fast mode: Skipping slide building"
+elif [[ "$1" == "--slides" ]]; then
+    MODE="slides"
+    echo "🎯 Slides-only mode: Building slides without syncing"
+fi
+
+if [[ "$MODE" != "slides" ]]; then
+    echo "🔄 Syncing content/ to Jekyll collections..."
+fi
 
 # Create directories
 mkdir -p docs/_lessons docs/_assignments docs/_projects docs/_slides/practice docs/slides/practice docs/_weeks
@@ -27,13 +43,15 @@ for week_dir in content/weeks/week-*; do
             cp "$week_dir/slides.md" "docs/_slides/practice/${week_num}_slides.md"
             echo "  ✅ $week_num/slides.md → _slides/practice/${week_num}_slides.md"
             
-            # Build HTML slides with marp
-            echo "  🎯 Building $week_num slides..."
-            week_num_compact=$(echo "$week_num" | sed 's/week-/week/')
-            npx @marp-team/marp-cli "$week_dir/slides.md" \
-                --config .marprc.yml \
-                --theme content/themes/unil-theme.css \
-                --output "docs/slides/practice/${week_num_compact}_slides.html"
+            # Build HTML slides with marp (skip in fast mode)
+            if [[ "$MODE" != "fast" ]]; then
+                echo "  🎯 Building $week_num slides..."
+                week_num_compact=$(echo "$week_num" | sed 's/week-/week/')
+                npx @marp-team/marp-cli "$week_dir/slides.md" \
+                    --config .marprc.yml \
+                    --theme content/themes/unil-theme.css \
+                    --output "docs/slides/practice/${week_num_compact}_slides.html"
+            fi
         fi
     fi
 done
@@ -116,28 +134,36 @@ EOF
 done
 fi  # End of disabled block
 
-# Sync projects
-echo "🚀 Syncing projects..."
-if [ -d "content/projects" ]; then
-    for project_file in content/projects/*.md; do
-        if [ -f "$project_file" ]; then
-            filename=$(basename "$project_file")
-            cp "$project_file" "docs/_projects/$filename"
-            echo "  ✅ $filename"
-        fi
-    done
+# Sync projects (skip in slides-only mode)
+if [[ "$MODE" != "slides" ]]; then
+    echo "🚀 Syncing projects..."
+    if [ -d "content/projects" ]; then
+        for project_file in content/projects/*.md; do
+            if [ -f "$project_file" ]; then
+                filename=$(basename "$project_file")
+                cp "$project_file" "docs/_projects/$filename"
+                echo "  ✅ $filename"
+            fi
+        done
+    fi
 fi
 
-# Sync assignments
-echo "📝 Syncing assignments..."
-if [ -d "content/assignments" ]; then
-    for assignment_file in content/assignments/*.md; do
-        if [ -f "$assignment_file" ]; then
-            filename=$(basename "$assignment_file")
-            cp "$assignment_file" "docs/_assignments/$filename"
-            echo "  ✅ $filename"
-        fi
-    done
+# Sync assignments (skip in slides-only mode)
+if [[ "$MODE" != "slides" ]]; then
+    echo "📝 Syncing assignments..."
+    if [ -d "content/assignments" ]; then
+        for assignment_file in content/assignments/*.md; do
+            if [ -f "$assignment_file" ]; then
+                filename=$(basename "$assignment_file")
+                cp "$assignment_file" "docs/_assignments/$filename"
+                echo "  ✅ $filename"
+            fi
+        done
+    fi
 fi
 
-echo "✅ Content sync complete!"
+if [[ "$MODE" == "slides" ]]; then
+    echo "✅ Slide building complete!"
+else
+    echo "✅ Content sync complete!"
+fi
