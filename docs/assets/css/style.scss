@@ -456,13 +456,15 @@ tr:hover {
 }
 
 .site-footer .citation {
-  margin: 0.75rem 0;
-  padding: 0.75rem;
+  margin: 0.75rem auto;
+  padding: 0.5rem 1rem;
   background-color: var(--surface-color);
   border-radius: 0.5rem;
   font-size: 0.85rem;
   color: var(--text-primary);
   border: 1px solid var(--border-color);
+  max-width: 600px;
+  text-align: center;
 }
 
 .card {
