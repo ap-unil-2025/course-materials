@@ -12,10 +12,10 @@
     
     <div class="nav-links" id="nav-links">
         <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Home</a>
-        <a href="{{ '/syllabus' | relative_url }}" {% if page.url contains '/syllabus' %}class="active"{% endif %}>Syllabus</a>
-        <a href="{{ '/weekly-materials' | relative_url }}" {% if page.url contains '/weekly-materials' or page.url contains '/week/' or page.url contains '/assignments' %}class="active"{% endif %}>Weekly Materials</a>
-        <a href="{{ '/projects' | relative_url }}" {% if page.url contains '/projects' or page.url contains 'PROJECT_RULES' %}class="active"{% endif %}>Projects</a>
-        <a href="{{ '/help-support' | relative_url }}" {% if page.url contains '/help-support' %}class="active"{% endif %}>Help & Support</a>
+        <a href="{{ '/syllabus/' | relative_url }}" {% if page.url contains '/syllabus' %}class="active"{% endif %}>Syllabus</a>
+        <a href="{{ '/weekly-materials/' | relative_url }}" {% if page.url contains '/weekly-materials' or page.url contains '/week/' or page.url contains '/assignments' %}class="active"{% endif %}>Weekly Materials</a>
+        <a href="{{ '/projects/' | relative_url }}" {% if page.url contains '/projects' or page.url contains 'PROJECT_RULES' %}class="active"{% endif %}>Projects</a>
+        <a href="{{ '/help-support/' | relative_url }}" {% if page.url contains '/help-support' %}class="active"{% endif %}>Help & Support</a>
         
         {% if site.data.navigation.external_links %}
         <div class="external-links">
