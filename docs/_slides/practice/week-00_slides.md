@@ -11,6 +11,12 @@ style: |
     background: #003aff;
     color: white;
   }
+    section.lead footer {
+    color: white;
+  }
+  section.lead header {
+    color: white;
+  }
   section.lead h1, section.lead h2, section.lead h3 {
     color: white;
     border-bottom: none;
@@ -27,9 +33,18 @@ style: |
 
 # Session 0: Welcome to Advanced Programming @ UNIL 2025!
 ## Anna Smirnova, TA
-## [Course Website](https://ap-unil-2025.github.io/course-materials/)
----
 
+---
+# Before we start: 
+<div align="center">
+
+| Course Website | Discord Server |
+|:--------------:|:--------------:|
+| ![Course Website QR](https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://ap-unil-2025.github.io/course-materials/) | ![Discord QR](https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://discord.com/invite/pr4q3QH2) |
+
+</div>
+
+---
 # Welcome! I'm Anna
 * I will be the course coordinator and the exercise lead for the semester.
 * I will hold the weekly hands-on sessions and help you with assignments.
@@ -111,7 +126,7 @@ We will focus on the **"how"** and **"why"** of modern programming workflows.
 ---
 # Administrative Details
 *   **Office Hours**: We will hold weekly office hours on Friday for questions and help with assignments. We will not be covering full solutions during these hours, or live debugging your code, but we will help you understand the concepts and guide you in the right direction.
-*   **Communication**: Please use the Discord server: https://discord.gg/your-invite-link for all course-related questions and discussions. This is the best way to get help and interact with your peers and instructors.
+*   **Communication**: Please use the Discord server: https://discord.com/invite/pr4q3QH2 for all course-related questions and discussions. This is the best way to get help and interact with your peers and instructors.
 > **Note:** I will not be answering questions via email. Please use Discord.
 > **Note:** **We will not be using Moodle** for this course, except for announcements. All course materials will be on the course website and GitHub.
 ---

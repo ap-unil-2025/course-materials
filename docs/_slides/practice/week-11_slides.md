@@ -1,28 +1,32 @@
 ---
 marp: true
-theme: unil-theme
 paginate: true
-backgroundColor: #f5f9ff
-header: "session 3: Modern Python Projects"
+header: "Modern Python Projects"
 footer: "Anna Smirnova, June 24, 2025"
 style: |
-  section {
-    font-size: 29px;
+  section.lead {
+    background: #003aff;
+    color: white;
   }
-  h1 {
-    font-size: 40px;
+    section.lead footer {
+    color: white;
   }
-  h2 {
-    font-size: 10px;
+  section.lead header {
+    color: white;
   }
-  h3 {
-    font-size: 20px;
-    }
+  section.lead h1, section.lead h2, section.lead h3 {
+    color: white;
+    border-bottom: none;
+  }
+  section.lead a {
+    color: white;
+  }
 ---
 
 <!-- _class: lead -->
 
-# Session 11: Modern Python Projects
+# Session 11: Python Projects That Don’t Make You Cry
+
 
 **Building organized, reproducible, and professional code.**
 

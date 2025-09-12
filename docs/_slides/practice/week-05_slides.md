@@ -1,10 +1,9 @@
 ---
 marp: true
-theme: unil-theme
+theme: gradient
 paginate: true
-backgroundColor: #f5f9ff
 size: 16:9
-title: "Session 5: Generative AI for Programming"
+title: "Session 5: Generative AI for Programming ✨"
 description: "Large Language Models and Autonomous Agents"
 author: "Anna Smirnova"
 date: "2025-10-13"
@@ -13,7 +12,7 @@ header: "Session 5: Generative AI for Programming"
 
 <!-- _class: lead -->
 
-# Session 5: Generative AI for Programming
+# Guest Lecture: Generative AI for Programming ✨
 
 **Large Language Models and Autonomous Agents**
 

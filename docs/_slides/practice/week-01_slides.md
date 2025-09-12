@@ -9,18 +9,24 @@ paginate: true
 header: "Code Like a Scientist: Essential Tools for Research Programming"
 footer: "Anna Smirnova, September 15, 2025"
 style: |
-  section {
-    font-size: 29px;
+  section.lead {
+    background: #003aff;
+    color: white;
   }
-  h1 {
-    font-size: 40px;
+  section.lead footer {
+    color: white;
   }
-  h2 {
-    font-size: 10px;
+  section.lead header {
+    color: white;
   }
-  h3 {
-    font-size: 20px;
-    }
+  section.lead h1, section.lead h2, section.lead h3 {
+    color: white;
+    border-bottom: none;
+  }
+  section.lead a {
+    color: white;
+  }
+
 
 # headerPosition: center
 # footerPosition: center
@@ -29,7 +35,7 @@ style: |
 
 ---
 
-<!-- _class: invert -->
+<!-- _class: lead -->
 
 # Practical Session 1 
 # Code Like a Scientist: Essential Tools for Research Programming

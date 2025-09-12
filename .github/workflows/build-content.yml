@@ -33,11 +33,19 @@ jobs:
           submodules: recursive
           token: ${{ secrets.SUBMODULE_TOKEN || secrets.GITHUB_TOKEN }}
 
-      - name: Fast sync content to Jekyll collections
+      - name: Setup Node.js for Marp
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          
+      - name: Install Marp CLI
+        run: npm install -g @marp-team/marp-cli
+        
+      - name: Sync content and build slides
         run: |
-          echo "🔄 Fast syncing content/ to Jekyll collections..."
+          echo "🔄 Syncing content/ to Jekyll collections and building slides..."
           chmod +x sync-content.sh
-          ./sync-content.sh --fast
+          ./sync-content.sh
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
