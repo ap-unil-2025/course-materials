@@ -288,9 +288,11 @@ layout: default
   text-decoration: none;
   color: inherit;
   transition: all 0.2s ease;
-  display: block;
+  display: flex;
+  flex-direction: column;
   position: relative;
   overflow: hidden;
+  min-height: 130px; /* Ensure consistent height */
 }
 
 .week-item:hover {
@@ -383,6 +385,7 @@ layout: default
   color: var(--text-primary);
   margin: 0 0 0.5rem 0;
   line-height: 1.3;
+  flex-grow: 0;
 }
 
 .week-item p {
@@ -390,6 +393,7 @@ layout: default
   color: var(--text-secondary);
   margin: 0;
   line-height: 1.4;
+  flex-grow: 1;
 }
 
 /* Special Week Styles */
@@ -469,7 +473,30 @@ layout: default
 <script>
 // Week availability checker - works with AJAX navigation
 (function() {
+  let futureContentAvailable = false;
+  
+  // Check if future content is available by testing a future week
+  function checkFutureContentAvailability() {
+    // Test if Week 14 (far future) page exists
+    const testUrl = '{{ "/week/week14" | relative_url }}';
+    
+    return fetch(testUrl, { method: 'HEAD' })
+      .then(response => {
+        futureContentAvailable = response.ok;
+        console.log('Future content available:', futureContentAvailable);
+      })
+      .catch(() => {
+        futureContentAvailable = false;
+      });
+  }
+  
   function disableFutureWeeks() {
+    // If future content is available (built with --future), don't disable anything
+    if (futureContentAvailable) {
+      console.log('Site built with --future flag, all weeks accessible');
+      return;
+    }
+    
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     
@@ -530,12 +557,18 @@ layout: default
     });
   }
   
-  // Run immediately
-  disableFutureWeeks();
+  // Check future content availability, then run
+  checkFutureContentAvailability().then(() => {
+    disableFutureWeeks();
+  });
   
   // Run on DOMContentLoaded (for full page loads)
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', disableFutureWeeks);
+    document.addEventListener('DOMContentLoaded', () => {
+      checkFutureContentAvailability().then(() => {
+        disableFutureWeeks();
+      });
+    });
   }
   
   // Watch for AJAX content changes
@@ -547,7 +580,12 @@ layout: default
                              (mutation.target.querySelector('.week-item') ||
                               mutation.target.classList && mutation.target.classList.contains('week-item'));
         if (hasWeekItems) {
-          setTimeout(disableFutureWeeks, 10);
+          // Re-check future content availability in case of navigation
+          setTimeout(() => {
+            checkFutureContentAvailability().then(() => {
+              disableFutureWeeks();
+            });
+          }, 10);
           break;
         }
       }
