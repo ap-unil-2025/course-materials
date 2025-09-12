@@ -34,7 +34,13 @@
     <footer class="site-footer">
         <div class="wrapper">
             <p>&copy; {{ 'now' | date: "%Y" }} {{ site.title | escape }}. All rights reserved.</p>
-            <p class="credits">Made with ❤️ by Anna Smirnova, Prof. Simon Scheidegger, and Claude Sonnet 4 🤖</p>
+            <p class="credits">Made with 💙 by Anna Smirnova, Prof. Simon Scheidegger, and Claude 🤖</p>
+            <p class="powered-by">
+                <a href="https://nuvolos.cloud" target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem; color: inherit; text-decoration: none;">
+                    Powered by
+                    <img src="{{ '/assets/images/nuvolos_logo.svg' | relative_url }}" alt="Nuvolos" style="height: 20px; width: auto; opacity: 0.8;">
+                </a>
+            </p>
         </div>
     </footer>
 
