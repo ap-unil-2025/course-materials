@@ -1,6 +1,7 @@
 ---
 marp: true
-theme: default
+theme: unil-theme
+# backgroundColor: #f5f9ff
 title: "Code Like a Scientist: Essential Tools for Research Programming"
 author: "Anna Smirnova"
 date: "September 15, 2025"
@@ -36,7 +37,6 @@ style: |
 ---
 
 <!-- _class: lead -->
-
 # Practical Session 1 
 # Code Like a Scientist: Essential Tools for Research Programming
 
@@ -48,25 +48,49 @@ style: |
 # First Things First
 *   **Welcome!** This is a hands-on tutorial to get you started with essential programming tools for researchers.
 *   **Goal:** By the end of this session, you will be comfortable using the terminal, managing Python environments, and using VSCode.
-*   **Prerequisites:** Basic understanding of Python and programming concepts. No prior experience with the terminal or Git is required.
-*   **Resources:** All slides and code examples are available on the class [GitHub](github.com/ap-unil-2025/ap-unil-2025-meta) repository and the class [website](https://ap-unil-2025.github.io/ap-unil-2025-meta/).
+*   **Prerequisites:** No prior programming experience is required, but a basic understanding of computers is helpful.
+*   **Resources:** All slides and code examples are available in the Nuvolos cloud environment and the class [website](https://ap-unil-2025.github.io/course-materials/).
 ---
 # Please open the following page in your browser!
-Nuvolos: https://nuvolos.com/
-Launch your workspace for this course (you should have received an email with the link).
-Log in with your university credentials
-Open the terminal in your workspace (bottom panel in VSCode).
+<p align="center">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://app.nuvolos.cloud/enroll/class/RshD654gzU4" alt="Scan this QR code to enroll" />
+    <br>
+    <small>Scan this QR code to enroll</small>
+</p>
+
+Or [click here to enroll in the course workspace](https://app.nuvolos.cloud/enroll/class/RshD654gzU4).
+Log in with your university credentials and launch a new VSCode instance (see demo!). This workspace has all the required tools pre-installed.
+
+> <span style="color: red;"> **Tip:** I highly recommend using Nuvolos for hands-on activities, especially if you are on Windows. But if you prefer to install everything locally, just ask!</span>
+
+---
+<p align="center">
+    <img src="/Users/asmirnov/Projects/research/AP2025/course-materials/docs/assets/images/nuvolos_logo.svg" alt="Nuvolos Logo" width="360"/>
+</p>
+
+<p align="center">
+    <b>Nuvolos</b> is a cloud-based platform providing a ready-to-use programming environment based on <b>Linux</b> and VSCode.<br>
+    <b>No installation required!</b> Log in with your university credentials and start coding.<br>
+    Each student gets their own isolated workspace with all the necessary tools pre-installed.
+</p>
+
+---
+# Your First Steps in Nuvolos
+*   After enrolling, you will see the Nuvolos dashboard.
+*   Click on "Launch VSCode" to start a new coding environment.
+*   This will open a new browser tab with VSCode running in the cloud.
+*   You can also install the [Nuvolos Desktop App](https://nuvolos.cloud/download) for a better experience.
+*   Once VSCode is open, you will see a terminal panel at the bottom. If not, open it with `Ctrl + `` (backtick) or via the menu: View > Terminal.
+*   You are now ready to start coding!
 
 ---
 # What is a Terminal, and why do we need it?
 
-*   **Terminal**: A text-based interface to interact with your computer's operating system.
-
-*   **Why use it?**
+*   **Terminal**: A text-based interface to interact with your computer's operating system. But **why use it?**
     *   **Efficiency**: Faster and more flexible than graphical interfaces, especially for repetitive tasks.
     *   **More importantly** — a lot of computers actually don't even come with a graphic interface, like many servers and high-performance computing (HPC) clusters.
 *   **The terminal allows you to** do pretty much anything you can do with a graphical user interface (GUI), but often more efficiently.
-* A lot of programming tools and libraries are designed to be used from the terminal, so it is essential to know how to use it.
+* A lot of **modern** programming tools and libraries are designed to be used from the terminal!
 ---
 
 # What is a shell? 
@@ -117,59 +141,23 @@ Open the terminal in your workspace (bottom panel in VSCode).
 ---
 
 # Using the Terminal in VSCode
+> In this course, I will be using the virtual VSCode in the Nuvolos environment for our hands-on activities. But if you wish to install VSCode and Python on your personal computer, feel free to reach out!
 
 *   **Built-in Terminal:**
     *   VSCode has a built-in terminal, accessible with `Ctrl+backtick` (Windows/Linux) or `Cmd+backtick` (macOS).
     *   Supports multiple shell options (e.g., Bash, PowerShell, Zsh).
-
-*   **Why use it?**
-    *   **Convenience**: Run commands without leaving the editor.
-    *   **Multiple Terminals**: You can open several terminal instances and switch between them (e.g., for different environments).
+* Open the terminal in your Nuvolos workspace (bottom panel in VSCode): `Ctrl + `` (backtick) or via the menu: View > Terminal.
+---
+# What's Going On?
+* What you're currently seeing is a terminal window running the `bash` shell.
+* The terminal is ready to accept commands. You can type commands and press `Enter` to execute them.
+* The prompt (i.e., the text `(base) nuvolos@nuvolos:~$`) indicates your Python environment (if any), your username, the hostname of the machine, and your current directory.
 ---
 # Your first commands in the terminal
-*   Open the terminal in your Nuvolos workspace.
 *   Type the following command and press Enter:
 ```bash
 echo "Hello, World!"
 ```
----
-# Bash is a Programming Language
-*   Bash is a command language and a scripting language.
-*   You can control the behavior of your computer by writing commands in Bash.
-*   You can run commands one by one in the terminal, just like we did with `echo "Hello, World!"`.
-*   You can write scripts (files with a series of commands) to automate tasks
----
-# Bash is a Programming Language
-*   Create a new file named `myscript.sh` and add the following content:
-```bash
-#!/bin/bash
-echo "This is my first script!"
-ls -la
-```
-*   Save the file and make it executable with:
-```bash
-chmod +x myscript.sh
-```
-*   Run the script with:
-```bash
-./myscript.sh
-```
----
-# Bash is a Programming Language
-*   Bash supports variables, conditionals, loops, and functions.
-*   Example of a simple bash script with a loop:
-```bash
-#!/bin/bash
-mkdir my_test_folder
-cd my_test_folder
-pwd
-for i in {1..5}
-do
-   touch "file_$i.txt"
-   echo "Created file_$i.txt"
-done
-```
-*   Save it as `loop.sh`, make it executable, and run it to see the output.
 ---
 
 # Basic Navigation Commands: `cd`, `ls`
@@ -217,14 +205,12 @@ The parts of the command written with a dash before them are called **flags**. T
 
 *   `cat` — Concatenate and display the content of a file:
     *   `cat <file>` — Displays the entire content of a file.
-    *   Useful for quickly viewing or concatenating files.
+    * Can also be used to concatenate multiple files: `cat file1 file2 > combined_file`.
 
 * `head` and  `tail` — Display the first/last few lines of a file:
     *   `tail <file>` — Shows the last 10 lines of a file by default.
     *   `tail -n <number> <file>` — Shows the last `<number>` lines of the file.
-
-*   `tail -f <file>` — Follow a file for real-time updates:
-    *   Continuously displays new lines as they are added to a file (useful for monitoring logs).
+    *   `tail -f <file>` — Follow a file for real-time updates: continuously displays new lines as they are added to a file (useful for monitoring logs).
 ---
 # Commands: `echo`, `clear`, `man`
 *   `echo <text>` — Prints text to the terminal.
@@ -258,25 +244,81 @@ The parts of the command written with a dash before them are called **flags**. T
 *   `Ctrl + K`:
     *   Deletes from the cursor to the end of the line.
 ---
-# Advanced Terminal Features: Redirection, Pipes, and More
-# (Optional)
+
+# Advanced Terminal Features: Scripting, Redirection, Pipes, and More
 ---
-# Redirection and Output to Files: `>`, `>>`
+# Bash is a Programming Language
+*   Bash is actually a **full-fledged programming language**, just like Python!
+*   You can control the behavior of your computer by writing commands in Bash, as we just learned, but...
+*   You can also write **scripts** (files with a series of commands) to automate tasks.
+* This is commonly used in research to automate data processing, analysis, and other repetitive tasks, as well as in HPC workflows.
+---
+# Bash is a Programming Language
+*   Create a new file named `myscript.sh` and add the following content:
+```bash
+#!/bin/bash
+echo "This is my first script!"
+ls -la
+```
+*   Save the file and make it executable with:
+```bash
+chmod +x myscript.sh # This command makes the script executable
+```
+*   Run the script with:
+```bash
+./myscript.sh # This command executes the script
+```
+---
+# Bash is a Programming Language
+*   Bash supports variables, conditionals, loops, and functions.
+*   Example of a simple bash script with a loop:
+```bash
+#!/bin/bash
+mkdir my_test_folder
+cd my_test_folder
+pwd
+for i in {1..5}
+do
+   touch "file_$i.txt"
+   echo "Created file_$i.txt"
+done
+```
+*   Save it as `loop.sh`, make it executable, and run it to see the output.
+---
+# Advanced Bash Features: Passing Arguments
+*   You can pass arguments to your bash scripts:
+```bash
+#!/bin/bash
+echo "Hello, $1!"  # $1 is the first argument passed to the script
+```
+*   Save it as `greet.sh`, make it executable, and run it with:
+```bash
+./greet.sh Anna  # This will print "Hello, Anna!"
+```
+*   You can use `$2`, `$3`, etc., for additional arguments.
+*   `$0` contains the name of the script itself.
+---
+# Advanced Bash Features: Conditionals
+*   You can use conditionals:
+```bash
+#!/bin/bash
+if [ -d "$1" ]; then
+   echo "Directory $1 exists."
+else
+   echo "Directory $1 does not exist."
+fi
+```
+*   Save it as `check_dir.sh`, make it executable, and run it with a directory name as an argument.
+*   You can use `elif` for additional conditions and `&&` and `||` for logical AND and OR operations.
+
+---
+# Advanced Commands: Redirection and Output to Files: `>`, `>>`
 *   `>` — Redirects the output of a command to a file, overwriting the file if it exists.
     *   Example: `echo "Hello, World!" > hello.txt` — Creates (or overwrites) `hello.txt` with "Hello, World!".
 *   `>>` — Appends the output of a command to a file, creating the file if it doesn't exist.
     *   Example: `echo "Another line" >> hello.txt` — Appends "Another line" to `hello.txt`.
 *   These operators are useful for saving command output for later use or logging.
----
-# Search with `grep`
-*   `grep <pattern> <file>` — Searches for a specific pattern in a file.
-    *   Example: `grep "error" log.txt` — Finds all lines containing "error" in `log.txt`.
-*   `grep -i <pattern> <file>` — Case-insensitive search.
-*   `grep -r <pattern> <directory>` — Recursively search through all files in a directory.
-*   `grep -n <pattern> <file>` — Show line numbers of matching lines.
-*   `grep` is a powerful tool for searching through text files and logs.        
-
----
+---     
 # Combining Commands with `&&` and `;`
 *   `&&` — Logical AND operator:
     *   Executes the second command only if the first command is successful (returns exit status 0).
@@ -292,30 +334,52 @@ The parts of the command written with a dash before them are called **flags**. T
 *   You can chain multiple commands together using pipes.
 *   Example: `cat file.txt | grep "error" | sort | uniq` — Finds lines containing "error" in `file.txt`, sorts them, and removes duplicates.
 ---
+# Useful Programs: `curl`, `wget`
+*   `curl <url>` — Transfers data from or to a server using various protocols (HTTP, FTP, etc.).
+    *   Example: `curl https://example.com` — Fetches the content of the webpage.
+*   `wget <url>` — Downloads files from the web.
+    *   Example: `wget https://example.com/file.zip` — Downloads `file.zip` from the specified URL.
+*   Both programs are useful for downloading datasets, scripts, or other resources directly from the terminal.
+*   These programs are installed in your Nuvolos workspace by default.
+---
+# Useful Programs: `tree`, `find`
+*   `tree` — Displays a tree-like structure of directories and files.
+    *   Example: `tree` — Shows the directory structure of the current folder.
+    *   `tree -L <level>` — Limits the display to a certain depth level.
+    * Not available on Nuvolos :(
+*   `find <path> -name <pattern>` — Searches for files and directories matching a specific pattern.
+    *   Example: `find . -name "*.txt"` — Finds all `.txt` files in the current directory and its subdirectories.
+---
+# Useful Programs: Search with `grep`
+*   `grep <pattern> <file>` — Searches for a specific pattern in a file.
+    *   Example: `grep "error" log.txt` — Finds all lines containing "error" in `log.txt`.
+*   `grep -i <pattern> <file>` — Case-insensitive search.
+*   `grep -r <pattern> <directory>` — Recursively search through all files in a directory.
+*   `grep -n <pattern> <file>` — Show line numbers of matching lines.
+*   `grep` is a powerful tool for searching through text files and logs.   
+<!-- ---
 # Useful Programs: `nano`, `vim`, `htop`
 *   `nano <file>` — A simple terminal-based text editor.
     *   Easy to use for beginners. Use `Ctrl + X` to exit, `Y` to save changes.
 *   `vim <file>` — A powerful terminal-based text editor.
     *   More complex, but very efficient once mastered. Use `:q` to quit, `:w` to save changes.
 *   `htop` — An interactive process viewer.
-    *   Displays system processes and resource usage in real-time. Use `F10` to exit.
-*   These programs are installed in your Nuvolos workspace by default.
----
-# Advanced Terminal Features: Tab Completion and Command History
+    *   Displays system processes and resource usage in real-time. Use `F10` to exit. -->
+<!-- --- -->
+<!-- # Advanced Terminal Features: Tab Completion and Command History
 *   **Tab Completion:**
     *   Press the `Tab` key while typing a command or filename to auto-complete it.
     *   If multiple options are available, press `Tab` twice to see a list of possible completions.
 *   **Command History:**
     *   Use the `Up` and `Down` arrow keys to navigate through your command history.
     *   Press `Ctrl + R` to search through your command history. Start typing a part of a previous command, and it will show matching commands.
-*   These features can significantly speed up your workflow in the terminal.
+*   These features can significantly speed up your workflow in the terminal. -->
 ---
-# Advanced Terminal Programs: `ssh`, `scp`, `rsync`
+# Advanced Terminal Programs: `ssh`, `rsync`
+* Not needed on Nuvolos, but very useful when working with remote servers or HPC clusters.
 *   `ssh` — **S**ecure **SH**ell, used to securely connect to a remote machine over a network.
 *   `ssh <user>@<host>` — Securely connect to a remote machine.
     *   Example: `ssh user@192.168.1.1`
-*   `scp <local_file> <user>@<host>:<remote_path>` — Securely copy files to/from a remote machine.
-    *   Example: `scp file.txt user@192.168.1.1:/remote/directory/`
 *   `rsync` — A fast and versatile file-copying tool.
     *   Can copy files locally or to/from a remote machine.
     *   Example: `rsync -avz file.txt user@192.168.1.1:/remote/directory/`
@@ -325,7 +389,7 @@ The parts of the command written with a dash before them are called **flags**. T
 ---
 # What is a Python Installation?
  *   The core Python interpreter installed on your system.
-        * A Python interpreter is a program that reads and executes Python code.
+        * A Python interpreter is a program that reads and executes Python code, just like the shell we discussed earlier!
 *   On most systems, Python is pre-installed or can be installed via package managers (e.g., `apt`, `brew`).
 *   On Windows, you generally have to install Python from the Python website.
 * On Nuvolos, you don't have to care about this, as Python is already installed in your workspace.
@@ -335,6 +399,7 @@ The parts of the command written with a dash before them are called **flags**. T
 *   Allows you to manage dependencies for different projects without conflicts.
 *   As in, it is a **folder** which contains the Python executable file and the files of installed packages.
 *   Multiple environments allow different projects to use different package versions without conflicts.
+* There are different tools to create and manage Python environments, such as `venv`, `conda`, and `uv`.
 
 ---
 
@@ -350,22 +415,10 @@ Now we know enough to write and run our first Python script!
 *  Open your terminal and navigate to the directory where you saved the file.
 *   Run the script using the command:
     ```bash
-    python3 hello_world.py
+    python hello_world.py
     ```
 ---
-# Difference Between `.ipynb` and `.py` Files
 
-*   **.ipynb Files:**
-    *   Stands for "Interactive Python Notebook."
-    *   Supports mixing code with rich text, images, and visualizations.
-    *   Ideal for drafting, demonstration, data exploration, teaching, and collaboration.
-    *   Not typically used in projects as main source code files.
-
-*   **.py Files:**
-    *   Standard Python script files, only contain Python codes.
-    *   Used for writing production code, modules, and libraries.
-    *   Can be executed directly in the terminal or an IDE.
----
 
 # `venv`
 
@@ -385,18 +438,30 @@ python3 -m venv myenv
 *   The `myenv` directory contains a copy of the Python interpreter and a `bin` directory with the `python` and `pip` programs.
 *   **Important!** The name `myenv` is just an example. You can name your environment anything you like, but it is a good practice to use a descriptive name that reflects the project it is associated with.
 ---
-
+# Virtual Environment on Nuvolos: Conda
+*   In your Nuvolos workspace, `conda` is the default environment manager.
+*   To create a new Conda environment, use the following command:
+```bash
+conda create --name myenv python=3.13
+```
+*   This creates a new environment named `myenv` with Python 3.13 installed.
+*   To activate the environment, use:
+```bash
+conda activate myenv
+```
+*   You can then install packages using `conda install <package>` or `pip install <package>`.
+---
 # Command: `which`
 
 *   `which <command>` — Shows the full path of the command or executable.
 
 *   Helps identify where an executable is located.
 
-*   **Example: `which python3`**
-    *   Output: `/usr/bin/python3`, tells you the system is using Python from this location.
-    *   If you run this after activating a venv, the output will be `.../myenv/bin/python3`.
+*   **Example: `which python`**
+    *   Output: `/opt/conda/bin/python`, tells you the system is using Python from this location.
+    *   If you run this after activating a virtual environment, the output will be `.../myenv/bin/python`.
 
-*   Useful for debugging, e.g., ensuring that you're using the right version of Python in the terminal.
+*   Useful for ensuring that you're using the right version of Python in the terminal.
 
 ---
 
@@ -415,6 +480,20 @@ python3 -m venv myenv
 # Installing Packages: `pip`
 > **Caution!** Make sure you are installing packages in the correct **virtual environment** (your prompt should show `(myenv)` when it is activated).
 *   `pip install <package>` — Install a package from the Python Package Index (PyPI).
+* Try it out! Install the `scikit-learn` package:
+```bash
+conda activate myenv  # Activate your virtual environment first
+pip install scikit-learn
+```
+* Now you can write:
+```python
+import sklearn
+```
+*   to use the `scikit-learn` package in your Python code.
+---
+# Installing Packages: `pip`
+*   `pip install <package>==<version>` — Install a specific version of a package.
+    *   Example: `pip install numpy==1.21.0` — Installs version 1.21.0 of the `numpy` package.
 *   `pip install -r requirements.txt` — Install all packages listed in a text file (commonly named `requirements.txt`).
         *   A requirements file contains all package versions your project depends on.
         *   This is **crucial** for reproducibility and collaboration!
@@ -429,15 +508,23 @@ python3 -m venv myenv
 ---
 # Advanced Package Management: `uv`
 *   **`uv`**: A tool for managing Python environments and packages, similar to `pip`, but with a rich set of features and impressive performance.
-*   **Why use `uv`?**
     *   Provides a more user-friendly interface for managing Python environments and Python versions.
-    *   Much faster than `pip` for installing packages. 
-    *   Supports creating and managing virtual environments with ease.
-    *   We will **use it in our class** and cover it in more detail in the next sessions. `uv` includes `venv` and `pip` functionality, so you will not get lost.
+    *   Much faster than `pip` for installing packages.
+    * I will cover it in more detail in the next sessions. `uv` includes `venv` and `pip` functionality, so you will not get lost.
+    * Install with `pip install uv` in a non-base conda env on Nuvolos.
 ---
 # Summary
 *   The terminal is a powerful tool for interacting with your computer and running commands efficiently.
 *   Basic commands like `cd`, `ls`, `mv`, `cp`, and `rm` help you navigate and manage files and directories.
-*   Python virtual environments (`venv`) are essential for managing project dependencies and avoiding conflicts.
-*   `pip` is the default package manager for Python, while `uv` is a more advanced tool that we will be using in this class.
+*   Python virtual environments (`conda`) are essential for managing project dependencies and avoiding conflicts.
+*   `pip` is the default package manager for Python.
 *   Using these tools effectively will enhance your productivity and help you manage your coding projects like a pro!
+---
+# Your Assignment for Next Time 
+*   There is no class next week (September 22), but please complete the following tasks before our next session on September 29:
+*   Explore the terminal and try out the commands we covered.
+*   Study the advanced terminal features in the slides! 
+*   Set up a Python virtual environment for your project.
+*   Install a few packages using `pip` or `uv`.
+*   Prepare any questions you have for our next session!
+

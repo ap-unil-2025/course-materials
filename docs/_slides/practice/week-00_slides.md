@@ -31,17 +31,15 @@ style: |
 <!-- _backgroundColor: #003aff -->
 <!-- _color: white -->
 
-# Session 0: Welcome to Advanced Programming @ UNIL 2025!
+# Session 0: Welcome to Data Science and Advanced Programming @ UNIL 2025!
 ## Anna Smirnova, TA
 
----
-# Before we start: 
+
 <div align="center">
 
-| Course Website | Discord Server |
+| <span style="color: black;">Course Website</span> | <span style="color: black;">Discord Server</span> |
 |:--------------:|:--------------:|
-| ![Course Website QR](https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://ap-unil-2025.github.io/course-materials/) | ![Discord QR](https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://discord.com/invite/pr4q3QH2) |
-
+| ![Course Website QR](https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://ap-unil-2025.github.io/course-materials/) | ![Discord QR](https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://discord.com/invite/pr4q3QH2) |
 </div>
 
 ---
@@ -52,8 +50,7 @@ style: |
     *   My PhD research area is Economics, but I have a degree in Computer Science, and I've worked in software development for several years.
     *   Now, I use programming for... everything in my work!
     *   My goal for my part of the Advanced Programming course is to give you the practical, real-world tools that I wish I had known when I started.
-
-**This is not a typical computer science course. This is about making your research life easier.**
+* **This is not a typical computer science course. This is about making your research life easier.**
 
 ---
 # Your other instructors
@@ -65,25 +62,25 @@ style: |
 ---
 # Part 1: Why Are We Here?
 
----
+<!-- ---
 # A Real-World Example
 *   Me and Prof. Scheidegger have vastly different working styles and workflows.
 * He works on Ubuntu Linux with Kate, and I use a combination of Mac and Arch Linux laptops with an array of esoteric editors.
 *   He prefers to write code in an elegant, minimalist way, while I like to think in terms of modular, reusable components and pipelines with OOP.
 * But we collaborate on research projects, as he is my PhD supervisor.
 * How do we make this work?
-* We use modern programming tools and practices to bridge the gap between our different styles!
+* We use modern programming tools and practices to bridge the gap between our different styles! -->
 
 ---
 
-# The Goal of This Tutorial Series
+# The Goal of These Tutorials
 
 To equip you with a foundational toolkit for writing **reproducible, maintainable, and collaborative code** for your research.
 
 We will focus on the **"how"** and **"why"** of modern programming workflows.
 
 ### This course is for you if you've ever:
-*   Had ever named a file `final_code_v3_real_final_I_swear.py` ...
+*   Had ever named a file `final_code_v3_real_final_I_swear.ipynb` ...
     * ...then zipped it up and emailed it to a colleague
 *   Spent hours trying to get a colleague's script to run on your machine.
 *   Felt overwhelmed by your own messy code a few months after writing it.
@@ -96,39 +93,38 @@ We will focus on the **"how"** and **"why"** of modern programming workflows.
 1.  **The Terminal & Environments**: Your command center.
 2.  **Git & GitHub**: A time machine for your code.
 3.  **Modern Project Management**: Building clean, organized projects.
-4.  **Debugging & Type Hints**: Finding and preventing bugs.
-5.  **Object-Oriented Programming**: A new way to structure code.
-6.  **AI Coding Partners**: Leveraging tools like GitHub Copilot.
-
+4.  **Debugging & Testing**: Finding and preventing bugs.
+5.  **AI Coding Partners**: Leveraging tools like GitHub Copilot.
+6.  **Object-Oriented Programming**: A new way to structure code.
 ---
 ## Practical Course Logistics: Materials
 *   **Course Website**: https://ap-unil-2025.github.io/course-materials/
     *   All course materials, including slides, lessons, assignments, and examples, will be available here.
 *   **GitHub**: We will use GitHub for assignments and collaboration. Make sure you have an account set up.
 * **Nuvolos**: We will use Nuvolos for coding exercises during the hands-on sessions. Stay tuned for details!
-* **Editor**: Nuvolos is a cloud environment with a built-in code editor (VSCode).
+*  **Discord**: Join our Discord server for discussions, questions, and announcements: https://discord.com/invite/pr4q3QH2
 ---
 # Practical Course Logistics: Grading
-*   **Assignments**: There will be **optional** homework assigments that will be graded on a pass/fail basis with GitHub Classroom.
+*   **Assignments**: There will be **optional** homework assigments that will be graded on a pass/fail basis, starting with Week 3.
     * They will not be required for the course.
     * HOWEVER, they can *boost* your final grade if you choose to complete them!
-*   **Participation**: Active participation in class and on GitHub will be considered in your final grade.
 *   **Final Project**: 100% of your grade will come from a final project where you will apply what you've learned to a real-world problem.
 
 ---
 # Final Project
 *   I will provide a list of several **project ideas** that you can choose from. 
 *   You can **also propose your own project idea**, but it must be approved by the instructors.
-*   The project will be due at the end of the semester, and you will present your project to the class (either in person or on video), as well as submit a report and a git repository with your code.
+*   The project will be due at the end of the semester, and you will present your project to the class (either in person or on video), as well as submit a **report** and a **git repository** with your code.
 *   The project should demonstrate your ability to apply the concepts and tools learned in this course to a real-world problem.
 *   Look for more details on the course website. We will discuss this more in the coming weeks.
 
 ---
 # Administrative Details
-*   **Office Hours**: We will hold weekly office hours on Friday for questions and help with assignments. We will not be covering full solutions during these hours, or live debugging your code, but we will help you understand the concepts and guide you in the right direction.
-*   **Communication**: Please use the Discord server: https://discord.com/invite/pr4q3QH2 for all course-related questions and discussions. This is the best way to get help and interact with your peers and instructors.
-> **Note:** I will not be answering questions via email. Please use Discord.
-> **Note:** **We will not be using Moodle** for this course, except for announcements. All course materials will be on the course website and GitHub.
+*   **Office Hours**: We will hold weekly office hours on Friday for questions and help with assignments. We will not be covering full homework solutions during these hours, or live debugging your code, but we will help you understand the concepts and guide you in the right direction.
+*   **Communication**: Please use the Discord server: https://discord.com/invite/pr4q3QH2 for all course-related questions and discussions. 
+    * This way, everyone can benefit from the discussions.
+* **We will not be answering code-related questions via email.** Please use Discord (or office hours) for that.
+* **Note:** **We will not be using Moodle** for this course, except for announcements. All course materials will be on the course website and Nuvolos.
 ---
 
 # Part 2: Let's Get to Know Each Other
@@ -152,12 +148,24 @@ What is your major?
 
 # Gauging Our Collective Skill Level
 
-This helps me tailor the course. Be honest --- there are no wrong answers! **Which statement best describes you?**
+This helps us tailor the course. Be honest --- there are no wrong answers! **Which statement best describes you?**
 
 *   **A) The Absolute Beginner**: "I have never written a line of code, or I've only copied/pasted things."
 *   **B) The Scripter**: "I can write scripts in a language like Python or R to get a specific task done. I'm comfortable with variables, loops, and functions."
 *   **C) The Tool-User**: "I'm comfortable with scripting, and I've used tools like Git before, but maybe not consistently or confidently."
 *   **D) The Confident Coder**: "I feel pretty good about my skills. I know about things like classes and environments, but I'm here to learn best practices and new tools."
+---
+# Programming Environment Preferences
+
+One more quick show of hands! **What's your current go-to programming setup?**
+
+*   **A) Jupyter Notebooks**: "I mostly work in Jupyter notebooks or Google Colab."
+*   **B) IDE User**: "I use an IDE like PyCharm, VSCode, or RStudio."
+*   **C) Simple Text Editor**: "I write code in basic text editors like Notepad++ or TextEdit."
+*   **D) Cloud Platforms**: "I primarily code on platforms like Replit, Kaggle, or university servers."
+*   **E) Mixed/Not Sure**: "I use different things depending on the situation, or I'm not sure what counts."
+
+This helps us understand where you're starting from in terms of development environments!
 
 
 <!-- # Part 3: A Quick, Live Coding Puzzle
