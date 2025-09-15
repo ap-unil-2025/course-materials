@@ -35,8 +35,15 @@ jobs:
           
       - name: Update submodules to latest
         run: |
-          git submodule update --init --recursive --remote
-          git submodule foreach --recursive git checkout main || git checkout master || true
+          echo "📚 Updating submodules to latest commits..."
+          git submodule update --init --recursive --remote --merge
+          if [ -d "docs/slides/lecture" ]; then
+            cd docs/slides/lecture
+            git fetch origin
+            git checkout origin/main || git checkout origin/master
+            cd ../../..
+          fi
+          echo "✅ Submodules updated to latest"
 
       - name: Setup Node.js for Marp
         uses: actions/setup-node@v4
