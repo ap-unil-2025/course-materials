@@ -1,6 +1,17 @@
 ---
-title: "Problem Set - Week 3"
-date: 2025-10-06
+layout: assignment
+title: "Problem Set Week 3: Python Basics"
+assignment_number: 103
+due_date: 2025-10-06 23:59:00
+difficulty: "Beginner"
+estimated_time: "4-5 hours"
+github_classroom_url: "https://classroom.github.com/a/xP3nK7mQ-ps-week3"
+topics:
+  - "Variables and data types"
+  - "Control flow"
+  - "String manipulation"
+  - "Problem solving"
+status: "closed"
 description: "Python Basics - Variables, Control Flow, and Simple Programs"
 ---
 
@@ -170,10 +181,3 @@ You've intercepted an alien transmission! Analyze it:
 - Include test cases showing your programs work correctly
 - Due: Before Week 4 lecture
 
-## Grading Rubric
-- Exercise 1-3: 15 points each
-- Exercise 4: 10 points
-- Exercise 5-6: 15 points each
-- Exercise 7-8: 10 points each
-- Code style and comments: 5 points
-- **Total: 100 points**

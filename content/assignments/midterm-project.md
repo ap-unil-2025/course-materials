@@ -3,7 +3,6 @@ layout: assignment
 title: "Midterm Project: AI-Powered Personal Finance Tracker"
 assignment_number: "Midterm"
 due_date: 2025-11-24 23:59:00
-points: 150
 difficulty: "Advanced"
 estimated_time: "20-25 hours (spread over 6 weeks)"
 topics:
@@ -15,7 +14,7 @@ topics:
   - "Testing and debugging"
   - "Git version control"
   - "Software architecture"
-status: "open"
+status: "closed"
 bonus: true
 project_type: "incremental"
 ---

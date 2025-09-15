@@ -1,6 +1,17 @@
 ---
-title: "Problem Set - Week 4"
-date: 2025-10-13
+layout: assignment
+title: "Problem Set Week 4: Functions & Data Structures"
+assignment_number: 104
+due_date: 2025-10-13 23:59:00
+difficulty: "Intermediate"
+estimated_time: "5-6 hours"
+github_classroom_url: "https://classroom.github.com/a/bR7pM4nY-ps-week4"
+topics:
+  - "Functions"
+  - "Lists and dictionaries"
+  - "Algorithms"
+  - "Recursion"
+status: "closed"
 description: "Functions, Data Structures, and Algorithms"
 ---
 
@@ -278,9 +289,3 @@ happy = # Find all happy numbers under 100
 - Add test cases demonstrating correctness
 - Due: Before Week 5 lecture
 
-## Grading Rubric
-- Exercises 1-4: 12 points each
-- Exercises 5-7: 11 points each
-- Exercise 8: 10 points
-- Exercise 9: 9 points
-- **Total: 100 points**

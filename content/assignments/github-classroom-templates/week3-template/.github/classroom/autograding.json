@@ -1,0 +1,44 @@
+{
+  "tests": [
+    {
+      "name": "Temperature Conversion Tests",
+      "setup": "pip install -r requirements.txt",
+      "run": "pytest test_assignment.py::test_celsius_to_fahrenheit test_assignment.py::test_fahrenheit_to_celsius test_assignment.py::test_classify_temperature -v",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 20
+    },
+    {
+      "name": "List Operations Tests",
+      "setup": "",
+      "run": "pytest test_assignment.py::test_find_max_min test_assignment.py::test_remove_duplicates test_assignment.py::test_calculate_average -v",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 25
+    },
+    {
+      "name": "Word Counter Tests",
+      "setup": "",
+      "run": "pytest test_assignment.py::test_count_words test_assignment.py::test_most_common_words -v",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 25
+    },
+    {
+      "name": "Calculator Tests",
+      "setup": "",
+      "run": "pytest test_assignment.py::test_calculate test_assignment.py::test_is_valid_expression -v",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 30
+    }
+  ]
+}

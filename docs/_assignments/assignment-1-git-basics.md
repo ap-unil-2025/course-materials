@@ -3,7 +3,6 @@ layout: assignment
 title: "Assignment 1: Git & Version Control Basics"
 assignment_number: 1
 due_date: 2025-02-15 23:59:00
-points: 100
 difficulty: "Beginner"
 estimated_time: "3-4 hours"
 github_classroom_url: "https://classroom.github.com/a/placeholder-assignment-1"
@@ -13,7 +12,7 @@ topics:
   - "Repository management"
   - "Branching and merging"
   - "Collaboration workflow"
-status: "open"
+status: "closed"
 ---
 
 ## Overview

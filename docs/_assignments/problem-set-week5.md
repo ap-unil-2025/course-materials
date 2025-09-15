@@ -1,6 +1,17 @@
 ---
-title: "Problem Set - Week 5"
-date: 2025-10-20
+layout: assignment
+title: "Problem Set Week 5: AI & Intelligent Agents"
+assignment_number: 105
+due_date: 2025-10-20 23:59:00
+difficulty: "Intermediate"
+estimated_time: "5-6 hours"
+github_classroom_url: "https://classroom.github.com/a/wL8nQ5mK-ps-week5"
+topics:
+  - "Large Language Models"
+  - "Prompt Engineering"
+  - "API Integration"
+  - "Autonomous Agents"
+status: "closed"
 description: "AI Integration, Prompt Engineering, and Autonomous Agents"
 ---
 
@@ -463,12 +474,6 @@ class StackOverflowBot:
 - Test with various inputs to show robustness
 - Due: Before Week 6 lecture
 
-## Grading Rubric
-- Exercises 1-3: 12 points each
-- Exercises 4-6: 11 points each
-- Exercises 7-9: 10 points each
-- Code quality and documentation: 11 points
-- **Total: 100 points**
 
 ## Note
 Since actual AI API calls may not be available, simulate AI responses where needed. Focus on the structure and logic of your solutions rather than actual AI integration.

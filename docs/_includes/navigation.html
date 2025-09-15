@@ -19,7 +19,8 @@
     <div class="nav-links" id="nav-links">
         <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Home</a>
         <a href="{{ '/syllabus' | relative_url }}" {% if page.url contains '/syllabus' %}class="active"{% endif %}>Syllabus</a>
-        <a href="{{ '/weekly-materials' | relative_url }}" {% if page.url contains '/weekly-materials' or page.url contains '/week/' or page.url contains '/assignments' %}class="active"{% endif %}>Weekly Materials</a>
+        <a href="{{ '/weekly-materials' | relative_url }}" {% if page.url contains '/weekly-materials' or page.url contains '/week/' %}class="active"{% endif %}>Weekly Materials</a>
+        <a href="{{ '/assignments' | relative_url }}" {% if page.url contains '/assignments' %}class="active"{% endif %}>Assignments</a>
         <a href="{{ '/projects' | relative_url }}" {% if page.url contains '/projects' or page.url contains 'PROJECT_RULES' %}class="active"{% endif %}>Projects</a>
         <a href="{{ '/help-support' | relative_url }}" {% if page.url contains '/help-support' %}class="active"{% endif %}>Help & Support</a>
         <a href="{{ '/citation' | relative_url }}" {% if page.url contains '/citation' %}class="active"{% endif %}>Cite</a>
@@ -72,6 +73,32 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <style>
+/* Make navigation more compact */
+.site-nav {
+    padding: 0.5rem 0;
+}
+
+.nav-links {
+    gap: 0.75rem;
+    font-size: 0.9rem;
+}
+
+.nav-links a {
+    padding: 0.25rem 0.4rem;
+}
+
+.powered-by-header {
+    gap: 0.3rem;
+}
+
+.powered-text {
+    font-size: 0.75rem;
+}
+
+.header-nuvolos-logo {
+    height: 20px;
+}
+
 .nav-toggle {
     display: none;
     background: none;

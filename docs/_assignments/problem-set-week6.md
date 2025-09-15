@@ -1,6 +1,17 @@
 ---
-title: "Problem Set - Week 6"
-date: 2025-10-27
+layout: assignment
+title: "Problem Set Week 6: OOP & Debugging"
+assignment_number: 106
+due_date: 2025-10-27 23:59:00
+difficulty: "Intermediate-Advanced"
+estimated_time: "6-7 hours"
+github_classroom_url: "https://classroom.github.com/a/pQ9xN3mL-ps-week6"
+topics:
+  - "Object-Oriented Programming"
+  - "Inheritance"
+  - "Debugging"
+  - "Testing"
+status: "closed"
 description: "Object-Oriented Programming and Debugging Techniques"
 ---
 
@@ -879,9 +890,3 @@ def fib_memoized(n, cache={}):
 - Include examples demonstrating polymorphism and inheritance
 - Due: Before Week 7 lecture
 
-## Grading Rubric
-- Exercises 1-3: 12 points each
-- Exercises 4-6: 11 points each
-- Exercises 7-9: 10 points each
-- Code quality, tests, and documentation: 11 points
-- **Total: 100 points**

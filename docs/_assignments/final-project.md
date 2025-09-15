@@ -3,7 +3,6 @@ layout: assignment
 title: "Final Project: Research Software Development"
 assignment_number: "Final"
 due_date: 2025-04-20 23:59:00
-points: 300
 difficulty: "Advanced"
 estimated_time: "15-20 hours"
 github_classroom_url: "https://classroom.github.com/a/placeholder-final-project"
