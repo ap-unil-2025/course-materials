@@ -497,8 +497,12 @@ layout: default
       return;
     }
     
-    const today = new Date();
+    // Override today for testing - set to course start date
+    // This ensures Week 0-1 is always visible when course starts
+    const today = new Date('2025-09-15');
     today.setHours(0, 0, 0, 0);
+    
+    console.log('Today (for course):', today.toDateString());
     
     // Week dates mapping - same dates as in Jekyll front matter
     const weekDates = {
