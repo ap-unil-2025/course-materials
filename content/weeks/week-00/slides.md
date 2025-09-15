@@ -2,7 +2,7 @@
 marp: true
 theme: gradient
 paginate: true
-# backgroundColor: #f5f9ff
+backgroundColor: #f5f9ff
 size: 16:9
 header: "Advanced Programming @ UNIL 2025"
 footer: "Anna Smirnova, September 2025"
@@ -54,9 +54,9 @@ style: |
 
 ---
 # Your other instructors
-*   **Prof. Dr. Simon Scheidegger** (Course Instructor) <simon.scheidegger@unil.ch>
-* **Francesco Brunamonti** <francesco.brunamonti@unil.ch> 
-- **Zhongshan Chen** <zhongshan.chen@unil.ch>
+-   **Prof. Dr. Simon Scheidegger** (Course Instructor) <simon.scheidegger@unil.ch>
+- **Francesco Brunamonti** <francesco.brunamonti@unil.ch> 
+- **Ashley Zhongshan Chen** <zhongshan.chen@unil.ch>
 
 
 ---

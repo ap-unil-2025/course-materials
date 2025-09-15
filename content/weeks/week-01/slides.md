@@ -1,12 +1,13 @@
 ---
 marp: true
-theme: unil-theme
-# backgroundColor: #f5f9ff
+theme: gradient
+backgroundColor: #f5f9ff
 title: "Code Like a Scientist: Essential Tools for Research Programming"
 author: "Anna Smirnova"
 date: "September 15, 2025"
 description: "A hands-on tutorial to get you started with essential programming tools for researchers."
 paginate: true
+
 header: "Code Like a Scientist: Essential Tools for Research Programming"
 footer: "Anna Smirnova, September 15, 2025"
 style: |
@@ -28,7 +29,6 @@ style: |
     color: white;
   }
 
-
 # headerPosition: center
 # footerPosition: center
 # headerAlign: center
@@ -37,6 +37,8 @@ style: |
 ---
 
 <!-- _class: lead -->
+<!-- _backgroundColor: #003aff -->
+<!-- _color: white -->
 # Practical Session 1 
 # Code Like a Scientist: Essential Tools for Research Programming
 
