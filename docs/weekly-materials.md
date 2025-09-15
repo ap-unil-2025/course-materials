@@ -497,12 +497,10 @@ layout: default
       return;
     }
     
-    // Override today for testing - set to course start date
-    // This ensures Week 0-1 is always visible when course starts
-    const today = new Date('2025-09-15');
+    const today = new Date();
     today.setHours(0, 0, 0, 0);
     
-    console.log('Today (for course):', today.toDateString());
+    console.log('Current date:', today.toISOString());
     
     // Week dates mapping - same dates as in Jekyll front matter
     const weekDates = {
@@ -537,8 +535,14 @@ layout: default
       
       if (!weekDate) return;
       
-      // If the week is in the future (including holidays), disable it
+      // Set time to midnight for proper comparison
+      weekDate.setHours(0, 0, 0, 0);
+      
+      console.log(`Week ${weekId}: ${weekDate.toISOString()} vs Today: ${today.toISOString()}`);
+      
+      // If the week starts AFTER today (not including today), disable it
       if (weekDate > today) {
+        console.log(`Disabling ${weekId} - starts in future`);
         item.classList.add('disabled');
         item.style.pointerEvents = 'none';
         item.style.cursor = 'not-allowed';
@@ -556,6 +560,19 @@ layout: default
           overlay.className = 'coming-soon-overlay';
           overlay.textContent = 'soon';
           item.appendChild(overlay);
+        }
+      } else {
+        console.log(`Enabling ${weekId} - already started`);
+        // Make sure it's enabled
+        item.classList.remove('disabled');
+        item.style.pointerEvents = '';
+        item.style.cursor = '';
+        item.onclick = null;
+        
+        // Remove overlay if exists
+        const overlay = item.querySelector('.coming-soon-overlay');
+        if (overlay) {
+          overlay.remove();
         }
       }
     });
