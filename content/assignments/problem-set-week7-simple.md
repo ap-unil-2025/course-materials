@@ -9,6 +9,7 @@ topics:
   - "Data preprocessing"
   - "Model evaluation"
   - "Simple gradient descent"
+status: "closed"
 ---
 
 # Problem Set 7: Introduction to Linear Regression

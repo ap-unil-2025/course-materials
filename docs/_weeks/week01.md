@@ -1,18 +1,14 @@
 ---
-title: "Week 1: Course Overview & Setup"
-date: 2025-09-15
-description: "Introduction to the course, structure, grading, and Nuvolos cloud computing platform"
-lecture_slides:
-  - title: "Introduction to the course"
-    link: "/course-materials/lectures/lecture_1/slides/Advanced_Programming_2025_lecture_1a.pdf"
-  - title: "Introduction to Nuvolos & Unix/Linux basics"
-    link: "/course-materials/lectures/lecture_1/slides/Advanced_Programming_2025_lecture_1b.pdf"
+title: "Course Overview and Setup"
+date: 2025-09-01
+description: "Weekly materials for week00"
+lecture_slides: "#"
 ta_slides: "/course-materials/slides/practice/week00_slides.html"
 lesson: "/course-materials/lessons/week00-lesson.html"
 assignment:
-  title: "Setup Development Environment"
+  title: "Assignment"
   link: "#"
-  description: "Set up Nuvolos, install Python, Git, and configure your development environment"
+  description: "Weekly assignment"
 examples:
   - title: "Course Materials Repository"
     link: "https://github.com/ap-unil-2025/course-materials"
@@ -20,22 +16,7 @@ references:
   - title: "Course Resources"
     link: "https://github.com/ap-unil-2025/course-materials"
     description: "Main course repository with all materials"
-  - title: "Git Documentation"
-    link: "https://git-scm.com/doc"
-    description: "Official Git documentation"
 ---
-
-## Week 1: Course Overview & Setup
-
-### Topics Covered
-- Introduction to the course structure and objectives
-- Grading system and capstone project requirements
-- Introduction to Nuvolos cloud computing platform
-- Unix/Linux basics and essential commands
-
-### Practice Session
-- **Slides**: [Week 1 Practice Slides](/course-materials/slides/practice/week00_slides.html)
-- **Lesson**: [Course Overview & Essential Tools Setup](/course-materials/lessons/week00-lesson.html)
 
 ## Week Overview
 

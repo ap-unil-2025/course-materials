@@ -32,6 +32,11 @@ jobs:
         with:
           submodules: recursive
           token: ${{ secrets.SUBMODULE_TOKEN || secrets.GITHUB_TOKEN }}
+          
+      - name: Update submodules to latest
+        run: |
+          git submodule update --init --recursive --remote
+          git submodule foreach --recursive git checkout main || git checkout master || true
 
       - name: Setup Node.js for Marp
         uses: actions/setup-node@v4

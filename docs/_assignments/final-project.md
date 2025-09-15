@@ -13,7 +13,7 @@ topics:
   - "Data analysis"
   - "Documentation"
   - "Deployment"
-status: "coming_soon"
+status: "closed"
 team_size: "1-3 students"
 ---
 

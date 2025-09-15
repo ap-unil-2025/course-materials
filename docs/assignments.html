@@ -22,6 +22,15 @@ title: Assignments
     <a href="#assignments-list" class="course-btn">View Assignments →</a>
   </div>
 
+  <!-- Warning Banner -->
+  <div class="warning-banner">
+    <div class="warning-icon">⚠️</div>
+    <div class="warning-content">
+      <h3>Important Notice</h3>
+      <p>These assignments are <strong>preliminary drafts</strong> and will be updated throughout the course. Content, difficulty levels, and due dates are subject to change. Please check back regularly for updates.</p>
+    </div>
+  </div>
+
 <div class="assignments-page" id="assignments-list">
     {% assign all_assignments = site.assignments | sort: 'assignment_number' %}
     {% assign assignments = all_assignments | where_exp: "item", "item.github_classroom_url or item.status == 'coming_soon'" %}
@@ -202,6 +211,36 @@ title: Assignments
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   text-decoration: none;
   color: #3b82f6;
+}
+
+/* Warning Banner */
+.warning-banner {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border: 2px solid #f59e0b;
+  border-radius: 0.75rem;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 10px rgba(245, 158, 11, 0.15);
+}
+
+.warning-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.warning-content h3 {
+  margin: 0 0 0.5rem 0;
+  color: #92400e;
+  font-size: 1.1rem;
+}
+
+.warning-content p {
+  margin: 0;
+  color: #78350f;
+  line-height: 1.5;
 }
 
 /* Compact Assignment List */

@@ -50,6 +50,7 @@ for week_dir in content/weeks/week-*; do
                 npx @marp-team/marp-cli "$week_dir/slides.md" \
                     --config .marprc.yml \
                     --theme content/themes/unil-theme.css \
+                    --html \
                     --output "docs/slides/practice/${week_num_compact}_slides.html"
             fi
         fi

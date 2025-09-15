@@ -9,6 +9,7 @@ topics:
   - "Functions"
   - "Lists and dictionaries"
   - "String manipulation"
+status: "closed"
 ---
 
 # Problem Set 3: Python Control Flow & Functions

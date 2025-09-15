@@ -7,12 +7,16 @@ lecture_slides:
     link: "/course-materials/lectures/lecture_1/slides/Advanced_Programming_2025_lecture_1a.pdf"
   - title: "Lecture 1b: Unix/Linux Basics"
     link: "/course-materials/lectures/lecture_1/slides/Advanced_Programming_2025_lecture_1b.pdf"
-ta_slides: "/course-materials/slides/practice/week00_slides.html"
+ta_slides:
+  - title: "Week 0 Practice Slides"
+    link: "/course-materials/slides/practice/week00_slides.html"
+  - title: "Week 1 Practice Slides"
+    link: "/course-materials/slides/practice/week01_slides.html"
 lesson: "/course-materials/lessons/week00-lesson.html"
 assignment:
   title: "Setup Development Environment"
   link: "#"
-  description: "Install Python, Git, and configure your development environment"
+  description: "Configure your development environment"
 examples:
   - title: "Course Materials Repository"
     link: "https://github.com/ap-unil-2025/course-materials"
@@ -32,12 +36,12 @@ This week covers **two practice sessions**:
 ### Session 1: Course Overview & Setup
 - **Slides**: [Week 0 Practice Slides](/course-materials/slides/practice/week00_slides.html)
 - **Lesson**: [Course Overview & Essential Tools Setup](/course-materials/lessons/week00-lesson.html)
-- Topics: Course introduction, Nuvolos platform, Unix/Linux basics
+- Topics: Course introduction
 
 ### Session 2: Essential Tools
 - **Slides**: [Week 1 Practice Slides](/course-materials/slides/practice/week01_slides.html)  
 - **Lesson**: [Essential Tools Setup & Unix/Linux Continuation](/course-materials/lessons/week01-lesson.html)
-- Topics: Advanced Unix commands, Git version control, Python environment setup
+- Topics: Unix/Linux basics, Python environment setup
 
 ## Week Overview
 
@@ -48,7 +52,6 @@ This week's materials include lecture content, practice exercises, and assignmen
 1. Review the lesson guide for detailed explanations
 2. Go through the practice slides for hands-on examples  
 3. Complete the weekly assignment
-4. Use the course repository for additional examples and resources
 
 ### Need Help?
 

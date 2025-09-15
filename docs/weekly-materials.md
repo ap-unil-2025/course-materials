@@ -473,29 +473,7 @@ layout: default
 <script>
 // Week availability checker - works with AJAX navigation
 (function() {
-  let futureContentAvailable = false;
-  
-  // Check if future content is available by testing a future week
-  function checkFutureContentAvailability() {
-    // Test if Week 14 (far future) page exists
-    const testUrl = '{{ "/week/week14" | relative_url }}';
-    
-    return fetch(testUrl, { method: 'HEAD' })
-      .then(response => {
-        futureContentAvailable = response.ok;
-        console.log('Future content available:', futureContentAvailable);
-      })
-      .catch(() => {
-        futureContentAvailable = false;
-      });
-  }
-  
   function disableFutureWeeks() {
-    // If future content is available (built with --future), don't disable anything
-    if (futureContentAvailable) {
-      console.log('Site built with --future flag, all weeks accessible');
-      return;
-    }
     
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -578,17 +556,13 @@ layout: default
     });
   }
   
-  // Check future content availability, then run
-  checkFutureContentAvailability().then(() => {
-    disableFutureWeeks();
-  });
+  // Run immediately
+  disableFutureWeeks();
   
   // Run on DOMContentLoaded (for full page loads)
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
-      checkFutureContentAvailability().then(() => {
-        disableFutureWeeks();
-      });
+      disableFutureWeeks();
     });
   }
   
@@ -601,11 +575,9 @@ layout: default
                              (mutation.target.querySelector('.week-item') ||
                               mutation.target.classList && mutation.target.classList.contains('week-item'));
         if (hasWeekItems) {
-          // Re-check future content availability in case of navigation
+          // Re-run after navigation
           setTimeout(() => {
-            checkFutureContentAvailability().then(() => {
-              disableFutureWeeks();
-            });
+            disableFutureWeeks();
           }, 10);
           break;
         }

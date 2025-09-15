@@ -1,8 +1,8 @@
 ---
 marp: true
-theme: unil-theme
+theme: gradient
 paginate: true
-backgroundColor: #f5f9ff
+# backgroundColor: #f5f9ff
 size: 16:9
 header: "Advanced Programming @ UNIL 2025"
 footer: "Anna Smirnova, September 2025"
@@ -165,7 +165,7 @@ One more quick show of hands! **What's your current go-to programming setup?**
 *   **D) Cloud Platforms**: "I primarily code on platforms like Replit, Kaggle, or university servers."
 *   **E) Mixed/Not Sure**: "I use different things depending on the situation, or I'm not sure what counts."
 
-This helps us understand where you're starting from in terms of development environments!
+<!-- This helps us understand where you're starting from in terms of development environments! -->
 
 
 <!-- # Part 3: A Quick, Live Coding Puzzle

@@ -68,15 +68,28 @@ layout: default
                     {% endif %}
                 {% endif %}
 
-                {% if page.ta_slides and page.ta_slides != "#" %}
-                <a href="{{ page.ta_slides | replace: '/slides/practice/', '/slides/practice/' }}" class="material-item ta-item">
-                    <div class="material-icon">👩‍💻</div>
-                    <div class="material-content">
-                        <h3>TA Practice Slides</h3>
-                        <p>Hands-on tutorials and practice exercises</p>
-                    </div>
-                    <div class="material-arrow">→</div>
-                </a>
+                {% if page.ta_slides %}
+                    {% if page.ta_slides.first %}
+                        {% for slide in page.ta_slides %}
+                        <a href="{{ slide.link }}" class="material-item ta-item">
+                            <div class="material-icon">👩‍💻</div>
+                            <div class="material-content">
+                                <h3>{{ slide.title }}</h3>
+                                <p>Hands-on tutorials and practice exercises</p>
+                            </div>
+                            <div class="material-arrow">→</div>
+                        </a>
+                        {% endfor %}
+                    {% elsif page.ta_slides != "#" %}
+                        <a href="{{ page.ta_slides | replace: '/slides/practice/', '/slides/practice/' }}" class="material-item ta-item">
+                            <div class="material-icon">👩‍💻</div>
+                            <div class="material-content">
+                                <h3>TA Practice Slides</h3>
+                                <p>Hands-on tutorials and practice exercises</p>
+                            </div>
+                            <div class="material-arrow">→</div>
+                        </a>
+                    {% endif %}
                 {% endif %}
 
                 {% if page.lesson and page.lesson != "#" %}
