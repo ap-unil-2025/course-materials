@@ -39,7 +39,7 @@ layout: default
         <p>Multiple channels • Quick responses • Community driven</p>
       </div>
     </div>
-    <a href="https://discord.gg/pr4q3QH2" target="_blank" class="support-btn">Join Discord →</a>
+    <a href="https://discord.gg/B6PskDUv" target="_blank" class="support-btn">Join Discord →</a>
   </div>
 
   <!-- Office Hours & Contact -->
@@ -149,7 +149,7 @@ layout: default
         <h4>Programming Help</h4>
         <p>Python syntax • Library issues • Debugging • Best practices</p>
         <div class="tech-actions">
-          <a href="https://discord.gg/pr4q3QH2" target="_blank" class="tech-link">Join Discord</a>
+          <a href="https://discord.gg/B6PskDUv" target="_blank" class="tech-link">Join Discord</a>
           <a href="mailto:anna.smirnova@unil.ch" class="tech-link">Office Hours</a>
         </div>
       </div>
@@ -161,7 +161,7 @@ layout: default
         <h4>Community Chat</h4>
         <p>Real-time help • Peer support • Quick questions • Study groups</p>
         <div class="tech-actions">
-          <a href="https://discord.gg/pr4q3QH2" target="_blank" class="tech-link">Join Discord</a>
+          <a href="https://discord.gg/B6PskDUv" target="_blank" class="tech-link">Join Discord</a>
           <a href="https://github.com/ap-unil-2025/course-materials/discussions" target="_blank" class="tech-link">GitHub Discussions</a>
         </div>
       </div>
@@ -194,7 +194,7 @@ layout: default
         <div class="step-number">3</div>
         <div class="step-content">
           <h4>Join Discord Community</h4>
-          <p>Connect with peers and TAs on <a href="https://discord.gg/pr4q3QH2" target="_blank">Discord</a> for real-time help</p>
+          <p>Connect with peers and TAs on <a href="https://discord.gg/B6PskDUv" target="_blank">Discord</a> for real-time help</p>
         </div>
       </div>
 

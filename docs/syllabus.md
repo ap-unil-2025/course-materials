@@ -83,7 +83,7 @@ layout: default
           <span class="info-badge">Community</span>
         </div>
         <h4>Discord Server</h4>
-        <p>Real-time help and peer support. <a href="https://discord.gg/pr4q3QH2" target="_blank">Join Discord</a>.</p>
+        <p>Real-time help and peer support. <a href="https://discord.gg/B6PskDUv" target="_blank">Join Discord</a>.</p>
       </div>
 
     </div>
