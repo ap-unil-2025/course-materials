@@ -2,7 +2,6 @@
 layout: assignment
 title: "Problem Set Week 3: Git & Python Fundamentals"
 assignment_number: 103
-due_date: 2025-10-06 23:59:00
 github_classroom_url: "https://classroom.github.com/a/week3-git-python"
 topics:
   - "Git version control"
@@ -350,90 +349,36 @@ Top 5 most common words:
 
 ## Bonus Challenge (Optional)
 
-Create `bonus_password_generator.py`:
+Create `bonus_password_generator.py` that generates secure passwords:
 
-```python
-import random
-import string
+**Requirements:**
+1. Create a function `generate_password(length, use_uppercase, use_lowercase, use_digits, use_special)`
+2. Build a character set based on the parameters
+3. Ensure at least one character from each selected type appears in the password
+4. Create a function `password_strength(password)` that rates password strength
+5. Allow user to specify password length
+6. Generate multiple password options for the user to choose from
 
-def generate_password(length=12, use_uppercase=True, use_lowercase=True,
-                     use_digits=True, use_special=True):
-    """
-    Generate a random password based on criteria.
-    """
-    characters = ""
-
-    if use_lowercase:
-        characters += string.ascii_lowercase
-    if use_uppercase:
-        characters += string.ascii_uppercase
-    if use_digits:
-        characters += string.digits
-    if use_special:
-        characters += string.punctuation
-
-    if not characters:
-        return "Error: No character types selected!"
-
-    # Ensure at least one character from each selected type
-    password = []
-    if use_lowercase:
-        password.append(random.choice(string.ascii_lowercase))
-    if use_uppercase:
-        password.append(random.choice(string.ascii_uppercase))
-    if use_digits:
-        password.append(random.choice(string.digits))
-    if use_special:
-        password.append(random.choice(string.punctuation))
-
-    # Fill the rest randomly
-    for _ in range(len(password), length):
-        password.append(random.choice(characters))
-
-    # Shuffle the password
-    random.shuffle(password)
-
-    return ''.join(password)
-
-def password_strength(password):
-    """
-    Rate password strength from 1-5.
-    """
-    score = 0
-
-    if len(password) >= 8:
-        score += 1
-    if len(password) >= 12:
-        score += 1
-    if any(c.islower() for c in password):
-        score += 1
-    if any(c.isupper() for c in password):
-        score += 1
-    if any(c.isdigit() for c in password):
-        score += 1
-
-    strength = ["Very Weak", "Weak", "Fair", "Good", "Strong", "Very Strong"]
-    return strength[min(score, 5)]
-
-def main():
-    print("Password Generator")
-    print("-" * 30)
-
-    length = int(input("Password length (default 12): ") or 12)
-
-    password = generate_password(length)
-    print(f"\nGenerated Password: {password}")
-    print(f"Strength: {password_strength(password)}")
-
-    # Generate multiple options
-    print("\nAlternative passwords:")
-    for i in range(3):
-        alt_password = generate_password(length)
-        print(f"{i+1}. {alt_password} ({password_strength(alt_password)})")
-
-if __name__ == "__main__":
-    main()
+**Example Output:**
 ```
+Password Generator
+------------------------------
+Password length (default 12): 16
+
+Generated Password: Kj9@mN#pL2xQ!vR4
+Strength: Very Strong
+
+Alternative passwords:
+1. bT7$wE@nM3hK&zX9 (Very Strong)
+2. pQ2!aF8#dG5*jL6m (Very Strong)
+3. vN4@kR7$tY9#wS2x (Very Strong)
+```
+
+**Hints:**
+- Use `string.ascii_lowercase`, `string.ascii_uppercase`, `string.digits`, `string.punctuation`
+- Use `random.choice()` to select random characters
+- Use `random.shuffle()` to mix the password
+- Check password length, and presence of different character types for strength rating
 
 ---
 
