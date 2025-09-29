@@ -1,0 +1,42 @@
+name: Weekly Monday Update
+
+on:
+  schedule:
+    # Runs at 8:00 AM UTC every Monday
+    # Switzerland is UTC+1 (winter) or UTC+2 (summer)
+    # So 7:00 UTC = 8:00 AM in Switzerland (winter) or 9:00 AM (summer)
+    - cron: '0 7 * * 1'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  trigger-rebuild:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update timestamp to trigger rebuild
+        run: |
+          echo "📅 Weekly update triggered at $(date)" >> .github/weekly-update.log
+          echo "Last update: $(date '+%Y-%m-%d %H:%M:%S')" > .github/last-weekly-update.txt
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add .github/weekly-update.log .github/last-weekly-update.txt
+          git commit -m "🔄 Weekly Monday update - $(date '+%Y-%m-%d')" || echo "No changes to commit"
+          git push || echo "Nothing to push"
+
+      - name: Trigger Pages rebuild
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.repos.requestPagesBuild({
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            });
+            console.log('✅ GitHub Pages rebuild triggered');
