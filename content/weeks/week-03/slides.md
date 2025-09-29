@@ -2,7 +2,7 @@
 marp: true
 paginate: true
 header: "Session 3: Contact Manager - Part 1"
-footer: "Anna Smirnova, October 6, 2025"
+footer: "Anna Smirnova, September 29, 2025"
 style: |
   section.lead {
     background: #003aff;

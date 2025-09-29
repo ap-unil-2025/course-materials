@@ -2,7 +2,7 @@
 marp: true
 paginate: true
 header: "Tracking Your Genius (Git & GitHub)"
-footer: "Anna Smirnova, June 24, 2025"
+footer: "Anna Smirnova, September 29, 2025"
 style: |
   section.lead {
     background: #003aff;
@@ -189,10 +189,17 @@ git config --global user.name "Your Name"
 
 # Your First (Real) Assignment
 
-Go to the link below and accept the invite to the classroom. The assignment is to clone your first GitHub repository, edit a file, commit it and push it to GitHub:
-[GitHub Classroom Assignment](https://classroom.github.com/a/your-assignment-link)
- 
-Try to complete the assignment by the end of the session. If you have any questions, please ask!
+## Problem Set Week 3: Git & Python Fundamentals
+
+Go to the link below and accept the invite to the classroom:
+[GitHub Classroom Assignment](https://classroom.github.com/a/ibuQ6b6G)
+
+**Practice problems:**
+- Git workflow practice
+- Python basics
+- Ungraded - focus on learning!
+
+Try to complete the assignment this week. If you have any questions, please ask!
 
 ---
 # Homework
