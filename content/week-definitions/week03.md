@@ -12,9 +12,9 @@ lecture_slides:
 ta_slides: "/course-materials/slides/practice/week02_slides.html"
 lesson: "/course-materials/lessons/week03-lesson.html"
 assignment:
-  title: "Python Basics Assignment"
-  link: "#"
-  description: "Practice with variables, loops, and basic data structures"
+  title: "Problem Set 3: Git & Python Fundamentals"
+  link: "/course-materials/assignments/problem-set-week3-git-python"
+  description: "Git workflow, temperature converter, number analysis, file processing"
 examples:
   - title: "Python Examples Repository"
     link: "https://github.com/ap-unil-2025/course-materials"
