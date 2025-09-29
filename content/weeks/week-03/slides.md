@@ -392,22 +392,26 @@ print("Thank you for using Contact Manager!")
 
 ---
 
-# Homework: Extend Your Contact Manager
+# Homework: Practice Assignment
 
-**Required features to add:**
+## Problem Set Week 3: Git & Python Fundamentals
 
-1. **Contact limit**: Maximum 10 contacts
-2. **Delete contact**: Remove by name
-3. **Update contact**: Change phone number
-4. **Contact types**: Friend/Family/Work
-5. **Pretty display**: Numbered list with formatting
+**GitHub Classroom Link:**
+https://classroom.github.com/a/ibuQ6b6G
 
-**Bonus challenges:**
-- Sort contacts alphabetically
-- Export to text file (we'll learn this properly next week)
-- Birthday tracking (calculate age)
+**Practice problems to complete:**
+1. **Git Workflow**: Practice commits and pushes
+2. **Temperature Converter**: Functions and calculations
+3. **Number Analysis**: Control flow and loops
+4. **File Word Counter**: String processing
 
-**Submit on GitHub!**
+**This is ungraded practice** - focus on learning!
+
+**Tips:**
+- Start with the Git workflow problem
+- Test your code frequently
+- Commit your progress often
+- Ask for help on Discord if stuck!
 
 ---
 
