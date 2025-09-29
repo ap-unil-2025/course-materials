@@ -29,7 +29,7 @@ style: |
 # Tracking Your Genius: Git & GitHub
 
 **Anna Smirnova**
-**October 6, 2025**
+**September 29, 2025**
 
 ---
 
