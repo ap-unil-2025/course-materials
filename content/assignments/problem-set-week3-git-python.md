@@ -2,14 +2,14 @@
 layout: assignment
 title: "Problem Set Week 3: Git & Python Fundamentals"
 assignment_number: 103
-github_classroom_url: "https://classroom.github.com/a/week3-git-python"
+github_classroom_url: "https://classroom.github.com/a/ibuQ6b6G"
 topics:
   - "Git version control"
   - "Python basics"
   - "Control flow"
   - "Functions"
   - "File I/O"
-status: "closed"
+status: "open"
 difficulty: "Beginner"
 estimated_time: "3-4 hours"
 ---
@@ -29,6 +29,7 @@ estimated_time: "3-4 hours"
 1. **Accept the GitHub Classroom Assignment**
    ```bash
    # Click the GitHub Classroom link above
+   # Or go to: https://classroom.github.com/a/ibuQ6b6G
    # This will create your personal repository
    ```
 

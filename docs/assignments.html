@@ -22,18 +22,19 @@ title: Assignments
     <a href="#assignments-list" class="course-btn">View Assignments →</a>
   </div>
 
-  <!-- Warning Banner -->
-  <div class="warning-banner">
-    <div class="warning-icon">⚠️</div>
-    <div class="warning-content">
-      <h3>Important Notice</h3>
-      <p>These assignments are <strong>preliminary drafts</strong> and will be updated throughout the course. Content, difficulty levels, and due dates are subject to change. Please check back regularly for updates.</p>
+  <!-- Assignment Status Banner -->
+  <div class="info-banner">
+    <div class="info-icon">📝</div>
+    <div class="info-content">
+      <h3>Week 3 Assignment Now Available</h3>
+      <p>The Git & Python Fundamentals assignment is now open. This is an <strong>ungraded practice assignment</strong> to help you build essential skills. More assignments will be released as the course progresses.</p>
     </div>
   </div>
 
 <div class="assignments-page" id="assignments-list">
     {% assign all_assignments = site.assignments | sort: 'assignment_number' %}
-    {% assign assignments = all_assignments | where_exp: "item", "item.github_classroom_url or item.status == 'coming_soon'" %}
+    {% assign week3_assignment = all_assignments | where: "title", "Problem Set Week 3: Git & Python Fundamentals" %}
+    {% assign assignments = week3_assignment %}
     {% if assignments.size > 0 %}
         <div class="assignments-list">
             {% for assignment in assignments %}
@@ -43,12 +44,10 @@ title: Assignments
                         <a href="{{ assignment.url | relative_url }}">{{ assignment.title | escape }}</a>
                     </h3>
                     <div class="assignment-status">
-                        {% assign now = 'now' | date: '%s' %}
-                        {% assign due = assignment.due_date | date: '%s' %}
-                        {% if assignment.status == 'coming_soon' %}
-                            <span class="status-badge status-coming-soon">Soon</span>
-                        {% elsif due > now %}
+                        {% if assignment.status == 'open' %}
                             <span class="status-badge status-open">Open</span>
+                        {% elsif assignment.status == 'coming_soon' %}
+                            <span class="status-badge status-coming-soon">Soon</span>
                         {% else %}
                             <span class="status-badge status-closed">Closed</span>
                         {% endif %}
@@ -89,19 +88,19 @@ title: Assignments
                 {% endif %}
 
                 <div class="card-actions">
-                    {% if assignment.status == 'closed' %}
-                        <span class="btn btn-disabled">Assignment Closed</span>
-                        <a href="{{ assignment.url | relative_url }}" class="btn btn-secondary">View Details</a>
-                    {% elsif assignment.status == 'coming_soon' %}
-                        <span class="btn btn-disabled">Available Soon</span>
-                        <a href="{{ assignment.url | relative_url }}" class="btn btn-secondary">Preview</a>
-                    {% else %}
+                    {% if assignment.status == 'open' %}
                         {% if assignment.github_classroom_url %}
                         <a href="{{ assignment.github_classroom_url }}" class="btn classroom-btn" target="_blank">
                             📚 Accept Assignment
                             <span class="external-icon">↗</span>
                         </a>
                         {% endif %}
+                        <a href="{{ assignment.url | relative_url }}" class="btn btn-secondary">View Details</a>
+                    {% elsif assignment.status == 'coming_soon' %}
+                        <span class="btn btn-disabled">Available Soon</span>
+                        <a href="{{ assignment.url | relative_url }}" class="btn btn-secondary">Preview</a>
+                    {% else %}
+                        <span class="btn btn-disabled">Assignment Closed</span>
                         <a href="{{ assignment.url | relative_url }}" class="btn btn-secondary">View Details</a>
                     {% endif %}
                 </div>
@@ -213,33 +212,33 @@ title: Assignments
   color: #3b82f6;
 }
 
-/* Warning Banner */
-.warning-banner {
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-  border: 2px solid #f59e0b;
+/* Info Banner */
+.info-banner {
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+  border: 2px solid #0284c7;
   border-radius: 0.75rem;
   padding: 1.25rem 1.5rem;
   display: flex;
   align-items: flex-start;
   gap: 1rem;
   margin-bottom: 2rem;
-  box-shadow: 0 2px 10px rgba(245, 158, 11, 0.15);
+  box-shadow: 0 2px 10px rgba(2, 132, 199, 0.15);
 }
 
-.warning-icon {
+.info-icon {
   font-size: 1.5rem;
   flex-shrink: 0;
 }
 
-.warning-content h3 {
+.info-content h3 {
   margin: 0 0 0.5rem 0;
-  color: #92400e;
+  color: #0c4a6e;
   font-size: 1.1rem;
 }
 
-.warning-content p {
+.info-content p {
   margin: 0;
-  color: #78350f;
+  color: #075985;
   line-height: 1.5;
 }
 
