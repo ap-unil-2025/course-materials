@@ -10,7 +10,7 @@ lecture_slides:
   - title: "Lecture 3c: Functions"
     link: "/course-materials/lectures/lecture_3/slides/Advanced_Programming_2025_lecture_3c.pdf"
 ta_slides: "/course-materials/slides/practice/week02_slides.html"
-lesson: "/course-materials/lessons/week02-lesson.html"
+lesson: "/course-materials/lessons/week03-lesson.html"
 assignment:
   title: "Python Basics Assignment"
   link: "#"
@@ -33,7 +33,7 @@ This week covers **two practice sessions** on Python fundamentals:
 
 ### Session 1: Git Workflows (Originally Week 2)
 - **Slides**: [Week 2 Practice Slides](/course-materials/slides/practice/week02_slides.html)
-- **Lesson**: [No Class - Holiday](/course-materials/lessons/week02-lesson.html)
+- **Lesson**: [Git Workflows](/course-materials/lessons/week02-lesson.html)
 - Topics: Git branching, merging, collaboration workflows
 
 ### Session 2: Python Basics (Originally Week 3)
