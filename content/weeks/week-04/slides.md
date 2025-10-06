@@ -4,9 +4,13 @@ paginate: true
 header: "Session 4: Contact Manager - Part 1"
 footer: "Anna Smirnova, October 13, 2025"
 style: |
+  section {
+    font-size: 22px;
+  }
   section.lead {
     background: #003aff;
     color: white;
+    font-size: 28px;
   }
   section.lead footer {
     color: white;
@@ -20,6 +24,11 @@ style: |
   }
   section.lead a {
     color: white;
+  }
+  .columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
   }
 ---
 
@@ -45,6 +54,33 @@ style: |
 - Maybe: simple recursion example
 
 **Let's build something real together!**
+
+---
+
+# Quick Review: Nuvolos Environment Setup
+
+**Important: You DO NOT need to create virtual environments!**
+
+✅ **What you should do:** Use the **base** conda environment (already set up) - just start coding in Python files
+
+❌ **What you should NOT do:** Don't create venv (virtual environments), don't create new conda environments, don't run `python -m venv`
+
+**Why?** Nuvolos already has everything configured in the base environment. Creating additional environments can cause confusion and conflicts. **Just code in base - it's ready to go!**
+
+---
+
+# Quick Review: Running Python Files in VSCode
+
+**1. Using the Play Button ▶️** - Open your `.py` file, click the play button (triangle) in top right, output appears in terminal below
+
+**2. Using the Terminal**
+```bash
+python your_file.py    # or python3 your_file.py
+```
+
+**3. Right-click Method** - Right-click in your code, select "Run Python File in Terminal"
+
+**Pro tip:** Use `print()` statements to see what your code is doing!
 
 ---
 
@@ -155,516 +191,348 @@ Bob: 555-0002
 
 ---
 
-# Build Feature 1: Add a Contact
+# Building Functions: The Thought Process
 
-```python
-def add_contact(contacts_list, name, phone, email=""):
-    """Add a new contact to our list"""
-    # TODO: Create a dictionary for this contact with:
-    # - name, phone, email fields
-    # - auto-generated id (hint: use len(contacts_list) + 1)
-    
-    # TODO: Add the contact to contacts_list
-    
-    # TODO: Print success message
-    
-    # TODO: Return the contact dictionary
-    pass
+**Before coding, ask:**
+1. What is the function supposed to do?
+2. What inputs does it need?
+3. What should it return?
+4. What are the steps to accomplish this?
 
-# Test it!
-add_contact(contacts, "Alice Smith", "555-0001", "alice@email.com")
-add_contact(contacts, "Bob Jones", "555-0002")
-print(contacts)
+**Let's apply this to adding a contact...**
+
+---
+
+# Feature 1: Add a Contact
+
+**Goal:** Add a new contact to our list
+
+**Inputs needed:**
+- The list of contacts (where to add)
+- Name (required)
+- Phone (required)
+- Email (optional - might be empty)
+
+**What should happen:**
+1. Create a contact dictionary with the data
+2. Add it to the list
+3. Give feedback to the user
+4. Return the contact (so we can use it later)
+
+**Question:** How do we know what ID to give the new contact?
+
+---
+
+# Add Contact: Step-by-Step Thinking
+
+**Step 1: Create the contact**
+- We need a dictionary
+- Keys: "name", "phone", "email", "id"
+- ID can be: current list length + 1 (why?)
+
+**Step 2: Add to list**
+- Use `.append()` to add to the end
+
+**Step 3: User feedback**
+- Print a message so user knows it worked
+
+**Step 4: Return the contact**
+- Why return it? So we can check what we added!
+
+**Now YOU implement it in the starter template!**
+
+---
+
+# Problem: What About Duplicates?
+
+**What happens if we add the same person twice?**
+- We'd have duplicate contacts
+- Confusing and wastes space
+
+**Solution: Check before adding**
+
+**How to check?**
+1. Loop through existing contacts
+2. Compare names (case-insensitive!)
+3. If found, return True
+4. If we finish the loop without finding, return False
+
+**Why case-insensitive?**
+- "Alice Smith" and "alice smith" are the same person!
+- Use `.lower()` when comparing
+
+---
+
+# Building on Functions
+
+**Good practice: Functions that use other functions**
+
+**Pseudocode:**
+```
+function add_contact_safe:
+    if contact_exists(name):
+        print "Already exists!"
+        return None
+    else:
+        call add_contact(name, phone, email)
+        return the result
 ```
 
-**Challenge**: What happens if we add a duplicate? Let's fix that!
+**Why separate functions?**
+- `contact_exists()` can be reused elsewhere
+- Each function has ONE job
+- Easier to test and fix
 
 ---
 
-# Prevent Duplicates
+# Feature 2: Search Contacts
 
-```python
-def contact_exists(contacts_list, name):
-    """Check if a contact already exists"""
-    # TODO: Loop through contacts_list
-    # TODO: Check if any contact's name matches (case-insensitive)
-    # TODO: Return True if found, False otherwise
-    pass
+**Goal:** Find contacts that match a search term
 
-# Improved add_contact
-def add_contact_safe(contacts_list, name, phone, email=""):
-    # TODO: Check if contact already exists using contact_exists()
-    # TODO: If exists, print warning and return None
-    # TODO: Otherwise, call add_contact() and return result
-    pass
+**Think about it:**
+- User types "alice" → should find "Alice Smith"
+- User types "555" → should find all numbers starting with 555
+- Search should work for names AND phone numbers
 
-# Test duplicate prevention
-add_contact_safe(contacts, "Alice Smith", "555-9999")
+**The algorithm:**
+```
+Create empty results list
+Convert search term to lowercase (why?)
+
+For each contact in the list:
+    If search term is IN the name OR IN the phone:
+        Add this contact to results
+
+Return the results list
 ```
 
-**Your turn**: Add a function to validate phone numbers!
+**Key insight:** Use `in` to check if one string is inside another!
 
 ---
 
-# Build Feature 2: Search Contacts
+# Feature 3: Display All Contacts
 
-```python
-def search_contacts(contacts_list, search_term):
-    """Find contacts by name or phone"""
-    results = []
-    search_lower = search_term.lower()
-    
-    # TODO: Loop through contacts_list
-    # TODO: Check if search_term is in name OR phone
-    # TODO: Add matching contacts to results list
-    # TODO: Return results
-    pass
+**Goal:** Show all contacts in a nice format
 
-# Make it user-friendly
-def display_search_results(search_term):
-    # TODO: Call search_contacts() to get results
-    
-    # TODO: If no results, print "not found" message
-    # TODO: Otherwise, print each result nicely formatted
-    pass
+**Think about formatting:**
+- Empty list? Show a message
+- Otherwise, show each contact on its own line
+- Make it readable!
 
-# Test it
-display_search_results("alice")
-display_search_results("555")
+**Pseudocode:**
+```
+function display_all_contacts:
+    If list is empty:
+        print "No contacts"
+        return
+
+    Print a header
+    For each contact:
+        Print name, phone, email in a nice format
 ```
 
----
-
-# Part 2: Power of List Comprehensions
+**Tip:** Use f-strings for nice formatting!
 
 ---
 
-# Make Our Search Smarter
+# Feature 4: Delete Contact
 
-```python
-# Old way (what we just wrote)
-def get_all_names(contacts_list):
-    names = []
-    for contact in contacts_list:
-        names.append(contact["name"])
-    return names
+**Goal:** Remove a contact by name
 
-# New way with list comprehension - ONE LINE!
-def get_all_names_v2(contacts_list):
-    # TODO: Return list of all names using list comprehension
-    # Hint: [something for contact in contacts_list]
-    pass
+**The challenge:** How do we find AND remove?
 
-# Even more powerful
-def get_contacts_without_email(contacts_list):
-    # TODO: Return names of contacts without email
-    # Hint: Add an if condition to list comprehension
-    pass
+**Approach:**
+```
+Loop through with enumerate (to get index):
+    If this contact's name matches:
+        Remove it using pop(index)
+        Print success message
+        return the removed contact
 
-# Test it
-print("All names:", get_all_names_v2(contacts))
-print("No email:", get_contacts_without_email(contacts))
+If we finish loop without finding:
+    Print "not found"
+    return None
 ```
 
-**Challenge**: Write a list comprehension to get all phone numbers starting with "555"
+**Why `enumerate`?** We need the index to use `pop()`!
 
 ---
 
-# Build Feature 3: Bulk Operations
+# Understanding Imports
 
-```python
-def bulk_add_from_text(contacts_list, text_data):
-    """Add multiple contacts from formatted text"""
-    lines = text_data.strip().split('\n')
-    added = 0
-    
-    for line in lines:
-        # TODO: Split line by comma
-        # TODO: Extract name (required) and phone (required)
-        # TODO: Extract email if present (optional)
-        # TODO: Use add_contact_safe() to add
-        # TODO: Count successful additions
-        pass
-    
-    return added
+**What is an import?**
+- Python has tons of useful code already written!
+- `import` lets you use that code in your program
+- Like getting tools from a toolbox
 
-# Test with sample data
-sample_data = """Charlie Brown, 555-0003, charlie@email.com
-Diana Prince, 555-0004
-Eve Adams, 555-0005, eve@email.com"""
+**What's a module?**
+- A `.py` file with Python code
+- Contains functions, variables, classes
+- Examples: `json`, `math`, `random`
 
-added_count = bulk_add_from_text(contacts, sample_data)
-print(f"\n✓ Added {added_count} new contacts")
-```
+**What's a package?**
+- A collection of related modules
+- A folder with multiple `.py` files
+- Example: `os`, `datetime`
 
 ---
 
-# Part 3: Dictionaries - Your Swiss Army Knife
+# How Imports Work
 
----
-
-# Enhance with Statistics
-
-```python
-def get_contact_stats(contacts_list):
-    """Get interesting statistics about contacts"""
-    stats = {
-        "total": len(contacts_list),
-        "with_email": 0,
-        "without_email": 0,
-        "by_area_code": {}
-    }
-    
-    for contact in contacts_list:
-        # TODO: Count contacts with/without email
-        
-        # TODO: Extract area code (first 3 chars of phone)
-        # TODO: Group contacts by area code in dictionary
-        pass
-    
-    return stats
-
-# Display stats
-stats = get_contact_stats(contacts)
-print(f"\n📊 Contact Statistics:")
-print(f"Total: {stats['total']} contacts")
-print(f"With email: {stats['with_email']}")
-print(f"By area code: {stats['by_area_code']}")
-```
-
----
-
-# Build Feature 4: Export/Import
-
+**Option 1: Import the whole module**
 ```python
 import json
 
-def save_contacts(contacts_list, filename="contacts.json"):
-    """Save contacts to a file"""
-    try:
-        # TODO: Open file in write mode
-        # TODO: Use json.dump() to save contacts_list
-        # TODO: Print success message
-        # TODO: Return True
-        pass
-    except Exception as e:
-        print(f"❌ Error saving: {e}")
-        return False
-
-def load_contacts(filename="contacts.json"):
-    """Load contacts from a file"""
-    try:
-        # TODO: Open file in read mode
-        # TODO: Use json.load() to read contacts
-        # TODO: Print success message
-        # TODO: Return loaded contacts
-        pass
-    except FileNotFoundError:
-        print("No saved contacts found")
-        return []
-    except Exception as e:
-        print(f"❌ Error loading: {e}")
-        return []
-
-# Test save/load
-save_contacts(contacts)
-loaded = load_contacts()
+# Now use it with the module name first:
+json.dump(data, file)     # module.function()
+json.load(file)           # module.function()
 ```
 
+**Why the `json.` prefix?** Tells Python where the function comes from!
+
+**Option 2: Import specific things**
+```python
+from json import dump, load
+
+# Now use directly (no prefix needed):
+dump(data, file)
+load(file)
+```
+
+**Trade-off:** Shorter to type, but less clear where it came from.
+
 ---
 
-# Part 4: Advanced Features
+# Common Import Examples
 
----
-
-# Sort and Filter
+**Built-in modules you'll use:**
 
 ```python
-def get_sorted_contacts(contacts_list, sort_by="name"):
-    """Return contacts sorted by field"""
-    # TODO: Use sorted() with a lambda key function
-    # Hint: key=lambda x: x[sort_by]
-    pass
-
-def filter_contacts(contacts_list, **criteria):
-    """Filter contacts by multiple criteria"""
-    results = contacts_list
-    
-    # TODO: For each field, value in criteria
-    # TODO: Filter results to only include matching contacts
-    # Hint: Use list comprehension with condition
-    pass
-    
-    return results
-
-# Test advanced features
-sorted_contacts = get_sorted_contacts(contacts, "name")
-print("\nSorted by name:")
-for c in sorted_contacts:
-    print(f"  {c['name']}: {c['phone']}")
-
-# Filter with multiple criteria
-filtered = filter_contacts(contacts, name="a", phone="555")
-print(f"\nFiltered ({len(filtered)} results):")
-for c in filtered:
-    print(f"  {c['name']}: {c['phone']}")
+import json              # For saving/loading data
+import random            # For random numbers
+import math              # For math functions
+from datetime import datetime  # For dates/times
 ```
 
----
-
-# Build a Menu System
-
+**How to call after importing:**
 ```python
-def display_menu():
-    print("\n" + "="*40)
-    print("     CONTACT MANAGER MENU")
-    print("="*40)
-    print("1. Add contact")
-    print("2. Search contacts")
-    print("3. Display all contacts")
-    print("4. Show statistics")
-    print("5. Save contacts")
-    print("6. Load contacts")
-    print("0. Exit")
-    print("="*40)
+import random
+number = random.randint(1, 10)    # random.function()
 
-def run_contact_manager():
-    """Main program loop"""
-    local_contacts = load_contacts()  # Load on start
-    
-    while True:
-        display_menu()
-        choice = input("\nEnter choice: ")
-        
-        if choice == "0":
-            # TODO: Save before exit
-            # TODO: Print goodbye
-            # TODO: Break the loop
-            pass
-        elif choice == "1":
-            # TODO: Get input for name, phone, email
-            # TODO: Call add_contact_safe()
-            pass
-        elif choice == "2":
-            # TODO: Get search term
-            # TODO: Call display_search_results()
-            pass
-        # TODO: Implement other menu choices
-
-# Uncomment to run:
-# run_contact_manager()
+from random import randint
+number = randint(1, 10)           # function() directly
 ```
+
+**Tip:** When starting, use `import module` - it's clearer!
 
 ---
 
-# Part 5: Make It Professional
+# Bonus: Saving Data
+
+**Why save?** So contacts don't disappear when program closes!
+
+**JSON = JavaScript Object Notation**
+- A standard way to store data
+- Works with lists and dictionaries!
+
+**The concept:**
+```
+To save:
+    Open a file for writing
+    Use json.dump() to write the list
+    Close the file
+
+To load:
+    Open the file for reading
+    Use json.load() to read the list
+    Close the file
+```
+
+**Hint:** Use `try/except` to handle errors (file not found, etc.)
 
 ---
 
-# Add Type Hints and Docstrings
+# Putting It Together
 
-```python
-from typing import List, Dict, Optional
+**What we covered today:**
 
-def add_contact_pro(
-    contacts_list: List[Dict[str, any]], 
-    name: str, 
-    phone: str, 
-    email: str = ""
-) -> Optional[Dict[str, any]]:
-    """
-    Add a new contact to the contact list.
-    
-    Args:
-        contacts_list: The list to add the contact to
-        name: Contact's full name
-        phone: Contact's phone number
-        email: Contact's email (optional)
-    
-    Returns:
-        The created contact dict, or None if duplicate
-    
-    Example:
-        >>> contacts = []
-        >>> add_contact_pro(contacts, "John Doe", "555-1234")
-        {'name': 'John Doe', 'phone': '555-1234', ...}
-    """
-    # Implementation here
-    pass
-```
+1. **Functions** - Organize code into reusable pieces
+2. **Lists** - Store multiple items
+3. **Dictionaries** - Store structured data
+4. **Combining them** - Build real programs!
 
-**This is how professionals write Python!**
+**You now know how to build complete programs!**
 
 ---
 
-# Bonus: Recursive Contact Search
+# Your Practice Assignment
 
-```python
-def find_contact_recursive(contacts_list, name, index=0):
-    """Find a contact using recursion (just for fun!)"""
-    # TODO: Base case 1 - if index >= len(contacts_list), return None
-    
-    # TODO: Base case 2 - if current contact matches name, return it
-    
-    # TODO: Recursive case - call function with index + 1
-    pass
+Download the starter template and implement:
 
-# Compare with the simple version
-def find_contact_simple(contacts_list, name):
-    # TODO: Use a for loop to find contact by name
-    pass
+**Core Features (do these first!):**
+1. `add_contact()` - Add a contact to the list
+2. `display_all_contacts()` - Show all contacts
+3. `contact_exists()` - Check for duplicates
 
-# Both work the same!
-print(find_contact_recursive(contacts, "alice smith"))
-print(find_contact_simple(contacts, "alice smith"))
-```
+**Challenge Features (if time!):**
+4. `search_contacts()` - Find contacts by name/phone
+5. `delete_contact()` - Remove a contact
+6. `save_contacts()` - Save to file
 
-**Question**: Which is better? Why?
+**Starter Template:**
+[Download here](https://raw.githubusercontent.com/ap-unil-2025/course-materials/master/content/weeks/week-04/contact_manager_starter.py)
 
 ---
 
-# Challenge Time! 🏆
+# Ideas to Extend (Optional!)
 
----
+**Once you have the basics working, try:**
 
-# 5-Minute Challenges
+1. **Add more fields**
+   - Birthday, address, notes...
 
-**Challenge 1**: Add a delete contact function
-```python
-def delete_contact(contacts_list, name):
-    # Your code here
-    pass
-```
+2. **Better formatting**
+   - Colors, tables, nicer output
 
-**Challenge 2**: Find duplicate phone numbers
-```python
-def find_duplicate_phones(contacts_list):
-    # Return list of phone numbers that appear more than once
-    pass
-```
+3. **Input validation**
+   - Check if phone number looks valid
+   - Check if email has @ symbol
 
-**Challenge 3**: Create a backup system
-```python
-def create_backup(contacts_list):
-    # Save with timestamp in filename
-    pass
-```
+4. **Statistics**
+   - Count total contacts
+   - Count how many have emails
 
-**Challenge 4**: Merge two contact lists
-```python
-def merge_contacts(list1, list2):
-    # Combine without duplicates
-    pass
-```
-
----
-
-# Quick Solutions
-
-```python
-# Challenge 1 Solution
-def delete_contact(contacts_list, name):
-    # TODO: Find contact by name and remove it
-    # Hint: Use enumerate() to get index
-    # Hint: Use pop(index) to remove
-    pass
-
-# Challenge 2 Solution
-def find_duplicate_phones(contacts_list):
-    # TODO: Count occurrences of each phone number
-    # TODO: Return list of phones that appear > 1 time
-    # Hint: Use a dictionary to count
-    pass
-
-# Test them!
-test_contacts = contacts.copy()
-delete_contact(test_contacts, "Alice Smith")
-print(f"Duplicate phones: {find_duplicate_phones(contacts)}")
-```
-
----
-
-# What We Built: v0.1 → v1.0
-
-## Week 3 (v0.1) vs Week 4 (v1.0)
-
-**Week 3 Limitations:**
-- ❌ Only 3 contacts (separate variables)
-- ❌ Repeated code everywhere
-- ❌ No way to save data
-- ❌ Hard to maintain
-
-**Week 4 Improvements:**
-- ✅ Unlimited contacts (lists!)
-- ✅ Reusable functions
-- ✅ Save/load with JSON
-- ✅ Clean, organized code
-- ✅ Professional structure
-- ✅ Easy to extend
-
-**From 200 lines → 50 lines of cleaner code!**
-
----
-
-# Take It Further (Homework)
-
-**Extend your Contact Manager:**
-
-1. **Add birthday tracking**
-   - Store birthdays
-   - Show upcoming birthdays
-   - Calculate age
-
-2. **Groups/Categories**
-   - Tag contacts (family, work, friends)
-   - Filter by group
-   - Group statistics
-
-3. **Import from CSV**
-   - Read real contact files
-   - Handle different formats
-   - Validate data
-
-4. **Search improvements**
-   - Fuzzy matching
-   - Search by partial phone
-   - Recent searches
-
-5. **Data validation**
-   - Valid email format
-   - Phone number formatting
-   - Duplicate checking
-
-**Share your improvements on GitHub!**
+**Remember: Start simple, then add features!**
 
 ---
 
 # Pro Tips from Today
 
+<div class="columns">
+<div>
+
 **1. Start with data structure**
-```python
-# We chose: list of dictionaries
-# Why? Easy to search, sort, and extend
-```
+- We chose: list of dictionaries
+- Why? Easy to search, sort, and extend
 
 **2. Build incrementally**
-```python
-# Start simple, add features one by one
-# Test each feature before moving on
-```
+- Start simple, add features one by one
+- Test each feature before moving on
+
+</div>
+<div>
 
 **3. Think about the user**
-```python
-# Clear messages, handle errors gracefully
-# Make it actually useful!
-```
+- Clear messages, handle errors gracefully
+- Make it actually useful!
 
 **4. Code organization**
-```python
-# Group related functions
-# Use clear naming
-# Add comments for "why", not "what"
-```
+- Use clear function and variable names
+- One function = one job
+- Add docstrings to explain what functions do
+
+</div>
+</div>
 
 **Remember**: The best code is code that works and others can understand!
 
@@ -674,17 +542,15 @@ print(f"Duplicate phones: {find_duplicate_phones(contacts)}")
 
 # Next Week (Week 5)
 
-## The AI Revolution
+## Generative AI & Programming
 
-**Bring your Contact Manager!**
+**Topics:**
+- How AI can help you code
+- Prompt engineering basics
+- Using AI as a learning tool
+- Understanding AI-generated code
+- When to use AI and when not to
 
-**Plot twist**: We'll recreate everything in 30 seconds!
-- Show AI writing our entire program
-- "But wait, there's more..."
-- Why you still need to understand the code
-- How to effectively prompt AI
-- Debugging AI-generated code
-
-**Week 6 Preview**: Turn it into professional OOP code
+**Week 6**: We'll learn OOP and refactor the Contact Manager!
 
 See you next Monday! 🤖

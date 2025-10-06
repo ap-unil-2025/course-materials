@@ -1,248 +1,500 @@
 ---
 layout: lesson
-title: "Python Fundamentals II"
+title: "Functions & Data Structures"
 week: 4
 date: 2025-10-06
 type: "programming"
 topics:
-  - Functions and recursion
-  - Object-Oriented Programming (OOP) basics
-  - Classes and inheritance
-  - Code organization and modularity
+  - Functions and code organization
+  - Lists for storing collections
+  - Dictionaries for structured data
+  - Building real programs
 slides: "/slides/practice/week04_slides.html"
-summary: "Advanced Python programming concepts including functions, recursion, and introduction to object-oriented programming with classes and inheritance."
+summary: "Learn to build real programs using functions, lists, and dictionaries through a hands-on Contact Manager project."
 ---
 
-# Python Fundamentals II
+# Functions & Data Structures
 
-This lesson builds on Python basics to cover more advanced programming concepts that are essential for writing organized, reusable, and maintainable code.
+This lesson teaches you how to build real, useful programs by organizing code with functions and storing data with lists and dictionaries.
 
 ## Learning Objectives
 
 By the end of this lesson, you will:
 
-- Write and use functions effectively for code organization
-- Understand and apply recursion for problem-solving
-- Create and use classes in object-oriented programming
-- Implement inheritance to create related classes
-- Organize code into modular, reusable components
+- Write functions to organize and reuse code
+- Use lists to store multiple items
+- Use dictionaries to store structured data
+- Combine lists and dictionaries for real programs
+- Build a complete Contact Manager application
 
-## Functions: Building Blocks of Programs
+## Why Build a Contact Manager?
 
-### Function Definition and Usage
+A Contact Manager is:
+- **Practical**: Like a real phone contacts app
+- **Relatable**: Everyone understands contacts
+- **Complete**: Uses all the key concepts
+- **Extensible**: Easy to add features
+
+## Functions: Organizing Your Code
+
+### What Are Functions?
+
+Functions are reusable blocks of code that:
+- Perform specific tasks
+- Can take inputs (parameters)
+- Can return outputs
+- Make code organized and maintainable
+
 ```python
-def calculate_compound_interest(principal, rate, time):
+def add_contact(contacts_list, name, phone, email=""):
+    """Add a new contact to our list"""
+    contact = {
+        "name": name,
+        "phone": phone,
+        "email": email,
+        "id": len(contacts_list) + 1
+    }
+
+    contacts_list.append(contact)
+    print(f"✓ Added {name} to contacts")
+    return contact
+```
+
+### Key Function Concepts
+
+**1. Parameters and Arguments**
+```python
+# Parameters: name, phone, email
+# email has a default value of ""
+def add_contact(contacts_list, name, phone, email=""):
+    pass
+
+# Calling with arguments:
+add_contact(contacts, "Alice", "555-0001", "alice@email.com")
+add_contact(contacts, "Bob", "555-0002")  # email uses default
+```
+
+**2. Return Values**
+```python
+def contact_exists(contacts_list, name):
+    """Check if contact already exists"""
+    for contact in contacts_list:
+        if contact["name"].lower() == name.lower():
+            return True  # Found it!
+    return False  # Not found
+```
+
+**3. Docstrings**
+```python
+def search_contacts(contacts_list, search_term):
     """
-    Calculate compound interest.
-    
-    Args:
-        principal (float): Initial amount
-        rate (float): Interest rate (as decimal)
-        time (int): Time period in years
-    
-    Returns:
-        float: Final amount after compound interest
+    Find contacts by name or phone.
+
+    This function searches through all contacts and returns
+    those that match the search term.
     """
-    return principal * (1 + rate) ** time
-
-# Usage
-final_amount = calculate_compound_interest(1000, 0.05, 10)
-print(f"Final amount: ${final_amount:.2f}")
+    # Function code here...
 ```
 
-### Function Features
-- **Parameters and Arguments**: Pass data to functions
-- **Return Values**: Get results back from functions
-- **Docstrings**: Document what your functions do
-- **Default Parameters**: Set default values for flexibility
+## Lists: Storing Multiple Items
 
+### Why Lists?
+
+**Bad approach:**
 ```python
-def greet(name, greeting="Hello"):
-    return f"{greeting}, {name}!"
-
-print(greet("Alice"))                    # Uses default
-print(greet("Bob", "Good morning"))      # Custom greeting
+contact1_name = "Alice"
+contact2_name = "Bob"
+contact3_name = "Charlie"
+# What if we need 100 contacts?!
 ```
 
-## Recursion: Functions That Call Themselves
-
-Recursion is powerful for problems that can be broken down into similar subproblems.
-
+**Good approach:**
 ```python
-def factorial(n):
-    """Calculate factorial using recursion."""
-    if n <= 1:          # Base case
-        return 1
-    else:               # Recursive case
-        return n * factorial(n - 1)
-
-def fibonacci(n):
-    """Calculate Fibonacci number using recursion."""
-    if n <= 1:
-        return n
-    return fibonacci(n - 1) + fibonacci(n - 2)
+contacts = []  # Can store unlimited items!
 ```
 
-### When to Use Recursion
-- Tree-like data structures
-- Mathematical sequences
-- Divide-and-conquer algorithms
-- Problems with recursive definitions
+### List Operations
 
-## Object-Oriented Programming (OOP) Basics
-
-### Classes: Blueprints for Objects
 ```python
-class BankAccount:
-    """A simple bank account class."""
-    
-    def __init__(self, account_holder, initial_balance=0):
-        self.account_holder = account_holder
-        self.balance = initial_balance
-    
-    def deposit(self, amount):
-        """Deposit money to the account."""
-        if amount > 0:
-            self.balance += amount
-            return True
+# Create empty list
+contacts = []
+
+# Add items
+contacts.append({"name": "Alice", "phone": "555-0001"})
+
+# Access items
+first_contact = contacts[0]
+
+# Loop through items
+for contact in contacts:
+    print(contact["name"])
+
+# Check length
+num_contacts = len(contacts)
+
+# Remove items
+contacts.pop(0)  # Remove first item
+```
+
+## Dictionaries: Storing Structured Data
+
+### Why Dictionaries?
+
+Dictionaries store key-value pairs, perfect for structured data:
+
+```python
+# One contact as a dictionary
+contact = {
+    "name": "Alice Smith",
+    "phone": "555-0001",
+    "email": "alice@email.com"
+}
+
+# Access values by key
+print(contact["name"])    # "Alice Smith"
+print(contact["phone"])   # "555-0001"
+
+# Check if key exists
+if "email" in contact:
+    print(contact["email"])
+```
+
+### Dictionary Operations
+
+```python
+# Create dictionary
+person = {"name": "Alice", "age": 25}
+
+# Add new key-value pair
+person["email"] = "alice@email.com"
+
+# Update value
+person["age"] = 26
+
+# Get all keys
+keys = person.keys()
+
+# Get all values
+values = person.values()
+
+# Loop through dictionary
+for key, value in person.items():
+    print(f"{key}: {value}")
+```
+
+## Combining Lists and Dictionaries
+
+This is the secret to building real programs!
+
+```python
+# A list of dictionaries - our contact database
+contacts = [
+    {"name": "Alice", "phone": "555-0001", "email": "alice@email.com"},
+    {"name": "Bob", "phone": "555-0002", "email": "bob@email.com"},
+    {"name": "Charlie", "phone": "555-0003", "email": ""}
+]
+
+# Loop through all contacts
+for contact in contacts:
+    print(f"{contact['name']}: {contact['phone']}")
+
+# Find specific contact
+def find_contact(contacts_list, name):
+    for contact in contacts_list:
+        if contact["name"].lower() == name.lower():
+            return contact
+    return None
+
+# Search contacts
+def search_contacts(contacts_list, search_term):
+    results = []
+    for contact in contacts_list:
+        if search_term in contact["name"] or search_term in contact["phone"]:
+            results.append(contact)
+    return results
+```
+
+## Building Features Step by Step
+
+### Feature 1: Add Contact
+
+```python
+def add_contact(contacts_list, name, phone, email=""):
+    """Add a new contact to our list"""
+    contact = {
+        "name": name,
+        "phone": phone,
+        "email": email,
+        "id": len(contacts_list) + 1
+    }
+
+    contacts_list.append(contact)
+    print(f"✓ Added {name} to contacts")
+    return contact
+```
+
+### Feature 2: Display All Contacts
+
+```python
+def display_all_contacts(contacts_list):
+    """Show all contacts in a nice format"""
+    if not contacts_list:
+        print("No contacts to display")
+        return
+
+    print("\n" + "="*50)
+    print(f"{'Name':<20} {'Phone':<15} {'Email':<20}")
+    print("="*50)
+
+    for contact in contacts_list:
+        print(f"{contact['name']:<20} {contact['phone']:<15} {contact.get('email', ''):<20}")
+
+    print("="*50)
+```
+
+### Feature 3: Search Contacts
+
+```python
+def search_contacts(contacts_list, search_term):
+    """Find contacts by name or phone"""
+    results = []
+    search_lower = search_term.lower()
+
+    for contact in contacts_list:
+        if (search_lower in contact["name"].lower() or
+            search_lower in contact["phone"]):
+            results.append(contact)
+
+    return results
+```
+
+### Feature 4: Delete Contact
+
+```python
+def delete_contact(contacts_list, name):
+    """Remove a contact by name"""
+    for i, contact in enumerate(contacts_list):
+        if contact["name"].lower() == name.lower():
+            removed = contacts_list.pop(i)
+            print(f"✓ Deleted {removed['name']}")
+            return removed
+
+    print(f"Contact {name} not found")
+    return None
+```
+
+## Saving and Loading Data
+
+Real programs need to save data!
+
+```python
+import json
+
+def save_contacts(contacts_list, filename="contacts.json"):
+    """Save contacts to a file"""
+    try:
+        with open(filename, 'w') as f:
+            json.dump(contacts_list, f, indent=2)
+        print(f"✓ Saved {len(contacts_list)} contacts")
+        return True
+    except Exception as e:
+        print(f"❌ Error saving: {e}")
         return False
-    
-    def withdraw(self, amount):
-        """Withdraw money from the account."""
-        if 0 < amount <= self.balance:
-            self.balance -= amount
-            return True
-        return False
-    
-    def get_balance(self):
-        """Return current balance."""
-        return self.balance
-    
-    def __str__(self):
-        return f"Account({self.account_holder}): ${self.balance:.2f}"
+
+def load_contacts(filename="contacts.json"):
+    """Load contacts from a file"""
+    try:
+        with open(filename, 'r') as f:
+            contacts = json.load(f)
+        print(f"✓ Loaded {len(contacts)} contacts")
+        return contacts
+    except FileNotFoundError:
+        print("No saved contacts found")
+        return []
 ```
 
-### Using Classes
-```python
-# Create objects (instances)
-alice_account = BankAccount("Alice", 1000)
-bob_account = BankAccount("Bob")
+## Building a Menu System
 
-# Use methods
-alice_account.deposit(500)
-alice_account.withdraw(200)
-print(alice_account)  # Account(Alice): $1300.00
+Put it all together with a menu:
+
+```python
+def display_menu():
+    """Show the menu"""
+    print("\n" + "="*40)
+    print("     CONTACT MANAGER MENU")
+    print("="*40)
+    print("1. Add contact")
+    print("2. Search contacts")
+    print("3. Display all contacts")
+    print("4. Delete contact")
+    print("5. Save contacts")
+    print("6. Load contacts")
+    print("0. Exit")
+    print("="*40)
+
+def run_contact_manager():
+    """Main program loop"""
+    contacts = load_contacts()
+
+    while True:
+        display_menu()
+        choice = input("\nEnter choice: ")
+
+        if choice == "0":
+            save_contacts(contacts)
+            print("Goodbye!")
+            break
+
+        elif choice == "1":
+            name = input("Name: ")
+            phone = input("Phone: ")
+            email = input("Email (optional): ")
+            add_contact(contacts, name, phone, email)
+
+        elif choice == "2":
+            search_term = input("Search for: ")
+            results = search_contacts(contacts, search_term)
+            for contact in results:
+                print(f"  • {contact['name']}: {contact['phone']}")
+
+        # Add other menu options...
 ```
 
-## Inheritance: Building on Existing Classes
+## Best Practices
 
+### 1. Write Clear Function Names
 ```python
-class SavingsAccount(BankAccount):
-    """A savings account with interest."""
-    
-    def __init__(self, account_holder, initial_balance=0, interest_rate=0.02):
-        super().__init__(account_holder, initial_balance)
-        self.interest_rate = interest_rate
-    
-    def add_interest(self):
-        """Add interest to the account."""
-        interest = self.balance * self.interest_rate
-        self.balance += interest
-        return interest
-    
-    def __str__(self):
-        return f"SavingsAccount({self.account_holder}): ${self.balance:.2f} @ {self.interest_rate*100}%"
+# Good
+def add_contact(contacts_list, name, phone):
+    pass
 
-class CheckingAccount(BankAccount):
-    """A checking account with overdraft protection."""
-    
-    def __init__(self, account_holder, initial_balance=0, overdraft_limit=100):
-        super().__init__(account_holder, initial_balance)
-        self.overdraft_limit = overdraft_limit
-    
-    def withdraw(self, amount):
-        """Withdraw with overdraft protection."""
-        if amount > 0 and (self.balance - amount) >= -self.overdraft_limit:
-            self.balance -= amount
-            return True
-        return False
+# Bad
+def ac(cl, n, p):
+    pass
 ```
 
-## Code Organization and Modularity
-
-### Why Organize Code?
-- **Maintainability**: Easier to update and fix
-- **Reusability**: Functions and classes can be used multiple times
-- **Readability**: Clear structure helps others understand your code
-- **Testing**: Modular code is easier to test
-
-### Best Practices
+### 2. One Function, One Task
 ```python
-# Good: Clear, focused functions
-def calculate_tax(income, tax_rate):
-    return income * tax_rate
+# Good: Each function does one thing
+def contact_exists(contacts_list, name):
+    # Just check existence
+    pass
 
-def calculate_net_income(gross_income, tax_rate):
-    tax = calculate_tax(gross_income, tax_rate)
-    return gross_income - tax
+def add_contact_safe(contacts_list, name, phone):
+    # Check, then add
+    if contact_exists(contacts_list, name):
+        return None
+    return add_contact(contacts_list, name, phone)
+```
 
-# Good: Classes with single responsibility
-class Portfolio:
-    def __init__(self):
-        self.stocks = {}
-    
-    def add_stock(self, symbol, shares, price):
-        self.stocks[symbol] = {"shares": shares, "price": price}
-    
-    def get_total_value(self):
-        return sum(stock["shares"] * stock["price"] 
-                  for stock in self.stocks.values())
+### 3. Use Docstrings
+```python
+def search_contacts(contacts_list, search_term):
+    """
+    Find contacts matching the search term.
+
+    Searches both name and phone fields.
+    Case-insensitive.
+    """
+    pass
+```
+
+### 4. Handle Edge Cases
+```python
+def display_all_contacts(contacts_list):
+    """Display all contacts"""
+    if not contacts_list:  # Empty list?
+        print("No contacts to display")
+        return
+
+    # Continue with display...
 ```
 
 ## Hands-on Activities
 
-### Activity 1: Function Design
-Create functions for common economic calculations:
-1. Present value calculation
-2. Loan payment calculator
-3. Investment growth projector
+### Activity 1: Basic Contact Manager
+Build these features:
+1. Add a contact
+2. Display all contacts
+3. Search for a contact
 
-### Activity 2: Recursion Practice
-Implement recursive solutions for:
-1. Calculating compound interest recursively
-2. Tree-traversal problems
-3. Economic modeling scenarios
+### Activity 2: Enhanced Features
+Add:
+1. Delete contact functionality
+2. Edit contact information
+3. Count statistics (total, with/without email)
 
-### Activity 3: OOP Design
-Design and implement:
-1. A `Student` class with grades and GPA calculation
-2. A `Portfolio` class for investment tracking
-3. Inheritance hierarchy for different account types
+### Activity 3: Data Persistence
+Implement:
+1. Save contacts to a file
+2. Load contacts from a file
+3. Auto-save on exit
 
-## Key OOP Concepts
+### Activity 4: Advanced Features
+Try:
+1. Sort contacts by name
+2. Find duplicate phone numbers
+3. Export contacts to different format
 
-### Encapsulation
-- Keep related data and methods together
-- Control access to internal data
-- Use private attributes when appropriate
+## Common Pitfalls
 
-### Inheritance
-- Reuse code from parent classes
-- Extend functionality in child classes
-- Override methods when needed
+### 1. Forgetting to Return
+```python
+# Bad: No return statement
+def add_contact(contacts_list, name, phone):
+    contact = {"name": name, "phone": phone}
+    contacts_list.append(contact)
+    # Oops! Should return contact
 
-### Polymorphism
-- Different objects can respond to the same method call
-- Enables flexible, extensible code design
+# Good: Returns the contact
+def add_contact(contacts_list, name, phone):
+    contact = {"name": name, "phone": phone}
+    contacts_list.append(contact)
+    return contact
+```
+
+### 2. Not Checking Empty Lists
+```python
+# Bad: Will fail on empty list
+first_contact = contacts[0]
+
+# Good: Check first
+if contacts:
+    first_contact = contacts[0]
+else:
+    print("No contacts")
+```
+
+### 3. Case-Sensitive Comparison
+```python
+# Bad: Won't find "alice" if stored as "Alice"
+if name == contact["name"]:
+    pass
+
+# Good: Case-insensitive
+if name.lower() == contact["name"].lower():
+    pass
+```
+
+## Project Template
+
+Download the Contact Manager starter template:
+[Contact Manager Starter Template](https://raw.githubusercontent.com/ap-unil-2025/course-materials/master/content/weeks/week-04/contact_manager_starter.py)
+
+The template includes:
+- Function stubs with TODOs
+- Clear instructions
+- Suggested implementation order
+- Test code
 
 ## Assessment
 
-This lesson contributes to:
-- Advanced Python programming skills
-- Object-oriented design thinking
-- Code organization and modularity
-- Problem-solving with recursion
+This lesson helps you build:
+- Function design and implementation skills
+- Understanding of data structures
+- Ability to build complete programs
+- Problem-solving with code organization
 
 ## Next Steps
 
-Next week we'll explore Generative AI and how it can assist in programming, followed by scientific computing with NumPy and Pandas.
+Next week (Week 5) we'll explore Generative AI and how it can assist in programming tasks. Week 6 will introduce Object-Oriented Programming (OOP) where we'll refactor our Contact Manager using classes.
