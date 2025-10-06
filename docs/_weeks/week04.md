@@ -6,9 +6,9 @@ lecture_slides: "/course-materials/lectures/lecture_4/slides/Advanced_Programmin
 ta_slides: "/course-materials/slides/practice/week04_slides.html"
 lesson: "/course-materials/lessons/week04-lesson.html"
 assignment:
-  title: "Contact Manager Project"
-  link: "#"
-  description: "Build a contact manager using functions, lists, and dictionaries"
+  title: "Problem Set 4: Lists, Dictionaries, Functions & Imports"
+  link: "https://classroom.github.com/a/oPeViRDp"
+  description: "Practice with lists, dictionaries, functions, JSON imports, and recursion"
 examples:
   - title: "Contact Manager Starter Template"
     link: "https://raw.githubusercontent.com/ap-unil-2025/course-materials/master/content/weeks/week-04/contact_manager_starter.py"

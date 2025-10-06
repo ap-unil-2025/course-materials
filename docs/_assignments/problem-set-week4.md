@@ -1,291 +1,173 @@
 ---
 layout: assignment
-title: "Problem Set Week 4: Functions & Data Structures"
+title: "Problem Set 4: Lists, Dictionaries, Functions & Imports"
 assignment_number: 104
-due_date: 2025-10-13 23:59:00
-difficulty: "Intermediate"
-estimated_time: "5-6 hours"
-github_classroom_url: "https://classroom.github.com/a/bR7pM4nY-ps-week4"
+github_classroom_url: "https://classroom.github.com/a/oPeViRDp"
 topics:
+  - "Lists and list operations"
+  - "Dictionaries and nested structures"
   - "Functions"
-  - "Lists and dictionaries"
-  - "Algorithms"
-  - "Recursion"
-status: "closed"
-description: "Functions, Data Structures, and Algorithms"
+  - "JSON imports and file I/O"
+  - "Recursion (bonus)"
+status: "open"
+difficulty: "Beginner to Intermediate"
+estimated_time: "3-4 hours"
 ---
 
-# Problem Set 4: Functions and Data Structures
+# Problem Set 4: Lists, Dictionaries, Functions & Imports
 
-This problem set focuses on functions, lists, dictionaries, and algorithmic thinking.
+## Overview
 
-## Exercise 1: Pokémon Battle Calculator 🎮
-Create a module `battle_calculator.py` for Pokémon damage calculations:
+This assignment focuses on working with Python data structures (lists and dictionaries), writing functions, using imports, and exploring basic recursion.
 
-### a) Damage calculator
-```python
-def calculate_damage(level, power, attack, defense):
-    """Calculate battle damage using the official formula"""
-    # Damage = ((2 * Level + 10) / 250) * (Attack/Defense) * Power + 2
-    
-def critical_hit(base_damage):
-    """Calculate critical hit damage (1.5x)"""
-    # Return modified damage
+**GitHub Classroom Link:** [Accept Assignment](https://classroom.github.com/a/oPeViRDp)
+
+## Learning Objectives
+
+- Master list operations and comprehensions
+- Work with dictionaries and nested data structures
+- Write functions that process collections
+- Use Python modules (json, random, etc.)
+- Understand basic recursion concepts
+
+## Assignment Structure
+
+This problem set consists of 4 required problems and 1 optional bonus problem:
+
+### Problem 1: List Operations (8 functions)
+Practice working with Python lists - creating, modifying, filtering, and transforming them.
+
+**Functions to implement:**
+- `create_number_list(start, end)` - Create a list of numbers
+- `filter_even_numbers(numbers)` - Filter even numbers
+- `square_numbers(numbers)` - Square each number
+- `find_max_min(numbers)` - Find maximum and minimum
+- `remove_duplicates(items)` - Remove duplicates while preserving order
+- `merge_lists(list1, list2)` - Merge two lists alternating elements
+- `list_statistics(numbers)` - Calculate statistics (sum, average, count, etc.)
+- `chunk_list(items, chunk_size)` - Split list into chunks
+
+### Problem 2: Dictionary Operations (9 functions)
+Practice working with Python dictionaries - creating, accessing, modifying, and nesting them.
+
+**Functions to implement:**
+- `create_student_record(name, age, major, gpa)` - Create a student dictionary
+- `get_value_safely(dictionary, key, default)` - Safe dictionary access
+- `merge_dictionaries(dict1, dict2)` - Merge two dictionaries
+- `count_word_frequency(text)` - Count word frequency in text
+- `invert_dictionary(dictionary)` - Swap keys and values
+- `filter_dictionary(dictionary, keys_to_keep)` - Filter dictionary by keys
+- `group_by_first_letter(words)` - Group words by first letter
+- `calculate_grades_average(students)` - Calculate grade averages
+- `nested_dict_access(data, keys)` - Access nested dictionary values
+
+### Problem 3: Mini Contact Manager (9 functions)
+Build a simple contact manager using lists and dictionaries - combines all concepts from Problems 1 & 2.
+
+**Functions to implement:**
+- `create_contact(name, phone, email)` - Create a contact dictionary
+- `add_contact(contacts, name, phone, email)` - Add contact to list
+- `find_contact_by_name(contacts, name)` - Find contact by name
+- `search_contacts(contacts, search_term)` - Search by name or phone
+- `delete_contact(contacts, name)` - Remove a contact
+- `count_contacts_with_email(contacts)` - Count contacts with email
+- `get_all_phone_numbers(contacts)` - Extract all phone numbers
+- `sort_contacts_by_name(contacts)` - Sort contacts alphabetically
+- `contact_exists(contacts, name)` - Check if contact exists
+
+### Problem 4: Data Persistence with JSON (9 functions)
+Learn to use Python modules (imports) and save data to files using JSON.
+
+**Functions to implement:**
+- `save_to_json(data, filename)` - Save data to JSON file
+- `load_from_json(filename)` - Load data from JSON file
+- `save_contacts_to_file(contacts, filename)` - Save contacts to JSON
+- `load_contacts_from_file(filename)` - Load contacts from JSON
+- `append_contact_to_file(contact, filename)` - Add contact to existing file
+- `backup_file(source_filename, backup_filename)` - Create backup copy
+- `get_file_stats(filename)` - Get file statistics
+- `merge_json_files(file1, file2, output_file)` - Merge two JSON files
+- `search_json_file(filename, key, value)` - Search JSON file
+
+### Bonus: Introduction to Recursion (8 functions - Optional)
+Learn about recursive functions - functions that call themselves!
+
+**Functions to implement:**
+- `factorial(n)` - Calculate factorial recursively
+- `countdown(n)` - Print countdown using recursion
+- `sum_list(numbers)` - Sum list recursively
+- `fibonacci(n)` - Calculate Fibonacci number
+- `power(base, exponent)` - Calculate power recursively
+- `reverse_string(text)` - Reverse string recursively
+- `count_down_list(n)` - Create countdown list
+- `flatten_list(nested_list)` - Flatten nested list
+
+## Getting Started
+
+1. **Accept the assignment** using the GitHub Classroom link above
+2. **Clone your repository** to your local machine or Nuvolos
+3. **Complete each problem** in its respective file (`problem1.py`, `problem2.py`, etc.)
+4. **Test your solutions** by running each file: `python problem1.py`
+5. **Commit and push** your work regularly
+
+## Testing Your Code
+
+Each problem file includes built-in test cases. Run them with:
+```bash
+python problem1.py
+python problem2.py
+python problem3.py
+python problem4.py
+python bonus_recursion.py  # if completed
 ```
 
-### b) Type effectiveness
-```python
-def type_multiplier(attacker_type, defender_type):
-    """Return damage multiplier based on type matchup"""
-    # Fire > Grass (2x), Water > Fire (2x), Grass > Water (2x)
-    # Same type: 1x, Reverse: 0.5x
+For automated testing:
+```bash
+pip install pytest
+pytest test_assignment.py -v
 ```
 
-### c) Battle simulator
-```python
-def simulate_battle(pokemon1_stats, pokemon2_stats):
-    """Simulate a full battle and return winner"""
-    # Stats: {name, hp, attack, defense, speed, type}
+## Submission
+
+Push your completed code to your GitHub repository:
+```bash
+git add .
+git commit -m "Complete Problem Set 4"
+git push origin main
 ```
 
-Test with Charmander (Fire) vs Squirtle (Water)!
+GitHub Actions will automatically run tests on your code.
 
-## Exercise 2: List Processing Functions
-Implement these list manipulation functions WITHOUT using built-in functions like `sum()`, `max()`, `min()`, `sorted()`:
+## Tips for Success
 
-```python
-def list_sum(numbers):
-    """Return sum of all elements"""
-    
-def list_product(numbers):
-    """Return product of all elements"""
-    
-def list_average(numbers):
-    """Return average of all elements"""
-    
-def list_median(numbers):
-    """Return median (middle value when sorted)"""
-    
-def list_mode(numbers):
-    """Return most frequent value"""
-    
-def remove_duplicates(lst):
-    """Return new list with duplicates removed, preserving order"""
-```
+- **Start early** - Give yourself time to debug
+- **Test incrementally** - Test each function as you write it
+- **Use print statements** - Debug by printing intermediate values
+- **Read error messages** - They tell you what went wrong
+- **Ask for help** - Use Discord or office hours if stuck
 
-## Exercise 3: Instagram Filter Engine 📸
-Implement image operations using matrices (images are just 2D arrays!):
+## Resources
 
-```python
-def create_canvas(width, height, background_color=0):
-    """Create a blank image canvas"""
-    
-def apply_brightness(image, factor):
-    """Adjust brightness (multiply all pixels by factor)"""
-    
-def blur_filter(image):
-    """Apply blur by averaging neighboring pixels"""
-    
-def edge_detection(image):
-    """Detect edges using pixel differences"""
-    
-def rotate_90(image):
-    """Rotate image 90 degrees clockwise"""
-    
-def create_gradient(width, height, direction='horizontal'):
-    """Create a gradient effect"""
-```
+- [Python Functions Documentation](https://docs.python.org/3/tutorial/controlflow.html#defining-functions)
+- [Python Data Structures](https://docs.python.org/3/tutorial/datastructures.html)
+- [JSON Module Documentation](https://docs.python.org/3/library/json.html)
+- Week 4 Lesson Guide
+- Week 4 Practice Slides
 
-Test by creating ASCII art representations:
-```python
-# 0-3: ' ', 4-6: '.', 7-9: '*', 10+: '#'
-image = [[0, 5, 10], [2, 7, 12], [4, 9, 14]]
-# Displays as: " .#" / " *#" / ".*#"
-```
+## Academic Integrity
 
-## Exercise 4: Dictionary Operations
-Create a student grade management system:
+This is an **individual assignment**. You may:
+- Use Python documentation
+- Discuss concepts with classmates
+- Ask questions on Discord
 
-```python
-def add_student(gradebook, name, grades):
-    """Add a student with their grades to gradebook"""
-    
-def calculate_gpa(gradebook, name):
-    """Calculate GPA for a specific student"""
-    
-def class_average(gradebook, subject):
-    """Calculate class average for a specific subject"""
-    
-def top_students(gradebook, n=3):
-    """Return top n students by GPA"""
-    
-def failing_students(gradebook, threshold=60):
-    """Return list of students below threshold"""
-```
+You may NOT:
+- Copy code from other students
+- Use AI to generate complete solutions
+- Submit work that is not your own
 
-Example gradebook structure:
-```python
-gradebook = {
-    "Alice": {"Math": 95, "Physics": 88, "Chemistry": 92},
-    "Bob": {"Math": 78, "Physics": 81, "Chemistry": 75}
-}
-```
+## Assessment
 
-## Exercise 5: Netflix Algorithm Simulator 🎬
-Implement recommendation system algorithms:
+This is an ungraded practice assignment designed to build your programming skills. Focus on understanding concepts rather than just getting tests to pass.
 
-### a) Watch history pattern finder
-```python
-def find_binge_pattern(watch_history, memo={}):
-    """Find recurring viewing patterns using memoization"""
-    # Return most common sequence of genres
-```
-
-### b) Recommendation tree builder
-```python
-def build_recommendation_tree(user_profile, content_library, depth=3):
-    """Recursively build personalized recommendation paths"""
-    # Each node leads to more specific suggestions
-```
-
-### c) Quick content search
-```python
-def search_content(library, title, filters=None):
-    """Binary search through sorted content library"""
-    # Filters: genre, year, rating
-```
-
-Test with:
-- User who watched: ["Stranger Things", "Dark", "Black Mirror"]
-- Should recommend: Sci-fi thrillers with mystery elements
-
-## Exercise 6: Spotify Wrapped Generator 🎧
-Analyze a year of listening data:
-
-```python
-def listening_stats(play_counts):
-    """
-    Analyze daily play counts and return your music personality:
-    - 'total_minutes': Total listening time
-    - 'peak_day': Your most active day
-    - 'consistency': How regular your habits are
-    - 'genre_evolution': How your taste changed
-    - 'discovery_rate': New vs repeat songs
-    - 'night_owl_score': Late night listening percentage
-    """
-    
-def find_obsession_periods(songs, threshold=10, min_days=7):
-    """
-    Find when you played a song obsessively
-    Return: {song: [(start_day, end_day, total_plays)]}
-    """
-    
-def generate_music_seasons(listening_data):
-    """
-    Create your personal "music seasons":
-    - 'Heartbreak Hotel': Sad songs period
-    - 'Gym Rat Era': Workout music dominance
-    - 'Study Grind': Lo-fi and classical
-    - 'Party Animal': High energy phase
-    """
-```
-
-## Exercise 7: Twitter Drama Analyzer 🔥
-Analyze viral tweets and threads:
-
-```python
-def find_ratio_tweets(replies):
-    """Find tweets that got 'ratio'd' (more replies than likes)"""
-    
-def extract_subtweeting(tweets):
-    """Detect potential subtweeting patterns"""
-    # Look for vague references, timing patterns
-    
-def viral_potential_score(tweet):
-    """
-    Calculate viral potential based on:
-    - Emotional words
-    - ALL CAPS percentage
-    - Emoji density
-    - Hot take indicators
-    - Question marks (engagement bait)
-    """
-    
-def thread_summarizer(thread):
-    """Convert a 37-part thread into actual points"""
-    # Return: main_point, supporting_args, unnecessary_parts
-    
-def detect_twitter_personalities(tweet_history):
-    """
-    Classify user type:
-    - 'Reply Guy': High reply/original ratio
-    - 'Hot Take Artist': Controversial opinions
-    - 'Thread Philosopher': Long educational threads
-    - 'Meme Lord': Image/joke heavy
-    - 'Lurker': Rare poster
-    """
-```
-
-## Exercise 8: TikTok Algorithm Battle ⚔️
-Implement and race different feed-sorting algorithms:
-
-```python
-def engagement_sort(videos):
-    """Sort by likes + comments + shares"""
-    
-def watch_time_sort(videos):
-    """Sort by average completion rate"""
-    
-def personalized_sort(videos, user_preferences):
-    """ML-style sort based on user history"""
-    
-def algorithm_showdown(content_pool, test_users):
-    """
-    Race algorithms to see which gets more 'engagement':
-    - Generate feed for each algorithm
-    - Simulate user scrolling
-    - Measure 'addiction score' (time spent)
-    - Crown the winner (most addictive algorithm)
-    Return: {algorithm_name: {avg_watch_time, skip_rate, viral_discoveries}}
-    """
-```
-
-Test with realistic data:
-- Dance videos: High immediate engagement
-- Educational: Slow burn, high completion
-- Comedy: High shares, mixed completion
-
-## Exercise 9: One-Line Coding Flexes 💪
-Solve these using list comprehensions (impress your friends!):
-
-```python
-# 1. Generate Fibonacci sequence (first 20)
-fib = # Your list comprehension dark magic here
-
-# 2. Find all "nice" numbers (sum of digits equals 7) under 1000
-nice_nums = # Your list comprehension here
-
-# 3. Create a chess board (8x8) with 'B' and 'W' squares
-chess = # Your nested comprehension here
-
-# 4. Generate all possible pizza combinations
-toppings = ['pepperoni', 'mushroom', 'olives']
-combos = # Get all possible combinations (hint: use binary!)
-
-# 5. Simulate dice probability (sum of two dice)
-dice_sums = # Generate all possible sums and their frequency
-
-# 6. Create ASCII art triangle
-size = 5
-triangle = # Generate: ['*', '**', '***', '****', '*****']
-
-# 7. Find "happy numbers" (iterating sum of squares of digits reaches 1)
-happy = # Find all happy numbers under 100
-```
-
-## Submission Instructions
-- Submit your solutions in separate Python files for each exercise
-- Include docstrings for all functions
-- Add test cases demonstrating correctness
-- Due: Before Week 5 lecture
-
+Good luck! Remember: struggling with problems is part of learning to code.
