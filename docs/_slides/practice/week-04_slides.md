@@ -1,7 +1,7 @@
 ---
 marp: true
 paginate: true
-header: "Session 4: Build Something Real"
+header: "Session 4: Contact Manager - Part 1"
 footer: "Anna Smirnova, October 13, 2025"
 style: |
   section.lead {
@@ -25,50 +25,133 @@ style: |
 
 <!-- _class: lead -->
 
-# Session 4: Contact Manager - Part 2
+# Session 4: Contact Manager - Part 1
 
-**Level Up with Functions & Data Structures**
+**Building Your First Real Program**
 
 ---
 
-# Welcome Back! 🚀
+# Welcome! 🚀
 
-**Last week (Week 3):**
-- Built Contact Manager v0.1
-- Used basic variables (contact1_name, etc.)
-- Limited to 3 contacts
-- Lots of repeated code
+**Last sessions:**
+- Git basics & GitHub workflow
+- Python fundamentals review
 
 **Today (Week 4):**
-- Upgrade to v1.0 with functions
-- Unlimited contacts using lists
-- Better data with dictionaries
-- Save/load to files
-- Clean, professional code
+- Build Contact Manager from scratch
+- Learn functions for organization
+- Use lists to store multiple contacts
+- Use dictionaries for structured data
+- Maybe: simple recursion example
 
-**Bring your Week 3 code - we're refactoring!**
+**Let's build something real together!**
 
 ---
 
-# Part 1: From Variables to Lists
+# What Are We Building Today?
+
+**A Contact Manager Application**
+
+Think of it like a simple phone contacts app:
+- Store multiple contacts (name, phone, email)
+- Add new contacts
+- Search for contacts
+- View all contacts
+- Delete contacts
+
+**Why this project?**
+- Practical and relatable
+- Teaches all the key concepts
+- You can actually use it!
+
+---
+
+# The Problem: How to Store Multiple Contacts?
+
+**Bad approach:**
+```python
+contact1_name = "Alice"
+contact1_phone = "555-0001"
+
+contact2_name = "Bob"
+contact2_phone = "555-0002"
+
+contact3_name = "Charlie"
+contact3_phone = "555-0003"
+```
+
+**Problems:**
+- What if we need 100 contacts?
+- Hard to loop through them
+- Hard to add/remove contacts
+
+**We need a better way!**
+
+---
+
+# The Solution: Lists!
 
 ```python
-# contact_manager_v1.py
-# Week 4: Upgrading with functions and data structures
+# contact_manager.py
+# Week 4: Building from scratch with proper data structures
 
-# Remember Week 3? We had:
-# contact1_name, contact2_name, contact3_name...
-# That was painful!
-
-# Now we use a list of dictionaries:
 contacts = []  # Can store unlimited contacts!
 
 print("="*40)
-print("  CONTACT MANAGER v1.0 (Advanced)")
+print("  CONTACT MANAGER v1.0")
 print("="*40)
 ```
 
-**Much better than separate variables!**
+**A list can hold many items - perfect for contacts!**
+
+But wait... how do we store name AND phone for each contact?
+
+**Answer: Dictionaries!**
+
+---
+
+# Understanding Dictionaries
+
+**A dictionary stores key-value pairs:**
+
+```python
+# One contact as a dictionary
+contact = {
+    "name": "Alice Smith",
+    "phone": "555-0001",
+    "email": "alice@email.com"
+}
+
+# Access values by key
+print(contact["name"])    # "Alice Smith"
+print(contact["phone"])   # "555-0001"
+```
+
+**Perfect for structured data like contacts!**
+
+---
+
+# Combining Lists and Dictionaries
+
+```python
+# A list of dictionaries - our contact database!
+contacts = [
+    {"name": "Alice", "phone": "555-0001", "email": "alice@email.com"},
+    {"name": "Bob", "phone": "555-0002", "email": "bob@email.com"}
+]
+
+# Loop through all contacts
+for contact in contacts:
+    print(f"{contact['name']}: {contact['phone']}")
+```
+
+**Output:**
+```
+Alice: 555-0001
+Bob: 555-0002
+```
+
+**This is how real programs store data!**
 
 ---
 
