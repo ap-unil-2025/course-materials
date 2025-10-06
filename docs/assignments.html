@@ -26,15 +26,14 @@ title: Assignments
   <div class="info-banner">
     <div class="info-icon">📝</div>
     <div class="info-content">
-      <h3>Week 3 Assignment Now Available</h3>
-      <p>The Git & Python Fundamentals assignment is now open. This is an <strong>ungraded practice assignment</strong> to help you build essential skills. More assignments will be released as the course progresses.</p>
+      <h3>Week 4 Assignment Now Available</h3>
+      <p>Problem Set 4: Lists, Dictionaries, Functions & Imports is now open. All assignments are <strong>ungraded practice assignments</strong> to help you build essential skills.</p>
     </div>
   </div>
 
 <div class="assignments-page" id="assignments-list">
     {% assign all_assignments = site.assignments | sort: 'assignment_number' %}
-    {% assign week3_assignment = all_assignments | where: "title", "Problem Set Week 3: Git & Python Fundamentals" %}
-    {% assign assignments = week3_assignment %}
+    {% assign assignments = all_assignments | where: "status", "open" %}
     {% if assignments.size > 0 %}
         <div class="assignments-list">
             {% for assignment in assignments %}
