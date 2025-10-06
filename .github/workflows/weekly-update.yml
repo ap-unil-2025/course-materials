@@ -2,10 +2,10 @@ name: Weekly Monday Update
 
 on:
   schedule:
-    # Runs at 8:00 AM UTC every Monday
+    # Runs at 8:00 AM Swiss time every Monday
     # Switzerland is UTC+1 (winter) or UTC+2 (summer)
-    # So 7:00 UTC = 8:00 AM in Switzerland (winter) or 9:00 AM (summer)
-    - cron: '0 7 * * 1'
+    # So 6:00 UTC = 7:00 AM (winter) or 8:00 AM (summer)
+    - cron: '0 6 * * 1'
   workflow_dispatch: # Allow manual trigger
 
 jobs:
