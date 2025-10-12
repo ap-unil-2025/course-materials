@@ -1,0 +1,277 @@
+/* @theme gradient-custom */
+/* Based on gradient theme by rnd195 https://github.com/rnd195/ */
+/* Customized for AP2025 Course with smaller fonts for more content */
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Roboto+Mono:wght@400;500;700&display=swap');
+
+:root {
+  font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 20px; /* Better readability - sweet spot */
+  font-weight: 500; /* Medium weight for better readability */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+section {
+  background-color: #ffffff;
+  background-image: linear-gradient(to top right, #f5edf5 5%, #edf5f7 95%);
+  padding: 50px 60px;
+}
+
+h1 {
+  color: #842174;
+  font-size: 2.2em; /* ~44px */
+  font-weight: 700;
+  margin-bottom: 0.5em;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  color: #842174;
+  font-size: 1.7em; /* ~34px */
+  font-weight: 700; /* Bolder for better visibility */
+  margin-bottom: 0.4em;
+  margin-top: 0.6em;
+}
+
+h3 {
+  color: #842174;
+  font-size: 1.35em; /* ~27px */
+  font-weight: 700; /* Bolder */
+  margin-bottom: 0.3em;
+}
+
+h4,
+h5,
+h6 {
+  color: #842174;
+  font-size: 1.15em;
+  font-weight: 700;
+}
+
+p, li {
+  font-size: 1.2em; /* 24px */
+  line-height: 1.5;
+  margin-bottom: 0.5em;
+  font-weight: 500; /* Medium weight - more substantial */
+}
+
+ul, ol {
+  margin-left: 1.5em;
+}
+
+a {
+  color: #9d30a6;
+}
+
+code {
+  background-color: #ffffffad;
+  font-size: 0.9em; /* ~18px */
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: 'Roboto Mono', 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
+}
+
+mark {
+  background-color: #eaa2ee;
+  padding: 0 2px 2px;
+}
+
+pre {
+  background-color: #ffffffad;
+  font-size: 0.8em; /* ~16px */
+  padding: 1em;
+  border-radius: 5px;
+  overflow-x: auto;
+}
+
+pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+table {
+  font-size: 0.85em; /* ~17px */
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+}
+
+table th {
+  background-color: #842174;
+  color: white;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+table td {
+  background-color: #ffffffad;
+  padding: 6px 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+blockquote {
+  font-size: 0.95em;
+  font-style: italic;
+  border-left: 4px solid #842174;
+  padding-left: 1em;
+  margin: 1em 0;
+  color: #555;
+}
+
+strong {
+  font-weight: 700;
+  color: #842174;
+}
+
+/* Header styling - top of slide */
+header {
+  position: absolute;
+  top: 30px;
+  left: 60px;
+  right: 60px;
+  font-size: 0.6em;
+  color: #842174;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+/* Footer element - bottom left */
+footer {
+  position: absolute;
+  bottom: 30px;
+  left: 60px;
+  font-size: 0.6em;
+  color: #842174;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+/* Pagination - bottom right, aligned with footer */
+section::after {
+  position: absolute;
+  bottom: 30px;
+  right: 60px;
+  font-size: 0.6em;
+  color: #842174;
+  font-weight: 500;
+  opacity: 0.8;
+  content: attr(data-marpit-pagination) " / " attr(data-marpit-pagination-total);
+}
+
+img[alt~="center"] {
+  display: block;
+  margin: 0 auto;
+}
+
+/* Blue variant */
+section.blue {
+  background-color: #ffffff;
+  background-image: linear-gradient(to bottom right, #cadaf7 5%, #87a7e4 95%);
+}
+
+section.blue > h1,
+section.blue > h2,
+section.blue > h3,
+section.blue > h4,
+section.blue > h5,
+section.blue > h6 {
+  color: #214484;
+}
+
+section.blue > a {
+  color: #303ca6;
+}
+
+section.blue::after,
+section.blue > footer,
+section.blue > header {
+  color: #303ca6;
+}
+
+section.blue strong {
+  color: #214484;
+}
+
+section.blue table th {
+  background-color: #214484;
+}
+
+/* Invert class (dark background) */
+section.invert {
+  background-color: #1a1a1a;
+  background-image: linear-gradient(to bottom right, #2a1a3a 5%, #1a3a4a 95%);
+  color: #ffffff;
+}
+
+section.invert h1,
+section.invert h2,
+section.invert h3,
+section.invert h4,
+section.invert h5,
+section.invert h6 {
+  color: #e1c2e1;
+}
+
+section.invert a {
+  color: #b9d5d9;
+}
+
+section.invert code {
+  background-color: #00000050;
+  color: #e1c2e1;
+}
+
+section.invert pre {
+  background-color: #00000050;
+}
+
+section.invert strong {
+  color: #e1c2e1;
+}
+
+section.invert table th {
+  background-color: #842174;
+}
+
+section.invert table td {
+  background-color: #00000030;
+  border-bottom: 1px solid #444;
+}
+
+/* Lead class (title slides) */
+section.lead {
+  text-align: center;
+  justify-content: center;
+  background-image: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+}
+
+section.lead h1 {
+  font-size: 3em;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+section.lead h2 {
+  color: white;
+  font-size: 1.8em;
+  font-weight: 400;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+section.lead h3 {
+  color: white;
+  font-size: 1.3em;
+  font-weight: 400;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+section.lead p {
+  color: white;
+  font-size: 1.2em;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+section.lead strong {
+  color: white;
+}

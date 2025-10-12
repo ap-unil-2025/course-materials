@@ -1,10 +1,8 @@
 ---
 marp: true
-theme: default
 paginate: true
-header: "Session 7: Trusting Your Code"
-footer: "An Introduction to Automated Testing with `pytest`"
-size: 16:9
+header: "Session 7: Debugging & Error Handling"
+footer: "Anna Smirnova, November 3, 2025"
 style: |
   section.lead {
     background: #003aff;
@@ -26,230 +24,673 @@ style: |
 ---
 
 <!-- _class: lead -->
-# Session 7: Trusting Your Code
 
-**An Introduction to Automated Testing with `pytest`**
+# Session 7: Debugging & Error Handling
 
----
-
-# Today's Goals
-
-*   Understand **why** we need to write tests for our code.
-*   Learn the difference between **manual** and **automated** testing.
-*   Get introduced to `pytest`, the standard Python testing framework.
-*   Write our first simple tests for our "Companion Project".
-*   Learn how to test for expected failures (exceptions).
-
----
-# Part 1: Why Test?
+**Finding Bugs and Handling Errors Gracefully**
 
 ---
 
-# The Problem: How Do You Know Your Code Works?
+# What We'll Cover Today
 
-So far, we've been testing our code **manually**:
-1.  Write a function.
-2.  Run the script.
-3.  Look at the `print()` output.
-4.  Decide if it "looks right".
+**Part 1: Understanding Bugs**
+- Types of bugs (syntax, runtime, logic)
+- How to read error messages
 
-**What's wrong with this?**
-*   **It's slow and repetitive.** You have to do it every time you make a change.
-*   **It's error-prone.** You might forget to test a specific case.
-*   **It doesn't scale.** What if you have 50 functions? You can't manually check all of them after every single change.
+**Part 2: Debugging Strategies**
+- Print debugging
+- Using debuggers (VSCode)
 
----
-
-# The Solution: Automated Testing
-
-**Automated Testing** is the practice of writing code to test your other code.
-
-You create a "test suite"—a collection of test functions that:
-1.  Run a piece of your code with a specific input.
-2.  **Assert** that the output is exactly what you expect.
-3.  Are run automatically every time you want to verify your project.
-
-**This gives you a "safety net".** When you change something, you can run your tests and be confident you didn't break anything.
+**Part 3: Exception Handling**
+- Try/except blocks
+- Common Python exceptions
+- Best practices
 
 ---
 
+# The Debugging Mindset
 
-# Part 2: Your First Tests with `pytest`
+> "Debugging is twice as hard as writing the code in the first place.
+> Therefore, if you write the code as cleverly as possible, you are, by definition,
+> not smart enough to debug it." – Brian Kernighan
 
----
-
-# Introducing `pytest`
-
-`pytest` is a powerful, yet simple, testing framework for Python.
-
-**Why `pytest`?**
-*   **Simple Syntax:** Writing tests feels very natural.
-*   **Powerful Features:** Easily handles complex testing scenarios.
-*   **Great Reporting:** Gives you clear, readable output when tests fail.
-*   **Auto-discovery:** It automatically finds your test files and functions.
+**Key insight**: Write simple, readable code. Your future self (and debugger) will thank you!
 
 ---
 
-# Setting Up for Testing
-
-Let's get our companion project ready for testing.
-
-1.  **Install `pytest` as a dev dependency:**
-    ```bash
-    uv pip install --dev pytest
-    ```
-
-2.  **Create a `tests/` directory:**
-    By convention, all test files live in a separate `tests/` directory at the root of your project.
-    ```bash
-    mkdir tests
-    ```
+# Part 1: Understanding Bugs
 
 ---
 
-# The Anatomy of a `pytest` Test
+# Types of Bugs: Overview
 
-`pytest` follows simple conventions for discovering tests:
+There are three main categories of bugs in Python:
 
-1.  Test filenames must start or end with `test_`.
-    *   Good: `test_analyzer.py`, `analyzer_test.py`
-2.  Test function names must start with `test_`.
-    *   Good: `def test_word_count(): ...`
+1. **Syntax Errors** - Python can't parse your code
+   - Detected before the program runs
+   - Easiest to fix
 
-Inside a test function, you use the plain `assert` keyword to check for correctness.
+2. **Runtime Errors (Exceptions)** - Code crashes during execution
+   - Detected when the problematic line runs
+   - Can be handled with try-except
+
+3. **Logic Errors** - Code runs but produces wrong results
+   - No error messages
+   - Hardest to find and fix
+
+Let's explore each type in detail...
 
 ---
 
-# Let's Code: Writing Our First Test
+# Bug Type 1: Syntax Errors
 
-**Goal:** Write a test for the `count_words` method in our `TextAnalyzer` class.
+**What they are**: Violations of Python's grammar rules
 
-**Open a new file: `tests/test_analyzer.py`**
+**When detected**: Before the program runs (at parse time)
+
+**Common examples**:
+```python
+# Missing colon
+if x > 5
+    print("Big")
+
+# Mismatched parentheses
+result = calculate(5, 10
+
+# Invalid indentation
+def greet():
+print("Hello")
+
+# Missing quotes
+message = Hello World
+```
+
+**How to identify**:
+- Python shows `SyntaxError` with a caret (^) pointing at the problem
+- The error is usually ON or RIGHT BEFORE the line indicated
+- Your code won't run at all until fixed
+
+---
+
+# Bug Type 2: Runtime Errors (Exceptions)
+
+**What they are**: Errors that occur during program execution
+
+**When detected**: When the problematic line is executed
+
+**Common examples**:
+```python
+# ZeroDivisionError - Division by zero
+result = 10 / 0
+
+# NameError - Using undefined variable
+x = y + 1  # if y doesn't exist
+
+# TypeError - Operation on wrong type
+result = 'foo' + 6  # Can't add string and int
+
+# IndexError - Accessing non-existent list index
+L = [1, 2, 3]
+x = L[10]
+
+# KeyError - Accessing non-existent dictionary key
+person = {'name': 'Alice'}
+age = person['age']  # 'age' doesn't exist
+
+# FileNotFoundError - Opening non-existent file
+f = open('missing.txt', 'r')
+```
+
+---
+
+# Bug Type 3: Logic Errors
+
+**What they are**: Code runs successfully but produces incorrect results
+
+**When detected**: Only when you notice wrong output (no error message!)
+
+**Why they're dangerous**: Python can't help you find them
+
+**Common examples**:
+```python
+# Example 1: Wrong operator
+def calculate_discount(price, percent):
+    return price + (price * percent)  # Should be minus!
+
+# Example 2: Off-by-one error
+def get_last_n_items(items, n):
+    return items[-n-1:]  # Should be items[-n:]
+
+# Example 3: Forgetting to return a value
+def calculate_average(numbers):
+    total = sum(numbers)
+    avg = total / len(numbers)
+    # Oops, forgot to return avg!
+
+# Example 4: Wrong variable scope
+total = 0
+def add_to_total(amount):
+    total = total + amount  # Oops, creates local total
+    return total
+```
+
+**How to find them**: Testing, debugging, code review, print statements
+
+---
+
+# Reading Error Messages
 
 ```python
-# tests/test_analyzer.py
-
-# We need to import the class we want to test
-from src.text_analyzer import TextAnalyzer
-
-def test_word_count_simple_case():
-    """
-    Tests the word_count method with a simple sentence.
-    """
-    # 1. SETUP: Create an instance with known data
-    analyzer = TextAnalyzer("hello world")
-
-    # 2. EXECUTION: Call the method we want to test
-    result = analyzer.count_words()
-
-    # 3. ASSERTION: Check if the result is what we expect
-    assert result == 2
+Traceback (most recent call last):
+  File "script.py", line 15, in <module>  # WHERE: line 15
+    result = divide(10, 0)
+  File "script.py", line 3, in divide     # Inside divide function
+    return a / b
+ZeroDivisionError: division by zero       # WHAT: the actual error
 ```
+
+**How to read this**:
+1. Start from the bottom - that's the actual error
+2. Work up to see the chain of function calls
+3. Look for YOUR code (not library code)
+4. The line numbers tell you exactly where to look
 
 ---
 
-# Running Your Tests
-
-This is the easy part! Navigate to the root directory of your project in the terminal and simply run:
-
-```bash
-uv run pytest
-```
-
-`pytest` will automatically find your `tests/` directory, find the `test_analyzer.py` file, find the `test_word_count_simple_case` function, run it, and report the results.
-
-**If everything passes, you'll see a green output!**
+# Part 2: Debugging Strategies
 
 ---
 
-# What Happens When a Test Fails?
+# Strategy 1: Print Debugging
 
-Let's write a test we know will fail to see `pytest`'s excellent error reporting.
+**The simplest tool**: Just add `print()` statements!
 
 ```python
-# In tests/test_analyzer.py
+def calculate_discount(price, discount_percent):
+    print(f"DEBUG: price={price}, discount={discount_percent}")
 
-def test_word_count_with_empty_string():
-    analyzer = TextAnalyzer("")
-    result = analyzer.count_words()
-    # This assertion is wrong on purpose!
-    assert result == 1
+    discount_amount = price * discount_percent
+    print(f"DEBUG: discount_amount={discount_amount}")
+
+    final_price = price - discount_amount
+    print(f"DEBUG: final_price={final_price}")
+
+    return final_price
+
+# Test it
+result = calculate_discount(100, 0.2)  # Expecting 80
+print(f"Result: {result}")
 ```
 
-Now run `uv run pytest` again. `pytest` will give you a detailed **red** report showing:
-*   Which test failed.
-*   Which `assert` statement failed.
-*   The values of the variables at the time of failure (e.g., `assert 0 == 1`).
-
-This makes debugging a failed test incredibly easy.
-
----
-
-
-# Part 3: More Advanced Testing Scenarios
+**Output**:
+```
+DEBUG: price=100, discount=0.2
+DEBUG: discount_amount=20.0
+DEBUG: final_price=80.0
+Result: 80.0
+```
 
 ---
 
-# Testing for Expected Errors
-
-What if you have a function that is *supposed* to raise an error? For example, our `calculate_mean` method should raise a `ValueError` if there are no results.
-
-How do you test that the error was correctly raised? With `pytest.raises`.
-
----
-
-# Let's Code: Testing for a `ValueError`
-
-**Goal:** Ensure our `calculate_mean` method correctly raises a `ValueError` when the results list is empty.
+# Pro Tip: Use a DEBUG Flag
 
 ```python
-# tests/test_analyzer.py
-import pytest # Need to import pytest for this
+DEBUG = True  # Set to False in production
 
-from src.text_analyzer import TextAnalyzer
+def calculate_discount(price, discount_percent):
+    if DEBUG:
+        print(f"DEBUG: price={price}, discount={discount_percent}")
 
-# ... other tests ...
+    discount_amount = price * discount_percent
 
-def test_calculate_mean_raises_error_on_empty_results():
-    """
-    Tests that calculate_mean raises a ValueError for an empty dataset.
-    """
-    # Create an analyzer with no results added
-    analyzer = TextAnalyzer("some text but no results yet")
-    
-    # Use a context manager to say "I expect an error inside this block"
-    with pytest.raises(ValueError):
-        # This line SHOULD raise a ValueError.
-        # If it does, the test passes. If it doesn't, the test fails.
-        analyzer.calculate_mean()
+    if DEBUG:
+        print(f"DEBUG: discount_amount={discount_amount}")
+
+    final_price = price - discount_amount
+    return final_price
+```
+
+**Benefits**:
+- Easy to turn off all debug output
+- No need to delete debug statements
+- Can keep them for future debugging
+
+---
+
+# Strategy 2: Using Debuggers
+
+**Debuggers** let you:
+- Pause execution at any line
+- Inspect variable values
+- Step through code line by line
+- See the call stack
+
+We will use **Visual debugging** with VSCode.
+
+---
+
+# VSCode Debugging (Live Demo)
+
+**Visual debugging** is the most powerful approach!
+
+**Setting Breakpoints**:
+1. Click left of line number → red dot appears
+2. Run debugger (F5 or "Debug Cell" in notebooks)
+3. Code pauses at breakpoint
+
+**Debug Controls** (toolbar at top):
+- **Continue (F5)**: Run until next breakpoint
+- **Step Over (F10)**: Execute current line
+- **Step Into (F11)**: Go inside function calls
+- **Step Out (Shift+F11)**: Exit current function
+
+**Panels**:
+- **Variables**: See all current variables and their values
+- **Watch**: Add expressions to monitor (e.g., `len(contacts)`)
+- **Call Stack**: See the chain of function calls
+
+---
+
+# Part 3: Exception Handling
+
+---
+
+# Handling Errors Gracefully
+
+**Without exception handling** (program crashes):
+```python
+def divide(a, b):
+    return a / b
+
+result = divide(10, 0)  # 💥 Crash!
+print("This never prints")
+```
+
+**With exception handling** (program continues):
+```python
+def divide(a, b):
+    try:
+        result = a / b
+        return result
+    except ZeroDivisionError:
+        print("Error: Cannot divide by zero!")
+        return None
+
+result = divide(10, 0)  # Error: Cannot divide by zero!
+print("Program continues running")  # This prints!
 ```
 
 ---
 
-# The "Arrange, Act, Assert" Pattern
+# Common Python Exceptions
 
-Good tests are easy to read and follow a standard pattern:
+```python
+# ZeroDivisionError
+try:
+    result = 1 / 0
+except ZeroDivisionError:
+    print("Cannot divide by zero!")
 
-1.  **Arrange**: Set up all the necessary preconditions and inputs. Create your objects, prepare your data.
-    *   `analyzer = TextAnalyzer("hello world")`
+# ValueError - Wrong type/value
+try:
+    age = int("twenty")  # Can't convert "twenty" to int
+except ValueError:
+    print("Please enter a number")
 
-2.  **Act**: Execute the single piece of code (the method or function) that you are testing.
-    *   `result = analyzer.count_words()`
+# NameError - Variable not defined
+try:
+    print(undefined_variable)
+except NameError:
+    print("Variable doesn't exist")
 
-3.  **Assert**: Check that the outcome of the "Act" phase is what you expected.
-    *   `assert result == 2`
+# TypeError - Wrong type for operation
+try:
+    result = 'foo' + 6  # Can't add string and int
+except TypeError:
+    print("Type mismatch")
 
-Structuring your tests this way makes them much clearer and more maintainable.
+# IndexError - List index out of range
+try:
+    L = [1, 2, 3]
+    print(L[10])
+except IndexError:
+    print("Index out of range")
+```
+
+---
+
+# Multiple Exception Handling
+
+```python
+def safe_divide(a, b):
+    try:
+        result = a / b
+        return result
+    except ZeroDivisionError:
+        print("Error: Division by zero")
+        return None
+    except TypeError:
+        print(f"Error: Cannot divide {type(a)} by {type(b)}")
+        return None
+    except Exception as e:  # Catch any other error
+        print(f"Unexpected error: {e}")
+        return None
+    finally:  # Always runs, even if there's an error
+        print("Division operation completed")
+
+# Test different cases
+print(safe_divide(10, 2))    # Works: 5.0
+print(safe_divide(10, 0))    # ZeroDivisionError
+print(safe_divide("10", 2))  # TypeError
+```
+
+**Best Practice**: Be specific with exceptions - catch specific errors first, then general ones.
+
+---
+
+# The Try-Except-Finally Pattern
+
+```python
+try:
+    # Code that might raise an exception
+    file = open('contacts.json', 'r')
+    data = json.load(file)
+except FileNotFoundError:
+    # Handle specific error
+    print("File not found, creating new contacts list")
+    data = []
+except json.JSONDecodeError:
+    # Handle another specific error
+    print("Invalid JSON, starting fresh")
+    data = []
+finally:
+    # Always runs, even if there was an error or return
+    try:
+        file.close()
+    except:
+        pass  # File wasn't opened
+```
+
+**Use `finally` for cleanup**: Closing files, releasing resources, etc.
+
+---
+
+# Raising Your Own Exceptions
+
+Sometimes YOU want to raise an error:
+
+```python
+class ContactManager:
+    def add_contact(self, name, phone):
+        if not name:
+            raise ValueError("Name cannot be empty")
+        if not phone:
+            raise ValueError("Phone cannot be empty")
+
+        contact = {'name': name, 'phone': phone}
+        self.contacts.append(contact)
+
+# Usage
+manager = ContactManager()
+try:
+    manager.add_contact("", "123-4567")
+except ValueError as e:
+    print(f"Error: {e}")  # Error: Name cannot be empty
+```
+
+**Why raise exceptions?**
+- Communicate errors clearly
+- Force calling code to handle errors
+- Better than returning `None` or `-1` as error codes
+
+---
+
+# Exercise 1: Debug the Shopping Cart
+
+```python
+class ShoppingCart:
+    def __init__(self):
+        self.items = []
+        self.total = 0
+
+    def add_item(self, item, price, quantity):
+        self.items.append({
+            'item': item,
+            'price': price,
+            'quantity': quantity
+        })
+        # BUG: What's wrong here?
+        self.total = price * quantity
+
+    def remove_item(self, item_name):
+        # BUG: This doesn't update the total
+        for item in self.items:
+            if item['item'] == item_name:
+                self.items.remove(item)
+
+    def get_total(self):
+        # BUG: Why is this wrong?
+        return self.total
+
+# Test it
+cart = ShoppingCart()
+cart.add_item("Apple", 0.5, 10)
+cart.add_item("Banana", 0.3, 5)
+print(f"Total: ${cart.get_total()}")  # What's wrong?
+```
+
+---
+
+# Exercise 1: Solution
+
+**Bug 1**: `add_item` sets total instead of adding to it
+```python
+# Wrong:
+self.total = price * quantity
+
+# Right:
+self.total += price * quantity
+```
+
+**Bug 2**: `remove_item` doesn't update total
+```python
+# Add before removing:
+self.total -= item['price'] * item['quantity']
+self.items.remove(item)
+```
+
+**Bug 3**: Better approach - calculate total dynamically
+```python
+def get_total(self):
+    return sum(item['price'] * item['quantity'] for item in self.items)
+```
+
+---
+
+# Exercise 2: Add Exception Handling to Contact Manager
+
+```python
+class ContactManager:
+    def __init__(self):
+        self.contacts = []
+
+    def add_contact(self, name, phone):
+        # TODO: Add validation
+        contact = {'name': name, 'phone': phone}
+        self.contacts.append(contact)
+
+    def save(self, filename):
+        # TODO: Handle file errors
+        with open(filename, 'w') as f:
+            json.dump(self.contacts, f)
+
+    def load(self, filename):
+        # TODO: Handle file not found, invalid JSON
+        with open(filename, 'r') as f:
+            self.contacts = json.load(f)
+```
+
+**Your task**: Add proper exception handling and validation!
+
+---
+
+# Exercise 2: Solution
+
+```python
+class ContactManager:
+    def add_contact(self, name, phone):
+        if not name or not phone:
+            raise ValueError("Name and phone cannot be empty")
+        contact = {'name': name, 'phone': phone}
+        self.contacts.append(contact)
+
+    def save(self, filename):
+        try:
+            with open(filename, 'w') as f:
+                json.dump(self.contacts, f)
+        except (IOError, OSError) as e:
+            print(f"Error saving file: {e}")
+            raise
+
+    def load(self, filename):
+        try:
+            with open(filename, 'r') as f:
+                self.contacts = json.load(f)
+        except FileNotFoundError:
+            print(f"File {filename} not found, starting fresh")
+            self.contacts = []
+        except json.JSONDecodeError:
+            print(f"Invalid JSON in {filename}, starting fresh")
+            self.contacts = []
+```
+
+---
+
+# Debugging Best Practices
+
+**1. Reproduce the Bug**
+- Can you make it happen consistently?
+- What are the minimal steps?
+
+**2. Isolate the Problem**
+- Comment out code sections
+- Test individual functions
+- Use binary search approach
+
+**3. Read Error Messages Carefully**
+- Don't panic and randomly change code
+- Understand what the error says
+- Look at the line numbers
+
+**4. Use the Right Tools**
+- Print debugging for simple issues
+- Debugger for complex logic
+- VSCode visual debugging for stepping through
+
+---
+
+# Exception Handling Best Practices
+
+**1. Be Specific**
+```python
+# Bad - catches everything
+try:
+    result = int(input())
+except:
+    print("Error")
+
+# Good - catches specific errors
+try:
+    result = int(input())
+except ValueError:
+    print("Please enter a number")
+```
+
+**2. Don't Silently Ignore Errors**
+```python
+# Bad
+try:
+    something()
+except:
+    pass  # User has no idea what went wrong
+
+# Good
+try:
+    something()
+except Exception as e:
+    print(f"Error: {e}")
+    # Maybe log it, raise it, or provide fallback
+```
+
+---
+
+# Debugging Checklist
+
+Before asking for help, try these steps:
+
+- [ ] Read the error message carefully
+- [ ] Check for typos in variable/function names
+- [ ] Verify indentation (Python is picky!)
+- [ ] Add print statements to see values
+- [ ] Use a debugger to step through code
+- [ ] Test with simpler inputs
+- [ ] Check if variables have expected types
+- [ ] Look for off-by-one errors in loops
+- [ ] Make sure all functions return values
+- [ ] Verify `self` is included in method definitions
+
+---
+
+# Homework Assignment
+
+**Debug and Harden Your Contact Manager**
+
+Take your Contact Manager v2.0 from last week and:
+
+1. **Add comprehensive exception handling**:
+   - Validate all inputs (no empty names/phones)
+   - Handle file errors gracefully
+   - Handle invalid JSON data
+
+2. **Debug a provided buggy version**:
+   - I'll give you a Contact Manager with 5 bugs
+   - Use debugging techniques to find and fix them
+   - Document your debugging process
+
+3. **Test edge cases**:
+   - Empty contact list
+   - Duplicate contacts
+   - Missing files
+   - Invalid data types
+
+**Deliverable**: Jupyter notebook showing your debugging process and fixed code
+
+---
+
+# Key Takeaways
+
+**Debugging**:
+- Three types of bugs: syntax, runtime, logic
+- Read error messages from bottom up
+- Use print debugging for simple issues
+- Use debuggers (VSCode) for complex problems
+
+**Exception Handling**:
+- Use `try-except` to handle errors gracefully
+- Be specific with exception types
+- Use `finally` for cleanup
+- Raise your own exceptions to validate inputs
+
+**Professional Practice**:
+- Write code that's easy to debug
+- Fail fast with clear error messages
+- Test edge cases
+- Handle errors, don't ignore them
 
 ---
 
 <!-- _class: lead -->
 
-# Session 7 Recap
+# Questions?
 
-*   **Automated testing** provides a "safety net" that allows you to change your code with confidence.
-*   **`pytest`** is the standard tool for writing simple and powerful tests in Python.
-*   Tests are functions that start with `test_` in files named `test_*.py`.
-*   The `assert` keyword is used to check if a condition is true.
-*   Use `pytest.raises` to test that your code correctly raises exceptions when it should.
-*   Writing tests is a fundamental part of writing professional, reliable software for your research.
+**Next week**: Project structure, dependencies, and modern Python tools!

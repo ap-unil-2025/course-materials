@@ -1,5 +1,7 @@
 themes:
   - ./content/themes/unil-theme.css
+  - ./content/themes/gradient-custom.css
+  - ./content/themes/tech-conference.css
 options:
   html: true
   allowLocalFiles: true
