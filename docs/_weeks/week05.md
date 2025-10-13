@@ -3,6 +3,12 @@ title: "Week 5: Generative AI"
 date: 2025-10-13
 description: "LLMs, prompt engineering, and autonomous agents"
 lecture_slides: "/course-materials/slides/practice/week05_slides.html"
+ta_slides: "#"
+lesson: "#"
+assignment:
+  title: "TBA"
+  link: "#"
+  description: "Assignment details to be announced"
 ---
 
 ## Week Overview
