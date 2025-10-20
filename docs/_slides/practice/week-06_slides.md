@@ -93,29 +93,55 @@ class ContactManager:
 **The data and the functions that operate on it are now together!**
 
 ---
-# Key OOP Concepts
-> Note: In practice, OOP is an extensive framework and a way of thinking about models and relationships. In our class, we will treat it as a way to organize code, but in the real world, it also includes design principles, patterns, and architecture.
-- **Class**: Blueprint for creating objects (e.g., `Student`)
-- **Object/Instance**: A specific instance of a class (e.g., `alice`)
-- **Attributes**: Data stored in an object (e.g., `name`, `age`, `grades`)
-- **Methods**: Functions defined in a class that operate on its data (e.g., `calculate_average`)
+# Key OOP Concepts: The Basics
+
+**Class**: Blueprint for creating objects
+- Example: `Student` class
+
+**Object/Instance**: A specific instance of a class
+- Example: `alice = Student("Alice", 12345)`
+
+**Attributes**: Data stored in an object
+- Example: `name`, `age`, `grades`
+
+**Methods**: Functions that operate on the object's data
+- Example: `calculate_average()`
 
 ---
-# Key OOP Concepts (cont.)
-- **Encapsulation**: Bundling data and methods in one unit (class)
-- **Inheritance**: Creating a new class based on an existing class (e.g., `ElectricCar` inherits from `Vehicle`)
-- **Polymorphism**: Methods that can do different things based on the object (e.g., `draw()` method for different shapes)
-- **Abstraction**: Hiding complex implementation details and showing only the necessary parts (e.g., using a `Database` class without knowing its internal workings)
-- **Patterns**: Reusable solutions to common problems (e.g., Singleton, Factory)
+
+# Key OOP Concepts: Core Principles
+
+**Encapsulation**: Bundle data and methods together
+- Keep related things in one place
+
+**Inheritance**: Build new classes from existing ones
+- `ElectricCar` inherits from `Vehicle`
+
+**Polymorphism**: Same method, different behaviors
+- `draw()` works differently for Circle vs. Square
+
+---
+
+# OOP in the Real World
+
+> **Note**: In practice, OOP is much more!
+> - Design principles and patterns
+> - Architecture and relationships
+> - Complex system modeling
+
+**In our class**: We treat OOP as a code organization tool
+
+**In industry**: It's a complete way of thinking about software design
+
 ---
 
 # Part 2: Inheritance - Building on Classes
 
 ---
 
-# Inheritance: Reusing Code
+# Inheritance: The Concept
 
-**Concept**: Build new classes based on existing ones
+**Build new classes based on existing ones**
 
 **Parent Class** (Vehicle):
 - Has: brand, model, year, speed
@@ -123,16 +149,22 @@ class ContactManager:
 
 **Child Class** (ElectricCar):
 - **Inherits** everything from Vehicle
-- **Adds**: battery_size, battery_level
-- **Adds** new method: charge()
-- **Extends** accelerate() to also use battery
+- **Plus** adds battery-specific features
 
-**Why is this useful?**
+---
+
+# Why Use Inheritance?
+
+**Benefits**:
 - Don't repeat code - reuse what works!
 - Add specific features to specialized classes
-- All electric cars are vehicles, but not all vehicles are electric!
+- Organize code by relationships
 
-**Key Tool**: `super()` - lets you use the parent class's methods
+**Example**: All electric cars are vehicles, but not all vehicles are electric!
+
+**Key Tool**: `super()`
+- Lets child class use parent class's methods
+- Extends behavior without rewriting everything
 
 ---
 
@@ -144,24 +176,38 @@ class ContactManager:
 
 **Design Question**: How should we structure this?
 
-**Option 1**: Two classes working together
-- `Student` class: Manages individual student data
-- `GradeBook` class: Manages collection of students
+Two classes working together:
+- `Student` class: Individual student data
+- `GradeBook` class: Collection of students
 
-**Student Class** should:
-- Store: name, student_id, grades (dictionary of subjects → list of grades)
-- Methods: add_grade(), get_average()
+**Key Design Principle**: Each class has ONE clear responsibility!
 
-**GradeBook Class** should:
-- Store: collection of Student objects
-- Methods: add_student(), find_student(), class_average()
+---
 
-**Key Design Principle**: Each class has a clear responsibility!
+# Student Grade Tracker: Student Class
 
-**Thinking Process**:
-1. What data does each class need to remember?
-2. What operations make sense for each class?
-3. How do they interact with each other?
+**What should Student remember?**
+- name
+- student_id
+- grades (dictionary: subject → list of grades)
+
+**What can Student do?**
+- add_grade(subject, grade)
+- get_average(subject)
+
+---
+
+# Student Grade Tracker: GradeBook Class
+
+**What should GradeBook remember?**
+- Collection of Student objects
+
+**What can GradeBook do?**
+- add_student(student)
+- find_student(student_id)
+- class_average(subject)
+
+**Thinking**: What operations make sense at the class level vs. individual student level?
 
 ---
 
@@ -192,34 +238,55 @@ DEBUG = True
 
 ---
 
-# Common OOP Pitfalls
+# Common Pitfall #1: Mutable Default Arguments
 
-**1. Modifying lists in __init__**
+**DON'T DO THIS**:
 ```python
 class Bad:
-    def __init__(self, items=[]):  # DON'T DO THIS!
+    def __init__(self, items=[]):  # Danger!
         self.items = items
+```
 
-# Why it's bad:
+**Why it's bad**:
+```python
 a = Bad()
 b = Bad()
 a.items.append(1)
 print(b.items)  # [1] - Surprise! Shared list!
+```
 
-# Do this instead:
+**Do this instead**:
+```python
 class Good:
     def __init__(self, items=None):
         self.items = items or []
 ```
 
-**2. Forgetting `self`**
+---
+
+# Common Pitfall #2: Forgetting `self`
+
+**DON'T DO THIS**:
 ```python
 class Calculator:
-    def add(x, y):  # Forgot self!
+    def add(x, y):  # Missing self!
         return x + y
 ```
 
-**3. Infinite recursion**
+**Error**: `add() takes 2 positional arguments but 3 were given`
+
+**Do this instead**:
+```python
+class Calculator:
+    def add(self, x, y):  # Always include self!
+        return x + y
+```
+
+---
+
+# Common Pitfall #3: Infinite Recursion
+
+**DON'T DO THIS**:
 ```python
 class Circle:
     @property
@@ -227,52 +294,89 @@ class Circle:
         return self.area  # Calls itself forever!
 ```
 
+**Error**: RecursionError: maximum recursion depth exceeded
+
+**Remember**: Accessing an attribute shouldn't call itself!
+
 ---
 
 
 
 # Homework Assignment
 
-**Build a Contact Manager v2.0 with OOP**
+**Build Contact Manager v2.0 with OOP**
 
-Extend your Contact Manager to use classes:
-
-1. **Create a `ContactManager` class** with:
-   - `__init__` method to initialize empty contact list
-   - `add_contact(name, phone, email)` method
-   - `search(term)` method to find contacts
-   - `delete_contact(name)` method
-   - `save(filename)` and `load(filename)` methods
-
-2. **Add robust error handling**:
-   - Handle file not found errors
-   - Handle invalid contact data
-   - Handle duplicate contacts
-
-3. **Optional: Add a `Contact` class**:
-   - Separate class for individual contacts
-   - ContactManager uses Contact objects
-
-**Deliverable**: Submit a Python file or Jupyter notebook with your class implementation
+Transform your functional Contact Manager to use classes!
 
 ---
 
-# Key Takeaways
+# Homework: Part 1 - ContactManager Class
 
-**OOP Essentials**:
-- Classes organize code into reusable blueprints
-- Objects are instances with their own data
-- Methods operate on object data using `self`
-- Inheritance lets you build on existing classes
+**Create a `ContactManager` class with these methods**:
+- `__init__()` - initialize empty contact list
+- `add_contact(name, phone, email)` - add a contact
+- `search(term)` - find contacts
+- `delete_contact(name)` - remove a contact
+- `save(filename)` and `load(filename)` - persistence
+
+---
+
+# Homework: Part 2 - Error Handling
+
+**Add robust error handling**:
+- File not found when loading
+- Invalid contact data
+- Duplicate contacts
+- Empty search results
+
+**Test your error handling** - make sure your code doesn't crash!
+
+---
+
+# Homework: Optional Challenge
+
+**Add a `Contact` class**:
+- Separate class for individual contacts
+- ContactManager uses Contact objects instead of dictionaries
+
+**Why?** Better encapsulation and cleaner code!
+
+**Deliverable**: Submit Python file or Jupyter notebook
+
+---
+
+# Key Takeaways: OOP Essentials
+
+**Classes** organize code into reusable blueprints
+
+**Objects** are instances with their own data
+
+**Methods** operate on object data using `self`
+
+**Inheritance** lets you build on existing classes
+
+---
+
+# Key Takeaways: Watch Out For...
 
 **Common Pitfalls**:
-- Don't use mutable default arguments in `__init__`
-- Always include `self` as first parameter in methods
-- Be careful with shared vs. instance attributes
+- ❌ Mutable default arguments in `__init__`
+- ❌ Forgetting `self` in methods
+- ❌ Shared vs. instance attributes confusion
 
-**Practice**:
-- Start by converting your functional Contact Manager to OOP
-- Add methods one at a time and test as you go
-- Use inheritance when it makes sense (optional)
+**Remember**: Test as you build!
 
-**Next Week**: We'll learn about testing and debugging!
+---
+
+# Key Takeaways: Practice Strategy
+
+**Start simple**:
+1. Convert your functional Contact Manager to OOP
+2. Add methods one at a time
+3. Test each method before moving on
+
+**Optional**: Try inheritance when it makes sense
+
+**Next Week**: Testing and debugging!
+
+---
