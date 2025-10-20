@@ -2,13 +2,17 @@
 marp: true
 paginate: true
 header: "Session 6: OOP & Debugging"
-footer: "Anna Smirnova, October 27, 2025"
+footer: "Anna Smirnova, October 20, 2025"
 style: |
+  section {
+    font-size: 22px;
+  }
   section.lead {
     background: #003aff;
     color: white;
+    font-size: 28px;
   }
-    section.lead footer {
+  section.lead footer {
     color: white;
   }
   section.lead header {
@@ -111,43 +115,24 @@ class ContactManager:
 
 # Inheritance: Reusing Code
 
-```python
-# Base class (parent)
-class Vehicle:
-    def __init__(self, brand, model, year):
-        self.brand = brand
-        self.model = model
-        self.year = year
-        self.speed = 0
-    
-    def start(self):
-        print(f"The {self.brand} {self.model} is starting...")
-    
-    def accelerate(self, amount):
-        self.speed += amount
-        print(f"Speed is now {self.speed} km/h")
+**Concept**: Build new classes based on existing ones
 
-# Derived class (child)
-class ElectricCar(Vehicle):
-    def __init__(self, brand, model, year, battery_size):
-        super().__init__(brand, model, year)  # Call parent constructor
-        self.battery_size = battery_size
-        self.battery_level = 100
-    
-    def charge(self):
-        self.battery_level = 100
-        print(f"Battery charged to {self.battery_level}%")
-    
-    def accelerate(self, amount):
-        super().accelerate(amount)  # Call parent method
-        self.battery_level -= amount * 0.1
-        print(f"Battery at {self.battery_level:.1f}%")
+**Parent Class** (Vehicle):
+- Has: brand, model, year, speed
+- Can: start(), accelerate()
 
-# Use it
-tesla = ElectricCar("Tesla", "Model 3", 2024, 75)
-tesla.start()
-tesla.accelerate(50)
-```
+**Child Class** (ElectricCar):
+- **Inherits** everything from Vehicle
+- **Adds**: battery_size, battery_level
+- **Adds** new method: charge()
+- **Extends** accelerate() to also use battery
+
+**Why is this useful?**
+- Don't repeat code - reuse what works!
+- Add specific features to specialized classes
+- All electric cars are vehicles, but not all vehicles are electric!
+
+**Key Tool**: `super()` - lets you use the parent class's methods
 
 ---
 
@@ -155,51 +140,28 @@ tesla.accelerate(50)
 
 ---
 
-# Project: Student Grade Tracker
+# Example: Student Grade Tracker
 
-```python
-class Student:
-    def __init__(self, name, student_id):
-        self.name = name
-        self.student_id = student_id
-        self.grades = {}
-    
-    def add_grade(self, subject, grade):
-        if subject not in self.grades:
-            self.grades[subject] = []
-        self.grades[subject].append(grade)
-    
-    def get_average(self, subject=None):
-        try:
-            if subject:
-                return sum(self.grades[subject]) / len(self.grades[subject])
-            else:
-                all_grades = [g for grades in self.grades.values() for g in grades]
-                return sum(all_grades) / len(all_grades)
-        except (KeyError, ZeroDivisionError):
-            return None
-    
-    def __str__(self):
-        return f"Student: {self.name} (ID: {self.student_id})"
+**Design Question**: How should we structure this?
 
-class GradeBook:
-    def __init__(self):
-        self.students = {}
-    
-    def add_student(self, student):
-        self.students[student.student_id] = student
-    
-    def find_student(self, student_id):
-        return self.students.get(student_id, None)
-    
-    def class_average(self, subject):
-        averages = []
-        for student in self.students.values():
-            avg = student.get_average(subject)
-            if avg is not None:
-                averages.append(avg)
-        return sum(averages) / len(averages) if averages else 0
-```
+**Option 1**: Two classes working together
+- `Student` class: Manages individual student data
+- `GradeBook` class: Manages collection of students
+
+**Student Class** should:
+- Store: name, student_id, grades (dictionary of subjects → list of grades)
+- Methods: add_grade(), get_average()
+
+**GradeBook Class** should:
+- Store: collection of Student objects
+- Methods: add_student(), find_student(), class_average()
+
+**Key Design Principle**: Each class has a clear responsibility!
+
+**Thinking Process**:
+1. What data does each class need to remember?
+2. What operations make sense for each class?
+3. How do they interact with each other?
 
 ---
 
