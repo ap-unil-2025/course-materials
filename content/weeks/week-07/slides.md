@@ -2,8 +2,11 @@
 marp: true
 paginate: true
 header: "Session 7: Debugging & Error Handling"
-footer: "Anna Smirnova, November 3, 2025"
+footer: "Anna Smirnova, October 27, 2025"
 style: |
+  section {
+    font-size: 24px;
+  }
   section.lead {
     background: #003aff;
     color: white;
