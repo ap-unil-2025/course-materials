@@ -1,694 +1,234 @@
 ---
 marp: true
 paginate: true
-header: "Session 7: Debugging & Error Handling"
+header: "Session 7: sklearn Survival Guide"
 footer: "Anna Smirnova, October 27, 2025"
 style: |
   section {
-    font-size: 24px;
+    font-size: 22px;
   }
   section.lead {
+    font-size: 28px;
     background: #003aff;
     color: white;
   }
-    section.lead footer {
-    color: white;
-  }
-  section.lead header {
-    color: white;
-  }
-  section.lead h1, section.lead h2, section.lead h3 {
-    color: white;
-    border-bottom: none;
-  }
-  section.lead a {
+  section.lead footer, section.lead header, section.lead h1, section.lead h2, section.lead h3 {
     color: white;
   }
 ---
 
 <!-- _class: lead -->
 
-# Session 7: Debugging & Error Handling
+# sklearn Survival Guide
+## Regression + Classification
 
-**Finding Bugs and Handling Errors Gracefully**
-
----
-
-# What We'll Cover Today
-
-**Part 1: Understanding Bugs**
-- Types of bugs (syntax, runtime, logic)
-- How to read error messages
-
-**Part 2: Debugging Strategies**
-- Print debugging
-- Using debuggers (VSCode)
-
-**Part 3: Exception Handling**
-- Try/except blocks
-- Common Python exceptions
-- Best practices
+**Practical tips for when theory meets reality**
 
 ---
 
-# The Debugging Mindset
+# Today's Plan
 
-> "Debugging is twice as hard as writing the code in the first place.
-> Therefore, if you write the code as cleverly as possible, you are, by definition,
-> not smart enough to debug it." – Brian Kernighan
+**15 min:** Common mistakes & debugging
+**30 min:** Hands-on exercise (`ml_regression_classification_starter.py`)
 
-**Key insight**: Write simple, readable code. Your future self (and debugger) will thank you!
-
----
-
-# Part 1: Understanding Bugs
+**Goal:** You leave with working code, not confusion
 
 ---
 
-# Types of Bugs: Overview
-
-There are three main categories of bugs in Python:
-
-1. **Syntax Errors** - Python can't parse your code
-   - Detected before the program runs
-   - Easiest to fix
-
-2. **Runtime Errors (Exceptions)** - Code crashes during execution
-   - Detected when the problematic line runs
-   - Can be handled with try-except
-
-3. **Logic Errors** - Code runs but produces wrong results
-   - No error messages
-   - Hardest to find and fix
-
-Let's explore each type in detail...
-
----
-
-# Bug Type 1: Syntax Errors
-
-**What they are**: Violations of Python's grammar rules
-
-**When detected**: Before the program runs (at parse time)
-
-**Common examples**:
-```python
-# Missing colon
-if x > 5
-    print("Big")
-
-# Mismatched parentheses
-result = calculate(5, 10
-
-# Invalid indentation
-def greet():
-print("Hello")
-
-# Missing quotes
-message = Hello World
-```
-
-**How to identify**:
-- Python shows `SyntaxError` with a caret (^) pointing at the problem
-- The error is usually ON or RIGHT BEFORE the line indicated
-- Your code won't run at all until fixed
-
----
-
-# Bug Type 2: Runtime Errors (Exceptions)
-
-**What they are**: Errors that occur during program execution
-
-**When detected**: When the problematic line is executed
-
-**Common examples**:
-```python
-# ZeroDivisionError - Division by zero
-result = 10 / 0
-
-# NameError - Using undefined variable
-x = y + 1  # if y doesn't exist
-
-# TypeError - Operation on wrong type
-result = 'foo' + 6  # Can't add string and int
-
-# IndexError - Accessing non-existent list index
-L = [1, 2, 3]
-x = L[10]
-
-# KeyError - Accessing non-existent dictionary key
-person = {'name': 'Alice'}
-age = person['age']  # 'age' doesn't exist
-
-# FileNotFoundError - Opening non-existent file
-f = open('missing.txt', 'r')
-```
-
----
-
-# Bug Type 3: Logic Errors
-
-**What they are**: Code runs successfully but produces incorrect results
-
-**When detected**: Only when you notice wrong output (no error message!)
-
-**Why they're dangerous**: Python can't help you find them
-
-**Common examples**:
-```python
-# Example 1: Wrong operator
-def calculate_discount(price, percent):
-    return price + (price * percent)  # Should be minus!
-
-# Example 2: Off-by-one error
-def get_last_n_items(items, n):
-    return items[-n-1:]  # Should be items[-n:]
-
-# Example 3: Forgetting to return a value
-def calculate_average(numbers):
-    total = sum(numbers)
-    avg = total / len(numbers)
-    # Oops, forgot to return avg!
-
-# Example 4: Wrong variable scope
-total = 0
-def add_to_total(amount):
-    total = total + amount  # Oops, creates local total
-    return total
-```
-
-**How to find them**: Testing, debugging, code review, print statements
-
----
-
-# Reading Error Messages
+# The sklearn Recipe (Always the Same)
 
 ```python
-Traceback (most recent call last):
-  File "script.py", line 15, in <module>  # WHERE: line 15
-    result = divide(10, 0)
-  File "script.py", line 3, in divide     # Inside divide function
-    return a / b
-ZeroDivisionError: division by zero       # WHAT: the actual error
+from sklearn.whatever import TheModel
+from sklearn.model_selection import train_test_split
+
+# 1. Split your data FIRST
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 2. Create model
+model = TheModel()
+
+# 3. Train (fit)
+model.fit(X_train, y_train)
+
+# 4. Predict
+y_pred = model.predict(X_test)
+
+# 5. Evaluate
+score = model.score(X_test, y_test)
 ```
 
-**How to read this**:
-1. Start from the bottom - that's the actual error
-2. Work up to see the chain of function calls
-3. Look for YOUR code (not library code)
-4. The line numbers tell you exactly where to look
+This pattern works for EVERYTHING in sklearn.
 
 ---
 
-# Part 2: Debugging Strategies
-
----
-
-# Strategy 1: Print Debugging
-
-**The simplest tool**: Just add `print()` statements!
+# Common Error #1: Shape Mismatches
 
 ```python
-def calculate_discount(price, discount_percent):
-    print(f"DEBUG: price={price}, discount={discount_percent}")
+# ❌ WRONG - X must be 2D
+X = [1, 2, 3, 4, 5]
+model.fit(X, y)  # ValueError: Expected 2D array
 
-    discount_amount = price * discount_percent
-    print(f"DEBUG: discount_amount={discount_amount}")
-
-    final_price = price - discount_amount
-    print(f"DEBUG: final_price={final_price}")
-
-    return final_price
-
-# Test it
-result = calculate_discount(100, 0.2)  # Expecting 80
-print(f"Result: {result}")
+# ✅ RIGHT - Reshape to 2D
+X = [[1], [2], [3], [4], [5]]
+# Or: X = np.array([1,2,3,4,5]).reshape(-1, 1)
+model.fit(X, y)
 ```
 
-**Output**:
-```
-DEBUG: price=100, discount=0.2
-DEBUG: discount_amount=20.0
-DEBUG: final_price=80.0
-Result: 80.0
+**Rule:** X is always 2D (samples × features), y is always 1D
+
+**Quick check:**
+```python
+print(X.shape)  # (100, 5) ← 100 samples, 5 features ✅
+print(y.shape)  # (100,) ← 100 labels ✅
 ```
 
 ---
 
-# Pro Tip: Use a DEBUG Flag
+# Common Error #2: Forgetting to Split
 
 ```python
-DEBUG = True  # Set to False in production
+# ❌ DISASTER
+model.fit(X, y)
+score = model.score(X, y)  # Testing on training data!
+print(f"Accuracy: {score}")  # 100% but meaningless
 
-def calculate_discount(price, discount_percent):
-    if DEBUG:
-        print(f"DEBUG: price={price}, discount={discount_percent}")
-
-    discount_amount = price * discount_percent
-
-    if DEBUG:
-        print(f"DEBUG: discount_amount={discount_amount}")
-
-    final_price = price - discount_amount
-    return final_price
+# ✅ CORRECT
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+model.fit(X_train, y_train)
+score = model.score(X_test, y_test)  # Real performance
 ```
 
-**Benefits**:
-- Easy to turn off all debug output
-- No need to delete debug statements
-- Can keep them for future debugging
+**Never test on data you trained on!**
 
 ---
 
-# Strategy 2: Using Debuggers
-
-**Debuggers** let you:
-- Pause execution at any line
-- Inspect variable values
-- Step through code line by line
-- See the call stack
-
-We will use **Visual debugging** with VSCode.
-
----
-
-# VSCode Debugging (Live Demo)
-
-**Visual debugging** is the most powerful approach!
-
-**Setting Breakpoints**:
-1. Click left of line number → red dot appears
-2. Run debugger (F5 or "Debug Cell" in notebooks)
-3. Code pauses at breakpoint
-
-**Debug Controls** (toolbar at top):
-- **Continue (F5)**: Run until next breakpoint
-- **Step Over (F10)**: Execute current line
-- **Step Into (F11)**: Go inside function calls
-- **Step Out (Shift+F11)**: Exit current function
-
-**Panels**:
-- **Variables**: See all current variables and their values
-- **Watch**: Add expressions to monitor (e.g., `len(contacts)`)
-- **Call Stack**: See the chain of function calls
-
----
-
-# Part 3: Exception Handling
-
----
-
-# Handling Errors Gracefully
-
-**Without exception handling** (program crashes):
-```python
-def divide(a, b):
-    return a / b
-
-result = divide(10, 0)  # 💥 Crash!
-print("This never prints")
-```
-
-**With exception handling** (program continues):
-```python
-def divide(a, b):
-    try:
-        result = a / b
-        return result
-    except ZeroDivisionError:
-        print("Error: Cannot divide by zero!")
-        return None
-
-result = divide(10, 0)  # Error: Cannot divide by zero!
-print("Program continues running")  # This prints!
-```
-
----
-
-# Common Python Exceptions
+# Common Error #3: Not Scaling for KNN
 
 ```python
-# ZeroDivisionError
-try:
-    result = 1 / 0
-except ZeroDivisionError:
-    print("Cannot divide by zero!")
+# Dataset: [size_sqft, bedrooms]
+# [[2000, 3], [1500, 2], [1800, 3]]
 
-# ValueError - Wrong type/value
-try:
-    age = int("twenty")  # Can't convert "twenty" to int
-except ValueError:
-    print("Please enter a number")
+# ❌ KNN without scaling
+knn = KNeighborsClassifier()
+knn.fit(X, y)  # Distance dominated by size!
 
-# NameError - Variable not defined
-try:
-    print(undefined_variable)
-except NameError:
-    print("Variable doesn't exist")
-
-# TypeError - Wrong type for operation
-try:
-    result = 'foo' + 6  # Can't add string and int
-except TypeError:
-    print("Type mismatch")
-
-# IndexError - List index out of range
-try:
-    L = [1, 2, 3]
-    print(L[10])
-except IndexError:
-    print("Index out of range")
+# ✅ KNN with scaling
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+knn.fit(X_scaled, y)  # All features matter equally
 ```
+
+**When to scale:** KNN, SVM, neural networks
+**When NOT to scale:** Trees, Random Forest
 
 ---
 
-# Multiple Exception Handling
+# Debugging: "My Model Sucks"
+
+**Training accuracy: 95%, Test accuracy: 60%**
+→ **Overfitting**. Model memorized training data.
+- Solution: Simpler model, more data, regularization
+
+**Training accuracy: 65%, Test accuracy: 62%**
+→ **Underfitting**. Model too simple.
+- Solution: More complex model, better features
+
+**Training accuracy: 50%, Test accuracy: 50%** (for binary classification)
+→ **Random guessing**. Model learned nothing.
+- Solution: Check your data, try different features
+
+---
+
+# Quick Reference: Regression Metrics
 
 ```python
-def safe_divide(a, b):
-    try:
-        result = a / b
-        return result
-    except ZeroDivisionError:
-        print("Error: Division by zero")
-        return None
-    except TypeError:
-        print(f"Error: Cannot divide {type(a)} by {type(b)}")
-        return None
-    except Exception as e:  # Catch any other error
-        print(f"Unexpected error: {e}")
-        return None
-    finally:  # Always runs, even if there's an error
-        print("Division operation completed")
+from sklearn.metrics import mean_squared_error, r2_score
 
-# Test different cases
-print(safe_divide(10, 2))    # Works: 5.0
-print(safe_divide(10, 0))    # ZeroDivisionError
-print(safe_divide("10", 2))  # TypeError
+y_pred = model.predict(X_test)
+
+# Mean Squared Error (lower = better)
+mse = mean_squared_error(y_test, y_pred)
+print(f"MSE: {mse:.2f}")
+
+# R² Score (0 to 1, higher = better)
+r2 = r2_score(y_test, y_pred)
+print(f"R²: {r2:.2f}")  # 0.85 = explains 85% of variance
 ```
 
-**Best Practice**: Be specific with exceptions - catch specific errors first, then general ones.
+**Interpretation:**
+- R² = 1.0 → Perfect predictions
+- R² = 0.0 → Model is useless (same as predicting mean)
+- R² < 0.0 → Model worse than predicting mean (!!)
 
 ---
 
-# The Try-Except-Finally Pattern
+# Quick Reference: Classification Metrics
 
 ```python
-try:
-    # Code that might raise an exception
-    file = open('contacts.json', 'r')
-    data = json.load(file)
-except FileNotFoundError:
-    # Handle specific error
-    print("File not found, creating new contacts list")
-    data = []
-except json.JSONDecodeError:
-    # Handle another specific error
-    print("Invalid JSON, starting fresh")
-    data = []
-finally:
-    # Always runs, even if there was an error or return
-    try:
-        file.close()
-    except:
-        pass  # File wasn't opened
+from sklearn.metrics import accuracy_score, confusion_matrix
+
+y_pred = model.predict(X_test)
+
+# Accuracy (higher = better)
+acc = accuracy_score(y_test, y_pred)
+print(f"Accuracy: {acc:.2%}")
+
+# Confusion Matrix (see where model fails)
+cm = confusion_matrix(y_test, y_pred)
+print(cm)
+#       Predicted
+#       0    1
+# Act 0 [45]  [5]   ← 5 false positives
+#     1 [3]  [47]   ← 3 false negatives
 ```
 
-**Use `finally` for cleanup**: Closing files, releasing resources, etc.
+**Warning:** Accuracy lies on imbalanced data!
 
 ---
 
-# Raising Your Own Exceptions
+# Pro Tips
 
-Sometimes YOU want to raise an error:
+**1. Start Simple**
+- Linear regression before polynomial
+- Single decision tree before random forest
+- Get something working, THEN optimize
 
+**2. Print Shapes**
 ```python
-class ContactManager:
-    def add_contact(self, name, phone):
-        if not name:
-            raise ValueError("Name cannot be empty")
-        if not phone:
-            raise ValueError("Phone cannot be empty")
-
-        contact = {'name': name, 'phone': phone}
-        self.contacts.append(contact)
-
-# Usage
-manager = ContactManager()
-try:
-    manager.add_contact("", "123-4567")
-except ValueError as e:
-    print(f"Error: {e}")  # Error: Name cannot be empty
+print(X_train.shape, X_test.shape)
+print(y_train.shape, y_test.shape)
 ```
 
-**Why raise exceptions?**
-- Communicate errors clearly
-- Force calling code to handle errors
-- Better than returning `None` or `-1` as error codes
-
----
-
-# Exercise 1: Debug the Shopping Cart
-
+**3. Check for NaN/Inf**
 ```python
-class ShoppingCart:
-    def __init__(self):
-        self.items = []
-        self.total = 0
-
-    def add_item(self, item, price, quantity):
-        self.items.append({
-            'item': item,
-            'price': price,
-            'quantity': quantity
-        })
-        # BUG: What's wrong here?
-        self.total = price * quantity
-
-    def remove_item(self, item_name):
-        # BUG: This doesn't update the total
-        for item in self.items:
-            if item['item'] == item_name:
-                self.items.remove(item)
-
-    def get_total(self):
-        # BUG: Why is this wrong?
-        return self.total
-
-# Test it
-cart = ShoppingCart()
-cart.add_item("Apple", 0.5, 10)
-cart.add_item("Banana", 0.3, 5)
-print(f"Total: ${cart.get_total()}")  # What's wrong?
+print(X.isnull().sum())  # For pandas
+print(np.isnan(X).sum())  # For numpy
 ```
 
----
-
-# Exercise 1: Solution
-
-**Bug 1**: `add_item` sets total instead of adding to it
+**4. Use random_state for reproducibility**
 ```python
-# Wrong:
-self.total = price * quantity
-
-# Right:
-self.total += price * quantity
-```
-
-**Bug 2**: `remove_item` doesn't update total
-```python
-# Add before removing:
-self.total -= item['price'] * item['quantity']
-self.items.remove(item)
-```
-
-**Bug 3**: Better approach - calculate total dynamically
-```python
-def get_total(self):
-    return sum(item['price'] * item['quantity'] for item in self.items)
+train_test_split(X, y, random_state=42)
 ```
 
 ---
 
-# Exercise 2: Add Exception Handling to Contact Manager
+# Exercise Time!
 
-```python
-class ContactManager:
-    def __init__(self):
-        self.contacts = []
+**File:** `ml_regression_classification_starter.py`
 
-    def add_contact(self, name, phone):
-        # TODO: Add validation
-        contact = {'name': name, 'phone': phone}
-        self.contacts.append(contact)
+**You'll build:**
+1. House price predictor (regression)
+2. Iris classifier (classification)
+3. Student pass/fail predictor
 
-    def save(self, filename):
-        # TODO: Handle file errors
-        with open(filename, 'w') as f:
-            json.dump(self.contacts, f)
+**Bonus challenges:**
+- Feature importance
+- Overfitting detection
+- SHAP explanations
+- Decision boundaries
 
-    def load(self, filename):
-        # TODO: Handle file not found, invalid JSON
-        with open(filename, 'r') as f:
-            self.contacts = json.load(f)
-```
-
-**Your task**: Add proper exception handling and validation!
-
----
-
-# Exercise 2: Solution
-
-```python
-class ContactManager:
-    def add_contact(self, name, phone):
-        if not name or not phone:
-            raise ValueError("Name and phone cannot be empty")
-        contact = {'name': name, 'phone': phone}
-        self.contacts.append(contact)
-
-    def save(self, filename):
-        try:
-            with open(filename, 'w') as f:
-                json.dump(self.contacts, f)
-        except (IOError, OSError) as e:
-            print(f"Error saving file: {e}")
-            raise
-
-    def load(self, filename):
-        try:
-            with open(filename, 'r') as f:
-                self.contacts = json.load(f)
-        except FileNotFoundError:
-            print(f"File {filename} not found, starting fresh")
-            self.contacts = []
-        except json.JSONDecodeError:
-            print(f"Invalid JSON in {filename}, starting fresh")
-            self.contacts = []
-```
-
----
-
-# Debugging Best Practices
-
-**1. Reproduce the Bug**
-- Can you make it happen consistently?
-- What are the minimal steps?
-
-**2. Isolate the Problem**
-- Comment out code sections
-- Test individual functions
-- Use binary search approach
-
-**3. Read Error Messages Carefully**
-- Don't panic and randomly change code
-- Understand what the error says
-- Look at the line numbers
-
-**4. Use the Right Tools**
-- Print debugging for simple issues
-- Debugger for complex logic
-- VSCode visual debugging for stepping through
-
----
-
-# Exception Handling Best Practices
-
-**1. Be Specific**
-```python
-# Bad - catches everything
-try:
-    result = int(input())
-except:
-    print("Error")
-
-# Good - catches specific errors
-try:
-    result = int(input())
-except ValueError:
-    print("Please enter a number")
-```
-
-**2. Don't Silently Ignore Errors**
-```python
-# Bad
-try:
-    something()
-except:
-    pass  # User has no idea what went wrong
-
-# Good
-try:
-    something()
-except Exception as e:
-    print(f"Error: {e}")
-    # Maybe log it, raise it, or provide fallback
-```
-
----
-
-# Debugging Checklist
-
-Before asking for help, try these steps:
-
-- [ ] Read the error message carefully
-- [ ] Check for typos in variable/function names
-- [ ] Verify indentation (Python is picky!)
-- [ ] Add print statements to see values
-- [ ] Use a debugger to step through code
-- [ ] Test with simpler inputs
-- [ ] Check if variables have expected types
-- [ ] Look for off-by-one errors in loops
-- [ ] Make sure all functions return values
-- [ ] Verify `self` is included in method definitions
-
----
-
-# Homework Assignment
-
-**Debug and Harden Your Contact Manager**
-
-Take your Contact Manager v2.0 from last week and:
-
-1. **Add comprehensive exception handling**:
-   - Validate all inputs (no empty names/phones)
-   - Handle file errors gracefully
-   - Handle invalid JSON data
-
-2. **Debug a provided buggy version**:
-   - I'll give you a Contact Manager with 5 bugs
-   - Use debugging techniques to find and fix them
-   - Document your debugging process
-
-3. **Test edge cases**:
-   - Empty contact list
-   - Duplicate contacts
-   - Missing files
-   - Invalid data types
-
-**Deliverable**: Jupyter notebook showing your debugging process and fixed code
-
----
-
-# Key Takeaways
-
-**Debugging**:
-- Three types of bugs: syntax, runtime, logic
-- Read error messages from bottom up
-- Use print debugging for simple issues
-- Use debuggers (VSCode) for complex problems
-
-**Exception Handling**:
-- Use `try-except` to handle errors gracefully
-- Be specific with exception types
-- Use `finally` for cleanup
-- Raise your own exceptions to validate inputs
-
-**Professional Practice**:
-- Write code that's easy to debug
-- Fail fast with clear error messages
-- Test edge cases
-- Handle errors, don't ignore them
+**Let's code!**
 
 ---
 
@@ -696,4 +236,4 @@ Take your Contact Manager v2.0 from last week and:
 
 # Questions?
 
-**Next week**: Project structure, dependencies, and modern Python tools!
+Open the file and let's get started!

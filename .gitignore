@@ -57,4 +57,4 @@ node_modules/
 .cache/
 
 # Generated HTML slides (built by CI/GitHub Actions)
-docs/slides/practice/*.html
+docs/slides/practice/*.htmlcontent/weeks/week-08/ml_regression_classification_solution.py

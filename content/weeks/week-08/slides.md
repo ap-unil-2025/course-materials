@@ -1,304 +1,256 @@
 ---
 marp: true
 paginate: true
-header: "Session 8: Modern Python Projects"
-footer: "Anna Smirnova, November 10, 2025"
+header: "Session 8: sklearn in Practice"
+footer: "Anna Smirnova, November 3, 2025"
 style: |
+  section {
+    font-size: 22px;
+  }
   section.lead {
+    font-size: 28px;
     background: #003aff;
     color: white;
   }
-    section.lead footer {
-    color: white;
-  }
-  section.lead header {
-    color: white;
-  }
-  section.lead h1, section.lead h2, section.lead h3 {
-    color: white;
-    border-bottom: none;
-  }
-  section.lead a {
+  section.lead footer, section.lead header, section.lead h1, section.lead h2, section.lead h3 {
     color: white;
   }
 ---
 
 <!-- _class: lead -->
 
-# Session 8: Python Projects That Don't Make You Cry
+# sklearn in Practice
+## Combined Regression + Classification Session
 
-
-**Building organized, reproducible, and professional code.**
-
----
-
-# First Things First: Today's Goals
-
-* Welcome to Session 8! Today, we will:
-*  Learn a standard **Project Structure** for Python.
-*   Understand what **Dependencies** are and why they matter.
-*   Manage projects with **`uv`**, a modern, all-in-one tool.
-*   Keep code clean and consistent with **`ruff`**.
+**Because you missed Week 7 due to midterms**
 
 ---
 
-# Part 1: Project Structure & Dependencies
+# Today's Combined Session
+
+We're covering **both** regression (Week 7) and classification (Week 8) today!
+
+**15 min:** Common mistakes & debugging
+**30 min:** Hands-on exercise
+
+**File:** `ml_regression_classification_starter.py`
+- Part 1: Regression (house prices)
+- Part 2: Classification (iris, students)
+- Part 3: Mini project
+- Bonus: Advanced challenges
 
 ---
 
-# Why Not Just One `.py` File?
+# The sklearn Recipe (Always the Same)
 
-As projects grow, a single file becomes messy. Good structure makes your project:
-
-*   **Understandable**: Newcomers can find things easily.
-*   **Maintainable**: Fixing bugs and adding features is simpler.
-*   **Importable**: Allows you to create reusable code modules.
-
----
-
-# A Standard Project Structure
-
-A great starting point for most research projects:
-
-```
-my-research-project/
-├── .gitignore
-├── README.md
-├── pyproject.toml      # <-- The new control center
-├── src/                # <-- Your source code lives here
-│   ├── __init__.py     # <-- Makes this a package
-│   ├── main.py
-│   └── calculations/   # <-- A submodule for related code
-│       ├── __init__.py
-│       └── math_utils.py
-│
-└── tests/              # (Optional but good practice)
-    └── test_calculations.py
-```
----
-
-# Modules and Packages: The `__init__.py` File
-
-*   A Python file (`.py`) is a **module**.
-*   A directory containing an `__init__.py` file is a **package**.
-
-The `__init__.py` file tells Python:
-> "Treat this folder as a group of modules you can **import** from."
-
-This allows you to import code from your own project, just like you import libraries!
-
----
-# Importing from Packages
-To import code from a module placed in a subfolder, you can use the dot notation:
 ```python
-from src.calculations import math_utils
+from sklearn.whatever import TheModel
+from sklearn.model_selection import train_test_split
+
+# 1. Split your data FIRST
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 2. Create model
+model = TheModel()
+
+# 3. Train (fit)
+model.fit(X_train, y_train)
+
+# 4. Predict
+y_pred = model.predict(X_test)
+
+# 5. Evaluate
+score = model.score(X_test, y_test)
 ```
 
-This works because `src/` and `src/calculations/` both contain an `__init__.py`.
-It can be completely empty; its presence is what matters. This allows you to organize your code into sub-folders and still import it.
-> Caution! TODO paths
-
----
-# Absolute vs. Relative Imports
-
-How you import depends on where you are.
-
-**1. Absolute Imports (Recommended)**
-*   Start the import path from the project's source root (`src`).
-*   They are clear, explicit, and work from anywhere.
-*   **Example**: `from src.calculations import math_utils`
-
-**2. Relative Imports (Use with caution)**
-*   Use `.` for the current package and `..` for the parent package.
-*   **Example**: Inside `src/main.py`, you could write `from .calculations import math_utils`
-*   Can be fragile if you move files around. **Stick to absolute imports.**
+**This works for Linear Regression, KNN, Decision Trees, everything.**
 
 ---
 
-# What Are Dependencies?
+# Common Error #1: Shape Mismatches
 
-> Recall: A **dependency** is an external software package at a specific version your project needs to function.
+```python
+# ❌ WRONG - X must be 2D
+X = [1, 2, 3, 4, 5]
+model.fit(X, y)  # ValueError: Expected 2D array
 
-When you write `import numpy`, your code has a **dependency** on NumPy.
-
-### Why does managing them matter?
-1.  **Functionality**: Your code will crash without them.
-2.  **Versions**: A new version of a library could break your existing code. You need to "lock" the versions that you know work.
-3.  **Reproducibility**: For research to be reproducible, others must be able to recreate your *exact* software environment.
-
----
-<!-- _class: invert -->
-
-# Part 2: Modern Tooling with `uv`
-
----
-
-# Introducing `uv`
-
-Forget juggling `venv` and `pip` separately.
-
-**`uv`** is an extremely fast, all-in-one tool that is both a:
-*   **Package Installer** (like `pip`)
-*   **Virtual Environment Manager** (like `venv`)
-
-It simplifies the entire project management workflow.
-
----
-
-# Project Setup with `uv`
-
-In a new, empty project folder, this one command does it all:
-
-```bash
-uv init
+# ✅ RIGHT - Reshape to 2D
+X = [[1], [2], [3], [4], [5]]
+# Or: X = np.array([1,2,3,4,5]).reshape(-1, 1)
+model.fit(X, y)
 ```
 
-This will automatically:
-1.  Create a virtual environment in a `.venv` folder.
-2.  Create a `pyproject.toml` file to configure your project.
+**Rule:** X is always 2D (samples × features), y is always 1D
 
----
-
-# The `pyproject.toml` Control Center
-
-This file is the modern standard for configuring Python projects. It replaces multiple older files (`setup.py`, `requirements.txt`).
-
-Let's look inside...
-
----
-
-### `pyproject.toml`: The `[project]` Section
-
-This section holds general information about your project.
-
-```toml
-[project]
-name = "my-research-project"
-version = "0.1.0"
-description = "A short description of the project."
+**Always print shapes when debugging:**
+```python
+print(f"X: {X.shape}, y: {y.shape}")
+# X: (100, 5), y: (100,) ✅
 ```
 
 ---
 
-### `pyproject.toml`: The `[project.dependencies]` Section
+# Common Error #2: Testing on Training Data
 
-This is where you list the packages your code needs to **run**. It's the "source of truth" for your project's needs.
+```python
+# ❌ DISASTER - 100% accuracy that means nothing
+model.fit(X, y)
+score = model.score(X, y)
 
-```toml
-[project.dependencies]
-# We will add packages like "numpy" here
+# ✅ CORRECT - Real test performance
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+model.fit(X_train, y_train)
+score = model.score(X_test, y_test)
+```
+
+**The #1 beginner mistake:** Never test on data you trained on!
+
+---
+
+# Common Error #3: Forgetting to Scale for KNN
+
+```python
+# Dataset: [house_size_sqft, bedrooms]
+# [[2000, 3], [1500, 2], [1800, 3]]
+
+# ❌ KNN without scaling - size dominates everything!
+knn = KNeighborsClassifier(n_neighbors=3)
+knn.fit(X, y)
+
+# ✅ KNN with scaling - features balanced
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+knn.fit(X_scaled, y)
+```
+
+**When to scale:** KNN, SVM, Neural Networks
+**When NOT to scale:** Decision Trees, Random Forest
+
+---
+
+# Regression vs Classification
+
+**Regression:** Predict a number
+```python
+from sklearn.linear_model import LinearRegression
+model = LinearRegression()
+price = model.predict([[1800, 3, 10]])  # $245,000
+```
+
+**Classification:** Predict a category
+```python
+from sklearn.neighbors import KNeighborsClassifier
+model = KNeighborsClassifier(n_neighbors=3)
+species = model.predict([[5.1, 3.5, 1.4, 0.2]])  # "Setosa"
+```
+
+**Same workflow, different outputs!**
+
+---
+
+# Debugging: "My Model Sucks"
+
+**Train: 95%, Test: 60%** → **Overfitting** (memorized data)
+- Fix: Simpler model, more data, regularization
+
+**Train: 65%, Test: 62%** → **Underfitting** (too simple)
+- Fix: More complex model, better features
+
+**Train: 50%, Test: 50%** (binary) → **Random guessing** (learned nothing)
+- Fix: Check data quality, try different features
+
+**Train: 50%, Test: 85%** → **You got lucky** (probably data leakage)
+- Fix: Check your train/test split!
+
+---
+
+# Quick Reference: Evaluation Metrics
+
+**Regression:**
+```python
+from sklearn.metrics import mean_squared_error, r2_score
+
+mse = mean_squared_error(y_test, y_pred)   # Lower = better
+r2 = r2_score(y_test, y_pred)              # 0 to 1, higher = better
+```
+
+**Classification:**
+```python
+from sklearn.metrics import accuracy_score, confusion_matrix
+
+acc = accuracy_score(y_test, y_pred)      # Higher = better
+cm = confusion_matrix(y_test, y_pred)     # Shows mistakes
 ```
 
 ---
 
-# Adding Dependencies with `uv`
+# Confusion Matrix: Where Your Model Fails
 
-This single command is all you need:
+```python
+cm = confusion_matrix(y_test, y_pred)
+print(cm)
 
-```bash
-uv pip install numpy pandas
+#           Predicted
+#           Cat  Dog
+# Actual Cat [45] [5]   ← 5 cats wrongly called dogs
+#        Dog [3]  [47]  ← 3 dogs wrongly called cats
 ```
 
-This will:
-1.  Add `numpy` and `pandas` to your `pyproject.toml`.
-2.  Install them into your `.venv` virtual environment.
-3.  Create/update a `uv.lock` file, which freezes the exact versions of *all* dependencies for perfect reproducibility.
+**Diagonal = correct**
+**Off-diagonal = mistakes**
+
+Use this to see WHAT your model confuses!
 
 ---
 
-# Running Code with `uv`
+# Pro Tips
 
-No more typing `source .venv/bin/activate`!
+**1. Start Simple, Then Optimize**
+```python
+# ✅ Start here
+model = LinearRegression()
 
-`uv` can run any command directly within your project's environment.
-
-```bash
-# Run a python script
-uv run python src/main.py
-
-# Run any other command
-uv run <command>
+# ❌ Don't start here
+model = GradientBoostingRegressor(
+    n_estimators=500,
+    learning_rate=0.001,
+    max_depth=10,
+    subsample=0.8
+)
 ```
 
----
-
-# The Power of `uv sync`
-
-You've cloned a project from GitHub. How do you install everything?
-
-```bash
-# Don't do this: uv pip install -r requirements.txt
-# Do this instead:
-uv sync
+**2. Always Print Shapes**
+```python
+print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
 ```
 
-`uv sync` reads the `uv.lock` file and installs the **exact** versions of all packages, guaranteeing a perfectly replicated environment.
-
-**This is the key to reproducibility.**
-
----
-# Advanced `uv` Features
-
-<img src="image.png" alt="alt text" width="650"/>
-
----
-<!-- _class: invert -->
-
-# Part 3: Code Quality with `ruff`
+**3. Use random_state=42** (or any number) for reproducibility
 
 ---
 
-# Linters and Formatters
+# Exercise Structure
 
-*   **Linter**: A tool that analyzes your code to find potential bugs, style errors, and bad practices.
-*   **Formatter**: A tool that automatically rewrites your code to follow a strict, consistent style guide.
+**Part 1: Regression**
+- Predict house prices
+- Multiple features
+- Evaluate with MSE and R²
 
-**`ruff`** is a next-generation tool that is an extremely fast **linter AND formatter** in one.
+**Part 2: Classification**
+- Iris species (KNN vs Decision Tree)
+- Student pass/fail predictor
+- Confusion matrices
 
----
-
-# Using `ruff` in Your Project
-
-1.  **Install `ruff` as a "dev" dependency:**
-    It's a tool for you, the developer, not for running the code.
-    ```bash
-    uv pip install --dev ruff
-    ```
-    This adds `ruff` to a special `[tool.uv.dev-dependencies]` section in your `pyproject.toml`.
-
-2.  **Lint your code:**
-    Find potential problems in all files in the current directory (`.`).
-    ```bash
-    uv run ruff check .
-    ```
-
-3.  **Format your code:**
-    Automatically clean up your code's style.
-    ```bash
-    uv run ruff format .
-    ```
+**Part 3: Bonus Challenges**
+- Level 1: Feature importance, residual analysis, scaling experiments
+- Level 2: SHAP, decision boundaries, overfitting detection, Yellowbrick
 
 ---
 
 <!-- _class: lead -->
 
-# Recap
+# Let's Code!
 
-You can now create a modern, structured, and reproducible Python project!
+Open: `ml_regression_classification_starter.py`
 
-| Task | `uv` Command | `ruff` Command |
-| :--- | :--- | :--- |
-| Start a new project | `uv init` | |
-| Add a runtime package | `uv add <package>` | |
-| Recreate environment | `uv sync` | |
-| Run a script in env | `uv run python script.py` | |
-| Find code errors | | `uv run ruff check .` |
-| Auto-format code | | `uv run ruff format .` |
----
-# Your Assignment
-* Unify your project structure using today's standard layout.
-* Add and manage dependencies with `uv`.
-* Use `ruff` to lint and format your code.
-* Submit your updated project by the next session.
-* If you have any questions or need help, feel free to reach out during office hours or via email.
----
+**Questions before we start?**
