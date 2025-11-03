@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
 Update the main page with the current week's information based on the current date.
+Reads week information from content/week-definitions/ files.
 """
 
 import re
@@ -8,32 +9,75 @@ from datetime import datetime
 import sys
 from pathlib import Path
 
-# Week schedule with start dates (Mondays)
-WEEK_SCHEDULE = [
-    {"week": "0-1", "start": "2025-09-15", "title": "Course Overview", "topics": "Setup • Unix/Linux • Git"},
-    {"week": "2", "start": "2025-09-22", "title": "Advanced Unix", "topics": "Shell Scripting • Automation • Tools"},
-    {"week": "3", "start": "2025-09-29", "title": "Git & Python Fundamentals", "topics": "Version Control • Python Basics • Practice"},
-    {"week": "4", "start": "2025-10-06", "title": "Functions & Data Structures", "topics": "Functions • Lists • Dictionaries"},
-    {"week": "5", "start": "2025-10-13", "title": "AI & Intelligent Agents", "topics": "LLMs • Prompt Engineering • Agents"},
-    {"week": "6", "start": "2025-10-20", "title": "OOP & Debugging", "topics": "Classes • Inheritance • Testing"},
-    {"week": "7", "start": "2025-10-27", "title": "Linear Regression", "topics": "Data Analysis • ML Basics • sklearn"},
-    {"week": "8", "start": "2025-11-03", "title": "Feature Engineering", "topics": "Preprocessing • Selection • Validation"},
-    {"week": "9", "start": "2025-11-10", "title": "Advanced Regression", "topics": "Regularization • Cross-validation • Metrics"},
-    {"week": "10", "start": "2025-11-17", "title": "Classification", "topics": "Logistic Regression • Trees • Evaluation"},
-    {"week": "11", "start": "2025-11-24", "title": "Neural Networks", "topics": "Perceptron • Backpropagation • PyTorch"},
-    {"week": "12", "start": "2025-12-01", "title": "Deep Learning", "topics": "CNNs • RNNs • Transfer Learning"},
-    {"week": "13", "start": "2025-12-08", "title": "Project Presentations", "topics": "Final Projects • Demos • Peer Review"},
-    {"week": "14", "start": "2025-12-15", "title": "Course Wrap-up", "topics": "Review • Exam Prep • Next Steps"}
-]
+def parse_week_definition(file_path):
+    """Parse a week definition file using regex (no YAML dependency needed)."""
+    with open(file_path, 'r') as f:
+        content = f.read()
 
-def get_current_week():
+    # Extract values using regex
+    title_match = re.search(r'^title:\s*["\']?([^"\'\n]+)["\']?', content, re.MULTILINE)
+    date_match = re.search(r'^date:\s*(\d{4}-\d{2}-\d{2})', content, re.MULTILINE)
+    desc_match = re.search(r'^description:\s*["\']?([^"\'\n]+)["\']?', content, re.MULTILINE)
+
+    if not all([title_match, date_match, desc_match]):
+        return None
+
+    return {
+        'title': title_match.group(1),
+        'date': date_match.group(1),
+        'description': desc_match.group(1)
+    }
+
+def get_week_schedule(repo_root):
+    """Build week schedule from week definition files."""
+    week_defs_dir = repo_root / "content" / "week-definitions"
+
+    schedule = []
+
+    # Process week00 through week14
+    for i in range(15):
+        week_file = week_defs_dir / f"week{i:02d}.md"
+        if not week_file.exists():
+            continue
+
+        data = parse_week_definition(week_file)
+        if not data:
+            continue
+
+        # Extract week number from title (e.g., "Week 7: Linear Regression" -> "7")
+        title = data.get('title', '')
+
+        # Handle special cases like "Week 0-1"
+        if i == 0:
+            week_num = "0-1"
+        else:
+            # Extract number from title
+            match = re.search(r'Week (\d+)', title)
+            week_num = match.group(1) if match else str(i)
+
+        # Remove "Week X: " prefix from title
+        clean_title = re.sub(r'^Week \d+:\s*', '', title)
+
+        # Get description for topics
+        topics = data.get('description', '')
+
+        schedule.append({
+            "week": week_num,
+            "start": str(data.get('date', '')),
+            "title": clean_title,
+            "topics": topics
+        })
+
+    return sorted(schedule, key=lambda x: x['start'])
+
+def get_current_week(schedule):
     """Determine which week should be displayed based on current date."""
     today = datetime.now().date()
 
     # Find the appropriate week
-    current_week = WEEK_SCHEDULE[0]  # Default to first week
+    current_week = schedule[0]  # Default to first week
 
-    for week in WEEK_SCHEDULE:
+    for week in schedule:
         week_start = datetime.strptime(week["start"], "%Y-%m-%d").date()
         if today >= week_start:
             current_week = week
@@ -83,8 +127,18 @@ def main():
         print(f"❌ Error: {index_path} not found")
         sys.exit(1)
 
+    # Build schedule from week definition files
+    print("📖 Reading week definitions...")
+    schedule = get_week_schedule(repo_root)
+
+    if not schedule:
+        print("❌ Error: No week definitions found")
+        sys.exit(1)
+
+    print(f"✅ Loaded {len(schedule)} weeks")
+
     # Get current week
-    current_week = get_current_week()
+    current_week = get_current_week(schedule)
     print(f"📅 Current week: Week {current_week['week']} - {current_week['title']}")
     print(f"   Topics: {current_week['topics']}")
 
