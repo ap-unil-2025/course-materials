@@ -32,11 +32,11 @@ jobs:
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          git add docs/index.html
+          git add docs/index.html docs/weekly-materials.md
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "🔄 Weekly update: Set current week on main page - $(date '+%Y-%m-%d')"
+            git commit -m "🔄 Weekly update: Set current week on main and weekly pages - $(date '+%Y-%m-%d')"
             git push
             echo "✅ Changes pushed - Build workflow will trigger automatically"
           fi
