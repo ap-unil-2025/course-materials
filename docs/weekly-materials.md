@@ -33,11 +33,11 @@ layout: default
     <div class="current-content">
       <span class="current-label">NOW</span>
       <div class="current-info">
-        <h2>Week 8: Classification</h2>
-        <p>Supervised learning classification, k-NN, Naive Bayes, decision trees, and ensemble methods</p>
+        <h2>Week 9: Unsupervised Learning</h2>
+        <p>Clustering algorithms including k-means, GMM, hierarchical and density-based clustering</p>
       </div>
     </div>
-    <a href="{{ '/week/week08' | relative_url }}" class="current-btn">Open Week 8 →</a>
+    <a href="{{ '/week/week09' | relative_url }}" class="current-btn">Open Week 9 →</a>
   </div>
 
   <section class="course-section">
