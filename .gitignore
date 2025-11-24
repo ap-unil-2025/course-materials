@@ -62,3 +62,4 @@ docs/slides/practice/*.html
 # Solution files (instructor reference only)
 content/weeks/week-08/ml_regression_classification_solution.py
 content/weeks/week-10/neural_networks_solution.py
+**/__pycache__/
