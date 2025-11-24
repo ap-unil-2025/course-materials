@@ -831,7 +831,7 @@ pdflatex project_report.tex
 # Report Tips
 
 **Do:**
-✅ Be concise - 2-4 pages is fine
+✅ Aim for ~10 pages (not including code appendix)
 ✅ Use tables and figures to present results
 ✅ Explain *why* you made each choice
 ✅ Discuss limitations honestly
