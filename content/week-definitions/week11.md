@@ -2,7 +2,7 @@
 title: "Week 11: Advanced Machine Learning"
 date: 2025-11-24
 description: "Advanced ML topics and techniques"
-lecture_slides: "#"
+lecture_slides: "/course-materials/lectures/lecture_11/slides/Advanced_Programming_2025_lecture_11.pdf"
 ta_slides: "/course-materials/slides/practice/week11_slides.html"
 lesson: "/course-materials/lessons/week11-lesson.html"
 assignment:
