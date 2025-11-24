@@ -335,16 +335,14 @@ Which classification model performs best for Iris species:
 Random Forest, K-Nearest Neighbors, or Logistic Regression?
 
 ## Setup
-```bash
+
 # Create environment
 conda env create -f environment.yml
 conda activate iris-project
-```
 
 ## Usage
-```bash
+
 python main.py
-```
 
 Expected output: Accuracy comparison between three models.
 ```
@@ -355,7 +353,7 @@ Expected output: Accuracy comparison between three models.
 
 ```markdown
 ## Project Structure
-```
+
 my-iris-comparison/
 ├── main.py              # Main entry point
 ├── src/                 # Source code
@@ -364,7 +362,6 @@ my-iris-comparison/
 │   └── evaluation.py    # Evaluation metrics
 ├── results/             # Output plots and metrics
 └── environment.yml      # Dependencies
-```
 
 ## Results
 - Random Forest: 0.967 accuracy
@@ -384,13 +381,8 @@ my-iris-comparison/
 ```bash
 # Activate environment
 conda activate iris-project
-
 # Run the project
 python main.py
-```
-
-**Expected output:**
-```
 ============================================================
 Iris Classification: Model Comparison
 ============================================================
@@ -754,175 +746,85 @@ Think: mini research paper, not just code documentation.
 
 ---
 
-# Report Structure
+# Report Structure & Templates
 
-Your report should include:
+**We provide templates! Download from the course website:**
+- **Markdown template**: `project_report_template.md` → PDF with pandoc
+- **LaTeX template**: `project_report_template.tex` → PDF with pdflatex
 
-1. **Introduction** - Research question and motivation
-2. **Methodology** - Data, models, evaluation approach
-3. **Results** - What you found
-4. **Discussion** - What it means
-5. **Conclusion** - Summary and future work
-6. **References** - Citations (if applicable)
-
-Save as `REPORT.md` in your project root.
+**Both templates include:**
+1. **Abstract** - 150-200 word summary
+2. **Introduction** - Research question and motivation
+3. **Literature Review** - Prior work and context
+4. **Methodology** - Data, models, evaluation
+5. **Results** - Tables, figures, findings
+6. **Discussion** - Interpretation and limitations
+7. **Conclusion** - Summary and future work
+8. **References** - Citations
 
 ---
 
-# Section 1: Introduction
+# Converting to PDF
 
-**What and Why**
+**Option 1: Markdown → PDF (pandoc)**
+```bash
+# Basic conversion
+pandoc project_report.md -o project_report.pdf --pdf-engine=xelatex
 
-```markdown
-# Introduction
+# With table of contents and numbering
+pandoc project_report.md \
+  -o project_report.pdf \
+  --pdf-engine=xelatex \
+  --toc \
+  --number-sections
+```
 
-## Research Question
-Which classification model performs best for predicting Iris species:
-Random Forest, K-Nearest Neighbors, or Logistic Regression?
-
-## Motivation
-The Iris dataset is a classic benchmark for classification algorithms.
-Understanding which models perform best on this task helps us choose
-appropriate algorithms for similar multi-class classification problems
-in botany and ecology.
-
-## Objectives
-- Compare three classification algorithms on Iris dataset
-- Evaluate using accuracy and per-class metrics
-- Identify strengths and weaknesses of each approach
+**Option 2: LaTeX → PDF (pdflatex)**
+```bash
+# Compile LaTeX (run twice for references)
+pdflatex project_report.tex
+pdflatex project_report.tex
 ```
 
 ---
 
-# Section 2: Methodology (1/2)
+# What to Include in Each Section
 
-**Data and Preprocessing**
+**Introduction**:
+- Research question (clear and specific)
+- Why it matters (motivation)
+- What you'll do (objectives)
 
-```markdown
-# Methodology
+**Methodology**:
+- Dataset description (source, size, features)
+- Preprocessing steps (scaling, splitting)
+- Models used (with hyperparameters)
+- Evaluation metrics
 
-## Dataset
-- **Source**: sklearn.datasets.load_iris()
-- **Samples**: 150 (120 train, 30 test)
-- **Features**: 4 (sepal length/width, petal length/width)
-- **Classes**: 3 species (setosa, versicolor, virginica)
-- **Split**: 80% train, 20% test (random_state=42)
-
-## Preprocessing
-All features were standardized using StandardScaler:
-- Fit on training data only (to avoid data leakage)
-- Applied same transformation to test data
-- Scaling is critical for KNN (distance-based algorithm)
-```
+**Results**:
+- Tables comparing models
+- Figures (learning curves, confusion matrices)
+- Key findings (be specific: "RF: 96.7%, KNN: 93.3%")
 
 ---
 
-# Section 2: Methodology (2/2)
+# What to Include (continued)
 
-**Models and Evaluation**
+**Discussion**:
+- Why did one model outperform others?
+- What surprised you?
+- What are the limitations?
+- How do results compare to expectations?
 
-```markdown
-## Models
-1. **Random Forest** (n_estimators=100, random_state=42)
-   - Ensemble of decision trees
-   - Handles non-linear relationships
+**Conclusion**:
+- Summary of key findings
+- Recommendations (which model to use when)
+- Future work (what's next?)
 
-2. **K-Nearest Neighbors** (n_neighbors=5)
-   - Instance-based learning
-   - Requires feature scaling
-
-3. **Logistic Regression** (max_iter=200, random_state=42)
-   - Linear classifier with softmax for multi-class
-   - Baseline model
-
-## Evaluation Metrics
-- Accuracy: Overall correct predictions
-- Per-class precision, recall, F1-score
-- All experiments use random_state=42 for reproducibility
-```
-
----
-
-# Section 3: Results
-
-**Present Your Findings**
-
-```markdown
-# Results
-
-## Model Performance
-
-| Model                | Accuracy | Notes                        |
-|---------------------|----------|------------------------------|
-| Random Forest       | 0.967    | Best overall, robust         |
-| Logistic Regression | 0.967    | Tied for best, simpler model |
-| K-Nearest Neighbors | 0.933    | Good, but slightly behind    |
-
-## Per-Class Performance (Random Forest)
-
-| Class      | Precision | Recall | F1-Score |
-|-----------|-----------|--------|----------|
-| Setosa    | 1.00      | 1.00   | 1.00     |
-| Versicolor| 0.94      | 0.94   | 0.94     |
-| Virginica | 0.94      | 0.94   | 0.94     |
-
-All models achieve >93% accuracy, indicating Iris is well-separated.
-```
-
----
-
-# Section 4: Discussion
-
-**Interpret Your Results**
-
-```markdown
-# Discussion
-
-## Key Findings
-1. **Random Forest and Logistic Regression tied for best accuracy (96.7%)**
-   - Surprising: Linear model matches ensemble method
-   - Suggests Iris classes are linearly separable
-
-2. **KNN performed well but slightly lower (93.3%)**
-   - May be sensitive to distance metric choice
-   - Could improve with hyperparameter tuning
-
-3. **All models perfect on Setosa class**
-   - Setosa is well-separated from other classes
-   - Main confusion between Versicolor and Virginica
-
-## Limitations
-- Small dataset (150 samples)
-- No hyperparameter tuning performed
-- Single train/test split (should use cross-validation)
-```
-
----
-
-# Section 5: Conclusion
-
-**Wrap It Up**
-
-```markdown
-# Conclusion
-
-## Summary
-We compared three classification algorithms on the Iris dataset.
-Random Forest and Logistic Regression both achieved 96.7% accuracy,
-while KNN achieved 93.3%. All models performed well, with perfect
-classification of the Setosa species.
-
-## Recommendations
-For this dataset:
-- **Use Logistic Regression** - Simplest, tied for best performance
-- **Use Random Forest** - If interpretability is less important
-
-## Future Work
-- Perform hyperparameter tuning (GridSearchCV)
-- Use k-fold cross-validation for more robust evaluation
-- Add confusion matrix visualization
-- Test on additional multi-class datasets
-```
+**References**:
+- Datasets used
+- Libraries/frameworks
+- Papers (if applicable)
 
 ---
 
@@ -948,7 +850,8 @@ For this dataset:
 ```
 my-iris-comparison/
 ├── README.md              # Setup and usage instructions
-├── REPORT.md             # ← Your research report here
+├── project_report.md      # ← Markdown source (if using pandoc)
+├── project_report.pdf     # ← Final PDF report
 ├── environment.yml
 ├── main.py
 ├── src/
@@ -957,39 +860,29 @@ my-iris-comparison/
 └── notebooks/
 ```
 
-**README = How to run it**
-**REPORT = What you did and found**
+**README.md** = How to run it (setup, usage)
+**project_report.pdf** = What you did and found (research report)
 
 They serve different purposes!
 
 ---
 
-# Report Example: File Structure
+# Download the Templates
 
-Your `REPORT.md` should look like:
+**Where to find them:**
+1. Go to course website main page
+2. Look for "Project Resources" section
+3. Download either:
+   - `project_report_template.md` (Markdown + pandoc)
+   - `project_report_template.tex` (LaTeX + pdflatex)
 
-```markdown
-# Iris Classification: Model Comparison Report
+**Both are comprehensive with:**
+- All required sections pre-structured
+- Example content to guide you
+- Proper formatting and references
+- Instructions for PDF conversion
 
-## 1. Introduction
-[Research question, motivation, objectives]
-
-## 2. Methodology
-[Data, preprocessing, models, evaluation]
-
-## 3. Results
-[Tables, metrics, findings]
-
-## 4. Discussion
-[Interpretation, limitations]
-
-## 5. Conclusion
-[Summary, recommendations, future work]
-
-## 6. References (if applicable)
-```
-
-**Total: 3-5 pages** (not including code)
+**Start with the template, customize for your project.**
 
 ---
 
@@ -1022,7 +915,7 @@ Your `REPORT.md` should look like:
 ✅ **1. Code runs:** `python main.py` works without errors
 ✅ **2. Dependencies listed:** `environment.yml` or `requirements.txt`
 ✅ **3. README complete:** Setup, usage, expected output
-✅ **4. Report written:** `REPORT.md` with methodology and results
+✅ **4. Report written:** `project_report.pdf` with methodology and results
 ✅ **5. Reproducible:** Same results every run (random_state=42)
 ✅ **6. No hardcoded paths:** Use relative paths only
 ✅ **7. Data included:** Or clear instructions to download
@@ -1102,8 +995,9 @@ if __name__ == "__main__":
 ```
 
 **✅ Complete report:**
-```markdown
-# REPORT.md with methodology, results, discussion
+```
+# project_report.pdf with methodology, results, discussion
+# Use the provided template (Markdown or LaTeX)
 ```
 
 ---
@@ -1113,7 +1007,7 @@ if __name__ == "__main__":
 ```
 my-project/
 ├── README.md              # Setup and usage
-├── REPORT.md             # Research findings
+├── project_report.pdf     # Research report (required!)
 ├── environment.yml        # Conda dependencies
 ├── main.py               # Entry point
 ├── src/                  # Source code
