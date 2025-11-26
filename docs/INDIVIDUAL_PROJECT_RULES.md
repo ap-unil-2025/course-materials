@@ -102,9 +102,16 @@ your-project/
 - Markdown template → PDF with pandoc
 - LaTeX template → PDF with pdflatex
 
-### 4. **Presentation** (December 16-20, Optional)
-- **Duration**: 8-10 minutes + Q&A
-- **Content**: Problem, approach, demo, results, learnings
+### 4. **Presentation Video** (Due: December 21, Required)
+- **Format**: Recorded video (MP4, YouTube link, or Loom)
+- **Duration**: 8-10 minutes
+- **Content**:
+  - Problem motivation (1-2 min)
+  - Technical approach (2-3 min)
+  - Demo of your code running (3-4 min)
+  - Results and learnings (1-2 min)
+
+**Optional**: Live presentation (December 16-20) instead of video, with Q&A
 
 ---
 
