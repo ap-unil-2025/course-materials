@@ -111,7 +111,7 @@ your-project/
   - Demo of your code running (3-4 min)
   - Results and learnings (1-2 min)
 
-**Optional**: Live presentation (December 16-20) instead of video, with Q&A
+**Optional**: Live presentation (TBA) instead of video, with Q&A
 
 ---
 
@@ -156,7 +156,7 @@ your-project/
 | **Nov 24** | Feature Freeze - stop adding, start polishing |
 | **Dec 8** | Documentation Week - finalize README and report |
 | **Dec 21** | **Final Submission** |
-| **Dec 16-20** | Presentations (optional) |
+| **TBA** | Presentations (optional) |
 
 ### Development Strategy
 
