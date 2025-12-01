@@ -234,6 +234,43 @@ See the `examples/iris-classification/` folder in the course repository for a co
 
 ---
 
+## 📬 How to Submit
+
+Email your submission to **anna.smirnova@unil.ch** by **December 21, 23:59**.
+
+**Subject line**: `[AP2025] Final Project - Your Name`
+
+**Email body**:
+```
+Name:
+Student ID:
+Project Title:
+GitHub Repository: [link]
+Video/Presentation: [link - YouTube, Loom, or Google Drive]
+
+Checklist:
+- [ ] python main.py runs without errors
+- [ ] requirements.txt or environment.yml included
+- [ ] Report (~10 pages PDF) attached OR in repository
+- [ ] Video is 10-15 min OR signed up for live presentation (Dec 15)
+```
+
+**Note**: Report can be attached to email OR included in your repository as `report.pdf` - both work!
+
+---
+
+## 🎤 Live Presentation Option
+
+Present live on **December 15** instead of recording a video!
+
+- **Benefit**: No video submission required
+- **Sign up by**: December 8
+- **Not graded**: Just an opportunity to practice presenting
+
+Sign up link: [TBA]
+
+---
+
 ## 📧 Need Help?
 
 - **Discord**: Quick questions and peer help
