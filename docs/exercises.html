@@ -1,0 +1,238 @@
+---
+layout: default
+title: "Exercises & Solutions"
+---
+
+<style>
+.exercises-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.exercises-header h1 {
+  font-size: 2rem;
+  color: var(--accent-color);
+  margin: 0 0 0.5rem 0;
+}
+
+.exercises-header p {
+  color: var(--text-secondary);
+  margin: 0;
+  font-size: 1rem;
+}
+
+.exercises-explanation {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.exercises-explanation h3 {
+  margin: 0 0 1rem 0;
+  color: var(--text-primary);
+}
+
+.exercises-explanation ul {
+  margin: 0;
+  padding-left: 1.5rem;
+  color: var(--text-secondary);
+}
+
+.exercises-explanation li {
+  margin-bottom: 0.5rem;
+}
+
+.exercise-card {
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.exercise-card:hover {
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.exercise-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.exercise-title h3 {
+  margin: 0 0 0.25rem 0;
+  color: var(--text-primary);
+}
+
+.exercise-title p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.exercise-weeks {
+  background: var(--primary-color);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.exercise-description {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.exercise-downloads {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.exercise-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.exercise-btn.starter {
+  background: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.exercise-btn.starter:hover {
+  background: #3b82f6;
+  color: white;
+}
+
+.exercise-btn.solution {
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.exercise-btn.solution:hover {
+  background: #10b981;
+  color: white;
+}
+</style>
+
+<div class="exercises-header">
+  <h1>Exercises & Solutions</h1>
+  <p>Practice materials from the TA sessions</p>
+</div>
+
+<div class="exercises-explanation">
+  <h3>Why only 4 exercise sets?</h3>
+  <ul>
+    <li><strong>Week 1</strong>: Course introduction — no exercises</li>
+    <li><strong>Week 2</strong>: State holiday — no class</li>
+    <li><strong>Week 3</strong>: Live Git demo in class — no take-home exercise</li>
+    <li><strong>Weeks 4-11</strong>: Four substantial exercises, each spanning ~2 weeks</li>
+    <li><strong>Weeks 12+</strong>: Project work — focus on your final project</li>
+  </ul>
+  <p style="margin-top: 1rem; color: var(--text-secondary);">Each exercise is designed to be comprehensive, giving you time to explore the concepts deeply rather than rushing through many small tasks.</p>
+</div>
+
+<div class="exercise-card">
+  <div class="exercise-header">
+    <div class="exercise-title">
+      <h3>Exercise 1: Contact Manager (Basics)</h3>
+      <p>Python fundamentals, functions, file I/O</p>
+    </div>
+    <span class="exercise-weeks">Weeks 4-5</span>
+  </div>
+  <p class="exercise-description">
+    Build a command-line contact manager application. Practice working with dictionaries, file handling (JSON),
+    user input, and structuring code into functions.
+  </p>
+  <div class="exercise-downloads">
+    <a href="{{ '/exercises/contact_manager_starter.py' | relative_url }}" class="exercise-btn starter" download>
+      📝 Starter Code
+    </a>
+    <a href="{{ '/exercises/contact_manager_solutions.py' | relative_url }}" class="exercise-btn solution" download>
+      ✅ Solution
+    </a>
+  </div>
+</div>
+
+<div class="exercise-card">
+  <div class="exercise-header">
+    <div class="exercise-title">
+      <h3>Exercise 2: Contact Manager (OOP)</h3>
+      <p>Object-oriented programming, classes, refactoring</p>
+    </div>
+    <span class="exercise-weeks">Weeks 6-7</span>
+  </div>
+  <p class="exercise-description">
+    Refactor your contact manager using object-oriented principles. Learn about classes, methods,
+    encapsulation, and how to structure larger applications.
+  </p>
+  <div class="exercise-downloads">
+    <a href="{{ '/exercises/contact_manager_oop_starter.py' | relative_url }}" class="exercise-btn starter" download>
+      📝 Starter Code
+    </a>
+    <a href="{{ '/exercises/contact_manager_oop_example.py' | relative_url }}" class="exercise-btn solution" download>
+      ✅ Solution
+    </a>
+  </div>
+</div>
+
+<div class="exercise-card">
+  <div class="exercise-header">
+    <div class="exercise-title">
+      <h3>Exercise 3: ML Regression & Classification</h3>
+      <p>Scikit-learn, model training, evaluation</p>
+    </div>
+    <span class="exercise-weeks">Weeks 8-9</span>
+  </div>
+  <p class="exercise-description">
+    Introduction to machine learning with scikit-learn. Train regression and classification models,
+    evaluate performance, and understand the ML workflow.
+  </p>
+  <div class="exercise-downloads">
+    <a href="{{ '/exercises/ml_regression_classification_starter.py' | relative_url }}" class="exercise-btn starter" download>
+      📝 Starter Code
+    </a>
+    <a href="{{ '/exercises/ml_regression_classification_solution.py' | relative_url }}" class="exercise-btn solution" download>
+      ✅ Solution
+    </a>
+  </div>
+</div>
+
+<div class="exercise-card">
+  <div class="exercise-header">
+    <div class="exercise-title">
+      <h3>Exercise 4: Neural Networks</h3>
+      <p>Deep learning basics, MLPClassifier, hyperparameters</p>
+    </div>
+    <span class="exercise-weeks">Weeks 10-11</span>
+  </div>
+  <p class="exercise-description">
+    Build and train neural networks using scikit-learn's MLPClassifier. Understand layers,
+    activation functions, and hyperparameter tuning.
+  </p>
+  <div class="exercise-downloads">
+    <a href="{{ '/exercises/neural_networks_starter.py' | relative_url }}" class="exercise-btn starter" download>
+      📝 Starter Code
+    </a>
+    <a href="{{ '/exercises/neural_networks_solution.py' | relative_url }}" class="exercise-btn solution" download>
+      ✅ Solution
+    </a>
+  </div>
+</div>
