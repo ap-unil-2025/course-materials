@@ -2,7 +2,7 @@
 marp: true
 paginate: true
 header: "Session 12: Reports & Documentation"
-footer: "Anna Smirnova, December 8, 2025"
+footer: "Anna Smirnova, December 1, 2025"
 style: |
   section.lead {
     background: #003aff;
@@ -34,19 +34,12 @@ style: |
 # Today's Goals
 
 **Part 1: Why Documentation Matters**
-- Code is read more than written
-- Types of documentation
-- Best practices
 
 **Part 2: Jupyter Notebooks as Reports**
-- Structuring analysis narratives
-- Markdown formatting
-- Code organization
 
 **Part 3: Exporting & Sharing**
-- PDF and HTML exports
-- Interactive reports
-- Reproducibility
+
+**Part 4: Hyperparameter Tuning**
 
 ---
 
@@ -56,9 +49,7 @@ style: |
 
 # The Documentation Problem
 
-**Consider this scenario**:
-
-You open a Jupyter notebook from 6 months ago...
+**Consider this scenario**: You open a Jupyter notebook from 6 months ago...
 
 ```python
 df2 = df.groupby('x')[['y', 'z']].agg(f).reset_index()
@@ -99,6 +90,7 @@ final = result[result['val'] > threshold]
 # Calculate year-over-year growth rate
 growth = (current - previous) / previous * 100
 ```
+---
 
 **2. Docstrings**
 ```python
@@ -120,11 +112,12 @@ def calculate_roi(investment, return_value):
 
 # Types of Documentation (cont.)
 
-**3. README files**
+**3. README files** - we already know!
 - Project overview
 - Installation instructions
 - Usage examples
 - Dependencies
+---
 
 **4. Analysis narratives** (Jupyter notebooks)
 - Problem statement
@@ -147,7 +140,7 @@ def calculate_roi(investment, return_value):
 - ✅ Use clear, simple language
 - ✅ Provide examples
 - ✅ Document assumptions and limitations
-
+---
 **Don't**:
 - ❌ State the obvious: `x = x + 1  # increment x`
 - ❌ Write novels (be concise)
@@ -237,6 +230,7 @@ This analysis examines Q4 sales performance across regions...
 ```markdown
 ![Alt text](path/to/image.png)
 ```
+---
 
 **Code**:
 ```markdown
@@ -288,6 +282,7 @@ import pandas as pd
 import numpy as np
 # ... 200 lines of code ...
 ```
+---
 
 **Good**: Logical, sequential cells
 ```python
@@ -324,6 +319,7 @@ df['date'] = pd.to_datetime(df['date'])
 print(f"Removed {null_count} null values")
 print(f"Final dataset: {len(df)} rows")
 ```
+---
 
 **3. Add markdown between code**
 ```markdown
@@ -365,41 +361,42 @@ Black Friday (Nov 24).
 
 **Explain** what the reader should notice!
 
+```
+
 ---
 
-# Creating a Complete Analysis Template
+# Your Project Report: Required Structure
 
-```markdown
-# [Project Title]
+**8 sections (aligned with professor's requirements):**
 
-**Author**: Your Name
-**Date**: YYYY-MM-DD
-**Last Updated**: YYYY-MM-DD
+1. **Abstract** (~200 words)
+2. **Introduction** - research question, motivation
+3. **Research Question & Literature** - context, related work
+4. **Methodology** - data, algorithms, evaluation approach
+5. **Implementation** - key decisions, challenges (can be brief)
+6. **Codebase & Reproducibility** - how to run it (2-3 sentences OK)
+7. **Results** - tables, figures, interpretation
+8. **Conclusion** - summary, limitations, future work
 
-## 1. Executive Summary
-[Brief overview of findings]
+**Appendix**: AI tools used (required if applicable)
 
-## 2. Business Question
-[What are we trying to answer?]
+---
 
-## 3. Data Description
-[Where data came from, time period, etc.]
+# Report Tips
 
-## 4. Methodology
-[What analysis techniques did you use?]
+**Length**: ~10 pages (min 8, excluding references)
 
-## 5. Analysis
-[The actual code and results]
+**Where to spend your pages**:
+- Methodology + Results = bulk of your report
+- Implementation/Codebase can be short if straightforward
 
-## 6. Findings
-[Key takeaways]
+**Common mistakes**:
+- ❌ Too much code in the report (use appendix)
+- ❌ Figures without interpretation
+- ❌ Missing research question
+- ❌ No discussion of limitations
 
-## 7. Recommendations
-[What should be done based on findings?]
-
-## 8. Limitations & Next Steps
-[What couldn't be answered? What's next?]
-```
+**Remember**: Explain the "why", not just the "what"
 
 ---
 
@@ -466,50 +463,17 @@ jupyter nbconvert --to html notebook.ipynb \
 
 ---
 
-# Ensuring Reproducibility
+# Reproducibility Reminder
 
-**Problem**: "It works on my machine"
+**You already know this** — just a quick checklist:
 
-**Solution**: Document environment
+✅ Dependencies in `requirements.txt`, `environment.yml`, or `pyproject.toml`
+✅ Random seeds set (`random_state=42`)
+✅ Relative file paths (not `/Users/yourname/...`)
+✅ Clear README with setup instructions
+✅ Notebook runs top-to-bottom without errors
 
-**1. List dependencies**:
-```bash
-# Create requirements file
-pip freeze > requirements.txt
-
-# Or with uv
-uv pip freeze > requirements.txt
-```
-
-**2. Create README**:
-```markdown
-## Installation
-
-```bash
-uv pip install -r requirements.txt
-```
-
-## Data
-Download from: [URL]
-Place in: `data/`
-
-## Running
-```bash
-jupyter notebook analysis.ipynb
-```
-```
-
----
-
-# Reproducibility Checklist
-
-- [ ] All dependencies listed in `requirements.txt`
-- [ ] Data sources documented (with download links if possible)
-- [ ] Random seeds set (`np.random.seed(42)`)
-- [ ] File paths relative, not absolute
-- [ ] Clear instructions in README
-- [ ] Output cleared before committing to git
-- [ ] Notebook runs top-to-bottom without errors
+**Any reproducible environment works**: conda, venv, uv, poetry...
 
 ---
 
@@ -638,11 +602,165 @@ Contains:
 """
 ```
 
-**Create your own** for:
-- Weekly reports
-- A/B test analyses
-- Financial reports
-- Research papers
+---
+
+# Part 4: Hyperparameter Tuning
+
+---
+
+# What Are Hyperparameters?
+
+**Parameters** — learned from data:
+- Weights in linear regression
+- Split points in decision trees
+
+**Hyperparameters** — set before training:
+- Number of trees in Random Forest
+- `k` in KNN
+- Learning rate
+- Max depth
+
+**Goal**: Find the best hyperparameters for your model
+
+---
+
+# GridSearchCV: Exhaustive Search
+
+```python
+from sklearn.model_selection import GridSearchCV
+from sklearn.ensemble import RandomForestClassifier
+# Define parameter grid
+param_grid = {
+    'n_estimators': [50, 100, 200],
+    'max_depth': [5, 10, None],
+    'min_samples_split': [2, 5]
+}
+
+# Create grid search
+grid_search = GridSearchCV(
+    RandomForestClassifier(random_state=42),
+    param_grid,
+    cv=5,              # 5-fold cross-validation
+    scoring='accuracy'
+)
+grid_search.fit(X_train, y_train)
+print(f"Best params: {grid_search.best_params_}")
+print(f"Best score: {grid_search.best_score_:.3f}")
+```
+
+---
+
+# GridSearchCV Results
+
+```python
+# Best model is already fitted
+best_model = grid_search.best_estimator_
+
+# Evaluate on test set
+test_score = best_model.score(X_test, y_test)
+print(f"Test accuracy: {test_score:.3f}")
+
+# See all results
+import pandas as pd
+results = pd.DataFrame(grid_search.cv_results_)
+results[['params', 'mean_test_score', 'rank_test_score']].head()
+```
+
+**Note**: GridSearchCV tries all combinations
+- 3 × 3 × 2 = 18 combinations
+- With 5-fold CV = 90 model fits!
+
+---
+
+# RandomizedSearchCV: Faster Alternative
+
+```python
+from sklearn.model_selection import RandomizedSearchCV
+from scipy.stats import randint, uniform
+# Define distributions
+param_distributions = {
+    'n_estimators': randint(50, 300),
+    'max_depth': randint(3, 20),
+    'min_samples_split': randint(2, 10),
+    'min_samples_leaf': randint(1, 5)
+}
+random_search = RandomizedSearchCV(
+    RandomForestClassifier(random_state=42),
+    param_distributions,
+    n_iter=20,         # Only try 20 random combinations
+    cv=5,
+    random_state=42
+)
+random_search.fit(X_train, y_train)
+```
+
+---
+
+# Hyperparameter Tuning Best Practices
+
+**1. Start simple**
+- First get a baseline with defaults
+- Then tune the most impactful parameters
+
+**2. Use cross-validation**
+- Never tune on test set!
+- CV prevents overfitting to validation data
+---
+**3. Common parameters to tune**:
+
+| Model | Key Hyperparameters |
+|-------|---------------------|
+| Random Forest | `n_estimators`, `max_depth`, `min_samples_split` |
+| KNN | `n_neighbors`, `weights` |
+| Logistic Regression | `C`, `penalty` |
+| SVM | `C`, `kernel`, `gamma` |
+
+**4. Document your search**
+- Report which parameters you tried
+- Include in your methodology section
+
+---
+
+# Deep Learning Hyperparameters (Simple)
+
+If you're using a neural network, key hyperparameters:
+
+| Parameter | What it does | Typical values |
+|-----------|--------------|----------------|
+| **Learning rate** | Step size for updates | 0.001, 0.01, 0.1 |
+| **Batch size** | Samples per update | 16, 32, 64, 128 |
+| **Epochs** | Training iterations | 10-100+ |
+| **Hidden layers** | Network depth | 1-3 for simple tasks |
+| **Neurons per layer** | Network width | 32, 64, 128 |
+---
+**Simple approach**: Start with defaults, then try 2-3 values for learning rate
+
+```python
+# Example with sklearn MLPClassifier
+from sklearn.neural_network import MLPClassifier
+mlp = MLPClassifier(hidden_layer_sizes=(64, 32),
+                    learning_rate_init=0.001,
+                    max_iter=200, random_state=42)
+```
+
+---
+
+# Beyond This Course: Real Hyperparameter Tuning
+
+**For info only** — what professionals use:
+
+| Tool | What it does |
+|------|--------------|
+| **Optuna** | Smart search (Bayesian optimization) |
+| **Ray Tune** | Distributed tuning across machines |
+| **W&B Sweeps** | Track experiments + automatic tuning |
+| **Keras Tuner** | Built-in for TensorFlow/Keras |
+
+**Why they exist**: GridSearch doesn't scale
+- 5 hyperparameters × 5 values each = 3,125 combinations
+- Bayesian methods find good values faster
+
+**For your projects**: GridSearchCV/RandomizedSearchCV is plenty!
 
 ---
 
@@ -656,36 +774,12 @@ Contains:
 **Jupyter notebooks as reports**:
 - Tell a story with your analysis
 - Use markdown extensively
-- One logical step per cell
 - Always interpret your results
 
-**Sharing & reproducibility**:
-- Export to HTML/PDF for sharing
-- Document dependencies
-- Use relative paths
-- Clear outputs before git commits
-
----
-
-# Homework Assignment
-
-**Create a Complete Data Analysis Report**
-
-Choose a dataset (or use one provided) and create a professional analysis:
-
-**Requirements**:
-1. **Complete narrative structure** (intro → analysis → conclusion)
-2. **At least 5 sections** with markdown headers
-3. **3+ visualizations** with interpretations
-4. **Code organized** in logical cells
-5. **Export to HTML** (without code cells)
-6. **Include README** with setup instructions
-
-**Deliverable**:
-- `.ipynb` file (original notebook)
-- `.html` file (exported report)
-- `requirements.txt`
-- `README.md`
+**Hyperparameter tuning**:
+- Use GridSearchCV or RandomizedSearchCV
+- Always use cross-validation
+- Document what you tried
 
 ---
 

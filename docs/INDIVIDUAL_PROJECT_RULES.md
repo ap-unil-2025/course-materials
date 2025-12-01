@@ -86,17 +86,18 @@ your-project/
 - Use `random_state` for reproducibility
 
 ### 3. **Technical Report** (Due: December 21)
-- **Length**: ~10 pages (excluding code appendix)
+- **Length**: ~10 pages (min 8 pages excluding references)
 - **Format**: PDF (use provided Markdown or LaTeX template)
-- **Structure**:
-  1. **Abstract** (200 words): Summary of project
+- **Structure** (8 required sections, aligned with professor's requirements):
+  1. **Abstract**: Summary of project (~200 words)
   2. **Introduction**: Research question and motivation
-  3. **Literature Review**: Brief context and related work
-  4. **Methodology**: Data, preprocessing, models, evaluation metrics
-  5. **Results**: Tables, figures, findings
-  6. **Discussion**: Interpretation, limitations
-  7. **Conclusion**: Summary and future work
-  8. **References**: Cited sources
+  3. **Research Question & Literature**: Context, related work, why it matters
+  4. **Methodology**: Data, algorithms, models, evaluation approach
+  5. **Implementation**: Key technical decisions, challenges solved (can be brief)
+  6. **Codebase & Reproducibility**: How to run it, dependencies (can be brief - 2-3 sentences)
+  7. **Results**: Tables, figures, findings, interpretation
+  8. **Conclusion**: Summary, limitations, future work
+  - **Appendix**: AI tools used (ChatGPT, Copilot, etc.) - required if applicable
 
 **Download templates from the course website:**
 - Markdown template → PDF with pandoc
@@ -104,12 +105,12 @@ your-project/
 
 ### 4. **Presentation Video** (Due: December 21, Required)
 - **Format**: Recorded video (MP4, YouTube link, or Loom)
-- **Duration**: 8-10 minutes
+- **Duration**: ~15 minutes
 - **Content**:
-  - Problem motivation (1-2 min)
-  - Technical approach (2-3 min)
-  - Demo of your code running (3-4 min)
-  - Results and learnings (1-2 min)
+  - Problem motivation (2-3 min)
+  - Technical approach and methodology (3-4 min)
+  - Demo of your code running (5-6 min)
+  - Results and learnings (2-3 min)
 
 **Optional**: Live presentation (TBA) instead of video, with Q&A
 
