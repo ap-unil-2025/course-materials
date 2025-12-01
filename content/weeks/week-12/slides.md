@@ -755,31 +755,10 @@ mlp = MLPClassifier(hidden_layer_sizes=(64, 32),
 | **Ray Tune** | Distributed tuning across machines |
 | **W&B Sweeps** | Track experiments + automatic tuning |
 | **Keras Tuner** | Built-in for TensorFlow/Keras |
-
 **Why they exist**: GridSearch doesn't scale
 - 5 hyperparameters × 5 values each = 3,125 combinations
 - Bayesian methods find good values faster
 
-**For your projects**: GridSearchCV/RandomizedSearchCV is plenty!
-
----
-
-# Key Takeaways
-
-**Documentation matters**:
-- Your future self will thank you
-- Enables collaboration
-- Makes work reproducible
-
-**Jupyter notebooks as reports**:
-- Tell a story with your analysis
-- Use markdown extensively
-- Always interpret your results
-
-**Hyperparameter tuning**:
-- Use GridSearchCV or RandomizedSearchCV
-- Always use cross-validation
-- Document what you tried
 
 ---
 
