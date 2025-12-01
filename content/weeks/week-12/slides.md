@@ -535,7 +535,6 @@ You have sales data for the past year. Create a professional analysis notebook:
 ```python
 import pandas as pd
 import matplotlib.pyplot as plt
-
 # Load data
 df = pd.read_csv('data/sales_2025.csv')
 df.head()
@@ -543,11 +542,8 @@ df.head()
 
 ```markdown
 The dataset contains {len(df)} transactions from...
-
 ## Sales by Category
 ```
-
-[Continue building out the analysis...]
 
 ---
 
@@ -562,11 +558,6 @@ The dataset contains {len(df)} transactions from...
 > primarily driven by reduced enterprise sales, which dropped
 > 23% compared to Q3."
 
-**What makes it good**:
-- Specific numbers
-- Identifies patterns
-- Explains possible causes
-- Actionable insights
 
 ---
 
