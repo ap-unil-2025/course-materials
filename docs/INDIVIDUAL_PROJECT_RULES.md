@@ -105,7 +105,7 @@ your-project/
 
 ### 4. **Presentation Video** (Due: December 21, Required)
 - **Format**: Recorded video (MP4, YouTube link, or Loom)
-- **Duration**: ~15 minutes
+- **Duration**: 10-15 minutes (not longer than 15!)
 - **Content**:
   - Problem motivation (2-3 min)
   - Technical approach and methodology (3-4 min)
