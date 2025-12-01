@@ -1,40 +1,43 @@
 ---
-title: "Week 12: High-Performance Computing"
+title: "Week 12: HPC & Documentation"
 date: 2025-12-01
-description: "HPC techniques for accelerating Python code"
-lecture_slides: "#"
+description: "High-performance computing and professional reports"
+lecture_slides: "/course-materials/slides/lecture/lectures/lecture_12/slides/Advanced_Programming_2025_lecture_12.pdf"
 ta_slides: "/course-materials/slides/practice/week12_slides.html"
 lesson: "/course-materials/lessons/week12-lesson.html"
 assignment:
-  title: "HPC Assignment"
-  link: "#"
-  description: "Optimize code performance using HPC techniques"
+  title: "Final Project"
+  link: "/course-materials/projects.html"
+  description: "Focus on your final project"
 examples:
-  - title: "Course Materials Repository"
-    link: "https://github.com/ap-unil-2025/course-materials"
+  - title: "Example Project Reports"
+    link: "/course-materials/projects.html#example-reports"
 references:
-  - title: "Course Resources"
-    link: "https://github.com/ap-unil-2025/course-materials"
-    description: "Main course repository with all materials"
+  - title: "Project Rules"
+    link: "/course-materials/INDIVIDUAL_PROJECT_RULES"
+    description: "Full project guidelines and requirements"
 ---
 
-## Week 12: High-Performance Computing
+## Week 12: High-Performance Computing & Documentation
 
-### Topics TBA
+### Lecture: High-Performance Computing
 - Parallel processing
 - Code optimization techniques
-- GPU acceleration
-- Distributed computing
+- Performance profiling
 
-Details to be announced. Check back for updates.
+### TA Session: Reports & Documentation
+- Professional report structure (8 required sections)
+- Jupyter notebooks as analysis narratives
+- Hyperparameter tuning (GridSearchCV, RandomizedSearchCV)
+- Exporting and reproducibility
 
-### Getting Started
-1. Review the lesson guide for detailed explanations
-2. Go through the practice slides for hands-on examples  
-3. Complete the weekly assignment
-4. Use the course repository for additional examples and resources
+### Focus This Week
+With the final deadline approaching (Dec 21), focus on:
+1. Finishing your project implementation
+2. Writing your ~10 page report
+3. Recording your 10-15 minute video presentation
 
-### Need Help?
-- Check the course discussion forum
-- Attend office hours
-- Review previous week's materials if needed
+### Resources
+- [Project Guidelines]({{ '/INDIVIDUAL_PROJECT_RULES' | relative_url }})
+- [Example Reports]({{ '/projects.html#example-reports' | relative_url }})
+- [Exercises & Solutions]({{ '/exercises.html' | relative_url }})
