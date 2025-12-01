@@ -236,7 +236,10 @@ See the `examples/iris-classification/` folder in the course repository for a co
 
 ## 📬 How to Submit
 
-Email your submission to **anna.smirnova@unil.ch** by **December 21, 23:59**.
+Email your submission to **all TAs** by **December 21, 23:59**:
+- anna.smirnova@unil.ch
+- francesco.brunamonti@unil.ch
+- zhongshan.chen@unil.ch
 
 **Subject line**: `[AP2025] Final Project - Your Name`
 
