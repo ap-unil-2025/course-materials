@@ -535,7 +535,6 @@ You have sales data for the past year. Create a professional analysis notebook:
 ```python
 import pandas as pd
 import matplotlib.pyplot as plt
-
 # Load data
 df = pd.read_csv('data/sales_2025.csv')
 df.head()
@@ -543,11 +542,8 @@ df.head()
 
 ```markdown
 The dataset contains {len(df)} transactions from...
-
 ## Sales by Category
 ```
-
-[Continue building out the analysis...]
 
 ---
 
@@ -562,11 +558,6 @@ The dataset contains {len(df)} transactions from...
 > primarily driven by reduced enterprise sales, which dropped
 > 23% compared to Q3."
 
-**What makes it good**:
-- Specific numbers
-- Identifies patterns
-- Explains possible causes
-- Actionable insights
 
 ---
 
@@ -755,31 +746,10 @@ mlp = MLPClassifier(hidden_layer_sizes=(64, 32),
 | **Ray Tune** | Distributed tuning across machines |
 | **W&B Sweeps** | Track experiments + automatic tuning |
 | **Keras Tuner** | Built-in for TensorFlow/Keras |
-
 **Why they exist**: GridSearch doesn't scale
 - 5 hyperparameters × 5 values each = 3,125 combinations
 - Bayesian methods find good values faster
 
-**For your projects**: GridSearchCV/RandomizedSearchCV is plenty!
-
----
-
-# Key Takeaways
-
-**Documentation matters**:
-- Your future self will thank you
-- Enables collaboration
-- Makes work reproducible
-
-**Jupyter notebooks as reports**:
-- Tell a story with your analysis
-- Use markdown extensively
-- Always interpret your results
-
-**Hyperparameter tuning**:
-- Use GridSearchCV or RandomizedSearchCV
-- Always use cross-validation
-- Document what you tried
 
 ---
 

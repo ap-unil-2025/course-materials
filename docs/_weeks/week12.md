@@ -32,7 +32,7 @@ references:
 - Exporting and reproducibility
 
 ### Focus This Week
-With the final deadline approaching (Dec 21), focus on:
+With the final deadline approaching (Jan 11), focus on:
 1. Finishing your project implementation
 2. Writing your ~10 page report
 3. Recording your 10-15 minute video presentation

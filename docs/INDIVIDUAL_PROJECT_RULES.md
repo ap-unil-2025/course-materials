@@ -58,7 +58,7 @@ Want to do something different? As long as you can demonstrate:
 - **Format**: `PROPOSAL.md` in your repository
 - **Content**: What you'll build, what data you'll use, what question you'll answer
 
-### 2. **GitHub Repository** (Due: December 21)
+### 2. **GitHub Repository** (Due: January 11)
 
 **Required Structure:**
 ```
@@ -85,7 +85,7 @@ your-project/
 - Data included or clear download instructions
 - Use `random_state` for reproducibility
 
-### 3. **Technical Report** (Due: December 21)
+### 3. **Technical Report** (Due: January 11)
 - **Length**: ~10 pages (min 8 pages excluding references)
 - **Format**: PDF (use provided Markdown or LaTeX template)
 - **Structure** (8 required sections, aligned with professor's requirements):
@@ -103,7 +103,7 @@ your-project/
 - Markdown template → PDF with pandoc
 - LaTeX template → PDF with pdflatex
 
-### 4. **Presentation Video** (Due: December 21, Required)
+### 4. **Presentation Video** (Due: January 11, Required)
 - **Format**: Recorded video (MP4, YouTube link, or Loom)
 - **Duration**: 10-15 minutes (not longer than 15!)
 - **Content**:
@@ -156,7 +156,7 @@ your-project/
 | **Nov 10** | Proposal Feedback |
 | **Nov 24** | Feature Freeze - stop adding, start polishing |
 | **Dec 8** | Documentation Week - finalize README and report |
-| **Dec 21** | **Final Submission** |
+| **Jan 11** | **Final Submission** |
 | **TBA** | Presentations (optional) |
 
 ### Development Strategy
@@ -236,7 +236,7 @@ See the `examples/iris-classification/` folder in the course repository for a co
 
 ## 📬 How to Submit
 
-Email your submission to **all TAs** by **December 21, 23:59**:
+Email your submission to **all TAs** by **January 11, 23:59**:
 - anna.smirnova@unil.ch
 - francesco.brunamonti@unil.ch
 - zhongshan.chen@unil.ch
@@ -284,4 +284,4 @@ Sign up link: [TBA]
 
 ---
 
-*Last updated: November 2025 | Deadline: December 21, 2025*
+*Last updated: December 2025 | Deadline: January 11, 2026*
