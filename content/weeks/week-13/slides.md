@@ -98,42 +98,44 @@ Core 8: [                    ] 0%
 
 ---
 
-# You Already Use Parallelism Every Day
+# Parallelism in Finance
 
-**Instagram/TikTok feed**: Loads 20 images at once, not one by one
-→ Threading (I/O-bound: waiting for network)
+**Bloomberg Terminal**: Streams prices for 1000s of securities simultaneously
+→ Threading (I/O-bound: waiting for market data feeds)
 
-**Spotify**: Downloads next songs while playing current one
-→ Threading (I/O-bound: network + disk)
+**Risk Management (VaR)**: Simulates 100,000 portfolio scenarios
+→ Multiprocessing (CPU-bound: Monte Carlo simulations)
 
-**Video games**: Physics, AI, rendering, audio all happen simultaneously
-→ Multiprocessing (CPU-bound: calculations)
+**High-Frequency Trading**: Processes market data in microseconds
+→ Parallelism is essential (latency = lost money)
 
-**Exporting video in Premiere/DaVinci**: Uses all your cores
-→ Multiprocessing (CPU-bound: encoding)
+**Portfolio Optimization**: Tests millions of weight combinations
+→ Multiprocessing (CPU-bound: optimization)
 
-**ChatGPT/Midjourney**: Your request runs on thousands of GPUs in parallel
-→ Massive parallelism (why AI is expensive)
+**Quant Research**: Backtests strategies across 20 years of data
+→ Both (download data + crunch numbers)
 
 ---
 
 # Why Your Code Feels Slow
 
-**Scenario**: Download 1000 Pokémon images for a project
+**Scenario**: Download 5 years of daily prices for 500 stocks (S&P 500)
 
 ```python
-# Your intuition (SLOW - 1000 seconds!)
-for pokemon_id in range(1, 1001):
-    download_image(f"pokemon_{pokemon_id}.png")  # 1 sec each
+# Your intuition (SLOW - 500+ seconds!)
+for ticker in sp500_tickers:
+    prices[ticker] = yfinance.download(ticker)  # ~1 sec each
 ```
 
 ```python
-# What professionals do (FAST - ~10 seconds!)
-with ThreadPoolExecutor(max_workers=100) as pool:
-    pool.map(download_image, range(1, 1001))
+# What quants do (FAST - ~10 seconds!)
+with ThreadPoolExecutor(max_workers=50) as pool:
+    results = pool.map(yfinance.download, sp500_tickers)
 ```
 
-**100x faster** — same downloads, just parallel.
+**50x faster** — same data, just parallel.
+
+This is how real trading firms download market data.
 
 ---
 
@@ -470,64 +472,62 @@ print(f"Parallel: {time.time() - start:.1f}s")  # ~2s
 
 ---
 
-# Real Example: Download All Pokémon Images
+# Real Example: Download Stock Data
 
 ```python
 from concurrent.futures import ThreadPoolExecutor
-import requests
+import yfinance as yf
 
-def download_pokemon(pokemon_id):
-    url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_id}"
-    response = requests.get(url)
-    data = response.json()
-    # Save the sprite image...
-    return data['name']
+def get_stock_data(ticker):
+    """Download 5 years of daily prices"""
+    stock = yf.Ticker(ticker)
+    return stock.history(period="5y")
 
-# Download first 150 Pokémon (Generation 1)
-pokemon_ids = range(1, 151)
+# S&P 500 tickers (or any list of stocks)
+tickers = ["AAPL", "GOOGL", "MSFT", "AMZN", ...]  # 500 stocks
 
-# SLOW: Sequential - about 2-3 minutes
-# for pid in pokemon_ids:
-#     download_pokemon(pid)
+# SLOW: Sequential - about 8 minutes
+# data = {t: get_stock_data(t) for t in tickers}
 
-# FAST: Parallel - about 5 seconds!
-with ThreadPoolExecutor(max_workers=20) as executor:
-    names = list(executor.map(download_pokemon, pokemon_ids))
+# FAST: Parallel - about 20 seconds!
+with ThreadPoolExecutor(max_workers=50) as executor:
+    results = list(executor.map(get_stock_data, tickers))
 
-print(f"Downloaded {len(names)} Pokémon!")
+data = dict(zip(tickers, results))
+print(f"Downloaded data for {len(data)} stocks!")
 ```
 
 ---
 
-# Real Example: Resize 1000 Profile Pictures
+# Real Example: Monte Carlo VaR
 
 ```python
 from concurrent.futures import ProcessPoolExecutor
-from PIL import Image
-import os
+import numpy as np
 
-def resize_image(filename):
-    """Resize image to 256x256 thumbnail"""
-    img = Image.open(f"uploads/{filename}")
-    img.thumbnail((256, 256))
-    img.save(f"thumbnails/{filename}")
-    return filename
+def simulate_portfolio_return(args):
+    """Simulate one random portfolio outcome"""
+    weights, returns_mean, returns_cov = args
+    # Generate random returns from historical distribution
+    simulated = np.random.multivariate_normal(returns_mean, returns_cov)
+    return np.dot(weights, simulated)
 
-# Get all uploaded images
-images = os.listdir("uploads/")  # 1000 images
+# Run 100,000 simulations for Value at Risk
+n_simulations = 100_000
+args = [(weights, mu, cov) for _ in range(n_simulations)]
 
-# SLOW: Sequential - uses 1 core
-# for img in images:
-#     resize_image(img)
+# SLOW: Sequential - about 30 seconds
+# results = [simulate_portfolio_return(a) for a in args]
 
-# FAST: Parallel - uses all cores!
+# FAST: Parallel - about 8 seconds!
 with ProcessPoolExecutor() as executor:
-    results = list(executor.map(resize_image, images))
+    results = list(executor.map(simulate_portfolio_return, args))
 
-print(f"Resized {len(results)} images!")
+var_95 = np.percentile(results, 5)
+print(f"95% VaR: {var_95:.2%} potential loss")
 ```
 
-Why ProcessPoolExecutor? Image resizing is CPU-bound!
+Why ProcessPoolExecutor? Monte Carlo is CPU-bound!
 
 ---
 
@@ -557,39 +557,35 @@ Numba compiles Python to **native machine code** at runtime.
 
 ---
 
-# Numba Example: Count Primes
+# Numba Example: Option Pricing
 
-**Task**: How many prime numbers are there under 1 million?
+**Task**: Price 100,000 European call options using Monte Carlo
 
 ```python
 from numba import njit
-
-def is_prime(n):
-    if n < 2: return False
-    for i in range(2, int(n**0.5) + 1):
-        if n % i == 0: return False
-    return True
-
-def count_primes_slow(limit):
-    return sum(1 for n in range(limit) if is_prime(n))
+import numpy as np
 
 @njit
-def count_primes_fast(limit):
-    count = 0
-    for n in range(2, limit):
-        is_p = True
-        for i in range(2, int(n**0.5) + 1):
-            if n % i == 0:
-                is_p = False
-                break
-        if is_p: count += 1
-    return count
+def black_scholes_mc(S, K, T, r, sigma, n_sims):
+    """Monte Carlo option pricing - blazingly fast with Numba"""
+    total = 0.0
+    for _ in range(n_sims):
+        # Simulate stock price at expiry
+        Z = np.random.randn()
+        ST = S * np.exp((r - 0.5*sigma**2)*T + sigma*np.sqrt(T)*Z)
+        # Payoff of call option
+        total += max(ST - K, 0)
+
+    # Discounted average payoff
+    return np.exp(-r * T) * total / n_sims
+
+# Price an AAPL call option with 1 million simulations
+price = black_scholes_mc(S=150, K=155, T=0.25, r=0.05, sigma=0.3,
+                         n_sims=1_000_000)
+print(f"Option price: ${price:.2f}")
 ```
 
-```
-count_primes_slow(1_000_000)  # ~25 seconds
-count_primes_fast(1_000_000)  # ~0.5 seconds (50x faster!)
-```
+Without `@njit`: ~15 seconds. With `@njit`: ~0.1 seconds. **150x faster!**
 
 ---
 
@@ -619,29 +615,33 @@ add(1, 2)      # Uses cached (int, int) version
 
 ---
 
-# Numba Example: Casino Simulation
+# Numba Example: Portfolio VaR Simulation
 
-**Question**: If I play roulette 10 million times, how much do I lose?
+**Question**: What's my 95% Value at Risk on a $1M portfolio?
 
 ```python
 @njit
-def simulate_roulette(n_games, bet=10):
-    """Bet on red every time. Red wins 18/38 times."""
-    balance = 0
-    for _ in range(n_games):
-        spin = np.random.randint(0, 38)  # 0-37
-        if spin <= 17:  # Red wins (18 numbers)
-            balance += bet
-        else:  # Black or green
-            balance -= bet
-    return balance
+def simulate_portfolio_var(n_sims, weights, mu, sigma):
+    """Simulate portfolio returns and find worst 5% outcome"""
+    returns = np.empty(n_sims)
+    n_assets = len(weights)
 
-# Simulate 10 million games instantly
-result = simulate_roulette(10_000_000)
-print(f"After 10M games: ${result:,}")  # Spoiler: you lose ~$526,000
+    for i in range(n_sims):
+        # Simulate daily returns for each asset
+        asset_returns = np.random.randn(n_assets) * sigma + mu
+        # Portfolio return = weighted sum
+        returns[i] = np.dot(weights, asset_returns)
+
+    # Sort and find 5th percentile (worst 5%)
+    returns.sort()
+    return returns[int(n_sims * 0.05)]
+
+# 10 million simulations for accurate VaR
+var_95 = simulate_portfolio_var(10_000_000, weights, mu, sigma)
+print(f"95% VaR: ${1_000_000 * var_95:,.0f} potential daily loss")
 ```
 
-Without `@njit`: ~30 seconds. With `@njit`: ~0.2 seconds.
+Without `@njit`: ~60 seconds. With `@njit`: ~0.5 seconds.
 
 ---
 
@@ -649,40 +649,41 @@ Without `@njit`: ~30 seconds. With `@njit`: ~0.2 seconds.
 
 ```python
 @njit
-def bad_example(data):
-    return pandas.DataFrame(data)  # Pandas not supported!
+def bad_example(df):
+    return df.groupby('sector').mean()  # Pandas not supported!
 
 @njit
-def also_bad(items):
-    return [x for x in items if x > 0]  # List comprehensions limited
+def also_bad(prices):
+    return [p for p in prices if p > 100]  # List comprehensions limited
 ```
 
-**Numba works with:** NumPy, basic Python, loops, math
+**Numba works with:** NumPy arrays, basic Python, loops, math
 **Numba doesn't work with:** Pandas, most libraries, complex objects
 
 **Rule**: Use Numba for the math-heavy inner loop, not the whole program.
 
 ---
 
-# Numba + Parallelism: Automatic Multi-Core
+# Numba + Parallelism: Multi-Core VaR
 
 ```python
 from numba import njit, prange
 
 @njit(parallel=True)
-def simulate_roulette_parallel(n_games):
-    """Same simulation, but across all CPU cores"""
-    balance = 0
-    for _ in prange(n_games):  # prange = parallel range!
-        spin = np.random.randint(0, 38)
-        if spin <= 17:
-            balance += 1
-        else:
-            balance -= 1
-    return balance
+def var_parallel(n_sims, weights, mu, sigma):
+    """Same VaR simulation, but across all CPU cores"""
+    returns = np.empty(n_sims)
+    n_assets = len(weights)
+
+    for i in prange(n_sims):  # prange = parallel range!
+        asset_returns = np.random.randn(n_assets) * sigma + mu
+        returns[i] = np.dot(weights, asset_returns)
+
+    returns.sort()
+    return returns[int(n_sims * 0.05)]
 ```
 
-`prange` automatically splits work across cores — no extra code!
+`prange` automatically splits simulations across cores!
 
 This combines:
 - JIT compilation speed

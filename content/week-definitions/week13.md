@@ -10,6 +10,8 @@ assignment:
   link: "/course-materials/projects.html"
   description: "Continue working on your final project"
 examples:
+  - title: "Finance Demo (Monte Carlo VaR)"
+    link: "/course-materials/demos/week13/finance_demo.py"
   - title: "CPU Demo (watch cores in btop)"
     link: "/course-materials/demos/week13/cpu_demo.py"
   - title: "Numba Demo (JIT compilation)"
