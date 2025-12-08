@@ -98,6 +98,45 @@ Core 8: [                    ] 0%
 
 ---
 
+# You Already Use Parallelism Every Day
+
+**Instagram/TikTok feed**: Loads 20 images at once, not one by one
+→ Threading (I/O-bound: waiting for network)
+
+**Spotify**: Downloads next songs while playing current one
+→ Threading (I/O-bound: network + disk)
+
+**Video games**: Physics, AI, rendering, audio all happen simultaneously
+→ Multiprocessing (CPU-bound: calculations)
+
+**Exporting video in Premiere/DaVinci**: Uses all your cores
+→ Multiprocessing (CPU-bound: encoding)
+
+**ChatGPT/Midjourney**: Your request runs on thousands of GPUs in parallel
+→ Massive parallelism (why AI is expensive)
+
+---
+
+# Why Your Code Feels Slow
+
+**Scenario**: Download 1000 Pokémon images for a project
+
+```python
+# Your intuition (SLOW - 1000 seconds!)
+for pokemon_id in range(1, 1001):
+    download_image(f"pokemon_{pokemon_id}.png")  # 1 sec each
+```
+
+```python
+# What professionals do (FAST - ~10 seconds!)
+with ThreadPoolExecutor(max_workers=100) as pool:
+    pool.map(download_image, range(1, 1001))
+```
+
+**100x faster** — same downloads, just parallel.
+
+---
+
 # The Problem
 
 ```python
@@ -119,22 +158,23 @@ wait_for_all()
 
 ---
 
-# Two Types of Tasks
+# Two Types of Slow Code
 
-**I/O-bound** — waiting for external resources:
-- Network requests (APIs, web scraping)
-- File operations (reading/writing)
+**I/O-bound** — waiting for stuff:
+- Downloading files, images, API responses
+- Reading/writing to disk
 - Database queries
-- User input
+- *Your code is idle, waiting for the network/disk*
 
-**CPU-bound** — doing calculations:
-- Number crunching
-- Image processing
-- Machine learning training
-- Data transformations
+**CPU-bound** — actually computing:
+- Resizing 10,000 images
+- Training a neural network
+- Applying filters to video frames
+- *Your CPU is maxed out at 100%*
 
-**Threading** works great for I/O-bound tasks
-**Multiprocessing** needed for CPU-bound tasks
+**How to tell?** Open Activity Monitor / Task Manager:
+- CPU at 100%? → CPU-bound → use **multiprocessing**
+- CPU low but code slow? → I/O-bound → use **threading**
 
 ---
 
@@ -430,53 +470,64 @@ print(f"Parallel: {time.time() - start:.1f}s")  # ~2s
 
 ---
 
-# Practical Example: Web Scraping
+# Real Example: Download All Pokémon Images
 
 ```python
 from concurrent.futures import ThreadPoolExecutor
 import requests
 
-def fetch_page(url):
-    response = requests.get(url, timeout=10)
-    return len(response.content)
+def download_pokemon(pokemon_id):
+    url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_id}"
+    response = requests.get(url)
+    data = response.json()
+    # Save the sprite image...
+    return data['name']
 
-urls = [
-    "https://python.org",
-    "https://github.com",
-    "https://stackoverflow.com",
-]
+# Download first 150 Pokémon (Generation 1)
+pokemon_ids = range(1, 151)
 
-# Fetch all pages concurrently
-with ThreadPoolExecutor(max_workers=5) as executor:
-    sizes = list(executor.map(fetch_page, urls))
+# SLOW: Sequential - about 2-3 minutes
+# for pid in pokemon_ids:
+#     download_pokemon(pid)
 
-for url, size in zip(urls, sizes):
-    print(f"{url}: {size:,} bytes")
+# FAST: Parallel - about 5 seconds!
+with ThreadPoolExecutor(max_workers=20) as executor:
+    names = list(executor.map(download_pokemon, pokemon_ids))
+
+print(f"Downloaded {len(names)} Pokémon!")
 ```
 
 ---
 
-# Practical Example: Batch Processing
+# Real Example: Resize 1000 Profile Pictures
 
 ```python
 from concurrent.futures import ProcessPoolExecutor
-import pandas as pd
+from PIL import Image
+import os
 
-def process_chunk(df_chunk):
-    # Heavy computation on each chunk
-    df_chunk['new_col'] = df_chunk['value'].apply(expensive_calc)
-    return df_chunk
+def resize_image(filename):
+    """Resize image to 256x256 thumbnail"""
+    img = Image.open(f"uploads/{filename}")
+    img.thumbnail((256, 256))
+    img.save(f"thumbnails/{filename}")
+    return filename
 
-# Split large DataFrame into chunks
-chunks = np.array_split(df, 4)
+# Get all uploaded images
+images = os.listdir("uploads/")  # 1000 images
 
-# Process chunks in parallel
-with ProcessPoolExecutor(max_workers=4) as executor:
-    processed = list(executor.map(process_chunk, chunks))
+# SLOW: Sequential - uses 1 core
+# for img in images:
+#     resize_image(img)
 
-# Combine results
-result = pd.concat(processed)
+# FAST: Parallel - uses all cores!
+with ProcessPoolExecutor() as executor:
+    results = list(executor.map(resize_image, images))
+
+print(f"Resized {len(results)} images!")
 ```
+
+Why ProcessPoolExecutor? Image resizing is CPU-bound!
 
 ---
 
@@ -506,33 +557,39 @@ Numba compiles Python to **native machine code** at runtime.
 
 ---
 
-# Numba Example: 50x Speedup
+# Numba Example: Count Primes
+
+**Task**: How many prime numbers are there under 1 million?
 
 ```python
-import numpy as np
 from numba import njit
 
-def slow_sum_squares(n):
-    total = 0
-    for i in range(n):
-        total += i * i
-    return total
+def is_prime(n):
+    if n < 2: return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0: return False
+    return True
+
+def count_primes_slow(limit):
+    return sum(1 for n in range(limit) if is_prime(n))
 
 @njit
-def fast_sum_squares(n):
-    total = 0
-    for i in range(n):
-        total += i * i
-    return total
+def count_primes_fast(limit):
+    count = 0
+    for n in range(2, limit):
+        is_p = True
+        for i in range(2, int(n**0.5) + 1):
+            if n % i == 0:
+                is_p = False
+                break
+        if is_p: count += 1
+    return count
 ```
 
-```python
-%timeit slow_sum_squares(10_000_000)  # ~800ms
-%timeit fast_sum_squares(10_000_000)  # ~15ms (first run compiles)
-%timeit fast_sum_squares(10_000_000)  # ~15ms (cached)
 ```
-
-**Same code, 50x faster** — just add `@njit`
+count_primes_slow(1_000_000)  # ~25 seconds
+count_primes_fast(1_000_000)  # ~0.5 seconds (50x faster!)
+```
 
 ---
 
@@ -562,49 +619,70 @@ add(1, 2)      # Uses cached (int, int) version
 
 ---
 
-# Numba: What Works and What Doesn't
+# Numba Example: Casino Simulation
 
-**Works great:**
+**Question**: If I play roulette 10 million times, how much do I lose?
+
 ```python
 @njit
-def monte_carlo_pi(n):
-    inside = 0
-    for _ in range(n):
-        x, y = np.random.random(), np.random.random()
-        if x*x + y*y < 1:
-            inside += 1
-    return 4 * inside / n
+def simulate_roulette(n_games, bet=10):
+    """Bet on red every time. Red wins 18/38 times."""
+    balance = 0
+    for _ in range(n_games):
+        spin = np.random.randint(0, 38)  # 0-37
+        if spin <= 17:  # Red wins (18 numbers)
+            balance += bet
+        else:  # Black or green
+            balance -= bet
+    return balance
+
+# Simulate 10 million games instantly
+result = simulate_roulette(10_000_000)
+print(f"After 10M games: ${result:,}")  # Spoiler: you lose ~$526,000
 ```
 
-**Doesn't work** (falls back to slow Python):
+Without `@njit`: ~30 seconds. With `@njit`: ~0.2 seconds.
+
+---
+
+# Numba: What Doesn't Work
+
 ```python
 @njit
 def bad_example(data):
-    return pandas.DataFrame(data)  # Pandas not supported
+    return pandas.DataFrame(data)  # Pandas not supported!
 
 @njit
 def also_bad(items):
     return [x for x in items if x > 0]  # List comprehensions limited
 ```
 
-Stick to NumPy and simple loops for best results.
+**Numba works with:** NumPy, basic Python, loops, math
+**Numba doesn't work with:** Pandas, most libraries, complex objects
+
+**Rule**: Use Numba for the math-heavy inner loop, not the whole program.
 
 ---
 
-# Numba + Parallelism: Best of Both Worlds
+# Numba + Parallelism: Automatic Multi-Core
 
 ```python
 from numba import njit, prange
 
 @njit(parallel=True)
-def parallel_sum(arr):
-    total = 0
-    for i in prange(len(arr)):  # prange = parallel range
-        total += arr[i]
-    return total
+def simulate_roulette_parallel(n_games):
+    """Same simulation, but across all CPU cores"""
+    balance = 0
+    for _ in prange(n_games):  # prange = parallel range!
+        spin = np.random.randint(0, 38)
+        if spin <= 17:
+            balance += 1
+        else:
+            balance -= 1
+    return balance
 ```
 
-**`prange`** automatically parallelizes loop iterations across cores!
+`prange` automatically splits work across cores — no extra code!
 
 This combines:
 - JIT compilation speed
