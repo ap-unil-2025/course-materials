@@ -34,9 +34,6 @@ style: |
 # Today's Goals
 
 **Part 1: Why Parallelism Matters Now**
-- The end of the "free lunch"
-- CPU-bound vs I/O-bound tasks
-- GIL and its implications
 
 **Part 2: Threading**
 - ThreadPoolExecutor for I/O-bound tasks
@@ -57,7 +54,10 @@ style: |
 
 # The End of the "Free Lunch"
 
-For decades, software got faster automatically:
+<div style="display: flex; gap: 2em;">
+<div style="flex: 1;">
+
+For decades, software got faster "for free":
 - **1970s-2005**: Clock speeds doubled every ~18 months
 - Your same code ran 2x faster on next year's CPU
 
@@ -65,19 +65,30 @@ For decades, software got faster automatically:
 - Heat and power limits hit
 - Single-core speed plateaued at ~4 GHz
 
-**The solution?** More cores, not faster cores.
+**The solution?** More cores.
+
+</div>
+<div style="flex: 1;">
 
 | Year | Typical Desktop | Cores |
 |------|-----------------|-------|
 | 2005 | Pentium 4       | 1     |
 | 2010 | Core i5         | 4     |
+| 2015 | Core i7         | 4-6   |
+| 2020 | Apple M1        | 8     |
 | 2024 | Apple M3 / Ryzen| 8-16  |
+
+</div>
+</div>
 
 ---
 
 # The New Reality
 
-**Your laptop has 8+ cores.** Most Python code uses **1**.
+**Your laptop has 8+ cores.** All code you wrote so far in Python code uses **1**.
+
+<div style="display: flex; gap: 2em;">
+<div style="flex: 1;">
 
 ```
 Core 1: [████████████████████] 100%
@@ -90,11 +101,21 @@ Core 7: [                    ] 0%
 Core 8: [                    ] 0%
 ```
 
+</div>
+<div style="flex: 1;">
+
 **Modern fast software uses parallelism:**
-- Web browsers (Chrome uses 1 process per tab)
-- Video encoding (FFmpeg parallelizes across cores)
-- Machine learning (PyTorch/TensorFlow parallelize training)
-- Databases (PostgreSQL parallelizes queries)
+
+| Software | Strategy |
+|----------|----------|
+| Chrome | 1 process per tab |
+| FFmpeg | Across cores |
+| PyTorch | Parallel training |
+| PostgreSQL | Parallel queries |
+
+</div>
+</div>
+
 
 ---
 
@@ -162,21 +183,32 @@ wait_for_all()
 
 # Two Types of Slow Code
 
+<div style="display: flex; gap: 2em;">
+<div style="flex: 1;">
+
 **I/O-bound** — waiting for stuff:
-- Downloading files, images, API responses
+- Downloading files, API responses
 - Reading/writing to disk
 - Database queries
-- *Your code is idle, waiting for the network/disk*
+- *Code is idle, waiting*
+
+→ Use **threading**
+
+</div>
+<div style="flex: 1;">
 
 **CPU-bound** — actually computing:
 - Resizing 10,000 images
 - Training a neural network
-- Applying filters to video frames
-- *Your CPU is maxed out at 100%*
+- Monte Carlo simulations
+- *CPU is maxed at 100%*
 
-**How to tell?** Open Activity Monitor / Task Manager:
-- CPU at 100%? → CPU-bound → use **multiprocessing**
-- CPU low but code slow? → I/O-bound → use **threading**
+→ Use **multiprocessing**
+
+</div>
+</div>
+
+**How to tell?** Open Activity Monitor: CPU at 100%? → CPU-bound. CPU low? → I/O-bound.
 
 ---
 
@@ -197,6 +229,34 @@ thread3: [      ===      ===]
 - Threading won't speed up CPU-bound code
 - Threading WILL speed up I/O-bound code (waiting doesn't need GIL)
 - Use multiprocessing for CPU-bound parallelism
+
+---
+
+# Breaking News: The GIL Is Going Away!
+
+**Python 3.13** (late 2024): Free-threaded mode as experimental option
+**Python 3.14** (Oct 2025): Free-threaded build officially supported (PEP 779)
+
+<div style="display: flex; gap: 2em;">
+<div style="flex: 1;">
+
+**What this means:**
+- Threads can truly run in parallel
+- CPU-bound code gets ~3x faster
+- No more multiprocessing workarounds
+
+</div>
+<div style="flex: 1;">
+
+**Caveats:**
+- Separate install (`python3.14t`)
+- Many libraries not yet compatible
+- Single-threaded code slightly slower
+
+</div>
+</div>
+
+**For now**: Still use multiprocessing for CPU-bound. But the future is exciting!
 
 ---
 
@@ -224,12 +284,6 @@ thread.start()
 thread.join()
 
 print("Done!")
-```
-
-Output:
-```
-Hello, World!
-Done!
 ```
 
 ---
@@ -478,24 +532,18 @@ print(f"Parallel: {time.time() - start:.1f}s")  # ~2s
 from concurrent.futures import ThreadPoolExecutor
 import yfinance as yf
 
-def get_stock_data(ticker):
-    """Download 5 years of daily prices"""
-    stock = yf.Ticker(ticker)
-    return stock.history(period="5y")
+tickers = ["AAPL", "GOOGL", "MSFT", ...]  # 500 stocks
 
-# S&P 500 tickers (or any list of stocks)
-tickers = ["AAPL", "GOOGL", "MSFT", "AMZN", ...]  # 500 stocks
+# SLOW: one at a time (~8 min)
+for t in tickers:
+    data[t] = yf.download(t)
 
-# SLOW: Sequential - about 8 minutes
-# data = {t: get_stock_data(t) for t in tickers}
-
-# FAST: Parallel - about 20 seconds!
-with ThreadPoolExecutor(max_workers=50) as executor:
-    results = list(executor.map(get_stock_data, tickers))
-
-data = dict(zip(tickers, results))
-print(f"Downloaded data for {len(data)} stocks!")
+# FAST: all at once (~20 sec)
+with ThreadPoolExecutor(max_workers=50) as pool:
+    data = dict(zip(tickers, pool.map(yf.download, tickers)))
 ```
+
+**25x faster** — downloading is I/O-bound (waiting for Yahoo servers)
 
 ---
 
@@ -503,31 +551,23 @@ print(f"Downloaded data for {len(data)} stocks!")
 
 ```python
 from concurrent.futures import ProcessPoolExecutor
-import numpy as np
 
-def simulate_portfolio_return(args):
-    """Simulate one random portfolio outcome"""
-    weights, returns_mean, returns_cov = args
-    # Generate random returns from historical distribution
-    simulated = np.random.multivariate_normal(returns_mean, returns_cov)
-    return np.dot(weights, simulated)
+def run_simulations(n):
+    """Simulate n portfolio returns"""
+    returns = []
+    for _ in range(n):
+        returns.append(simulate_one_day(weights, mu, cov))
+    return returns
 
-# Run 100,000 simulations for Value at Risk
-n_simulations = 100_000
-args = [(weights, mu, cov) for _ in range(n_simulations)]
+# FAST: Split 100K sims across 4 cores
+with ProcessPoolExecutor(max_workers=4) as pool:
+    chunks = pool.map(run_simulations, [25000, 25000, 25000, 25000])
+    all_returns = sum(chunks, [])  # Combine results
 
-# SLOW: Sequential - about 30 seconds
-# results = [simulate_portfolio_return(a) for a in args]
-
-# FAST: Parallel - about 8 seconds!
-with ProcessPoolExecutor() as executor:
-    results = list(executor.map(simulate_portfolio_return, args))
-
-var_95 = np.percentile(results, 5)
-print(f"95% VaR: {var_95:.2%} potential loss")
+var_95 = np.percentile(all_returns, 5)
 ```
 
-Why ProcessPoolExecutor? Monte Carlo is CPU-bound!
+**4x faster** — Monte Carlo is CPU-bound (pure calculation)
 
 ---
 
@@ -559,33 +599,27 @@ Numba compiles Python to **native machine code** at runtime.
 
 # Numba Example: Option Pricing
 
-**Task**: Price 100,000 European call options using Monte Carlo
-
 ```python
 from numba import njit
-import numpy as np
 
-@njit
-def black_scholes_mc(S, K, T, r, sigma, n_sims):
-    """Monte Carlo option pricing - blazingly fast with Numba"""
+@njit  # ← This one line makes it 100x faster
+def option_price_mc(S, K, T, r, sigma, n_sims):
     total = 0.0
     for _ in range(n_sims):
-        # Simulate stock price at expiry
         Z = np.random.randn()
         ST = S * np.exp((r - 0.5*sigma**2)*T + sigma*np.sqrt(T)*Z)
-        # Payoff of call option
         total += max(ST - K, 0)
-
-    # Discounted average payoff
     return np.exp(-r * T) * total / n_sims
 
-# Price an AAPL call option with 1 million simulations
-price = black_scholes_mc(S=150, K=155, T=0.25, r=0.05, sigma=0.3,
-                         n_sims=1_000_000)
-print(f"Option price: ${price:.2f}")
+price = option_price_mc(S=150, K=155, T=0.25, r=0.05, sigma=0.3,
+                        n_sims=1_000_000)
 ```
 
-Without `@njit`: ~15 seconds. With `@njit`: ~0.1 seconds. **150x faster!**
+| | Time |
+|---|------|
+| Pure Python | ~15 sec |
+| With `@njit` | ~0.1 sec |
+| **Speedup** | **150x** |
 
 ---
 
@@ -615,33 +649,26 @@ add(1, 2)      # Uses cached (int, int) version
 
 ---
 
-# Numba Example: Portfolio VaR Simulation
-
-**Question**: What's my 95% Value at Risk on a $1M portfolio?
+# Numba Example: Portfolio VaR
 
 ```python
 @njit
-def simulate_portfolio_var(n_sims, weights, mu, sigma):
-    """Simulate portfolio returns and find worst 5% outcome"""
+def calculate_var(n_sims, weights, mu, sigma):
     returns = np.empty(n_sims)
-    n_assets = len(weights)
-
     for i in range(n_sims):
-        # Simulate daily returns for each asset
-        asset_returns = np.random.randn(n_assets) * sigma + mu
-        # Portfolio return = weighted sum
+        asset_returns = np.random.randn(len(weights)) * sigma + mu
         returns[i] = np.dot(weights, asset_returns)
-
-    # Sort and find 5th percentile (worst 5%)
     returns.sort()
-    return returns[int(n_sims * 0.05)]
+    return returns[int(n_sims * 0.05)]  # 5th percentile
 
-# 10 million simulations for accurate VaR
-var_95 = simulate_portfolio_var(10_000_000, weights, mu, sigma)
-print(f"95% VaR: ${1_000_000 * var_95:,.0f} potential daily loss")
+var = calculate_var(10_000_000, weights, mu, sigma)  # 10M sims!
 ```
 
-Without `@njit`: ~60 seconds. With `@njit`: ~0.5 seconds.
+| | Time | Speedup |
+|---|------|---------|
+| Pure Python | ~60 sec | — |
+| `@njit` | ~0.5 sec | 120x |
+| `@njit(parallel=True)` | ~0.15 sec | 400x |
 
 ---
 
@@ -664,26 +691,22 @@ def also_bad(prices):
 
 ---
 
-# Numba + Parallelism: Multi-Core VaR
+# Numba + Parallelism: Just Change One Word
 
 ```python
 from numba import njit, prange
 
-@njit(parallel=True)
+@njit(parallel=True)  # ← Add parallel=True
 def var_parallel(n_sims, weights, mu, sigma):
-    """Same VaR simulation, but across all CPU cores"""
     returns = np.empty(n_sims)
-    n_assets = len(weights)
-
-    for i in prange(n_sims):  # prange = parallel range!
-        asset_returns = np.random.randn(n_assets) * sigma + mu
+    for i in prange(n_sims):  # ← Change range to prange
+        asset_returns = np.random.randn(len(weights)) * sigma + mu
         returns[i] = np.dot(weights, asset_returns)
-
     returns.sort()
     return returns[int(n_sims * 0.05)]
 ```
 
-`prange` automatically splits simulations across cores!
+Two changes: `parallel=True` and `prange` → runs on all CPU cores automatically!
 
 This combines:
 - JIT compilation speed
