@@ -2,7 +2,7 @@
 title: "Week 13: Parallel Computing"
 date: 2025-12-08
 description: "Multithreading, parallelization, and performance optimization"
-lecture_slides: "/course-materials/slides/lecture/lectures/lecture_13/demo/HPC_summary_python.ipynb"
+lecture_slides: "#"
 ta_slides: "/course-materials/slides/practice/week13_slides.html"
 lesson: "#"
 assignment:
