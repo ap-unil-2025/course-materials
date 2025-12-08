@@ -127,6 +127,65 @@ print(f"Time: {time.time() - start:.2f}s")
 
 
 # =============================================================================
+# EXERCISE 5: Option Pricing (finance example)
+# =============================================================================
+
+def price_option(args):
+    """Monte Carlo option pricing"""
+    S, K, T, r, sigma, n_sims = args
+    total = 0.0
+    for _ in range(n_sims):
+        Z = np.random.randn()
+        ST = S * np.exp((r - 0.5*sigma**2)*T + sigma*np.sqrt(T)*Z)
+        total += max(ST - K, 0)
+    return np.exp(-r * T) * total / n_sims
+
+# Price one option
+print("\n=== Exercise 5: Single Option ===")
+start = time.time()
+price = price_option((100, 100, 1.0, 0.05, 0.2, 1_000_000))
+print(f"Option price: ${price:.2f}")
+print(f"Time: {time.time() - start:.2f}s")
+
+# SOLUTION: Price 8 options in parallel
+print("\n=== Exercise 5: 8 Options Parallel ===")
+strikes = [80, 85, 90, 95, 100, 105, 110, 115]
+args_list = [(100, K, 1.0, 0.05, 0.2, 1_000_000) for K in strikes]
+
+start = time.time()
+with ProcessPoolExecutor(max_workers=4) as pool:
+    prices = list(pool.map(price_option, args_list))
+
+for K, p in zip(strikes, prices):
+    print(f"Strike ${K}: ${p:.2f}")
+print(f"Time: {time.time() - start:.2f}s")
+
+
+# =============================================================================
+# EXERCISE 6: Numba Parallel (prange)
+# =============================================================================
+
+from numba import prange
+
+@njit(parallel=True)
+def estimate_pi_parallel(n):
+    inside = 0
+    for _ in prange(n):  # prange instead of range!
+        x = np.random.random()
+        y = np.random.random()
+        if x*x + y*y < 1:
+            inside += 1
+    return 4 * inside / n
+
+print("\n=== Exercise 6: Numba Parallel ===")
+estimate_pi_parallel(1000)  # Warmup
+start = time.time()
+pi = estimate_pi_parallel(100_000_000)  # 100 million!
+print(f"π ≈ {pi:.6f}")
+print(f"Time: {time.time() - start:.2f}s")
+
+
+# =============================================================================
 # BONUS: Max out all cores
 # =============================================================================
 

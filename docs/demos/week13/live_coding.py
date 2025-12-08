@@ -116,6 +116,46 @@ print(f"Time: {time.time() - start:.2f}s")
 
 
 # =============================================================================
+# EXERCISE 5: Option Pricing (finance example)
+# =============================================================================
+
+def price_option(args):
+    """Monte Carlo option pricing"""
+    S, K, T, r, sigma, n_sims = args
+    total = 0.0
+    for _ in range(n_sims):
+        Z = np.random.randn()
+        ST = S * np.exp((r - 0.5*sigma**2)*T + sigma*np.sqrt(T)*Z)
+        total += max(ST - K, 0)
+    return np.exp(-r * T) * total / n_sims
+
+# Price one option
+print("\n=== Exercise 5: Single Option ===")
+start = time.time()
+price = price_option((100, 100, 1.0, 0.05, 0.2, 1_000_000))
+print(f"Option price: ${price:.2f}")
+print(f"Time: {time.time() - start:.2f}s")
+
+# CHALLENGE: Price 8 options with different strikes in parallel
+# strikes = [80, 85, 90, 95, 100, 105, 110, 115]
+# ... your code here ...
+
+
+# =============================================================================
+# EXERCISE 6: Numba Parallel (prange)
+# =============================================================================
+
+# from numba import njit, prange
+
+# CHALLENGE: Make estimate_pi use all cores with prange
+# Hint: @njit(parallel=True) and change range() to prange()
+
+# @njit(parallel=True)
+# def estimate_pi_parallel(n):
+#     ... your code here ...
+
+
+# =============================================================================
 # BONUS: Max out all cores (watch in btop)
 # =============================================================================
 

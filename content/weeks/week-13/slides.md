@@ -305,6 +305,38 @@ def estimate_pi(n):
 
 ---
 
+# Exercise 5: Option Pricing
+
+```python
+def price_option(args):
+    S, K, T, r, sigma, n_sims = args
+    # ... Monte Carlo pricing ...
+    return price
+
+strikes = [80, 85, 90, 95, 100, 105, 110, 115]
+```
+
+**Challenge:** Price all 8 options in parallel using `ProcessPoolExecutor`
+
+---
+
+# Exercise 6: Numba Parallel
+
+Remember `estimate_pi`? Let's use all cores:
+
+```python
+from numba import njit, prange
+
+@njit(parallel=True)
+def estimate_pi_parallel(n):
+    for _ in prange(n):  # not range!
+        ...
+```
+
+**Challenge:** Add `parallel=True` and `prange`. Run with 100 million samples.
+
+---
+
 # Bonus: Watch Your Cores
 
 Open `btop` or Activity Monitor in another window.
