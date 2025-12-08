@@ -33,11 +33,11 @@ layout: default
     <div class="current-content">
       <span class="current-label">NOW</span>
       <div class="current-info">
-        <h2>Week 12: High-Performance Computing</h2>
-        <p>HPC techniques for accelerating Python code</p>
+        <h2>Week 13: Project Presentations I</h2>
+        <p>Student capstone project presentations</p>
       </div>
     </div>
-    <a href="{{ '/week/week12' | relative_url }}" class="current-btn">Open Week 12 →</a>
+    <a href="{{ '/week/week13' | relative_url }}" class="current-btn">Open Week 13 →</a>
   </div>
 
   <section class="course-section">
