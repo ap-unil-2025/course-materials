@@ -215,20 +215,13 @@ import time
 from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 ```
 
-If you have Numba:
-```python
-from numba import njit
-```
-
 ---
 
-# Exercise 1: Simulate Slow Downloads
+# Exercise 1: Slow Downloads
 
-Let's pretend we're downloading stock data:
+I'll type this, you follow along:
 
 ```python
-import time
-
 def download_stock(ticker):
     """Simulate downloading — takes 1 second"""
     time.sleep(1)
@@ -237,116 +230,68 @@ def download_stock(ticker):
 tickers = ["AAPL", "GOOGL", "MSFT", "AMZN", "META", "NVDA"]
 ```
 
-Try downloading sequentially. How long does it take?
-
-```python
-start = time.time()
-for t in tickers:
-    print(download_stock(t))
-print(f"Time: {time.time() - start:.1f}s")
-```
+Now let's time the sequential version...
 
 ---
 
-# Exercise 1: Now Parallelize It
+# Exercise 1: Your Turn
 
+**Challenge:** Make it faster using `ThreadPoolExecutor`
+
+Hint:
 ```python
-from concurrent.futures import ThreadPoolExecutor
-
-start = time.time()
-with ThreadPoolExecutor(max_workers=6) as pool:
-    results = list(pool.map(download_stock, tickers))
-for r in results:
-    print(r)
-print(f"Time: {time.time() - start:.1f}s")
+with ThreadPoolExecutor(max_workers=?) as pool:
+    results = pool.map(???, ???)
 ```
 
-How much faster? Why does this work even with the GIL?
+You have 2 minutes. Then we'll code it together.
 
 ---
 
-# Exercise 2: CPU-Bound Work
-
-Now let's try something CPU-intensive:
+# Exercise 2: CPU-Bound
 
 ```python
 def slow_sum(n):
-    """Sum of squares — pure CPU work"""
     total = 0
     for i in range(n):
         total += i * i
     return total
-
-# Try it
-start = time.time()
-results = [slow_sum(5_000_000) for _ in range(4)]
-print(f"Sequential: {time.time() - start:.1f}s")
 ```
+
+Let's time it with 4 calls...
 
 ---
 
-# Exercise 2: Try Threading
+# Exercise 2: Your Turn
 
-```python
-start = time.time()
-with ThreadPoolExecutor(max_workers=4) as pool:
-    results = list(pool.map(lambda _: slow_sum(5_000_000), range(4)))
-print(f"Threaded: {time.time() - start:.1f}s")
-```
+**Challenge 1:** Try using `ThreadPoolExecutor`. Does it help?
 
-Is it faster? (Spoiler: no — GIL blocks CPU work)
+**Challenge 2:** Try using `ProcessPoolExecutor`. What happens?
 
----
-
-# Exercise 2: Use Multiprocessing
-
-```python
-from concurrent.futures import ProcessPoolExecutor
-
-def slow_sum_wrapper(n):
-    return slow_sum(n)
-
-start = time.time()
-with ProcessPoolExecutor(max_workers=4) as pool:
-    results = list(pool.map(slow_sum_wrapper, [5_000_000]*4))
-print(f"Parallel: {time.time() - start:.1f}s")
-```
-
-Now it's ~4x faster!
+You have 3 minutes.
 
 ---
 
 # Exercise 3: Numba
 
-Same slow function, but with `@njit`:
+If you have numba installed:
 
 ```python
 from numba import njit
-
-@njit
-def fast_sum(n):
-    total = 0
-    for i in range(n):
-        total += i * i
-    return total
-
-# First call compiles
-fast_sum(100)
-
-# Now time it
-start = time.time()
-result = fast_sum(50_000_000)  # 10x more iterations!
-print(f"Numba: {time.time() - start:.3f}s")
 ```
+
+**Challenge:** Add `@njit` to `slow_sum`. How much faster?
+
+Try running it twice — why is the second run faster?
 
 ---
 
 # Exercise 4: Monte Carlo Pi
 
-Classic example — estimate π by throwing darts:
+I'll show the slow version:
 
 ```python
-def pi_slow(n):
+def estimate_pi(n):
     inside = 0
     for _ in range(n):
         x = np.random.random()
@@ -354,57 +299,19 @@ def pi_slow(n):
         if x*x + y*y < 1:
             inside += 1
     return 4 * inside / n
-
-start = time.time()
-print(f"π ≈ {pi_slow(1_000_000)}")
-print(f"Time: {time.time() - start:.2f}s")
 ```
+
+**Challenge:** Speed it up with `@njit`
 
 ---
 
-# Exercise 4: Speed It Up
+# Bonus: Watch Your Cores
 
-```python
-@njit
-def pi_fast(n):
-    inside = 0
-    for _ in range(n):
-        x = np.random.random()
-        y = np.random.random()
-        if x*x + y*y < 1:
-            inside += 1
-    return 4 * inside / n
+Open `btop` or Activity Monitor in another window.
 
-pi_fast(1000)  # Compile
+**Challenge:** Write code that makes all your cores hit 100%
 
-start = time.time()
-print(f"π ≈ {pi_fast(10_000_000)}")  # 10x more!
-print(f"Time: {time.time() - start:.2f}s")
-```
-
----
-
-# Bonus: Watch btop
-
-If you have time, open `btop` or Activity Monitor.
-
-Run this and watch the cores:
-
-```python
-from concurrent.futures import ProcessPoolExecutor
-import time
-
-def burn_cpu(n):
-    total = 0
-    for i in range(50_000_000):
-        total += i * i % 1000
-    return total
-
-with ProcessPoolExecutor(max_workers=4) as pool:
-    list(pool.map(burn_cpu, range(4)))
-```
-
-All 4 cores should hit 100%!
+Hint: `ProcessPoolExecutor` + a slow function
 
 ---
 
