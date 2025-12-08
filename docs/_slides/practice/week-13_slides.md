@@ -199,94 +199,212 @@ def calculate_var(n_sims, weights, mu, sigma):
 
 ---
 
-# Part 3: Live Demos
+# Part 3: Live Coding
 
-*Let's run some code together*
-
----
-
-# Demo Setup
-
-Open two terminal windows side by side:
-
-**Terminal 1:** Run `btop` or `htop`
-```bash
-btop
-```
-
-**Terminal 2:** Run our demos
-```bash
-cd demos/week13
-python cpu_demo.py
-```
-
-Watch the CPU cores light up!
+*Open your laptops — we're coding together*
 
 ---
 
-# Demo 1: cpu_demo.py
+# Setup
 
-```bash
-python cpu_demo.py
+Open a Python file or Jupyter notebook.
+
+```python
+import numpy as np
+import time
+from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 ```
 
-What to watch:
-- **Sequential**: Only 1 core at 100%
-- **Parallel**: All cores at 100%
-
-This is multiprocessing in action.
+If you have Numba:
+```python
+from numba import njit
+```
 
 ---
 
-# Demo 2: finance_demo.py
+# Exercise 1: Simulate Slow Downloads
 
-```bash
-python finance_demo.py
+Let's pretend we're downloading stock data:
+
+```python
+import time
+
+def download_stock(ticker):
+    """Simulate downloading — takes 1 second"""
+    time.sleep(1)
+    return f"{ticker}: ${np.random.uniform(100, 500):.2f}"
+
+tickers = ["AAPL", "GOOGL", "MSFT", "AMZN", "META", "NVDA"]
 ```
 
-Monte Carlo VaR calculation:
-- $1M portfolio, 10 assets
-- 5 million simulations
-- Sequential vs parallel
+Try downloading sequentially. How long does it take?
 
-*"This is how banks calculate risk for Basel III requirements"*
+```python
+start = time.time()
+for t in tickers:
+    print(download_stock(t))
+print(f"Time: {time.time() - start:.1f}s")
+```
 
 ---
 
-# Demo 3: numba_demo.py
+# Exercise 1: Now Parallelize It
 
-```bash
-python numba_demo.py
+```python
+from concurrent.futures import ThreadPoolExecutor
+
+start = time.time()
+with ThreadPoolExecutor(max_workers=6) as pool:
+    results = list(pool.map(download_stock, tickers))
+for r in results:
+    print(r)
+print(f"Time: {time.time() - start:.1f}s")
 ```
 
-Two examples:
-1. **Option pricing** — Black-Scholes Monte Carlo
-2. **Portfolio VaR** — with `parallel=True`
-
-Watch the speedup numbers!
+How much faster? Why does this work even with the GIL?
 
 ---
 
-# Let's Try It Together
+# Exercise 2: CPU-Bound Work
 
-If you have Python + NumPy:
+Now let's try something CPU-intensive:
+
+```python
+def slow_sum(n):
+    """Sum of squares — pure CPU work"""
+    total = 0
+    for i in range(n):
+        total += i * i
+    return total
+
+# Try it
+start = time.time()
+results = [slow_sum(5_000_000) for _ in range(4)]
+print(f"Sequential: {time.time() - start:.1f}s")
+```
+
+---
+
+# Exercise 2: Try Threading
+
+```python
+start = time.time()
+with ThreadPoolExecutor(max_workers=4) as pool:
+    results = list(pool.map(lambda _: slow_sum(5_000_000), range(4)))
+print(f"Threaded: {time.time() - start:.1f}s")
+```
+
+Is it faster? (Spoiler: no — GIL blocks CPU work)
+
+---
+
+# Exercise 2: Use Multiprocessing
+
+```python
+from concurrent.futures import ProcessPoolExecutor
+
+def slow_sum_wrapper(n):
+    return slow_sum(n)
+
+start = time.time()
+with ProcessPoolExecutor(max_workers=4) as pool:
+    results = list(pool.map(slow_sum_wrapper, [5_000_000]*4))
+print(f"Parallel: {time.time() - start:.1f}s")
+```
+
+Now it's ~4x faster!
+
+---
+
+# Exercise 3: Numba
+
+Same slow function, but with `@njit`:
 
 ```python
 from numba import njit
-import numpy as np
 
 @njit
-def pi_monte_carlo(n):
+def fast_sum(n):
+    total = 0
+    for i in range(n):
+        total += i * i
+    return total
+
+# First call compiles
+fast_sum(100)
+
+# Now time it
+start = time.time()
+result = fast_sum(50_000_000)  # 10x more iterations!
+print(f"Numba: {time.time() - start:.3f}s")
+```
+
+---
+
+# Exercise 4: Monte Carlo Pi
+
+Classic example — estimate π by throwing darts:
+
+```python
+def pi_slow(n):
     inside = 0
     for _ in range(n):
-        x, y = np.random.random(), np.random.random()
+        x = np.random.random()
+        y = np.random.random()
         if x*x + y*y < 1:
             inside += 1
     return 4 * inside / n
 
-# Try it!
-print(pi_monte_carlo(10_000_000))
+start = time.time()
+print(f"π ≈ {pi_slow(1_000_000)}")
+print(f"Time: {time.time() - start:.2f}s")
 ```
+
+---
+
+# Exercise 4: Speed It Up
+
+```python
+@njit
+def pi_fast(n):
+    inside = 0
+    for _ in range(n):
+        x = np.random.random()
+        y = np.random.random()
+        if x*x + y*y < 1:
+            inside += 1
+    return 4 * inside / n
+
+pi_fast(1000)  # Compile
+
+start = time.time()
+print(f"π ≈ {pi_fast(10_000_000)}")  # 10x more!
+print(f"Time: {time.time() - start:.2f}s")
+```
+
+---
+
+# Bonus: Watch btop
+
+If you have time, open `btop` or Activity Monitor.
+
+Run this and watch the cores:
+
+```python
+from concurrent.futures import ProcessPoolExecutor
+import time
+
+def burn_cpu(n):
+    total = 0
+    for i in range(50_000_000):
+        total += i * i % 1000
+    return total
+
+with ProcessPoolExecutor(max_workers=4) as pool:
+    list(pool.map(burn_cpu, range(4)))
+```
+
+All 4 cores should hit 100%!
 
 ---
 
