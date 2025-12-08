@@ -321,13 +321,11 @@ print("All downloads complete!")
 
 ```python
 import time
-
 # Sequential
 start = time.time()
 for f in files:
     download_file(f)
 print(f"Sequential: {time.time() - start:.1f}s")  # ~6 seconds
-
 # Parallel with threads
 start = time.time()
 threads = [threading.Thread(target=download_file, args=(f,))
@@ -338,7 +336,6 @@ for t in threads:
     t.join()
 print(f"Threaded: {time.time() - start:.1f}s")  # ~2 seconds
 ```
-
 **3x speedup** for I/O-bound tasks!
 
 ---
@@ -361,8 +358,9 @@ for t in threads:
 
 print(counter)  # Expected: 400000, Actual: ??? (random!)
 ```
-
-**Why?** `counter += 1` is actually:
+---
+# Why? 
+`counter += 1` is actually:
 1. Read counter
 2. Add 1
 3. Write counter
@@ -385,7 +383,10 @@ def increment():
             counter += 1
         finally:
             lock.release()
+```
+---
 
+```python
 # Or using context manager (preferred):
 def increment_safe():
     global counter
@@ -417,7 +418,7 @@ with ThreadPoolExecutor(max_workers=3) as executor:
 for result in results:
     print(result)
 ```
-
+---
 **Benefits:**
 - Manages thread lifecycle automatically
 - Limits concurrent threads
@@ -446,7 +447,7 @@ with ThreadPoolExecutor(max_workers=3) as executor:
         result = future.result()
         print(f"{item}: {result}")
 ```
-
+---
 Output (in completion order):
 ```
 1: Processed 1
@@ -488,7 +489,6 @@ Need **multiprocessing** for CPU-bound tasks.
 ```python
 from concurrent.futures import ProcessPoolExecutor
 import time
-
 def cpu_intensive(n):
     return sum(i*i for i in range(n))
 
@@ -498,14 +498,12 @@ numbers = [10_000_000] * 4
 start = time.time()
 results = [cpu_intensive(n) for n in numbers]
 print(f"Sequential: {time.time() - start:.1f}s")  # ~8s
-
 # Parallel with processes
 start = time.time()
 with ProcessPoolExecutor(max_workers=4) as executor:
     results = list(executor.map(cpu_intensive, numbers))
 print(f"Parallel: {time.time() - start:.1f}s")  # ~2s
 ```
-
 **4x speedup** on 4 cores!
 
 ---
@@ -614,7 +612,7 @@ def option_price_mc(S, K, T, r, sigma, n_sims):
 price = option_price_mc(S=150, K=155, T=0.25, r=0.05, sigma=0.3,
                         n_sims=1_000_000)
 ```
-
+---
 | | Time |
 |---|------|
 | Pure Python | ~15 sec |
@@ -631,7 +629,7 @@ price = option_price_mc(S=150, K=155, T=0.25, r=0.05, sigma=0.3,
 2. Compiles to optimized machine code via LLVM
 3. Caches the compiled code
 4. Subsequent calls use cached fast version
-
+---
 ```python
 @njit
 def add(a, b):
@@ -663,7 +661,7 @@ def calculate_var(n_sims, weights, mu, sigma):
 
 var = calculate_var(10_000_000, weights, mu, sigma)  # 10M sims!
 ```
-
+---
 | | Time | Speedup |
 |---|------|---------|
 | Pure Python | ~60 sec | — |
@@ -705,7 +703,7 @@ def var_parallel(n_sims, weights, mu, sigma):
     returns.sort()
     return returns[int(n_sims * 0.05)]
 ```
-
+---
 Two changes: `parallel=True` and `prange` → runs on all CPU cores automatically!
 
 This combines:
@@ -743,33 +741,45 @@ Open `btop` or `htop` in another terminal to watch!
 
 ---
 
-# Demo Code: cpu_demo.py
+# Demo 1: cpu_demo.py
 
-```python
-"""Run this and watch btop/htop to see cores light up!"""
-from concurrent.futures import ProcessPoolExecutor
-import time
-
-def cpu_work(n):
-    """Burn CPU for a few seconds"""
-    total = 0
-    for i in range(50_000_000):
-        total += i * i % 1000
-    return total
-
-if __name__ == "__main__":
-    print("Sequential (watch: 1 core at 100%)...")
-    start = time.time()
-    for _ in range(4):
-        cpu_work(0)
-    print(f"Sequential: {time.time() - start:.1f}s\n")
-
-    print("Parallel (watch: 4 cores at 100%)...")
-    start = time.time()
-    with ProcessPoolExecutor(max_workers=4) as ex:
-        list(ex.map(cpu_work, range(4)))
-    print(f"Parallel: {time.time() - start:.1f}s")
+```bash
+python cpu_demo.py
 ```
+
+Watch `btop` in split terminal — see cores light up!
+
+- Sequential: 1 core at 100%
+- Parallel: all cores at 100%
+
+---
+
+# Demo 2: finance_demo.py
+
+```bash
+python finance_demo.py
+```
+
+Monte Carlo VaR on $1M portfolio:
+- 5 million simulations
+- Sequential vs parallel comparison
+- Shows real finance use case
+
+*"This is how banks calculate risk for Basel III"*
+
+---
+
+# Demo 3: numba_demo.py
+
+```bash
+python numba_demo.py
+```
+
+Two examples:
+1. **Option pricing** — 1M Monte Carlo sims
+2. **Portfolio VaR** — 5M simulations
+
+Shows `@njit` speedup (50-150x) and `parallel=True`
 
 ---
 
