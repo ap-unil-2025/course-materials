@@ -1,37 +1,44 @@
 ---
-title: "Week 13: Project Presentations I"
+title: "Week 13: Parallel Computing"
 date: 2025-12-08
-description: "Student capstone project presentations"
-lecture_slides: "#"
-ta_slides: "#"
+description: "Multithreading, parallelization, and performance optimization"
+lecture_slides: "/course-materials/slides/lecture/lectures/lecture_13/demo/HPC_summary_python.ipynb"
+ta_slides: "/course-materials/slides/practice/week13_slides.html"
 lesson: "#"
 assignment:
-  title: "Capstone Project Presentation"
-  link: "/course-materials/lectures/capstone_project/capstone_project.pdf"
-  description: "Present your data science project"
+  title: "Final Project"
+  link: "/course-materials/projects.html"
+  description: "Continue working on your final project"
 examples:
-  - title: "Capstone Project Guidelines"
-    link: "/course-materials/lectures/capstone_project/capstone_project.pdf"
+  - title: "Multithreading Examples"
+    link: "/course-materials/slides/lecture/lectures/lecture_13/demo/multithreading.ipynb"
+  - title: "Parallelization Examples"
+    link: "/course-materials/slides/lecture/lectures/lecture_13/demo/parallelization.ipynb"
 references:
-  - title: "Presentation Tips"
-    link: "#"
-    description: "Guidelines for effective presentations"
+  - title: "Python Threading Docs"
+    link: "https://docs.python.org/3/library/threading.html"
+    description: "Official Python threading documentation"
 ---
 
-## Week 13: Project Presentations I
+## Week 13: Parallel Computing
 
-### Capstone Project Presentations
-This week is dedicated to student presentations of their capstone projects.
+### Lecture: High-Performance Python
+- Multithreading basics
+- Parallelization with multiprocessing
+- Numba for JIT compilation
+- Performance optimization
 
-### Presentation Requirements
-- 10-minute video presentation
-- GitHub repository with code
-- 10-page project report
-- Q&A session
+### TA Session: Practical Multithreading
+- Creating and managing threads
+- Thread synchronization (locks)
+- ThreadPoolExecutor
+- When to use threads vs processes
 
-### Evaluation Criteria
-- Technical implementation
-- Problem-solving approach
-- Code quality and documentation
-- Presentation clarity
-- Innovation and creativity
+### Project Status
+- Deadline: **January 11, 2026**
+- Live presentations: **December 15** (sign up by Dec 8)
+- Focus on finishing implementation and writing your report
+
+### Resources
+- [Project Guidelines]({{ '/INDIVIDUAL_PROJECT_RULES' | relative_url }})
+- [Multithreading Notebook]({{ '/slides/lecture/lectures/lecture_13/demo/multithreading.ipynb' | relative_url }})
