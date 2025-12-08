@@ -44,7 +44,7 @@ style: |
 
 # Why This Matters
 
-**Project deadline: Jan 11**
+**3 weeks until project deadline (Dec 21)**
 
 The #1 grading criterion:
 > **Does `python main.py` work on our machines?**
@@ -1119,4 +1119,4 @@ print(f"Gap: {train_acc - test_acc:.3f}")
 
 # Questions?
 
-**Jan 11 deadline - Let's make your projects great!**
+**Dec 21 deadline - Let's make your projects great!**

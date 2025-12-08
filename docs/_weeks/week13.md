@@ -10,10 +10,16 @@ assignment:
   link: "/course-materials/projects.html"
   description: "Continue working on your final project"
 examples:
-  - title: "Multithreading Examples"
+  - title: "CPU Demo (watch cores in btop)"
+    link: "/course-materials/demos/week13/cpu_demo.py"
+  - title: "Numba Demo (JIT compilation)"
+    link: "/course-materials/demos/week13/numba_demo.py"
+  - title: "Multithreading Notebook"
     link: "/course-materials/slides/lecture/lectures/lecture_13/demo/multithreading.ipynb"
-  - title: "Parallelization Examples"
+  - title: "Parallelization Notebook"
     link: "/course-materials/slides/lecture/lectures/lecture_13/demo/parallelization.ipynb"
+  - title: "Numba Notebook"
+    link: "/course-materials/slides/lecture/lectures/lecture_13/demo/numba.ipynb"
 references:
   - title: "Python Threading Docs"
     link: "https://docs.python.org/3/library/threading.html"

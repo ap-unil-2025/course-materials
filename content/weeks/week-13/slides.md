@@ -33,24 +33,68 @@ style: |
 
 # Today's Goals
 
-**Part 1: Why Parallelism?**
+**Part 1: Why Parallelism Matters Now**
+- The end of the "free lunch"
 - CPU-bound vs I/O-bound tasks
 - GIL and its implications
 
 **Part 2: Threading**
-- Creating threads
-- Synchronization with locks
-- ThreadPoolExecutor
+- ThreadPoolExecutor for I/O-bound tasks
 
 **Part 3: Multiprocessing**
-- When to use processes vs threads
-- ProcessPoolExecutor
+- ProcessPoolExecutor for CPU-bound tasks
 
-**Part 4: Project Work Time**
+**Part 4: Numba**
+- JIT compilation for numeric code
+
+**Part 5: Live Demo & Project Time**
 
 ---
 
-# Part 1: Why Parallelism?
+# Part 1: Why Parallelism Matters Now
+
+---
+
+# The End of the "Free Lunch"
+
+For decades, software got faster automatically:
+- **1970s-2005**: Clock speeds doubled every ~18 months
+- Your same code ran 2x faster on next year's CPU
+
+**Then it stopped.** Around 2005:
+- Heat and power limits hit
+- Single-core speed plateaued at ~4 GHz
+
+**The solution?** More cores, not faster cores.
+
+| Year | Typical Desktop | Cores |
+|------|-----------------|-------|
+| 2005 | Pentium 4       | 1     |
+| 2010 | Core i5         | 4     |
+| 2024 | Apple M3 / Ryzen| 8-16  |
+
+---
+
+# The New Reality
+
+**Your laptop has 8+ cores.** Most Python code uses **1**.
+
+```
+Core 1: [████████████████████] 100%
+Core 2: [                    ] 0%
+Core 3: [                    ] 0%
+Core 4: [                    ] 0%
+Core 5: [                    ] 0%
+Core 6: [                    ] 0%
+Core 7: [                    ] 0%
+Core 8: [                    ] 0%
+```
+
+**Modern fast software uses parallelism:**
+- Web browsers (Chrome uses 1 process per tab)
+- Video encoding (FFmpeg parallelizes across cores)
+- Machine learning (PyTorch/TensorFlow parallelize training)
+- Databases (PostgreSQL parallelizes queries)
 
 ---
 
@@ -436,7 +480,198 @@ result = pd.concat(processed)
 
 ---
 
-# Part 4: Project Work
+# Part 4: Numba — JIT Compilation
+
+---
+
+# The Third Option: Make Python Faster
+
+So far we've seen:
+- **Threading**: Good for I/O-bound (limited by GIL for CPU)
+- **Multiprocessing**: Good for CPU-bound (but has overhead)
+
+**What if we could make Python itself faster?**
+
+Enter **Numba**: Just-In-Time (JIT) compilation
+
+```python
+from numba import njit
+
+@njit  # This one decorator changes everything
+def fast_function(x):
+    ...
+```
+
+Numba compiles Python to **native machine code** at runtime.
+
+---
+
+# Numba Example: 50x Speedup
+
+```python
+import numpy as np
+from numba import njit
+
+def slow_sum_squares(n):
+    total = 0
+    for i in range(n):
+        total += i * i
+    return total
+
+@njit
+def fast_sum_squares(n):
+    total = 0
+    for i in range(n):
+        total += i * i
+    return total
+```
+
+```python
+%timeit slow_sum_squares(10_000_000)  # ~800ms
+%timeit fast_sum_squares(10_000_000)  # ~15ms (first run compiles)
+%timeit fast_sum_squares(10_000_000)  # ~15ms (cached)
+```
+
+**Same code, 50x faster** — just add `@njit`
+
+---
+
+# How Numba Works
+
+**Just-In-Time Compilation:**
+
+1. First call: Numba infers types from arguments
+2. Compiles to optimized machine code via LLVM
+3. Caches the compiled code
+4. Subsequent calls use cached fast version
+
+```python
+@njit
+def add(a, b):
+    return a + b
+
+add(1, 2)      # Compiles for (int, int) → int
+add(1.0, 2.0)  # Compiles again for (float, float) → float
+add(1, 2)      # Uses cached (int, int) version
+```
+
+**Limitation**: Numba needs to infer types. Works best with:
+- NumPy arrays
+- Simple numeric types
+- Loops (where Python is slowest!)
+
+---
+
+# Numba: What Works and What Doesn't
+
+**Works great:**
+```python
+@njit
+def monte_carlo_pi(n):
+    inside = 0
+    for _ in range(n):
+        x, y = np.random.random(), np.random.random()
+        if x*x + y*y < 1:
+            inside += 1
+    return 4 * inside / n
+```
+
+**Doesn't work** (falls back to slow Python):
+```python
+@njit
+def bad_example(data):
+    return pandas.DataFrame(data)  # Pandas not supported
+
+@njit
+def also_bad(items):
+    return [x for x in items if x > 0]  # List comprehensions limited
+```
+
+Stick to NumPy and simple loops for best results.
+
+---
+
+# Numba + Parallelism: Best of Both Worlds
+
+```python
+from numba import njit, prange
+
+@njit(parallel=True)
+def parallel_sum(arr):
+    total = 0
+    for i in prange(len(arr)):  # prange = parallel range
+        total += arr[i]
+    return total
+```
+
+**`prange`** automatically parallelizes loop iterations across cores!
+
+This combines:
+- JIT compilation speed
+- Automatic parallelization
+- No GIL issues (Numba releases it)
+
+**Result**: Near-C performance with Python syntax.
+
+---
+
+# Part 5: Live Demo
+
+---
+
+# Live Demo: Watch Your Cores Light Up
+
+Let's see parallelism in action with `btop`/`htop`:
+
+**Demo 1: Sequential (1 core busy)**
+```python
+# All work on one core
+for i in range(4):
+    cpu_intensive_task()
+```
+
+**Demo 2: Multiprocessing (all cores busy)**
+```python
+# Work spread across cores
+with ProcessPoolExecutor(max_workers=4) as ex:
+    ex.map(cpu_intensive_task, range(4))
+```
+
+Open `btop` or `htop` in another terminal to watch!
+
+---
+
+# Demo Code: cpu_demo.py
+
+```python
+"""Run this and watch btop/htop to see cores light up!"""
+from concurrent.futures import ProcessPoolExecutor
+import time
+
+def cpu_work(n):
+    """Burn CPU for a few seconds"""
+    total = 0
+    for i in range(50_000_000):
+        total += i * i % 1000
+    return total
+
+if __name__ == "__main__":
+    print("Sequential (watch: 1 core at 100%)...")
+    start = time.time()
+    for _ in range(4):
+        cpu_work(0)
+    print(f"Sequential: {time.time() - start:.1f}s\n")
+
+    print("Parallel (watch: 4 cores at 100%)...")
+    start = time.time()
+    with ProcessPoolExecutor(max_workers=4) as ex:
+        list(ex.map(cpu_work, range(4)))
+    print(f"Parallel: {time.time() - start:.1f}s")
+```
+
+---
+
+# Part 6: Project Work
 
 ---
 
@@ -476,20 +711,18 @@ result = pd.concat(processed)
 
 # Key Takeaways
 
-**Threading:**
-- Great for I/O-bound tasks
-- Use `ThreadPoolExecutor` for clean code
-- Watch out for race conditions → use locks
+**Why parallelism now?**
+- Single-core speed has plateaued since ~2005
+- Modern CPUs have many cores; use them!
 
-**Multiprocessing:**
-- Required for CPU-bound speedups
-- Use `ProcessPoolExecutor`
-- Higher overhead than threading
+**Threading** → I/O-bound (network, files, APIs)
+**Multiprocessing** → CPU-bound (number crunching)
+**Numba** → Make numeric Python code 50x faster
 
-**Project advice:**
+**For your projects:**
 - Focus on correctness first
 - Only optimize if needed
-- Document any parallelism used
+- Numba is easiest win for numeric loops
 
 ---
 
