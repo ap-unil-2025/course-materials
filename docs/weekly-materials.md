@@ -33,11 +33,11 @@ layout: default
     <div class="current-content">
       <span class="current-label">NOW</span>
       <div class="current-info">
-        <h2>Week 13: Project Presentations I</h2>
-        <p>Student capstone project presentations</p>
+        <h2>Week 14: Project Presentations II & Course Wrap-up</h2>
+        <p>Final presentations and course conclusion</p>
       </div>
     </div>
-    <a href="{{ '/week/week13' | relative_url }}" class="current-btn">Open Week 13 →</a>
+    <a href="{{ '/week/week14' | relative_url }}" class="current-btn">Open Week 14 →</a>
   </div>
 
   <section class="course-section">
