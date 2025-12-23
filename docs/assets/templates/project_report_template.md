@@ -5,6 +5,8 @@ author: "Your Name (your.email@unil.ch)"
 date: "December 2025"
 geometry: margin=1in
 fontsize: 11pt
+toc: true
+numbersections: true
 header-includes:
   - \usepackage{fancyhdr}
   - \pagestyle{fancy}
@@ -13,11 +15,12 @@ header-includes:
   - \fancyfoot[C]{\thepage}
 ---
 
-# Abstract
+# Abstract {-}
 
 Provide a concise summary (150-200 words) of your project including:
+
 - The problem you're solving
-- Your approach/methodology  
+- Your approach/methodology
 - Key results/findings
 - Main contributions
 
@@ -25,20 +28,7 @@ Provide a concise summary (150-200 words) of your project including:
 
 \newpage
 
-# Table of Contents
-
-1. [Introduction](#introduction)
-2. [Literature Review](#literature-review)
-3. [Methodology](#methodology)
-4. [Results](#results)
-5. [Discussion](#discussion)
-6. [Conclusion](#conclusion)
-7. [References](#references)
-8. [Appendices](#appendices)
-
-\newpage
-
-# 1. Introduction
+# Introduction
 
 Introduce your project and its context. This section should include:
 
@@ -47,7 +37,7 @@ Introduce your project and its context. This section should include:
 - **Objectives and goals**: What do you aim to achieve?
 - **Report organization**: Brief overview of the report structure
 
-# 2. Literature Review
+# Literature Review / Related Work
 
 Discuss relevant prior work, existing solutions, or theoretical background:
 
@@ -56,9 +46,9 @@ Discuss relevant prior work, existing solutions, or theoretical background:
 - Datasets used in related studies
 - Gap in existing work that your project addresses
 
-# 3. Methodology
+# Methodology
 
-## 3.1 Data Description
+## Data Description
 
 Describe your dataset(s):
 
@@ -68,7 +58,7 @@ Describe your dataset(s):
 - **Features**: Description of important variables
 - **Data quality**: Missing values, outliers, etc.
 
-## 3.2 Approach
+## Approach
 
 Detail your technical approach:
 
@@ -77,7 +67,7 @@ Detail your technical approach:
 - **Model architecture**: If using ML/DL, describe the model
 - **Evaluation metrics**: How do you measure success?
 
-## 3.3 Implementation
+## Implementation
 
 Discuss the implementation details:
 
@@ -91,26 +81,26 @@ Example code snippet:
 def preprocess_data(df):
     """
     Preprocess the input dataframe.
-    
+
     Args:
         df: Input pandas DataFrame
-    
+
     Returns:
         Preprocessed DataFrame
     """
     # Remove missing values
     df = df.dropna()
-    
+
     # Normalize numerical features
     scaler = StandardScaler()
     df[numerical_cols] = scaler.fit_transform(df[numerical_cols])
-    
+
     return df
 ```
 
-# 4. Results
+# Results
 
-## 4.1 Experimental Setup
+## Experimental Setup
 
 Describe your experimental environment:
 
@@ -119,7 +109,7 @@ Describe your experimental environment:
 - **Hyperparameters**: Learning rate, batch size, etc.
 - **Training details**: Number of epochs, cross-validation
 
-## 4.2 Performance Evaluation
+## Performance Evaluation
 
 Present your results with tables and figures.
 
@@ -130,7 +120,7 @@ Present your results with tables and figures.
 
 *Table 1: Model performance comparison*
 
-## 4.3 Visualizations
+## Visualizations
 
 Include relevant plots and figures:
 
@@ -139,10 +129,11 @@ Include relevant plots and figures:
 - Feature importance plots
 - Results visualizations
 
-![Example Results](path/to/figure.png)
+![Your results visualization](figures/results_plot.png)
+
 *Figure 1: Description of your results*
 
-# 5. Discussion
+# Discussion
 
 Analyze and interpret your results:
 
@@ -152,9 +143,9 @@ Analyze and interpret your results:
 - **Limitations**: What are the constraints of your approach?
 - **Surprising findings**: Unexpected discoveries
 
-# 6. Conclusion
+# Conclusion and Future Work
 
-## 6.1 Summary
+## Summary
 
 Summarize your key findings and contributions:
 
@@ -162,7 +153,7 @@ Summarize your key findings and contributions:
 - Project objectives met
 - Impact of your work
 
-## 6.2 Future Work
+## Future Directions
 
 Suggest potential improvements or extensions:
 
@@ -171,7 +162,7 @@ Suggest potential improvements or extensions:
 - Real-world applications
 - Scalability considerations
 
-# References
+# References {-}
 
 1. Author, A. (2024). *Title of Article*. Journal Name, 10(2), 123-145.
 
@@ -181,13 +172,13 @@ Suggest potential improvements or extensions:
 
 4. Library Documentation. (2024). *Library Name Documentation*. https://docs.example.com
 
-# Appendices
+\newpage
 
-## Appendix A: Additional Results
+# Appendix A: Additional Figures {-}
 
 Include supplementary figures or tables that support but aren't essential to the main narrative.
 
-## Appendix B: Code Repository
+# Appendix B: Code Repository {-}
 
 **GitHub Repository:** https://github.com/yourusername/project-repo
 
@@ -195,19 +186,19 @@ Include supplementary figures or tables that support but aren't essential to the
 
 ```
 project-repo/
-├── README.md
-├── requirements.txt
-├── data/
-│   ├── raw/
-│   └── processed/
-├── src/
-│   ├── preprocessing.py
-│   ├── models.py
-│   └── evaluation.py
-├── notebooks/
-│   └── exploration.ipynb
-└── results/
-    └── figures/
+|-- README.md
+|-- requirements.txt
+|-- data/
+|   |-- raw/
+|   +-- processed/
+|-- src/
+|   |-- preprocessing.py
+|   |-- models.py
+|   +-- evaluation.py
+|-- notebooks/
+|   +-- exploration.ipynb
++-- results/
+    +-- figures/
 ```
 
 ### Installation Instructions
@@ -226,7 +217,7 @@ python src/main.py --config config.yaml
 
 ---
 
-*Note: This report should be exactly 10 pages when rendered. Use the page count in your PDF viewer to verify.*
+*Note: This report should be approximately 10 pages when rendered.*
 
 ---
 
@@ -238,13 +229,11 @@ To convert this Markdown file to PDF, use pandoc:
 pandoc project_report.md -o project_report.pdf --pdf-engine=xelatex
 ```
 
-Or with additional options:
+Or with table of contents and numbered sections (recommended):
 
 ```bash
 pandoc project_report.md \
   -o project_report.pdf \
   --pdf-engine=xelatex \
-  --highlight-style=pygments \
-  --toc \
-  --number-sections
+  --highlight-style=pygments
 ```
