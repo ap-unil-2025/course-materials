@@ -21,6 +21,9 @@ tags:
 status: "available"
 ---
 
+> **2025 archive.** This template project was offered in autumn 2025 only and is not available in 2026.
+
+
 ## Overview
 
 Build a professional-grade Monte Carlo simulation toolkit for analyzing game-theoretic scenarios in economics. Implement strategies like Tit-for-Tat and Grim Trigger for repeated games such as the Prisoner's Dilemma.

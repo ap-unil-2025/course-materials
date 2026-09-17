@@ -20,6 +20,9 @@ tags:
 status: "available"
 ---
 
+> **2025 archive.** This template project was offered in autumn 2025 only and is not available in 2026.
+
+
 ## Overview
 
 Build a high-performance discrete-event simulation framework for analyzing complex queueing systems. From simple queues to intricate network topologies, create tools for performance analysis and optimization.

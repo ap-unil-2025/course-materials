@@ -20,6 +20,9 @@ tags:
 status: "available"
 ---
 
+> **2025 archive.** This template project was offered in autumn 2025 only and is not available in 2026.
+
+
 ## Overview
 
 Develop a sophisticated longevity-bond pricing engine that models mortality risk and prices longevity-linked securities. This project combines actuarial science with advanced financial mathematics.

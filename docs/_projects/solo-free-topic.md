@@ -22,6 +22,9 @@ proposal_required: true
 proposal_deadline: "Week 2 Friday 23:59 CET"
 ---
 
+> **2025 archive.** This template project was offered in autumn 2025 only and is not available in 2026.
+
+
 ## Overview
 
 Propose and implement your own software engineering project on any topic **except data science**. This option allows maximum creativity while maintaining all technical requirements of the course.

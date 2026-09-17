@@ -20,6 +20,9 @@ tags:
 status: "available"
 ---
 
+> **2025 archive.** This template project was offered in autumn 2025 only and is not available in 2026.
+
+
 ## Overview
 
 Build a Monte Carlo simulation toolkit for insurance claim reserving using the Chain-Ladder method. This project focuses on implementing sophisticated statistical methods for actuarial science applications.

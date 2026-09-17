@@ -20,6 +20,9 @@ tags:
 status: "available"
 ---
 
+> **2025 archive.** This template project was offered in autumn 2025 only and is not available in 2026.
+
+
 ## Overview
 
 Create a professional command-line interface for calculating Value-at-Risk (VaR) and Expected Shortfall (ES) using multiple methodologies. Focus on building tools for quantitative risk management.
